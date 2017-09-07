@@ -1,0 +1,2 @@
+# sonarqube-devon-plugin
+Plugin for SonarQube to validate Devon architecture
