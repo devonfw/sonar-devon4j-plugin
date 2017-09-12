@@ -342,7 +342,7 @@
       <id>hohwille</id>
       <name>J&#246;rg Hohwiller</name>
       <email>hohwille@users.sourceforge.net</email>
-      <organization></organization>
+      <organization>Capgemini</organization>
       <organizationUrl/>
       <roles>
         <role>admin</role>
@@ -353,10 +353,10 @@
       <properties/>
     </developer>
     <developer>
-      <id>ksobkowiak</id>
-      <name>Krzysztof Sobkowiak</name>
-      <email>sobkowiak@onet.eu</email>
-      <organization></organization>
+      <id>Capgemini-Sam</id>
+      <name>Sam</name>
+      <email>sam.sabah@capgemini.com</email>
+      <organization>Capgemini</organization>
       <organizationUrl/>
       <roles>
         <role>admin</role>
