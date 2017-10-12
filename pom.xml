@@ -5,19 +5,22 @@
 	<groupId>io.oasp.java.ide</groupId>
 	<artifactId>sonarqube-devon-plugin</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+  <packaging>sonar-plugin</packaging>
 	<name>${project.artifactId}</name>
 	<description>SonarQube Plugin with rules for static code analysis to validate architecture.</description>
 	<url>http://oasp.io/oasp4j/maven/oasp4j</url>
 	<inceptionYear>2014</inceptionYear>
 
 	<properties>
-		<java.version>1.7</java.version>
+		<java.version>1.8</java.version>
 		<java.plugin.version>4.7.1.9272</java.plugin.version>
 		<sonar.version>6.3</sonar.version>
 		<oasp.version>2.4.0</oasp.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.plugin.version>4.7.1.9272</java.plugin.version>
+    <sslr.version>1.21</sslr.version>
+    <gson.version>2.6.2</gson.version>
 	</properties>
 
 	<dependencies>
@@ -59,7 +62,7 @@
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
-			<version>1.4</version>
+			<version>${gson.version}</version>
 		</dependency>
 
 		<dependency>
@@ -68,13 +71,13 @@
 			<version>3.6.1</version>
 			<scope>test</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>org.codehaus.sonar.sslr</groupId>
-			<artifactId>sslr-testing-harness</artifactId>
-			<version>1.17</version>
-			<scope>test</scope>
-		</dependency>
+    
+    <dependency>
+      <groupId>org.sonarsource.sslr</groupId>
+      <artifactId>sslr-testing-harness</artifactId>
+      <version>${sslr.version}</version>
+      <scope>test</scope>
+    </dependency>
 
 		<dependency>
 			<groupId>org.sonarsource.java</groupId>
@@ -111,19 +114,20 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
-				<artifactId>sonar-packaging-maven-plugin</artifactId>
-				<version>1.17</version>
-				<extensions>true</extensions>
-				<configuration>
-					<pluginKey>devon-java</pluginKey>
-					<pluginName>Devon Java Rules</pluginName>
-					<pluginClass>io.oasp.ide.sonarqube.common.impl.DevonSonarPlugin</pluginClass>
-					<sonarLintSupported>true</sonarLintSupported>
-					<sonarQubeMinVersion>5.6</sonarQubeMinVersion> <!-- allow to depend on API 6.x but run on LTS -->
-				</configuration>
-			</plugin>
+        <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+        <artifactId>sonar-packaging-maven-plugin</artifactId>
+        <version>1.17</version>
+        <extensions>true</extensions>
+        <configuration>
+          <pluginKey>devon-java</pluginKey>
+          <pluginName>Devon Java Rules</pluginName>
+          <pluginClass>io.oasp.ide.sonarqube.common.impl.DevonSonarPlugin</pluginClass>
+          <sonarLintSupported>true</sonarLintSupported>
+          <sonarQubeMinVersion>5.6</sonarQubeMinVersion> <!-- allow to depend on API 6.x but run on LTS -->
+        </configuration>
+      </plugin>
 
+      <!-- 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
@@ -132,6 +136,7 @@
 					<includeEmptyDirs>true</includeEmptyDirs>
 				</configuration>
 			</plugin>
+       -->
 
 			<!-- configure java compiler -->
 			<plugin>
@@ -145,6 +150,7 @@
 			</plugin>
 
 			<!-- advanced manifests -->
+      <!-- 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -157,8 +163,10 @@
 					</archive>
 				</configuration>
 			</plugin>
+       -->
 
 			<!-- also generate source JARs -->
+      <!-- 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
@@ -172,6 +180,7 @@
 					</execution>
 				</executions>
 			</plugin>
+       -->
 		</plugins>
 		<pluginManagement>
 			<plugins>
@@ -183,7 +192,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.2</version>
+					<version>3.6.0</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>

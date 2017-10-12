@@ -1,8 +1,5 @@
 package io.oasp.ide.sonarqube.common.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.sonar.api.Plugin;
 
 /**
@@ -13,9 +10,8 @@ public class DevonPlugin implements Plugin {
   @Override
   public void define(Context context) {
 
-    List<Object> extensions = new ArrayList<>();
-    extensions.add(new ArchitectureRule());
-    context.addExtensions(extensions);
+    context.addExtension(DevonSonarDefinition.class);
+    context.addExtension(DevonSonarRegistrar.class);
   }
 
 }

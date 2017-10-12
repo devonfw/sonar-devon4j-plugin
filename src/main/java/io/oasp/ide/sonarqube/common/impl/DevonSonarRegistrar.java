@@ -13,19 +13,22 @@ import org.sonarsource.api.sonarlint.SonarLintSide;
 @SonarLintSide
 public class DevonSonarRegistrar implements CheckRegistrar {
 
-	@Override
-	public void register(RegistrarContext registrarContext) {
-		registrarContext.registerClassesForRepository(DevonSonarDefinition.REPOSITORY_KEY, checkClasses(),
-				testCheckClasses());
-	}
+  @Override
+  public void register(RegistrarContext registrarContext) {
 
-	public static List<Class<? extends JavaCheck>> checkClasses() {
-		List<Class<? extends JavaCheck>> checks = new ArrayList<>();
-		checks.add(DevonArchitecturePackageCheck.class);
-		return checks;
-	}
+    registrarContext.registerClassesForRepository(DevonSonarDefinition.REPOSITORY_KEY, checkClasses(),
+        testCheckClasses());
+  }
 
-	public static List<Class<? extends JavaCheck>> testCheckClasses() {
-		return new ArrayList<>();
-	}
+  public static List<Class<? extends JavaCheck>> checkClasses() {
+
+    List<Class<? extends JavaCheck>> checks = new ArrayList<>();
+    checks.add(DevonArchitecturePackageCheck.class);
+    return checks;
+  }
+
+  public static List<Class<? extends JavaCheck>> testCheckClasses() {
+
+    return new ArrayList<>();
+  }
 }

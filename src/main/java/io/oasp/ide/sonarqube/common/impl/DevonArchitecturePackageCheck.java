@@ -37,6 +37,8 @@ public class DevonArchitecturePackageCheck implements JavaFileScanner {
 				context.addIssue(lineNumber, this, "Invalid Package " + packageName + " !");
 			}
 		}
+		
+		
 	}
 
 	private void printPackage(JavaTree pkg, StringBuilder sb) {
