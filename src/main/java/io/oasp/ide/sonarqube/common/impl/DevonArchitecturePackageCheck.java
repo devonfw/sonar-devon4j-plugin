@@ -1,56 +1,84 @@
 package io.oasp.ide.sonarqube.common.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import java.util.Deque;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Set;
+
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
-import org.sonar.java.model.JavaTree;
+import org.sonar.java.resolve.JavaSymbol;
 import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
-import org.sonar.plugins.java.api.tree.CompilationUnitTree;
+import org.sonar.plugins.java.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.java.api.tree.ClassTree;
 import org.sonar.plugins.java.api.tree.IdentifierTree;
-import org.sonar.plugins.java.api.tree.MemberSelectExpressionTree;
-import org.sonar.plugins.java.api.tree.PackageDeclarationTree;
-import org.sonar.plugins.java.api.tree.SyntaxToken;
-import org.sonar.plugins.java.api.tree.Tree;
 
 import io.oasp.module.basic.common.api.reflect.OaspPackage;
 
 @Rule(key = "DevonArchitecturePackageCheck", name = "Devon Package Check", description = "Verify that the code is following the devon package conventions.", //
-		priority = Priority.MAJOR, tags = { "bug" })
-public class DevonArchitecturePackageCheck implements JavaFileScanner {
+    priority = Priority.MAJOR, tags = { "bug" })
+public class DevonArchitecturePackageCheck extends BaseTreeVisitor implements JavaFileScanner {
 
-	@Override
-	public void scanFile(JavaFileScannerContext context) {
-		if (context.fileParsed()) {
-			CompilationUnitTree cut = context.getTree();
-			PackageDeclarationTree packageDeclaration = cut.packageDeclaration();
-			String packageName = "";
-			int lineNumber = -1;
-			if (packageDeclaration != null) {
-				JavaTree pkg = (JavaTree) packageDeclaration.packageName();
-				lineNumber = pkg.getLine();
-				StringBuilder sb = new StringBuilder();
-				printPackage(pkg, sb);
-				packageName = sb.toString();
-			}
-			OaspPackage pkg = OaspPackage.of(packageName);
-			if (!pkg.isValid()) {
-				context.addIssue(lineNumber, this, "Invalid Package " + packageName + " !");
-			}
-		}
-		
-		
-	}
+  private List<String> issues;
 
-	private void printPackage(JavaTree pkg, StringBuilder sb) {
-		for (Tree child : pkg.getChildren()) {
-			if (child instanceof SyntaxToken) {
-				sb.append(((SyntaxToken) child).text());
-			} else if (child instanceof MemberSelectExpressionTree) {
-				printPackage((JavaTree) child, sb);
-			} else if (child instanceof IdentifierTree) {
-				sb.append(((IdentifierTree) child).name());
-			}
-		}
-	}
+  private String fullyQualifiedName;
+
+  /**
+   * The constructor.
+   */
+  public DevonArchitecturePackageCheck() {
+    super();
+    this.issues = new ArrayList<>();
+  }
+
+  /**
+   * @return fullyQualifiedName
+   */
+  public String getFullyQualifiedName() {
+
+    return this.fullyQualifiedName;
+  }
+
+  @Override
+  public void scanFile(JavaFileScannerContext context) {
+
+    this.issues.clear();
+    scan(context.getTree());
+    for (String issue : this.issues) {
+      int lineNumber = 1;
+      context.addIssue(lineNumber, this, issue);
+    }
+  }
+
+  @Override
+  public void visitIdentifier(IdentifierTree tree) {
+
+    // TODO Auto-generated method stub
+    super.visitIdentifier(tree);
+  }
+
+  @Override
+  public void visitClass(ClassTree tree) {
+
+    this.fullyQualifiedName = ((JavaSymbol.TypeJavaSymbol) tree.symbol()).getFullyQualifiedName();
+    String packageName = " ";
+
+    int lastDot = this.fullyQualifiedName.lastIndexOf('.');
+    if (lastDot > 0) {
+      packageName = this.fullyQualifiedName.substring(0, lastDot);
+    }
+    if (packageName.isEmpty()) {
+      this.issues.add("Invalid Package IS EMPTY!" + packageName + " !");
+    } else {
+      OaspPackage pkg = OaspPackage.of(packageName);
+      if (!pkg.isValid()) {
+        this.issues.add("Invalid Package IS VALID" + packageName + " !");
+      }
+    }
+  }
 
 }
