@@ -3,16 +3,11 @@ package io.oasp.ide.sonarqube.common.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.util.Deque;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
-
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
-import org.sonar.java.resolve.JavaSymbol;
 import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
+import org.sonar.plugins.java.api.semantic.Symbol.TypeSymbol;
 import org.sonar.plugins.java.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.java.api.tree.ClassTree;
 import org.sonar.plugins.java.api.tree.IdentifierTree;
@@ -62,9 +57,14 @@ public class DevonArchitecturePackageCheck extends BaseTreeVisitor implements Ja
   }
 
   @Override
-  public void visitClass(ClassTree tree) {
+  public void visitClass(ClassTree classTree) {
+    // classTree.symbol().type().fullyQualifiedName()
 
-    this.fullyQualifiedName = ((JavaSymbol.TypeJavaSymbol) tree.symbol()).getFullyQualifiedName();
+    // String mySource = "" + JavaSymbol.TypeJavaSymbol.class.getProtectionDomain().getCodeSource();
+    TypeSymbol symbol = classTree.symbol();
+    // String theirSource = "" + symbol.getClass().getProtectionDomain().getCodeSource();
+
+    this.fullyQualifiedName = classTree.symbol().type().fullyQualifiedName();
     String packageName = " ";
 
     int lastDot = this.fullyQualifiedName.lastIndexOf('.');
