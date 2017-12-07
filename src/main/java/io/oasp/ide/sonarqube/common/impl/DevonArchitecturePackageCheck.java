@@ -70,13 +70,18 @@ public class DevonArchitecturePackageCheck extends BaseTreeVisitor implements Ja
     int lastDot = this.fullyQualifiedName.lastIndexOf('.');
     if (lastDot > 0) {
       packageName = this.fullyQualifiedName.substring(0, lastDot);
+      System.out.println("I'm in line #" + new Exception().getStackTrace()[0].getLineNumber());
     }
     if (packageName.isEmpty()) {
       this.issues.add("Invalid Package IS EMPTY!" + packageName + " !");
+      System.out.println("I'm in line #" + new Exception().getStackTrace()[0].getLineNumber());
     } else {
       OaspPackage pkg = OaspPackage.of(packageName);
+      System.out.println("I'm in line #" + new Exception().getStackTrace()[0].getLineNumber());
+
       if (!pkg.isValid()) {
         this.issues.add("Invalid Package IS VALID" + packageName + " !");
+        System.out.println("I'm in line #" + new Exception().getStackTrace()[0].getLineNumber());
       }
     }
   }
