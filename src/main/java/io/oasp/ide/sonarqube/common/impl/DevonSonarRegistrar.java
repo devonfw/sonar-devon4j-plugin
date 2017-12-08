@@ -24,6 +24,7 @@ public class DevonSonarRegistrar implements CheckRegistrar {
 
     List<Class<? extends JavaCheck>> checks = new ArrayList<>();
     checks.add(DevonArchitecturePackageCheck.class);
+    checks.add(DevonArchitectureScopeApiImplCheck.class);
     return checks;
   }
 
