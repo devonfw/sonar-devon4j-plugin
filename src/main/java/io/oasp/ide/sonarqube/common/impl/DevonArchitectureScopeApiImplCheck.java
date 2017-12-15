@@ -9,7 +9,7 @@ import io.oasp.module.basic.common.api.reflect.OaspPackage;
  *
  */
 @Rule(key = "DevonArchitectureScopeApiImplCheck", name = "Devon Scope API-Impl Check", description = "Verify that the code from API package does not depend on code from implementation package.", //
-    priority = Priority.CRITICAL, tags = { "bug" })
+    priority = Priority.CRITICAL, tags = { "Bug" })
 public class DevonArchitectureScopeApiImplCheck extends DevonArchitectureCheck {
 
   @Override

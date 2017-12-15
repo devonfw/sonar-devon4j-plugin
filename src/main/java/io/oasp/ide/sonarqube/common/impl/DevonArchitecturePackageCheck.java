@@ -21,7 +21,7 @@ public class DevonArchitecturePackageCheck extends DevonArchitectureCheck {
   @Override
   protected String createIssueForInvalidSourcePackage(OaspPackage pkg) {
 
-    return "The package '" + pkg.toString() + " is not a valid OASP package.";
+    return "The package '" + pkg.toString() + "----- is not a valid OASP package.------";
   }
 
 }
