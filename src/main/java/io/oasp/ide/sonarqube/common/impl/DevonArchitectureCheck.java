@@ -94,6 +94,9 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
     if (tree.is(Tree.Kind.INFERED_TYPE)) {
       return;
     }
+    if (this.sourcePackage == null) {
+      return;
+    }
     int lastDot = className.lastIndexOf('.');
     if (lastDot <= 0) {
       return;

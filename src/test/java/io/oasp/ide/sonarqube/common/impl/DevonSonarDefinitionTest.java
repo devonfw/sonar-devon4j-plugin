@@ -10,26 +10,28 @@ import org.sonar.api.server.rule.RulesDefinition.Rule;
 
 public class DevonSonarDefinitionTest {
 
-	@Test
-	public void test() {
-		DevonSonarDefinition rulesDefinition = new DevonSonarDefinition();
-		RulesDefinition.Context context = new RulesDefinition.Context();
-		rulesDefinition.define(context);
-		RulesDefinition.Repository repository = context.repository(DevonSonarDefinition.REPOSITORY_KEY);
+  @Test
+  public void test() {
 
-		assertThat(repository.name()).isEqualTo("Devon Java Rules");
-		assertThat(repository.language()).isEqualTo("java");
-		assertThat(repository.rules()).hasSize(1);
+    DevonSonarDefinition rulesDefinition = new DevonSonarDefinition();
+    RulesDefinition.Context context = new RulesDefinition.Context();
+    rulesDefinition.define(context);
+    RulesDefinition.Repository repository = context.repository(DevonSonarDefinition.REPOSITORY_KEY);
 
-		assertAllRuleParametersHaveDescription(repository);
-	}
+    assertThat(repository.name()).isEqualTo("Devon Java Rules");
+    assertThat(repository.language()).isEqualTo("java");
+    assertThat(repository.rules()).hasSize(2);
 
-	private void assertAllRuleParametersHaveDescription(Repository repository) {
-		for (Rule rule : repository.rules()) {
-			for (Param param : rule.params()) {
-				assertThat(param.description()).as("description for " + param.key()).isNotEmpty();
-			}
-		}
-	}
+    assertAllRuleParametersHaveDescription(repository);
+  }
+
+  private void assertAllRuleParametersHaveDescription(Repository repository) {
+
+    for (Rule rule : repository.rules()) {
+      for (Param param : rule.params()) {
+        assertThat(param.description()).as("description for " + param.key()).isNotEmpty();
+      }
+    }
+  }
 
 }
