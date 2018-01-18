@@ -20,7 +20,9 @@ public class DevonSonarDefinitionTest {
 
     assertThat(repository.name()).isEqualTo("Devon Java Rules");
     assertThat(repository.language()).isEqualTo("java");
-    assertThat(repository.rules()).hasSize(2);
+    assertThat(repository.rules()).hasSize(4);
+
+    // adding the checks number
 
     assertAllRuleParametersHaveDescription(repository);
   }

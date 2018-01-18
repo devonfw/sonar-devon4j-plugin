@@ -12,8 +12,6 @@ import org.sonar.check.Cardinality;
 import org.sonar.plugins.java.Java;
 import org.sonar.squidbridge.annotations.RuleTemplate;
 
-import com.google.common.annotations.VisibleForTesting;
-
 /**
  * TODO
  */
@@ -27,20 +25,18 @@ public class DevonSonarDefinition implements RulesDefinition {
 
     NewRepository repository = context.createRepository(REPOSITORY_KEY, Java.KEY).setName("Devon Java Rules");
 
-    Class<DevonArchitectureScopeApiImplCheck> ruleClass2 = DevonArchitectureScopeApiImplCheck.class;
-    new RulesDefinitionAnnotationLoader().load(repository, ruleClass2);
-    newRule(ruleClass2, repository);
-
-    Class<DevonArchitecturePackageCheck> ruleClass = DevonArchitecturePackageCheck.class;
-    new RulesDefinitionAnnotationLoader().load(repository, ruleClass);
-    newRule(ruleClass, repository);
+    addRule(repository, DevonArchitecturePackageCheck.class);
+    addRule(repository, DevonArchitectureScopeApiImplCheck.class);
+    addRule(repository, DevonArchitectureLayerServiceDataaccessCheck.class);
+    addRule(repository, DevonArchitectureScopeApiBaseCheck.class);
+    // registration a new rule
 
     repository.done();
   }
 
-  @VisibleForTesting
-  protected void newRule(Class<?> ruleClass, NewRepository repository) {
+  private void addRule(NewRepository repository, Class<?> ruleClass) {
 
+    new RulesDefinitionAnnotationLoader().load(repository, ruleClass);
     org.sonar.check.Rule ruleAnnotation = AnnotationUtils.getAnnotation(ruleClass, org.sonar.check.Rule.class);
     if (ruleAnnotation == null) {
       throw new IllegalArgumentException("No Rule annotation was found on " + ruleClass);
