@@ -1,10 +1,21 @@
-/*
- * This is a header...
- */
-package io.oasp.ide.sonarqube.component1.logic.impl;
+package io.oasp.ide.sonarqube.common.base;
 
-import io.oasp.ide.sonarqube.general.logic.base.AbstractUc; // Compliant
+import io.oasp.ide.sonarqube.common.impl.Bar; // Noncompliant
 
-class MyUcImpl extends AbstactUc {
+
+class MyClass {
+
+  private io.oasp.ide.sonarqube.common.impl.Foo foo; // Noncompliant
+
+  private Bar bar;
+
+  public io.oasp.ide.sonarqube.common.impl.Foo getFoo() { // Noncompliant
+    return this.foo;
+  }
+
+  public void init() {
+
+    this.foo = new io.oasp.ide.sonarqube.common.impl.Foo();// Noncompliant
+  }
 
 }

@@ -4,13 +4,14 @@ import org.junit.Test;
 import org.sonar.java.checks.verifier.JavaCheckVerifier;
 
 /**
- * Test of {@link DevonArchitectureScopeBaseImplCheck}.
+ * @author ssabah
+ *
  */
+
+// DevonArchitectureScopeBaseImplCheck
+
 public class DevonArchitectureScopeBaseImplCheckTest {
 
-  /**
-   * Test the {@link DevonArchitectureScopeBaseImplCheck}.
-   */
   @Test
   public void test() {
 
