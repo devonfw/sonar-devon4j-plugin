@@ -34,6 +34,11 @@ public class DevonSonarDefinition implements RulesDefinition {
     addRule(repository, DevonArchitectureLayerServiceDataaccessCheck.class);
     addRule(repository, DevonArchitectureComponentLayerCheck.class);
     addRule(repository, DevonArchitectureScopeBaseImplCheck.class);
+    addRule(repository, DevonArchitectureScopeBaseBaseCheck.class);
+    addRule(repository, DevonArchitectureLayerServiceBatchCheck.class);
+    addRule(repository, DevonArchitectureLayerServiceClientCheck.class);
+    addRule(repository, DevonArchitectureLayerBatchDataaccessCheck.class);
+    addRule(repository, DevonArchitectureLayerClientDataaccessCheck.class);
 
     // registration a new rule
 
