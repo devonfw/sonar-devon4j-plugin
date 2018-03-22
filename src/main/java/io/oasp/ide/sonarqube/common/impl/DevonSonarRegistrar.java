@@ -23,16 +23,21 @@ public class DevonSonarRegistrar implements CheckRegistrar {
   public static List<Class<? extends JavaCheck>> checkClasses() {
 
     List<Class<? extends JavaCheck>> checks = new ArrayList<>();
-    // checks.add(DevonArchitecturePackageCheck.class); // **
-    // checks.add(DevonArchitectureScopeApiImplCheck.class); // **
-    // checks.add(DevonArchitectureScopeApiBaseCheck.class); // **
-    //
-    // checks.add(DevonArchitectureLayerDataaccessServiceCheck.class);// **
-    // checks.add(DevonArchitectureLayerDataaccessLogicCheck.class);// **
-    // checks.add(DevonArchitectureLayerLogicServiceCheck.class); // **
-    // checks.add(DevonArchitectureLayerServiceDataaccessCheck.class);
-
-    // checks.add(DevonArchitecturePackageCheck.class);
+    checks.add(DevonArchitecturePackageCheck.class); // **
+    checks.add(DevonArchitectureScopeApiImplCheck.class); // **
+    checks.add(DevonArchitectureLayerDataaccessServiceCheck.class); // **
+    checks.add(DevonArchitectureScopeApiBaseCheck.class);// **
+    checks.add(DevonArchitectureLayerLogicServiceCheck.class);// **
+    checks.add(DevonArchitectureLayerDataaccessLogicCheck.class); // **
+    checks.add(DevonArchitectureLayerServiceDataaccessCheck.class);
+    checks.add(DevonArchitectureComponentLayerCheck.class);// **
+    checks.add(DevonArchitectureScopeBaseImplCheck.class); // **
+    checks.add(DevonArchitectureScopeBaseBaseCheck.class);
+    checks.add(DevonArchitecturePackageCheck.class);
+    checks.add(DevonArchitectureLayerServiceBatchCheck.class);
+    checks.add(DevonArchitectureLayerServiceClientCheck.class);
+    checks.add(DevonArchitectureLayerBatchDataaccessCheck.class);
+    checks.add(DevonArchitectureLayerClientDataaccessCheck.class);
 
     // add the new check class!
     return checks;

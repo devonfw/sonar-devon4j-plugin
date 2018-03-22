@@ -27,6 +27,7 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
    * The constructor.
    */
   public DevonArchitectureCheck() {
+
     super();
   }
 
@@ -104,6 +105,9 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
     String pkgName = className.substring(0, lastDot);
     String simpleName = className.substring(lastDot + 1);
     OaspPackage targetPkg = OaspPackage.of(pkgName);
+    if (!targetPkg.isValid()) {
+      return;
+    }
     String warning = checkDependency(this.sourcePackage, targetPkg, simpleName);
     if (warning != null) {
       int line = tree.firstToken().line();

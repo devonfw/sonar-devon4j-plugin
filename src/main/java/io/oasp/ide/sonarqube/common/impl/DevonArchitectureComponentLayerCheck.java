@@ -22,6 +22,7 @@ public class DevonArchitectureComponentLayerCheck extends DevonArchitectureCheck
           + "' may call code from other components (" + target.getComponent() + ") but not on different layer ("
           + target.getLayer() + ").";
     }
+
     return null;
   }
 
