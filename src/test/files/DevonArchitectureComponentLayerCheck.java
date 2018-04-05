@@ -3,7 +3,8 @@
  */
 package io.oasp.ide.sonarqube.component1.logic.api;
 
-import io.oasp.ide.sonarqube.component2.dataaccess.api.Bar; // Noncompliant
+//import io.oasp.ide.sonarqube.component2.dataaccess.api.Bar; // Noncompliant
+import io.oasp.module.jpa.common.api.Bar;
 
 import java.sql.Timestamp;
 class MyClass {

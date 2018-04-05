@@ -17,7 +17,8 @@ public class DevonArchitectureComponentLayerCheck extends DevonArchitectureCheck
   @Override
   protected String checkDependency(OaspPackage source, OaspPackage target, String targetTypeSimpleName) {
 
-    if (!source.getComponent().equals(target.getComponent()) && !source.getLayer().equals(target.getLayer())) {
+    if (!source.getComponent().equals(target.getComponent()) && !source.getLayer().equals(target.getLayer())
+        && !target.getLayer().contains("common")) {
       return "Code from component '" + source.getComponent() + "' and layer '" + source.getLayer()
           + "' may call code from other components (" + target.getComponent() + ") but not on different layer ("
           + target.getLayer() + ").";
