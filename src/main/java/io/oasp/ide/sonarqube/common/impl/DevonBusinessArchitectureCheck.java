@@ -54,7 +54,8 @@ public abstract class DevonBusinessArchitectureCheck extends DevonArchitectureCh
     }
     Component sourceComponent = getComponent(sourceComponentName);
     if (sourceComponent == null) {
-      return sourceComponentUndefined(sourceComponentName);
+      return null;
+
     }
     boolean targetDependencyAllowed = sourceComponent.hasDependency(targetComponentName);
     if (!targetDependencyAllowed) {
@@ -62,11 +63,6 @@ public abstract class DevonBusinessArchitectureCheck extends DevonArchitectureCh
     } else {
       return checkDependency(source, sourceComponent, target, targetTypeSimpleName);
     }
-  }
-
-  protected String sourceComponentUndefined(String sourceComponentName) {
-
-    return null;
   }
 
   /**
@@ -88,4 +84,5 @@ public abstract class DevonBusinessArchitectureCheck extends DevonArchitectureCh
    */
   protected abstract String checkDependency(OaspPackage source, Component sourceComponent, OaspPackage target,
       String targetTypeSimpleName);
+
 }

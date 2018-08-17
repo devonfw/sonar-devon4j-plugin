@@ -124,6 +124,12 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
     OaspPackage pkg = OaspPackage.of(qualifiedName);
     if (pkg.isValid()) {
       this.sourcePackage = pkg;
+
+      String warning = createIssueForSourcePackage(pkg);
+      if (warning != null) {
+        int line = tree.firstToken().line();
+        this.context.addIssue(line, this, warning);
+      }
     } else {
       String warning = createIssueForInvalidSourcePackage(pkg);
       if (warning != null) {
@@ -133,6 +139,15 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
       this.sourcePackage = null;
     }
     super.visitPackage(tree);
+  }
+
+  /**
+   * @param pkg
+   * @return
+   */
+  protected String createIssueForSourcePackage(OaspPackage pkg) {
+
+    return null;
   }
 
   private String getQualifiedName(Tree tree) {
