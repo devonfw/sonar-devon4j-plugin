@@ -1,0 +1,8 @@
+{
+  "architecture": {
+    "components": [
+        {"name":"compA","dependencies":["compB"]},
+        {"name":"compB","dependencies":[]}
+      ]
+  }
+}

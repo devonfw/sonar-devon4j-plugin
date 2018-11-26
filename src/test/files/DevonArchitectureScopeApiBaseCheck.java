@@ -1,20 +1,20 @@
-package io.oasp.ide.sonarqube.common.api;
+package com.devonfw.ide.sonarqube.common.api;
 
-import io.oasp.ide.sonarqube.common.base.Bar; // Noncompliant
+import com.devonfw.ide.sonarqube.common.base.Bar; // Noncompliant
 
 class MyClass {
 
-  private io.oasp.ide.sonarqube.common.base.Foo foo; // Noncompliant
+  private com.devonfw.ide.sonarqube.common.base.Foo foo; // Noncompliant
 
   private Bar bar;
 
-  public io.oasp.ide.sonarqube.common.base.Foo getFoo() { // Noncompliant
+  public com.devonfw.ide.sonarqube.common.base.Foo getFoo() { // Noncompliant
     return this.foo;
   }
 
   public void init() {
 
-    this.foo = new io.oasp.ide.sonarqube.common.base.Foo();// Noncompliant
+    this.foo = new com.devonfw.ide.sonarqube.common.base.Foo();// Noncompliant
   }
 
 }
