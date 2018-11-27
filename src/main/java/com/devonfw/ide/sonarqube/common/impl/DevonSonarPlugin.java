@@ -9,7 +9,7 @@ import org.sonar.api.config.PropertyDefinition;
  */
 public class DevonSonarPlugin implements Plugin {
 
-  public static final String CONFIG_KEY = "sonar.devon.config";
+  static final String CONFIG_KEY = "sonar.devon.config";
 
   static final String FORBIDDEN_CONF_KEY = "sonar.devon.forbiddenConf";
 
@@ -22,13 +22,8 @@ public class DevonSonarPlugin implements Plugin {
 
     context.addExtensions(DevonSonarDefinition.class, DevonSonarRegistrar.class);
     context.addExtension(PropertyDefinition.builder(CONFIG_KEY).name("Config JSON")
-        .description("Configuration of business architecture, etc. TODO").category("Devon").subCategory("")
-        .type(PropertyType.TEXT)
-        .defaultValue(
-            "{\"businessArchitecture\":{\"components\":[\n{\"name\":\"component1\",\\\"dependencies\\\":[]}}\n]}}")
+        .description("Configuration of business architecture").category("Devon").subCategory("").type(PropertyType.TEXT)
+        .defaultValue("{\"architecture\":{\"components\":[\n{\"name\":\"component1\",\\\"dependencies\\\":[]}}\n]}}")
         .build());
-    // context.addExtension(PropertyDefinition.builder(CONFIG_KEY).name("Config JSON")
-    // .description("Employee personal information").category("Yassin").subCategory("").type(PropertyType.TEXT)
-    // .defaultValue("{\"Company\":{\"employee\":[\n{\"name\":\"name1\",\\\"working days\\\":[]}}\n]}}").build());
   }
 }

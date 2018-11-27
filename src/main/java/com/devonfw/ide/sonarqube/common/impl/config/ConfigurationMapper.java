@@ -34,7 +34,9 @@ public class ConfigurationMapper {
   public Configuration fromJson(String json) {
 
     try {
-      return this.objectMapper.readValue(json, Configuration.class);
+      Configuration configuration = this.objectMapper.readValue(json, Configuration.class);
+      configuration.initialize();
+      return configuration;
     } catch (IOException e) {
       throw new IllegalStateException(e);
     }
@@ -47,7 +49,9 @@ public class ConfigurationMapper {
   public Configuration fromJson(File json) {
 
     try {
-      return this.objectMapper.readValue(json, Configuration.class);
+      Configuration configuration = this.objectMapper.readValue(json, Configuration.class);
+      configuration.initialize();
+      return configuration;
     } catch (IOException e) {
       throw new IllegalStateException(e);
     }

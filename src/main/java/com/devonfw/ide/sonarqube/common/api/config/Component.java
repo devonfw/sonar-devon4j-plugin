@@ -1,9 +1,7 @@
 package com.devonfw.ide.sonarqube.common.api.config;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * {@link Component} of the {@link Architecture}.
@@ -12,18 +10,15 @@ import java.util.List;
  */
 public class Component {
 
-  static final Component GENERAL = new Component("general", Collections.emptyList());
+  static final String NAME_GENERAL = "general";
 
-  static final Component APP = new Component("app", Collections.emptyList());
-
-  static final Component APPLICATION = new Component("application", Collections.emptyList());
-
-  static final List<Component> DEFAULT_COMPONENTS = Collections
-      .unmodifiableList(Arrays.asList(GENERAL, APP, APPLICATION));
+  static final String NAME_APP = "app";
 
   private String name;
 
-  private List<String> dependencies;
+  private Set<String> dependencies;
+
+  Set<String> transitiveDependencies;
 
   /**
    * The constructor.
@@ -50,7 +45,7 @@ public class Component {
    * @param name the {@link #getName() name} of this {@link Component}.
    * @param dependencies the {@link #getDependencies() dependencies}.
    */
-  public Component(String name, List<String> dependencies) {
+  public Component(String name, Set<String> dependencies) {
 
     super();
     this.name = name;
@@ -74,12 +69,12 @@ public class Component {
   }
 
   /**
-   * @return dependencies
+   * @return the {@link Set} of declared dependencies.
    */
-  public List<String> getDependencies() {
+  public Set<String> getDependencies() {
 
     if (this.dependencies == null) {
-      this.dependencies = new ArrayList<>();
+      this.dependencies = new HashSet<>();
     }
     return this.dependencies;
   }
@@ -87,7 +82,7 @@ public class Component {
   /**
    * @param dependencies new value of {@link #getDependencies()}.
    */
-  public void setDependencies(List<String> dependencies) {
+  public void setDependencies(Set<String> dependencies) {
 
     if (this.dependencies != null) {
       throw new IllegalStateException();
@@ -102,18 +97,22 @@ public class Component {
    */
   public boolean hasDependency(String dependentComponentName) {
 
-    if ((this == APP) || (this == APPLICATION)) {
-      return true;
+    if (this.transitiveDependencies != null) {
+      return this.transitiveDependencies.contains(dependentComponentName);
+    } else {
+      return getDependencies().contains(dependentComponentName);
     }
-    if (dependentComponentName.equals(GENERAL.name)) {
-      return true;
-    }
-    for (String dependency : getDependencies()) {
-      if (dependency.equals(dependentComponentName)) {
-        return true;
-      }
-    }
-    return false;
+  }
+
+  /**
+   * @return the {@link Set} of transitive dependencies including {@link #getDependencies() declared dependencies} as
+   *         well as {@link Architecture#hasTransitiveDependencies() transitive} dependencies (recursively). Is
+   *         calculated outside of this bean and does not map to JSON. Will be {@code null} until
+   *         {@link Configuration#initialize() initialization}.
+   */
+  public Set<String> transitiveDependencies() {
+
+    return this.transitiveDependencies;
   }
 
 }

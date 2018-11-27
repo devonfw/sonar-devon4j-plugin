@@ -26,4 +26,16 @@ public class Configuration {
     this.architecture = architecture;
   }
 
+  /**
+   * Properly initializes this configuration.
+   */
+  public void initialize() {
+
+    if (this.architecture == null) {
+      System.out.println("WARNING: configuration is missing architecture.");
+      this.architecture = new Architecture();
+    }
+    this.architecture.initialize(this);
+  }
+
 }
