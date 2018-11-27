@@ -1,3 +1,3 @@
-= sonarqube-devon-plugin
+= sonar-devon-plugin
 
-Plugin for SonarQube to validate Devon architecture
+Plugin for SonarQube to validate https://github.com/devonfw-wiki/devon4j/wiki/coding-conventions#packages[devonfw architecture].
