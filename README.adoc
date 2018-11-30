@@ -43,47 +43,47 @@ Within the same component you are always allowed to call code from the same laye
 
 === Layer Rules
 
-* L1. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerCommon2AnyCheckTest.java[DevonArchitectureLayerCommon2AnyCheckTest]
-* L2. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerAny2ClientCheck.java[DevonArchitectureLayerAny2ClientCheck]
-* L3. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerClient2LogicCheck.java[DevonArchitectureLayerClient2LogicCheck]
-* L4. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerClient2DataaccessCheck.java[DevonArchitectureLayerClient2DataaccessCheck]
-* L5. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerClient2BatchCheck.java[DevonArchitectureLayerClient2BatchCheck]
-* L6. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerService2BatchCheck.java[DevonArchitectureLayerService2BatchCheck]
-* L7. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerBatch2ServiceCheck.java[DevonArchitectureLayerBatch2ServiceCheck]
-* L8. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerService2DataaccessCheck.java[DevonArchitectureLayerService2DataaccessCheck]
-* L9. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerLogic2ServiceCheck.java[DevonArchitectureLayerLogic2ServiceCheck]
-* L10. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerDataaccess2ServiceCheck.java[DevonArchitectureLayerDataaccess2ServiceCheck]
-* L11. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerBatch2DataaccessCheck.java[DevonArchitectureLayerBatch2DataaccessCheck]
-* L12. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerDataaccess2LogicCheck.java[DevonArchitectureLayerDataaccess2LogicCheck]
+* L1. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerCommon2AnyCheck.java[DevonArchitectureLayerCommon2AnyCheck]
+* L2. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerAny2ClientCheck.java[DevonArchitectureLayerAny2ClientCheck]
+* L3. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerClient2LogicCheck.java[DevonArchitectureLayerClient2LogicCheck]
+* L4. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerClient2DataaccessCheck.java[DevonArchitectureLayerClient2DataaccessCheck]
+* L5. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerClient2BatchCheck.java[DevonArchitectureLayerClient2BatchCheck]
+* L6. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerService2BatchCheck.java[DevonArchitectureLayerService2BatchCheck]
+* L7. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerBatch2ServiceCheck.java[DevonArchitectureLayerBatch2ServiceCheck]
+* L8. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerService2DataaccessCheck.java[DevonArchitectureLayerService2DataaccessCheck]
+* L9. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerLogic2ServiceCheck.java[DevonArchitectureLayerLogic2ServiceCheck]
+* L10. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerDataaccess2ServiceCheck.java[DevonArchitectureLayerDataaccess2ServiceCheck]
+* L11. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerBatch2DataaccessCheck.java[DevonArchitectureLayerBatch2DataaccessCheck]
+* L12. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerDataaccess2LogicCheck.java[DevonArchitectureLayerDataaccess2LogicCheck]
 
 === Component Rules
 
 The following component rules will rely on the `architecture.json` configuration decsribed above.
 
-* C1. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureComponentDeclarationCheck.java[DevonArchitectureComponentDeclarationCheck]
-* C2. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureComponentDependencyCheck.java[DevonArchitectureComponentDependencyCheck]
-* C3. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerService2Service4ComponentCheck.java[DevonArchitectureLayerService2Service4ComponentCheck]
-* C4. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerService2Logic4ComponentCheck.java[DevonArchitectureLayerService2Logic4ComponentCheck]
-* C5. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerLogic2Dataaccess4ComponentCheck.java[DevonArchitectureLayerLogic2Dataaccess4ComponentCheck]
-* C6. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerDataaccess2Dataaccess4ComponentCheck.java[DevonArchitectureLayerDataaccess2Dataaccess4ComponentCheck]
-* C7. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerBatch2Logic4ComponentCheck.java[DevonArchitectureLayerBatch2Logic4ComponentCheck]
+* C1. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureComponentDeclarationCheck.java[DevonArchitectureComponentDeclarationCheck]
+* C2. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureComponentDependencyCheck.java[DevonArchitectureComponentDependencyCheck]
+* C3. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerService2Service4ComponentCheck.java[DevonArchitectureLayerService2Service4ComponentCheck]
+* C4. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerService2Logic4ComponentCheck.java[DevonArchitectureLayerService2Logic4ComponentCheck]
+* C5. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerLogic2Dataaccess4ComponentCheck.java[DevonArchitectureLayerLogic2Dataaccess4ComponentCheck]
+* C6. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerDataaccess2Dataaccess4ComponentCheck.java[DevonArchitectureLayerDataaccess2Dataaccess4ComponentCheck]
+* C7. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureLayerBatch2Logic4ComponentCheck.java[DevonArchitectureLayerBatch2Logic4ComponentCheck]
 
 === Scope Rules
 
 Further there are aditional rules to check the scope:
 image:DevonScopeRules.png["Devon Architecture Rules",link=DevonScopeRules.png]
 
-* S1. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureScopeApi2ImplCheck.java[DevonArchitectureScopeApi2ImplCheck]
-* S2. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureScopeApi2BaseCheck.java[DevonArchitectureScopeApi2BaseCheck]
-* S3. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureScopeBase2ImplCheck.java[DevonArchitectureScopeBase2ImplCheck]
-* S4. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureScopeApi2Base4ComponentPartCheck.java[DevonArchitectureScopeApi2Base4ComponentPartCheck]
-* S5. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureScopeBase2Impl4ComponentPartCheck.java[DevonArchitectureScopeBase2Impl4ComponentPartCheck]
-* S6. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureScopeImpl2Base4ComponentPartCheck.java[DevonArchitectureScopeImpl2Base4ComponentPartCheck]
-* S7. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureScopeBase2Base4ComponentPartCheck.java[DevonArchitectureScopeBase2Base4ComponentPartCheck]
-* S8. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureScopeImpl2Impl4ComponentPartCheck.java[DevonArchitectureScopeImpl2Impl4ComponentPartCheck]
+* S1. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureScopeApi2ImplCheck.java[DevonArchitectureScopeApi2ImplCheck]
+* S2. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureScopeApi2BaseCheck.java[DevonArchitectureScopeApi2BaseCheck]
+* S3. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureScopeBase2ImplCheck.java[DevonArchitectureScopeBase2ImplCheck]
+* S4. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureScopeApi2Base4ComponentPartCheck.java[DevonArchitectureScopeApi2Base4ComponentPartCheck]
+* S5. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureScopeBase2Impl4ComponentPartCheck.java[DevonArchitectureScopeBase2Impl4ComponentPartCheck]
+* S6. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureScopeImpl2Base4ComponentPartCheck.java[DevonArchitectureScopeImpl2Base4ComponentPartCheck]
+* S7. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureScopeBase2Base4ComponentPartCheck.java[DevonArchitectureScopeBase2Base4ComponentPartCheck]
+* S8. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitectureScopeImpl2Impl4ComponentPartCheck.java[DevonArchitectureScopeImpl2Impl4ComponentPartCheck]
 
 === Package Rules
 
 Finnally, there is a generic rule that checks the devonfw https://github.com/devonfw/devon4j/wiki/coding-conventions#packages[packaging conventions]:
 
-* P1. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/test/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitecturePackageCheck.java[DevonArchitecturePackageCheck]
+* P1. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitecturePackageCheck.java[DevonArchitecturePackageCheck]
