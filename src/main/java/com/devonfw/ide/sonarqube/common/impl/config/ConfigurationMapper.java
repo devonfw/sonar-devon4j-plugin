@@ -35,7 +35,7 @@ public class ConfigurationMapper {
 
     try {
       Configuration configuration = this.objectMapper.readValue(json, Configuration.class);
-      configuration.initialize();
+      configuration.initialize(Configuration.ARCHITECTURE_JSON);
       return configuration;
     } catch (IOException e) {
       throw new IllegalStateException(e);
@@ -50,7 +50,7 @@ public class ConfigurationMapper {
 
     try {
       Configuration configuration = this.objectMapper.readValue(json, Configuration.class);
-      configuration.initialize();
+      configuration.initialize(json.getAbsolutePath());
       return configuration;
     } catch (IOException e) {
       throw new IllegalStateException(e);

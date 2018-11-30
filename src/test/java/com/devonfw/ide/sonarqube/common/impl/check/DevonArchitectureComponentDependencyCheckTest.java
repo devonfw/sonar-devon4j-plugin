@@ -14,18 +14,8 @@ public class DevonArchitectureComponentDependencyCheckTest {
   @Test
   public void test() {
 
-    DevonArchitectureComponentDependencyCheck check = new DevonArchitectureComponentDependencyCheck();
-    JavaCheckVerifier.verify("src/test/files/DevonArchitectureComponentDependencyCheck.java", check);
-  }
-
-  /**
-   * Test of {@link DevonArchitectureComponentDependencyCheck}.
-   */
-  @Test
-  public void test2() {
-
-    DevonArchitectureComponentDependencyCheck check = new DevonArchitectureComponentDependencyCheck();
-    JavaCheckVerifier.verify("src/test/files/DevonArchitectureComponentDependencyCheck2.java", check);
+    JavaCheckVerifier.verify("src/test/files/DevonArchitectureComponentDependencyCheck.java",
+        new DevonArchitectureComponentDependencyCheck());
   }
 
 }

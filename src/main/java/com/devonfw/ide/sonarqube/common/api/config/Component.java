@@ -10,9 +10,11 @@ import java.util.Set;
  */
 public class Component {
 
-  static final String NAME_GENERAL = "general";
+  /** {@link #getName() Name} of general component (for cross-cutting code). */
+  public static final String NAME_GENERAL = "general";
 
-  static final String NAME_APP = "app";
+  /** {@link #getName() Name} of app component (for application orchestration). */
+  public static final String NAME_APP = "app";
 
   private String name;
 
@@ -37,19 +39,6 @@ public class Component {
 
     super();
     this.name = name;
-  }
-
-  /**
-   * The constructor.
-   *
-   * @param name the {@link #getName() name} of this {@link Component}.
-   * @param dependencies the {@link #getDependencies() dependencies}.
-   */
-  public Component(String name, Set<String> dependencies) {
-
-    super();
-    this.name = name;
-    this.dependencies = dependencies;
   }
 
   /**
@@ -108,7 +97,7 @@ public class Component {
    * @return the {@link Set} of transitive dependencies including {@link #getDependencies() declared dependencies} as
    *         well as {@link Architecture#hasTransitiveDependencies() transitive} dependencies (recursively). Is
    *         calculated outside of this bean and does not map to JSON. Will be {@code null} until
-   *         {@link Configuration#initialize() initialization}.
+   *         {@link Configuration#initialize(String) initialization}.
    */
   public Set<String> transitiveDependencies() {
 

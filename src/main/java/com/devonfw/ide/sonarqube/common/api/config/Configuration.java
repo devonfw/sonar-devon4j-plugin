@@ -5,7 +5,21 @@ package com.devonfw.ide.sonarqube.common.api.config;
  */
 public class Configuration {
 
+  /** Default filename of the file for this {@link Configuration}. */
+  public static final String ARCHITECTURE_JSON = "architecture.json";
+
   private Architecture architecture;
+
+  private Status status;
+
+  /**
+   * The constructor.
+   */
+  public Configuration() {
+
+    super();
+    this.status = new Status();
+  }
 
   /**
    * @return the {@link Architecture}.
@@ -27,12 +41,23 @@ public class Configuration {
   }
 
   /**
-   * Properly initializes this configuration.
+   * @return the status of this {@link Configuration}.
    */
-  public void initialize() {
+  public Status status() {
 
+    return this.status;
+  }
+
+  /**
+   * Properly initializes this configuration.
+   * 
+   * @param source the source where the configuration was loaded from.
+   */
+  public void initialize(String source) {
+
+    this.status.source = source;
     if (this.architecture == null) {
-      System.out.println("WARNING: configuration is missing architecture.");
+      this.status.addError("The configuration file architecture.json is missing the property \"architecture\".");
       this.architecture = new Architecture();
     }
     this.architecture.initialize(this);

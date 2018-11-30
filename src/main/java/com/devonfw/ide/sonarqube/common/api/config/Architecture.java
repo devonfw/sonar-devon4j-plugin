@@ -86,7 +86,7 @@ public class Architecture {
     for (Component component : this.components) {
       Component duplicate = this.componentMap.put(component.getName(), component);
       if (duplicate != null) {
-        System.out.println("ERROR: Duplicate architecture component '" + component.getName() + "'.");
+        configuration.status().addError("Duplicate architecture component '" + component.getName() + "'.");
       }
     }
     if (!this.componentMap.containsKey(Component.NAME_GENERAL)) {
@@ -113,7 +113,7 @@ public class Architecture {
     if (component.transitiveDependencies != null) {
       Node<String> duplicate = parentNode.find(name);
       if (duplicate != null) {
-        System.out.println("ERROR: cyclic dependency detected: " + componentNode);
+        configuration.status().addError("Cyclic dependency detected: " + componentNode);
       }
       return; // already initialized...
     }
@@ -125,8 +125,8 @@ public class Architecture {
       if (!dependency.contains(".")) {
         Component dependentComponent = this.componentMap.get(dependency);
         if (dependentComponent == null) {
-          System.out.println("WARNING: component '" + name + "' has dependency '" + dependency
-              + "' but no such component is defined.");
+          configuration.status().addError(
+              "Component '" + name + "' has dependency '" + dependency + "' but no such component is defined.");
         } else {
           initialize(dependentComponent, componentNode, configuration);
           if (hasTransitiveDependencies()) {

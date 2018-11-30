@@ -3,8 +3,6 @@ package com.devonfw.ide.sonarqube.common.impl.check;
 import org.junit.Test;
 import org.sonar.java.checks.verifier.JavaCheckVerifier;
 
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecturePackageCheck;
-
 /**
  * Test of {@link DevonArchitecturePackageCheck}.
  */
@@ -14,18 +12,49 @@ public class DevonArchitecturePackageCheckTest {
    * Test the {@link DevonArchitecturePackageCheck}.
    */
   @Test
-  public void test() {
+  public void testNoScope() {
 
-    JavaCheckVerifier.verify("src/test/files/DevonArchitecturePackageCheck.java", new DevonArchitecturePackageCheck());
+    JavaCheckVerifier.verify("src/test/files/DevonArchitecturePackageCheck_NoScope.java",
+        new DevonArchitecturePackageCheck());
   }
 
   /**
    * Test the {@link DevonArchitecturePackageCheck}.
    */
   @Test
-  public void test2() {
+  public void testIllegalLayer() {
 
-    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonArchitecturePackageCheck2.java",
+    JavaCheckVerifier.verify("src/test/files/DevonArchitecturePackageCheck_IllegalLayer.java",
+        new DevonArchitecturePackageCheck());
+  }
+
+  /**
+   * Test the {@link DevonArchitecturePackageCheck}.
+   */
+  @Test
+  public void testIllegalRoot() {
+
+    JavaCheckVerifier.verify("src/test/files/DevonArchitecturePackageCheck_IllegalRoot.java",
+        new DevonArchitecturePackageCheck());
+  }
+
+  /**
+   * Test the {@link DevonArchitecturePackageCheck}.
+   */
+  @Test
+  public void testNoIssue() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonArchitecturePackageCheck_OK.java",
+        new DevonArchitecturePackageCheck());
+  }
+
+  /**
+   * Test the {@link DevonArchitecturePackageCheck}.
+   */
+  @Test
+  public void testNoIssueSpringBootApp() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonArchitecturePackageCheck_OK_SpringBootApp.java",
         new DevonArchitecturePackageCheck());
   }
 

@@ -3,7 +3,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>io.oasp.java.ide</groupId>
+  <groupId>com.devonfw.tools</groupId>
   <artifactId>sonar-devon-plugin</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>sonar-plugin</packaging>
@@ -32,7 +32,6 @@
       <version>${sonar.version}</version>
       <scope>provided</scope>
     </dependency>
-
 
     <dependency>
       <groupId>org.sonarsource.java</groupId>
@@ -141,18 +140,6 @@
         </configuration>
       </plugin>
 
-      <!--
-        <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-resources-plugin</artifactId>
-        <configuration>
-        <pluginClass>org.sonarqube.plugins.example.ExamplePlugin</pluginClass>
-        <encoding>${project.build.sourceEncoding}</encoding>
-        <includeEmptyDirs>true</includeEmptyDirs>
-        </configuration>
-        </plugin>
-      -->
-
       <!-- configure java compiler -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -163,39 +150,6 @@
           <target>${java.version}</target>
         </configuration>
       </plugin>
-
-      <!-- advanced manifests -->
-      <!--
-        <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <configuration>
-        <archive>
-        <manifest>
-        <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-        <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-        </manifest>
-        </archive>
-        </configuration>
-        </plugin>
-      -->
-
-      <!-- also generate source JARs -->
-      <!--
-        <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <executions>
-        <execution>
-        <id>attach-sources</id>
-        <phase>package</phase>
-        <goals>
-        <goal>jar-no-fork</goal>
-        </goals>
-        </execution>
-        </executions>
-        </plugin>
-      -->
     </plugins>
     <pluginManagement>
       <plugins>

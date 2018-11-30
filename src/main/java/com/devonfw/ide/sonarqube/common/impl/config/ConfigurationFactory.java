@@ -11,8 +11,6 @@ import com.devonfw.ide.sonarqube.common.api.config.Configuration;
  */
 public class ConfigurationFactory {
 
-  private static final String ARCHITECTURE_JSON = "architecture.json";
-
   private static final ConfigurationFactory INSTANCE = new ConfigurationFactory();
 
   private final ConfigurationMapper mapper;
@@ -74,7 +72,7 @@ public class ConfigurationFactory {
     if (folder == null) {
       return null;
     }
-    File configFile = new File(folder, ARCHITECTURE_JSON);
+    File configFile = new File(folder, Configuration.ARCHITECTURE_JSON);
     if (configFile.exists()) {
       return configFile;
     }

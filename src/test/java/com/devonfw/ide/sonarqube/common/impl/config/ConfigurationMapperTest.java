@@ -7,7 +7,7 @@ import org.junit.Test;
 import com.devonfw.ide.sonarqube.common.api.config.Architecture;
 import com.devonfw.ide.sonarqube.common.api.config.Component;
 import com.devonfw.ide.sonarqube.common.api.config.Configuration;
-import com.devonfw.ide.sonarqube.common.impl.config.ConfigurationMapper;
+import com.devonfw.ide.sonarqube.common.api.config.Status;
 import com.devonfw.module.test.common.base.ModuleTest;
 
 /**
@@ -76,6 +76,80 @@ public class ConfigurationMapperTest extends ModuleTest {
     Component component3 = components.get(2);
     assertThat(component3.getName()).isEqualTo("component3");
     assertThat(component3.getDependencies()).isEmpty();
+  }
+
+  /**
+   * Test of {@link ConfigurationMapper#fromJson(String)}.
+   */
+  @Test
+  public void testFromJsonIllegalCyclicDependency() {
+
+    // given
+    String json = "{\"architecture\":" + //
+        "{\"components\":[" + //
+        "{\"name\":\"component1\",\"dependencies\":[\"component2\"]}," + //
+        "{\"name\":\"component2\",\"dependencies\":[\"component3\"]}," + //
+        "{\"name\":\"component3\",\"dependencies\":[\"component1\"]}" + //
+        "]}}";
+    ConfigurationMapper mapper = new ConfigurationMapper();
+
+    // when
+    Configuration config = mapper.fromJson(json);
+
+    // then
+    assertThat(config).isNotNull();
+    Status status = config.status();
+    assertThat(status).isNotNull();
+    assertThat(status.getErrors())
+        .containsExactly("Cyclic dependency detected: components->component1->component2->component3->component1");
+  }
+
+  /**
+   * Test of {@link ConfigurationMapper#fromJson(String)}.
+   */
+  @Test
+  public void testFromJsonIllegalDuplicateComponent() {
+
+    // given
+    String json = "{\"architecture\":" + //
+        "{\"components\":[" + //
+        "{\"name\":\"component1\",\"dependencies\":[\"general\"]}," + //
+        "{\"name\":\"component1\",\"dependencies\":[\"general\"]}" + //
+        "]}}";
+    ConfigurationMapper mapper = new ConfigurationMapper();
+
+    // when
+    Configuration config = mapper.fromJson(json);
+
+    // then
+    assertThat(config).isNotNull();
+    Status status = config.status();
+    assertThat(status).isNotNull();
+    assertThat(status.getErrors()).containsExactly("Duplicate architecture component 'component1'.");
+  }
+
+  /**
+   * Test of {@link ConfigurationMapper#fromJson(String)}.
+   */
+  @Test
+  public void testFromJsonIllegalUndefinedDependency() {
+
+    // given
+    String json = "{\"architecture\":" + //
+        "{\"components\":[" + //
+        "{\"name\":\"component1\",\"dependencies\":[\"general\",\"com.devonfw.modules.jpa\",\"component2\"]}" + //
+        "]}}";
+    ConfigurationMapper mapper = new ConfigurationMapper();
+
+    // when
+    Configuration config = mapper.fromJson(json);
+
+    // then
+    assertThat(config).isNotNull();
+    Status status = config.status();
+    assertThat(status).isNotNull();
+    assertThat(status.getErrors())
+        .containsExactly("Component 'component1' has dependency 'component2' but no such component is defined.");
   }
 
 }

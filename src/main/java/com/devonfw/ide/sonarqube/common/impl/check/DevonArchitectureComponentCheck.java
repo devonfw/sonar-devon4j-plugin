@@ -25,7 +25,17 @@ public abstract class DevonArchitectureComponentCheck extends DevonArchitectureC
     if (this.configuration == null) {
       this.configuration = new Configuration();
     }
+    onConfigurationSet(context);
     super.scanFile(context);
+  }
+
+  /**
+   * Called from {@link #scanFile(JavaFileScannerContext)} after the {@link Configuration} has been set.
+   *
+   * @param context the {@link JavaFileScannerContext}.
+   */
+  protected void onConfigurationSet(JavaFileScannerContext context) {
+
   }
 
   /**
@@ -65,29 +75,12 @@ public abstract class DevonArchitectureComponentCheck extends DevonArchitectureC
     }
     Component sourceComponent = getComponent(sourceComponentName);
     if (sourceComponent == null) {
-      return null; // already covered by DevonBusinessArchitectureDependencyCheck.createIssueForInvalidSourcePackage
+      return null; // already covered by DevonArchitectureComponentDeclarationCheck.createIssueForInvalidSourcePackage
     }
-    boolean targetDependencyAllowed;
-    if (targetComponentName.equals("general") || sourceComponentName.equals("app")
-        || sourceComponentName.equals("application")) {
-      targetDependencyAllowed = true;
-    } else {
-      String targetName = prefix + targetComponentName;
-      targetDependencyAllowed = sourceComponent.hasDependency(targetName);
-      if (targetRoot.equals("com.devonfw.module")) {
-        if (targetApp.equals("jpa")) {
-          targetDependencyAllowed = source.isLayerDataAccess();
-        } else if (targetApp.equals("batch")) {
-          targetDependencyAllowed = source.isLayerBatch();
-        } else if (targetApp.equals("json")) {
-          targetDependencyAllowed = source.isLayerCommon();
-        } else {
-          targetDependencyAllowed = true;
-        }
-      }
-      if (!targetDependencyAllowed) {
-        return targetDependencyNotAllowed(sourceComponent, targetName);
-      }
+    String targetName = prefix + targetComponentName;
+    boolean targetDependencyAllowed = sourceComponent.hasDependency(targetName);
+    if (!targetDependencyAllowed) {
+      return targetDependencyNotAllowed(sourceComponent, targetName);
     }
     return checkDependency(source, sourceComponent, target, targetTypeSimpleName);
   }
