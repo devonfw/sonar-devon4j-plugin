@@ -18,7 +18,7 @@ public class DevonArchitectureScopeBase2Base4ComponentPartCheck extends DevonArc
   protected String checkDependency(Devon4jPackage source, Devon4jPackage target, String targetTypeSimpleName) {
 
     if (source.isScopeBase() && target.isScopeBase() && !isSameComponentPart(source, target)
-        && !isSameComponentOrGeneralWithCommonLayer(source, target)) {
+        && !isSameOrGeneralComponentWithSameOrCommonLayer(source, target)) {
       return "Code from base scope ('" + source.toString()
           + "') shall not depend on base scope of other component part ('" + target.toString() + "').";
     }

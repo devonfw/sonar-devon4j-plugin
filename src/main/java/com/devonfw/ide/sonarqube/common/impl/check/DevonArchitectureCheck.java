@@ -127,15 +127,14 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
     if (!targetPkg.isValid()) {
       return;
     }
-    if (targetPkg.getRoot().equals("com.devonfw")) {
+    String targetRoot = targetPkg.getRoot();
+    if (targetRoot.equals("com.devonfw") && !isSameRootApplication(this.sourcePackage, targetPkg)) {
       boolean targetDependencyAllowed;
-      String targetApp = targetPkg.getApplication();
-      if (targetApp.equals("jpa")) {
+      String targetComponent = targetPkg.getComponent();
+      if (targetComponent.equals("jpa")) {
         targetDependencyAllowed = this.sourcePackage.isLayerDataAccess();
-      } else if (targetApp.equals("batch")) {
+      } else if (targetComponent.equals("batch")) {
         targetDependencyAllowed = this.sourcePackage.isLayerBatch();
-      } else if (targetApp.equals("json")) {
-        targetDependencyAllowed = this.sourcePackage.isLayerCommon();
       } else {
         targetDependencyAllowed = true;
       }
@@ -251,9 +250,9 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
    * @return {@code true} if both {@link Devon4jPackage packages} have the same {@link Devon4jPackage#getComponent()
    *         component} and {@link Devon4jPackage#getLayer() layer}, {@code false} otherwise.
    */
-  protected boolean isSameComponentOrGeneralWithCommonLayer(Devon4jPackage source, Devon4jPackage target) {
+  protected boolean isSameOrGeneralComponentWithSameOrCommonLayer(Devon4jPackage source, Devon4jPackage target) {
 
-    if (target.isLayerCommon()) {
+    if (target.isLayerCommon() || (target.getLayer().equals(source.getLayer()))) {
       String targetComponent = target.getComponent();
       if (targetComponent.equals(Component.NAME_GENERAL)) {
         return true;
