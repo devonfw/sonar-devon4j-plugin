@@ -10,7 +10,7 @@
   <name>${project.artifactId}</name>
   <description>SonarQube Plugin with rules for static code analysis to validate architecture.</description>
   <url>http://oasp.io/oasp4j/maven/oasp4j</url>
-  <inceptionYear>2014</inceptionYear>
+  <inceptionYear>2017</inceptionYear>
 
   <properties>
     <java.version>1.8</java.version>
