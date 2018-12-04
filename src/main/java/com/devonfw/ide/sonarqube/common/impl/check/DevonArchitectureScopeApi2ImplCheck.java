@@ -3,7 +3,7 @@ package com.devonfw.ide.sonarqube.common.impl.check;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
-import com.devonfw.module.basic.common.api.reflect.Devon4jPackage;
+import com.devonfw.ide.sonarqube.common.api.JavaType;
 
 /**
  * {@link DevonArchitectureCheck} to verify that code from api scope does not depend on impl scope.
@@ -14,7 +14,7 @@ import com.devonfw.module.basic.common.api.reflect.Devon4jPackage;
 public class DevonArchitectureScopeApi2ImplCheck extends DevonArchitectureCheck {
 
   @Override
-  protected String checkDependency(Devon4jPackage source, Devon4jPackage target, String targetTypeSimpleName) {
+  protected String checkDependency(JavaType source, JavaType target) {
 
     if (source.isScopeApi() && target.isScopeImpl()) {
       return "Code from api scope ('" + source.toString() + "') shall not depend on impl scope ('" + target.toString()

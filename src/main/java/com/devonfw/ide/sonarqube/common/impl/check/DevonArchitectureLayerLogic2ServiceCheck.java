@@ -3,7 +3,7 @@ package com.devonfw.ide.sonarqube.common.impl.check;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
-import com.devonfw.module.basic.common.api.reflect.Devon4jPackage;
+import com.devonfw.ide.sonarqube.common.api.JavaType;
 
 /**
  * {@link DevonArchitectureCheck} verifying that code from logic layer does not depend on service layer (of same app).
@@ -14,7 +14,7 @@ import com.devonfw.module.basic.common.api.reflect.Devon4jPackage;
 public class DevonArchitectureLayerLogic2ServiceCheck extends DevonArchitectureCheck {
 
   @Override
-  protected String checkDependency(Devon4jPackage source, Devon4jPackage target, String targetTypeSimpleName) {
+  protected String checkDependency(JavaType source, JavaType target) {
 
     if (source.isLayerLogic() && target.isLayerService() && isSameRootApplication(source, target)) {
       return "Code from logic layer ('" + source.toString() + "') shall not depend on service layer ('"

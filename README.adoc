@@ -88,6 +88,14 @@ image:DevonScopeRules.png["Devon Architecture Rules",link=DevonScopeRules.png]
 
 === Package Rules
 
-Finnally, there is a generic rule that checks the devonfw https://github.com/devonfw/devon4j/wiki/coding-conventions#packages[packaging conventions]:
+Additioan, there is a generic rule that checks the devonfw https://github.com/devonfw/devon4j/wiki/coding-conventions#packages[packaging conventions]:
 
 * P1. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitecturePackageCheck.java[DevonArchitecturePackageCheck]
+[DevonArchitecture3rdPartyTransactionalCheck]
+=== 3rd Party Rules
+
+Finally, there are rules checking the proper usage of third-party library code:
+
+* E1. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitecture3rdPartyTransactionalCheck.java[DevonArchitecture3rdPartyTransactionalCheck]
+* E2. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitecture3rdPartyMysemaCheck.java[DevonArchitecture3rdPartyMysemaCheck]
+* E3. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitecture3rdPartyJpaCheck.java[DevonArchitecture3rdPartyJpaCheck]

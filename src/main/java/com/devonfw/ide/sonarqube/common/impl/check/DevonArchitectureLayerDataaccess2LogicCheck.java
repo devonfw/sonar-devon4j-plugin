@@ -3,7 +3,7 @@ package com.devonfw.ide.sonarqube.common.impl.check;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
-import com.devonfw.module.basic.common.api.reflect.Devon4jPackage;
+import com.devonfw.ide.sonarqube.common.api.JavaType;
 
 /**
  * {@link DevonArchitectureCheck} verifying that dataaccess layer does not depend on logic layer.
@@ -13,7 +13,7 @@ import com.devonfw.module.basic.common.api.reflect.Devon4jPackage;
 public class DevonArchitectureLayerDataaccess2LogicCheck extends DevonArchitectureCheck {
 
   @Override
-  protected String checkDependency(Devon4jPackage source, Devon4jPackage target, String targetTypeSimpleName) {
+  protected String checkDependency(JavaType source, JavaType target) {
 
     if (source.isLayerDataAccess() && target.isLayerLogic()) {
       return "Dataaccess layer ('" + source.toString() + "') shall depend on logic layer ('" + target.toString()

@@ -5,10 +5,10 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.ClassTree;
 
+import com.devonfw.ide.sonarqube.common.api.JavaType;
 import com.devonfw.ide.sonarqube.common.api.config.Architecture;
 import com.devonfw.ide.sonarqube.common.api.config.Component;
 import com.devonfw.ide.sonarqube.common.api.config.Status;
-import com.devonfw.module.basic.common.api.reflect.Devon4jPackage;
 
 /**
  * {@link DevonArchitectureComponentCheck} verifying that a {@link Component} itself is properly defined in
@@ -20,17 +20,17 @@ import com.devonfw.module.basic.common.api.reflect.Devon4jPackage;
 public class DevonArchitectureComponentDeclarationCheck extends DevonArchitectureComponentCheck {
 
   @Override
-  protected String createIssueForInvalidSourcePackage(Devon4jPackage pkg, ClassTree classTree) {
+  protected String createIssueForInvalidSourcePackage(JavaType source, ClassTree classTree) {
 
-    if (pkg.isValid()) {
-      String sourceComponentName = pkg.getComponent();
+    if (source.isValid()) {
+      String sourceComponentName = source.getComponent();
       Component sourceComponent = getComponent(sourceComponentName);
       if (sourceComponent == null) {
         return "Undefined component '" + sourceComponentName
             + "' - please configure business architecture in architecture.json file.";
       }
     }
-    return super.createIssueForInvalidSourcePackage(pkg, classTree);
+    return super.createIssueForInvalidSourcePackage(source, classTree);
   }
 
   @Override
@@ -47,8 +47,7 @@ public class DevonArchitectureComponentDeclarationCheck extends DevonArchitectur
   }
 
   @Override
-  protected String checkDependency(Devon4jPackage source, Component sourceComponent, Devon4jPackage target,
-      String targetTypeSimpleName) {
+  protected String checkDependency(JavaType source, Component sourceComponent, JavaType target) {
 
     return null;
   }

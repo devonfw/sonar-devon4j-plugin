@@ -4,10 +4,10 @@ import java.io.File;
 
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 
+import com.devonfw.ide.sonarqube.common.api.JavaType;
 import com.devonfw.ide.sonarqube.common.api.config.Component;
 import com.devonfw.ide.sonarqube.common.api.config.Configuration;
 import com.devonfw.ide.sonarqube.common.impl.config.ConfigurationFactory;
-import com.devonfw.module.basic.common.api.reflect.Devon4jPackage;
 
 /**
  * Abstract base class for a {@link DevonArchitectureCheck} that checks the business architecture (validates the
@@ -56,7 +56,7 @@ public abstract class DevonArchitectureComponentCheck extends DevonArchitectureC
   }
 
   @Override
-  protected String checkDependency(Devon4jPackage source, Devon4jPackage target, String targetTypeSimpleName) {
+  protected String checkDependency(JavaType source, JavaType target) {
 
     String sourceComponentName = source.getComponent();
     String targetComponentName = target.getComponent();
@@ -82,7 +82,7 @@ public abstract class DevonArchitectureComponentCheck extends DevonArchitectureC
     if (!targetDependencyAllowed) {
       return targetDependencyNotAllowed(sourceComponent, targetName);
     }
-    return checkDependency(source, sourceComponent, target, targetTypeSimpleName);
+    return checkDependency(source, sourceComponent, target);
   }
 
   /**
@@ -96,13 +96,11 @@ public abstract class DevonArchitectureComponentCheck extends DevonArchitectureC
   }
 
   /**
-   * @param source the {@link Devon4jPackage} of the source type to analyze.
+   * @param source the {@link JavaType} of the source type to analyze.
    * @param sourceComponent the {@link Component} of the source type to analyze.
-   * @param target the {@link Devon4jPackage} of the dependent target type.
-   * @param targetTypeSimpleName the simple name of the target type.
+   * @param target the {@link JavaType} of the dependent target type.
    * @return the issue to create in case of a disallowed dependency or {@code null} for none.
    */
-  protected abstract String checkDependency(Devon4jPackage source, Component sourceComponent, Devon4jPackage target,
-      String targetTypeSimpleName);
+  protected abstract String checkDependency(JavaType source, Component sourceComponent, JavaType target);
 
 }

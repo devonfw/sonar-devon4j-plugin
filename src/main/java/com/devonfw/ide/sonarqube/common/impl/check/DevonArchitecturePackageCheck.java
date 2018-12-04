@@ -5,7 +5,7 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.tree.ClassTree;
 import org.sonar.plugins.java.api.tree.Tree.Kind;
 
-import com.devonfw.module.basic.common.api.reflect.Devon4jPackage;
+import com.devonfw.ide.sonarqube.common.api.JavaType;
 
 /**
  * {@link DevonArchitectureCheck} verifying the devon package conventions.
@@ -15,34 +15,34 @@ import com.devonfw.module.basic.common.api.reflect.Devon4jPackage;
 public class DevonArchitecturePackageCheck extends DevonArchitectureCheck {
 
   @Override
-  protected String checkDependency(Devon4jPackage source, Devon4jPackage target, String targetTypeSimpleName) {
+  protected String checkDependency(JavaType source, JavaType target) {
 
     return null;
   }
 
   @Override
-  protected String createIssueForInvalidSourcePackage(Devon4jPackage pkg, ClassTree classTree) {
+  protected String createIssueForInvalidSourcePackage(JavaType source, ClassTree classTree) {
 
-    if (pkg.isValid()) {
+    if (source.isValid()) {
       return null;
     }
-    if (!pkg.isValidLayer() && !pkg.isValidScope()) {
+    if (!source.isValidLayer() && !source.isValidScope()) {
       if ((classTree.kind() == Kind.CLASS) && classTree.simpleName().name().matches("SpringBoot[a-zA-Z0-9]*App")) {
         return null;
       }
     }
     StringBuilder sb = new StringBuilder(64);
     sb.append("The package '");
-    sb.append(pkg.toString());
+    sb.append(source.toString());
     sb.append("' is not compliant with your architecture.");
-    if (!pkg.isValidLayer()) {
+    if (!source.isValidLayer()) {
       sb.append(" Layer '");
-      sb.append(pkg.getLayer());
+      sb.append(source.getLayer());
       sb.append("' is invalid. Valid layers are: dataaccess,logic,service,batch,client, or common");
     }
-    if (!pkg.isValidScope()) {
+    if (!source.isValidScope()) {
       sb.append(" Scope '");
-      sb.append(pkg.getScope());
+      sb.append(source.getScope());
       sb.append("' is invalid. Valid scopes are: api,base, or impl");
     }
     return sb.toString();
