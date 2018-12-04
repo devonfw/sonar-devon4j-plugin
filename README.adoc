@@ -92,6 +92,7 @@ Additioan, there is a generic rule that checks the devonfw https://github.com/de
 
 * P1. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitecturePackageCheck.java[DevonArchitecturePackageCheck]
 [DevonArchitecture3rdPartyTransactionalCheck]
+
 === 3rd Party Rules
 
 Finally, there are rules checking the proper usage of third-party library code:
