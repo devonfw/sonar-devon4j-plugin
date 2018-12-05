@@ -125,11 +125,13 @@ public class JavaType {
   @Override
   public String toString() {
 
-    String fqn = this.pkg.toString();
-    if (fqn.isEmpty()) {
+    String pkgName = this.pkg.toString();
+    if (this.simpleName == null) {
+      return pkgName;
+    } else if (pkgName.isEmpty()) {
       return this.simpleName;
     } else {
-      return fqn + "." + this.simpleName;
+      return pkgName + "." + this.simpleName;
     }
   }
 

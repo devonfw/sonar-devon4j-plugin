@@ -24,7 +24,7 @@ public class DevonArchitecture3rdPartyTransactionalCheckTest {
   @Test
   public void testApi() {
 
-    JavaCheckVerifier.verify("src/test/files/DevonArchitecture3rdPartyTransactionalCheckApi.java",
+    JavaCheckVerifier.verify("src/test/files/DevonArchitecture3rdPartyTransactionalCheck_Api.java",
         new DevonArchitecture3rdPartyTransactionalCheck());
   }
 

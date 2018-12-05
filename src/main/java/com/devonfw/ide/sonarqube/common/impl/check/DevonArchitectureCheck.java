@@ -138,7 +138,7 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
       }
     } else {
       String targetRoot = targetPkg.getRoot();
-      if (targetRoot.equals("com.devonfw") && !isSameRootApplication(this.sourceType, targetType)) {
+      if ("com.devonfw".equals(targetRoot) && !isSameRootApplication(this.sourceType, targetType)) {
         boolean targetDependencyAllowed;
         String targetComponent = targetPkg.getComponent();
         if (targetComponent.equals("jpa")) {
