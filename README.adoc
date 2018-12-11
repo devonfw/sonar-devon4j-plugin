@@ -15,7 +15,7 @@ This `sonar-devon-plugin` provides a plugin extending https://sonarqube.org[Sona
 
 == Installation
 
-If you have https://sonarqube.org[SonarQube] installed, you only need to https://repo.maven.apache.org/maven2/com/devonfw/tools/sonar-devon-plugin[download] and copy the latest version of this `sonar-devon-plugin` into the `extensions/plugins` folder of your SonarQube installation.
+If you have https://sonarqube.org[SonarQube] installed, you only need to https://repo.maven.apache.org/maven2/com/devonfw/tools/sonar-devon-plugin/[download] and copy the latest version of this `sonar-devon-plugin` into the `extensions/plugins` folder of your SonarQube installation.
 Further you need to import the devonfw quality profiles (or active all the rules of this plugin in your quality profile).
 For further details read the https://github.com/devonfw/sonar-devon-plugin/wiki/guide-sonar-qube-setup[SonarQube setup guide]
 
