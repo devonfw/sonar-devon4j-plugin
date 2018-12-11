@@ -19,6 +19,9 @@ public class DevonArchitectureLayerLogic2Dataaccess4ComponentCheck extends Devon
   protected String checkDependency(JavaType source, Component sourceComponent, JavaType target) {
 
     if (source.isLayerLogic() && target.isLayerDataAccess()) {
+      if (target.toString().equals("com.devonfw.module.jpa.dataaccess.api.RevisionMetadata")) {
+        return null; // specific exclusion for unclean packaging
+      }
       return "Code from logic layer ('" + source.toString()
           + "') shall not depend on dataaccess layer of a different component ('" + target.toString() + "').";
     }
