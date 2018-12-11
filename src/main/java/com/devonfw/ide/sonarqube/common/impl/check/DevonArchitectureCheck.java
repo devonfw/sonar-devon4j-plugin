@@ -132,7 +132,7 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
     Devon4jPackage targetPkg = Devon4jPackage.of(pkgName);
     JavaType targetType = new JavaType(targetPkg, simpleName);
     String warning = null;
-    if (!targetPkg.isValid()) {
+    if (!targetPkg.isValid() || (targetPkg.getRoot() == null)) {
       if (isCheckDependencyOnInvalidPackage()) {
         warning = checkDependency(this.sourceType, targetType);
       }
