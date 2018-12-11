@@ -128,4 +128,10 @@ public class Component {
     return this.allDependencies;
   }
 
+  @Override
+  public String toString() {
+
+    return this.name;
+  }
+
 }

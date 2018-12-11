@@ -82,12 +82,12 @@ public class Architecture {
       app = new Component(Component.NAME_APP);
       this.componentMap.put(Component.NAME_APP, app);
     }
-    app.allDependencies = new HashSet<>();
+    initialize(app, root, configuration);
     for (Component component : this.components) {
       initialize(component, root, configuration);
       app.allDependencies.add(component.getName());
     }
-    for (Component component : this.components) {
+    for (Component component : this.componentMap.values()) {
       Set<String> nonTransitiveDependencies = component.getNonTransitiveDependencies();
       if (nonTransitiveDependencies != null) {
         component.allDependencies.addAll(nonTransitiveDependencies);
@@ -107,21 +107,29 @@ public class Architecture {
       return; // already initialized...
     }
     component.allDependencies = new HashSet<>(component.getDependencies());
-    if (!name.equals(Component.NAME_GENERAL)) {
+    for (String dependency : component.getDependencies()) {
+      initializeDependency(component, configuration, name, componentNode, dependency);
+    }
+    if (!component.getName().equals(Component.NAME_GENERAL)
+        && !component.getDependencies().contains(Component.NAME_GENERAL)) {
+      initializeDependency(component, configuration, name, componentNode, Component.NAME_GENERAL);
       component.allDependencies.add(Component.NAME_GENERAL);
     }
-    for (String dependency : component.getDependencies()) {
-      if (dependency.contains(".")) {
-        component.allDependencies.add(dependency);
+  }
+
+  private void initializeDependency(Component component, Configuration configuration, String name,
+      Node<String> componentNode, String dependency) {
+
+    if (dependency.contains(".")) {
+      component.allDependencies.add(dependency);
+    } else {
+      Component dependentComponent = this.componentMap.get(dependency);
+      if (dependentComponent == null) {
+        configuration.status()
+            .addError("Component '" + name + "' has dependency '" + dependency + "' but no such component is defined.");
       } else {
-        Component dependentComponent = this.componentMap.get(dependency);
-        if (dependentComponent == null) {
-          configuration.status().addError(
-              "Component '" + name + "' has dependency '" + dependency + "' but no such component is defined.");
-        } else {
-          initialize(dependentComponent, componentNode, configuration);
-          component.allDependencies.addAll(dependentComponent.allDependencies);
-        }
+        initialize(dependentComponent, componentNode, configuration);
+        component.allDependencies.addAll(dependentComponent.allDependencies);
       }
     }
   }
