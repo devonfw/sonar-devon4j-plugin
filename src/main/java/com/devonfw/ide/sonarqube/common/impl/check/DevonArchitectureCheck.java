@@ -179,7 +179,11 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
     super.visitPackage(tree);
   }
 
-  private String getQualifiedName(Tree tree) {
+  /**
+   * @param tree the {@link Tree} name to traverse.
+   * @return the qualified name.
+   */
+  protected String getQualifiedName(Tree tree) {
 
     if (tree == null) {
       return "";
