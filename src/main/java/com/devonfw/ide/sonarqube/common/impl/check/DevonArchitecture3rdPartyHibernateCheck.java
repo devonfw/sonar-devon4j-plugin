@@ -25,10 +25,21 @@ public class DevonArchitecture3rdPartyHibernateCheck extends DevonArchitecture3r
 
     if (target.getPackage().startsWith("org.hibernate") && !target.getPackage().startsWith("org.hibernate.validator")) {
       if (source.isLayerDataAccess()) {
+        String targetSimpleName = target.getSimpleName();
         if (target.getPackage().equals("org.hibernate.annotations")) {
-          if (DISCOURAGED_HIBERNATE_ANNOTATIONS.contains(target.getSimpleName())) {
+          if (DISCOURAGED_HIBERNATE_ANNOTATIONS.contains(targetSimpleName)) {
             return "Standard JPA annotations should be used instead of this proprietary hibernate annotation (" + target
                 + ").";
+          }
+        } else if (target.getPackage().startsWith("org.hibernate.envers")) {
+          if (!source.isScopeImpl()) {
+            if (!target.getPackage().equals("org.hibernate.envers") || targetSimpleName.startsWith("Default")
+                || targetSimpleName.contains("Listener") || targetSimpleName.contains("Reader")) {
+              return "Hibernate envers implementation (" + target
+                  + ") should only be used in impl scope of dataaccess layer.";
+            }
+          } else if (target.getPackage().contains("internal")) {
+            return "Hibernate envers internals (" + target + ") should never be used directly.";
           }
         } else if (!source.isScopeImpl()) {
           return "Hibernate internals (" + target + ") should only be used in impl scope of dataaccess layer.";
