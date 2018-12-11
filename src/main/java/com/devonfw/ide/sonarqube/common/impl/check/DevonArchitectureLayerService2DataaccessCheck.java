@@ -17,6 +17,9 @@ public class DevonArchitectureLayerService2DataaccessCheck extends DevonArchitec
   protected String checkDependency(JavaType source, JavaType target) {
 
     if (source.isLayerService() && target.isLayerDataAccess()) {
+      if (target.toString().equals("com.devonfw.module.jpa.dataaccess.api.RevisionMetadata")) {
+        return null; // specific exclusion for unclean packaging
+      }
       return "Code from service layer ('" + source.toString() + "') shall not depend on dataacssess layer ('"
           + target.toString() + "').";
     }

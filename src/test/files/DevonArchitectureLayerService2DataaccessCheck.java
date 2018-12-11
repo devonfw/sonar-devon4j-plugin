@@ -4,6 +4,7 @@
 package com.devonfw.ide.sonarqube.service.api;
 
 import com.devonfw.ide.sonarqube.dataaccess.api.Bar; // Noncompliant
+import com.devonfw.module.jpa.dataaccess.api.RevisionMetadata; // compliant (build in exclusion)
 
 class MyClass {
 
