@@ -60,25 +60,31 @@ public abstract class DevonArchitectureComponentCheck extends DevonArchitectureC
 
     String sourceComponentName = source.getComponent();
     String targetComponentName = target.getComponent();
-    String sourceRoot = source.getRoot();
-    String targetRoot = target.getRoot();
-    String sourceApp = source.getApplication();
-    String targetApp = target.getApplication();
-    String prefix;
-    if (sourceRoot.equals(targetRoot) && sourceApp.equals(targetApp)) {
-      prefix = "";
-    } else {
-      prefix = targetRoot + "." + targetApp + ".";
-    }
-    if (sourceComponentName.equals(targetComponentName) && prefix.isEmpty()) {
+    boolean sameRootApp = isSameRootApplication(source, target);
+    if (sourceComponentName.equals(targetComponentName) && sameRootApp) {
       return null;
     }
     Component sourceComponent = getComponent(sourceComponentName);
     if (sourceComponent == null) {
       return null; // already covered by DevonArchitectureComponentDeclarationCheck.createIssueForInvalidSourcePackage
     }
-    String targetName = prefix + targetComponentName;
-    boolean targetDependencyAllowed = sourceComponent.hasDependency(targetName);
+    boolean targetDependencyAllowed;
+    String targetName;
+    if (sameRootApp) {
+      targetName = targetComponentName;
+      targetDependencyAllowed = sourceComponent.hasDependency(targetName);
+    } else {
+      String targetRoot = target.getRoot();
+      String targetRootApp = targetRoot + "." + target.getApplication();
+      targetName = targetRootApp + "." + targetComponentName;
+      targetDependencyAllowed = sourceComponent.hasDependency(targetRoot); // allow full access to (external) root?
+      if (!targetDependencyAllowed) {
+        targetDependencyAllowed = sourceComponent.hasDependency(targetRootApp); // allow full access to external app?
+        if (!targetDependencyAllowed) {
+          targetDependencyAllowed = sourceComponent.hasDependency(targetName); // allow access to external component?
+        }
+      }
+    }
     if (!targetDependencyAllowed) {
       return targetDependencyNotAllowed(sourceComponent, targetName);
     }

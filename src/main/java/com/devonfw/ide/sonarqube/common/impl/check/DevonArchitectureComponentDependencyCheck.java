@@ -21,7 +21,7 @@ public class DevonArchitectureComponentDependencyCheck extends DevonArchitecture
 
     return "Access from component '" + sourceComponent.getName() + "' to '" + targetComponentName
         + "' is not allowed. Only the following components are allowed dependencies: "
-        + sourceComponent.transitiveDependencies() + "";
+        + sourceComponent.allDependencies() + "";
   }
 
   @Override

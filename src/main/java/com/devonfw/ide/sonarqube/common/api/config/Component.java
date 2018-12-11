@@ -20,7 +20,9 @@ public class Component {
 
   private Set<String> dependencies;
 
-  Set<String> transitiveDependencies;
+  private Set<String> nonTransitiveDependencies;
+
+  Set<String> allDependencies;
 
   /**
    * The constructor.
@@ -58,7 +60,7 @@ public class Component {
   }
 
   /**
-   * @return the {@link Set} of declared dependencies.
+   * @return the {@link Set} of declared and transitive dependencies.
    */
   public Set<String> getDependencies() {
 
@@ -80,28 +82,50 @@ public class Component {
   }
 
   /**
+   * @return the {@link Set} of declared, non-transitive dependencies.
+   */
+  public Set<String> getNonTransitiveDependencies() {
+
+    return this.nonTransitiveDependencies;
+  }
+
+  /**
+   * @param nonTransitiveDependencies new value of {@link #getNonTransitiveDependencies()}.
+   */
+  public void setNonTransitiveDependencies(Set<String> nonTransitiveDependencies) {
+
+    if (this.nonTransitiveDependencies != null) {
+      throw new IllegalStateException();
+    }
+    this.nonTransitiveDependencies = nonTransitiveDependencies;
+  }
+
+  /**
    * @param dependentComponentName the {@link #getName() name} of the dependent {@link Component}.
    * @return {@code true} if this {@link Component} has a {@link #getDependencies() defined dependency} on the
    *         {@link Component} with the given {@link #getName() name}, {@code false} otherwise.
    */
   public boolean hasDependency(String dependentComponentName) {
 
-    if (this.transitiveDependencies != null) {
-      return this.transitiveDependencies.contains(dependentComponentName);
+    if (this.allDependencies != null) {
+      return this.allDependencies.contains(dependentComponentName);
     } else {
+      if ((this.nonTransitiveDependencies != null) && this.nonTransitiveDependencies.contains(dependentComponentName)) {
+        return true;
+      }
       return getDependencies().contains(dependentComponentName);
     }
   }
 
   /**
-   * @return the {@link Set} of transitive dependencies including {@link #getDependencies() declared dependencies} as
-   *         well as {@link Architecture#hasTransitiveDependencies() transitive} dependencies (recursively). Is
+   * @return the {@link Set} of transitive dependencies including {@link #getNonTransitiveDependencies() non-transitive
+   *         dependencies} as well as {@link #getDependencies() declared and transitive dependencies} (recursively). Is
    *         calculated outside of this bean and does not map to JSON. Will be {@code null} until
    *         {@link Configuration#initialize(String) initialization}.
    */
-  public Set<String> transitiveDependencies() {
+  public Set<String> allDependencies() {
 
-    return this.transitiveDependencies;
+    return this.allDependencies;
   }
 
 }

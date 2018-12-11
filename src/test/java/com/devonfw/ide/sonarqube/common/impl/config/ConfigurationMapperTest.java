@@ -1,5 +1,6 @@
 package com.devonfw.ide.sonarqube.common.impl.config;
 
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.Test;
@@ -18,7 +19,8 @@ public class ConfigurationMapperTest extends ModuleTest {
   private static final String JSON_EXAMPLE = "{\"architecture\":" + //
       "{\"components\":[" + //
       "{\"name\":\"component1\",\"dependencies\":[\"component2\"]}," + //
-      "{\"name\":\"component2\",\"dependencies\":[\"component3\"]}," + //
+      "{\"name\":\"component2\",\"dependencies\":[\"component3\"],\"nonTransitiveDependencies\":[\"io.oasp.module.jpa\"]},"
+      + //
       "{\"name\":\"component3\",\"dependencies\":[]}" + //
       "]}}";
 
@@ -36,6 +38,8 @@ public class ConfigurationMapperTest extends ModuleTest {
     Component component3 = new Component("component3");
     component1.getDependencies().add(component2.getName());
     component2.getDependencies().add(component3.getName());
+    component2.setNonTransitiveDependencies(new HashSet<>());
+    component2.getNonTransitiveDependencies().add("io.oasp.module.jpa");
     components.add(component1);
     components.add(component2);
     components.add(component3);
@@ -69,13 +73,16 @@ public class ConfigurationMapperTest extends ModuleTest {
     assertThat(components).isNotNull().hasSize(3);
     Component component1 = components.get(0);
     assertThat(component1.getName()).isEqualTo("component1");
-    assertThat(component1.getDependencies()).containsExactly("component2");
+    assertThat(component1.getDependencies()).containsExactlyInAnyOrder("component2");
+    assertThat(component1.allDependencies()).containsExactlyInAnyOrder("general", "component2", "component3");
     Component component2 = components.get(1);
     assertThat(component2.getName()).isEqualTo("component2");
-    assertThat(component2.getDependencies()).containsExactly("component3");
+    assertThat(component2.getDependencies()).containsExactlyInAnyOrder("component3");
+    assertThat(component2.allDependencies()).containsExactlyInAnyOrder("general", "component3", "io.oasp.module.jpa");
     Component component3 = components.get(2);
     assertThat(component3.getName()).isEqualTo("component3");
     assertThat(component3.getDependencies()).isEmpty();
+    assertThat(component3.allDependencies()).containsExactlyInAnyOrder("general");
   }
 
   /**

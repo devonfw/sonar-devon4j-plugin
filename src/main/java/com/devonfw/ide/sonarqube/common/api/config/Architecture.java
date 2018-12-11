@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * {@link Architecture} of a devonfw application.
@@ -12,8 +13,6 @@ import java.util.Map;
  * @see #getComponents()
  */
 public class Architecture {
-
-  private Boolean transitive;
 
   private List<Component> components;
 
@@ -25,23 +24,6 @@ public class Architecture {
   public Architecture() {
 
     super();
-  }
-
-  /**
-   * @return {@code true} or {@code null} if the {@link Component#getDependencies() dependencies} are treated
-   *         transitive, {@code false} otherwise.
-   */
-  public Boolean getTransitive() {
-
-    return this.transitive;
-  }
-
-  /**
-   * @param transitive new value of {@link #getTransitive()}.
-   */
-  public void setTransitive(Boolean transitive) {
-
-    this.transitive = transitive;
   }
 
   /**
@@ -89,8 +71,9 @@ public class Architecture {
         configuration.status().addError("Duplicate architecture component '" + component.getName() + "'.");
       }
     }
-    if (!this.componentMap.containsKey(Component.NAME_GENERAL)) {
-      Component general = new Component(Component.NAME_GENERAL);
+    Component general = this.componentMap.get(Component.NAME_GENERAL);
+    if (general == null) {
+      general = new Component(Component.NAME_GENERAL);
       this.componentMap.put(Component.NAME_GENERAL, general);
     }
     Node<String> root = new Node<>("components");
@@ -99,10 +82,16 @@ public class Architecture {
       app = new Component(Component.NAME_APP);
       this.componentMap.put(Component.NAME_APP, app);
     }
-    app.transitiveDependencies = new HashSet<>();
+    app.allDependencies = new HashSet<>();
     for (Component component : this.components) {
       initialize(component, root, configuration);
-      app.transitiveDependencies.add(component.getName());
+      app.allDependencies.add(component.getName());
+    }
+    for (Component component : this.components) {
+      Set<String> nonTransitiveDependencies = component.getNonTransitiveDependencies();
+      if (nonTransitiveDependencies != null) {
+        component.allDependencies.addAll(nonTransitiveDependencies);
+      }
     }
   }
 
@@ -110,40 +99,31 @@ public class Architecture {
 
     String name = component.getName();
     Node<String> componentNode = parentNode.createChild(name);
-    if (component.transitiveDependencies != null) {
+    if (component.allDependencies != null) {
       Node<String> duplicate = parentNode.find(name);
       if (duplicate != null) {
         configuration.status().addError("Cyclic dependency detected: " + componentNode);
       }
       return; // already initialized...
     }
-    component.transitiveDependencies = new HashSet<>(component.getDependencies());
+    component.allDependencies = new HashSet<>(component.getDependencies());
     if (!name.equals(Component.NAME_GENERAL)) {
-      component.transitiveDependencies.add(Component.NAME_GENERAL);
+      component.allDependencies.add(Component.NAME_GENERAL);
     }
     for (String dependency : component.getDependencies()) {
-      if (!dependency.contains(".")) {
+      if (dependency.contains(".")) {
+        component.allDependencies.add(dependency);
+      } else {
         Component dependentComponent = this.componentMap.get(dependency);
         if (dependentComponent == null) {
           configuration.status().addError(
               "Component '" + name + "' has dependency '" + dependency + "' but no such component is defined.");
         } else {
           initialize(dependentComponent, componentNode, configuration);
-          if (hasTransitiveDependencies()) {
-            component.transitiveDependencies.addAll(dependentComponent.transitiveDependencies);
-          }
+          component.allDependencies.addAll(dependentComponent.allDependencies);
         }
       }
     }
-  }
-
-  /**
-   * @return {@code true} if {@link Component#getDependencies() dependencies} are {@link #getTransitive() transitive}
-   *         (default), {@code false} otherwise.
-   */
-  public boolean hasTransitiveDependencies() {
-
-    return !Boolean.FALSE.equals(this.transitive);
   }
 
 }
