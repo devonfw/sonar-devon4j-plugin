@@ -16,7 +16,7 @@ public class DevonArchitectureLayerDataaccess2LogicCheck extends DevonArchitectu
   protected String checkDependency(JavaType source, JavaType target) {
 
     if (source.isLayerDataAccess() && target.isLayerLogic()) {
-      return "Dataaccess layer ('" + source.toString() + "') shall depend on logic layer ('" + target.toString()
+      return "Dataaccess layer ('" + source.toString() + "') shall not depend on logic layer ('" + target.toString()
           + "').";
     }
     return null;
