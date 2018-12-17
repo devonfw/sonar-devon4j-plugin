@@ -1,0 +1,16 @@
+= Changelog of sonar-devon-plugin
+
+This file documents all notable changes to https://github.com/devonfw/sonar-devon-plugin[sonar-devon-plugin].
+
+== Unreleased 3.1.0
+
+Changes for this release can be found in https://github.com/devonfw/sonar-devon-plugin/milestone/2?closed=1[milestone 3.1.0].
+
+== 3.0.0
+
+This is the first official release. In http://devonfw.com[devon] all released artifacts share the same version number.
+This allows to easily see which artifacts belong together and are guaranteed to be compatible. As this plugin was later
+added to devon it started with the devon version for that moment in time what was 3.0.0.
+
+Changes for this release can be found in https://github.com/devonfw/sonar-devon-plugin/milestone/1?closed=1[milestone 3.0.0].
+
