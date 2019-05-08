@@ -1,13 +1,11 @@
-package com.devonfw.ide.sonarqube.common.impl.check;
+package com.devonfw.ide.sonarqube.common.impl.check.namingconventions;
 
 import org.junit.Test;
 import org.sonar.java.checks.verifier.JavaCheckVerifier;
 
-/**
- * @author vhacimuf
- *
- */
-public class DevonNamingConventionClassExtendsClassImplCheckTest {
+import com.devonfw.ide.sonarqube.common.impl.check.DevonNamingConventionClassExtendsClassImplCheck;
+
+public class DevonClassInheritanceNamingConventionImplCheckTest {
   @Test
   public void testNoIssueCaseOne() {
 
@@ -40,7 +38,7 @@ public class DevonNamingConventionClassExtendsClassImplCheckTest {
   public void testIssueOnFileCaseOne() {
 
     JavaCheckVerifier.verifyIssueOnFile("src/test/files/DevonClassInheritanceNamingConventionImplCase2Check.java",
-        "Classes inheriting from AbstractTo should have [^CEce]To$ as prefix",
+        "Classes inheriting from AbstractUc should have Uc.*Impl$ as prefix",
         new DevonNamingConventionClassExtendsClassImplCheck());
   }
 
@@ -48,7 +46,15 @@ public class DevonNamingConventionClassExtendsClassImplCheckTest {
   public void testIssueOnFileCaseTwo() {
 
     JavaCheckVerifier.verifyIssueOnFile("src/test/files/DevonClassInheritanceNamingConventionToCase6Check.java",
-        "If a superclass has[^CEce]To$ as prefix, then the subclass should also have[^CEce]To$ as prefix.",
+        "If a superclass has Uc.*Impl$ as prefix, then the subclass should also haveUc.*Impl$ as prefix.",
+        new DevonNamingConventionClassExtendsClassImplCheck());
+  }
+
+  @Test
+  public void testIssueOnFileCaseThree() {
+
+    JavaCheckVerifier.verifyIssueOnFile("src/test/files/DevonClassInheritanceNamingConventionImplCase7Check.java",
+        "Classes inheriting from AbstractUc should not be abstract",
         new DevonNamingConventionClassExtendsClassImplCheck());
   }
 

@@ -1,7 +1,9 @@
-package com.devonfw.ide.sonarqube.common.impl.check;
+package com.devonfw.ide.sonarqube.common.impl.check.namingconventions;
 
 import org.junit.Test;
 import org.sonar.java.checks.verifier.JavaCheckVerifier;
+
+import com.devonfw.ide.sonarqube.common.impl.check.DevonNamingConventionClassExtendsClassCtoCheck;
 
 /**
  * @author vhacimuf

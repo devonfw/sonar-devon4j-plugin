@@ -13,13 +13,14 @@ import java.util.regex.Pattern;
 
 import org.sonar.java.ast.parser.JavaParser;
 import org.sonar.java.model.JavaTree;
+import org.sonar.java.model.ModifiersUtils;
 import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
-import org.sonar.plugins.java.api.semantic.Symbol;
 import org.sonar.plugins.java.api.tree.ClassTree;
 import org.sonar.plugins.java.api.tree.CompilationUnitTree;
 import org.sonar.plugins.java.api.tree.IdentifierTree;
 import org.sonar.plugins.java.api.tree.ListTree;
+import org.sonar.plugins.java.api.tree.Modifier;
 import org.sonar.plugins.java.api.tree.Tree;
 import org.sonar.plugins.java.api.tree.Tree.Kind;
 import org.sonar.plugins.java.api.tree.TypeTree;
@@ -53,11 +54,9 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
 
     List<Tree> types = parsedTree.types();
     ClassTree tree = getTreeInstance(types);
-
     Kind kind = tree.kind();
 
     boolean isClass = kind.equals(Tree.Kind.CLASS);
-
     if (!isClass)
       return;
 
@@ -83,22 +82,6 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
       superClassName = superClass.toString();
     }
 
-    Symbol.TypeSymbol typeSymbol = tree.symbol();
-
-    if (this.isAbstract != null)
-      if (this.isAbstract) {
-        if (!typeSymbol.isAbstract()) {
-          return;
-        }
-      } else {
-        if (!this.isAbstract) {
-          if (typeSymbol.isAbstract()) {
-            return;
-          }
-        }
-
-      }
-
     if (superClassName != null) {
 
       if (superClassName.equals(this.extendedSuperClass)) {
@@ -110,6 +93,7 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
         if (!endsWith) {
           this.context.addIssueOnFile(this, "Classes inheriting from " + this.extendedSuperClass + " should have "
               + this.classSuffixRegEx + " as prefix");
+          return;
         }
 
         if (this.interfacesToImplement != null) {
@@ -118,16 +102,40 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
           if (!contains) {
             this.context.addIssueOnFile(this, "Classes extending " + this.extendedSuperClass
                 + " should implement an interface with the same name except the suffix");
+            return;
+
           }
         }
       } else if (Pattern.compile(this.classSuffixRegEx).matcher(superClassName).find()) {
 
         if (!Pattern.compile(this.classSuffixRegEx).matcher(className).find()) {
-          this.context.addIssueOnFile(this, "If a superclass has" + this.classSuffixRegEx
+          this.context.addIssueOnFile(this, "If a superclass has " + this.classSuffixRegEx
               + " as prefix, then the subclass should also have" + this.classSuffixRegEx + " as prefix.");
+          return;
 
         }
       }
+      boolean isAbstract = isAbstract(tree);
+
+      if (this.isAbstract != null)
+        if (this.isAbstract) {
+          if (!isAbstract) {
+
+            this.context.addIssueOnFile(this,
+                "Classes inheriting from " + this.extendedSuperClass + " should be abstract");
+            return;
+          }
+        } else {
+          if (!this.isAbstract) {
+            if (isAbstract) {
+              this.context.addIssueOnFile(this,
+                  "Classes inheriting from " + this.extendedSuperClass + " should not be abstract");
+              return;
+            }
+          }
+
+        }
+
     }
   }
 
@@ -174,6 +182,11 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
       }
     }
     return null;
+  }
+
+  private static boolean isAbstract(ClassTree tree) {
+
+    return ModifiersUtils.hasModifier(tree.modifiers(), Modifier.ABSTRACT);
   }
 
 }

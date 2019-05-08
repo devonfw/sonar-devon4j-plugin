@@ -66,12 +66,12 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
     IdentifierTree simpleName = tree.simpleName();
     String className = simpleName.name();
 
-    boolean containsInterface = superInterfacesNames.contains(this.extendedInterface);
+    boolean contains = superInterfacesNames.contains(this.extendedInterface);
 
     ArrayList<String> matchingInterfaces = (ArrayList<String>) getMatchingStrings(superInterfacesNames,
         this.extendingInterfaceSuffix);
 
-    if (containsInterface) {
+    if (contains) {
 
       Pattern pattern = Pattern.compile(this.extendingInterfaceSuffix);
       Matcher matcher = pattern.matcher(className);
@@ -80,11 +80,13 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
       if (!endsWith) {
         this.context.addIssueOnFile(this, "Interfaces inheriting from " + this.extendedInterface + " should have "
             + this.extendingInterfaceSuffix + " as prefix");
+        return;
       }
     } else if (!matchingInterfaces.isEmpty()) {
       if (!className.endsWith(this.extendingInterfaceSuffix)) {
         this.context.addIssueOnFile(this, "If a superinterface has " + this.extendingInterfaceSuffix
             + " as prefix, then the subinteraface should also have" + this.extendingInterfaceSuffix + " as prefix.");
+        return;
       }
 
     }

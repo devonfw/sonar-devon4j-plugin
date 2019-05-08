@@ -3,6 +3,6 @@
  */
 package com.devonfw.ide.sonarqube.batch.api;
 
-class ClassOne extends ClassTwoTo {
+public class ClassDaoImpl extends AbstractDao {
 
 }
