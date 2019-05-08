@@ -1,9 +1,6 @@
-package com.devonfw.ide.sonarqube.common.impl.check;
+package com.devonfw.ide.sonarqube.common.impl.check.namingconvention;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -29,16 +26,21 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
 
   private JavaFileScannerContext context;
 
-  protected String extendedInterface;
+  final protected String extendedInterface;
 
-  protected String extendingInterfaceSuffix;
+  final protected String extendingInterfaceSuffix;
 
-  public abstract void init();
+  public DevonNamingConventionInterfaceExtendsInterfaceCheck(String pExtendedInterface,
+      String pExtendingInterfaceSuffix) {
+
+    this.extendedInterface = pExtendedInterface;
+    this.extendingInterfaceSuffix = pExtendingInterfaceSuffix;
+
+  }
 
   @Override
   public void scanFile(JavaFileScannerContext context) {
 
-    init();
     this.context = context;
 
     File file = context.getFile();
@@ -93,31 +95,13 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
 
   }
 
-  private static String getFileContent(File file) throws IOException {
-
-    BufferedReader br = new BufferedReader(new FileReader(file));
-    String output = "";
-    String st;
-    while ((st = br.readLine()) != null)
-      output += st + "\n";
-
-    return output;
-  }
-
   private static CompilationUnitTree parseJavaFile(String path) {
 
     ActionParser<Tree> parser = JavaParser.createParser();
 
     File input = new File(path);
 
-    String fileContent = null;
-    try {
-      fileContent = getFileContent(input);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
-    Tree javaFileTree = parser.parse(fileContent);
+    Tree javaFileTree = parser.parse(input);
 
     CompilationUnitTree parsedTree = new JavaTree.CompilationUnitTreeImpl(null, new ArrayList<>(), new ArrayList<>(),
         null);

@@ -1,24 +1,20 @@
-package com.devonfw.ide.sonarqube.common.impl.check;
+package com.devonfw.ide.sonarqube.common.impl.check.namingconvention;
 
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
-/**
- * @author vhacimuf
- *
- */
-
-@Rule(key = "Devon4j:S2", name = "Devon Naming Convention Check", //
+@Rule(key = "Devon4j:E6", name = "Devon Naming Convention Check", //
     description = "Verify that Classes extending AbstractCto shall end with Cto.", //
     priority = Priority.CRITICAL, tags = { "bug" })
 
 public class DevonNamingConventionClassExtendsClassCtoCheck extends DevonNamingConventionClassExtendsClassCheck {
 
-  @Override
-  public void init() {
+  /**
+   * The constructor.
+   */
+  public DevonNamingConventionClassExtendsClassCtoCheck() {
 
-    this.extendedSuperClass = "AbstractCto";
-    this.classSuffixRegEx = "Cto$";
+    super("AbstractCto", "Cto$");
   }
 
 }

@@ -1,25 +1,21 @@
-package com.devonfw.ide.sonarqube.common.impl.check;
+package com.devonfw.ide.sonarqube.common.impl.check.namingconvention;
 
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
-/**
- * @author vhacimuf
- *
- */
-
-@Rule(key = "Devon4j:S2", name = "Devon Naming Convention Check", //
+@Rule(key = "Devon4j:E12", name = "Devon Naming Convention Check", //
     description = "Verify that Interfaces extending Dao shall end with Dao", //
     priority = Priority.CRITICAL, tags = { "bug" })
 
 public class DevonNamingConventionInterfaceExtendsInterfaceDaoCheck
     extends DevonNamingConventionInterfaceExtendsInterfaceCheck {
 
-  @Override
-  public void init() {
+  /**
+   * The constructor.
+   */
+  public DevonNamingConventionInterfaceExtendsInterfaceDaoCheck() {
 
-    this.extendedInterface = "Dao";
-    this.extendingInterfaceSuffix = "Dao$";
+    super("Dao", "Dao$");
   }
 
 }

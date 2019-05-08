@@ -3,6 +3,6 @@
  */
 package com.devonfw.ide.sonarqube.batch.api;
 
-class ClassOne extends UcClassTwoToImpl {
+class MyClass extends MySecondClassSearchCriteriaTo {
 
 }

@@ -1,9 +1,6 @@
-package com.devonfw.ide.sonarqube.common.impl.check;
+package com.devonfw.ide.sonarqube.common.impl.check.namingconvention;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -31,17 +28,30 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
 
   private JavaFileScannerContext context;
 
-  protected String extendedSuperClass;
+  final protected String extendedSuperClass;
 
-  protected String classSuffixRegEx;
+  final protected String classSuffixRegEx;
+
+  final protected Boolean isAbstract;
 
   protected String className;
 
   protected List<String> interfacesToImplement = null;
 
-  protected Boolean isAbstract = null;
+  public DevonNamingConventionClassExtendsClassCheck(String pExtendedSuperClass, String pClassSuffixRegEx,
+      Boolean pIsAbstract) {
 
-  public abstract void init();
+    this.extendedSuperClass = pExtendedSuperClass;
+    this.classSuffixRegEx = pClassSuffixRegEx;
+    this.isAbstract = pIsAbstract;
+  }
+
+  public DevonNamingConventionClassExtendsClassCheck(String pExtendedSuperClass, String pClassSuffixRegEx) {
+
+    this.extendedSuperClass = pExtendedSuperClass;
+    this.classSuffixRegEx = pClassSuffixRegEx;
+    this.isAbstract = null;
+  }
 
   @Override
   public void scanFile(JavaFileScannerContext context) {
@@ -110,7 +120,7 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
 
         if (!Pattern.compile(this.classSuffixRegEx).matcher(className).find()) {
           this.context.addIssueOnFile(this, "If a superclass has " + this.classSuffixRegEx
-              + " as prefix, then the subclass should also have" + this.classSuffixRegEx + " as prefix.");
+              + " as prefix, then the subclass should also have " + this.classSuffixRegEx + " as prefix.");
           return;
 
         }
@@ -139,15 +149,9 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
     }
   }
 
-  private static String getFileContent(File file) throws IOException {
+  protected void init() {
 
-    BufferedReader br = new BufferedReader(new FileReader(file));
-    String output = "";
-    String st;
-    while ((st = br.readLine()) != null)
-      output += st + "\n";
-
-    return output;
+    return;
   }
 
   private static CompilationUnitTree parseJavaFile(String path) {
@@ -156,14 +160,7 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
 
     File input = new File(path);
 
-    String fileContent = null;
-    try {
-      fileContent = getFileContent(input);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
-    Tree javaFileTree = parser.parse(fileContent);
+    Tree javaFileTree = parser.parse(input);
 
     CompilationUnitTree parsedTree = new JavaTree.CompilationUnitTreeImpl(null, new ArrayList<>(), new ArrayList<>(),
         null);
