@@ -59,7 +59,7 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
 
     LinkedList<String> superInterfacesNames = new LinkedList<String>();
     ListTree<TypeTree> superInterfaces = tree.superInterfaces();
-    // TODO falls leer, tue nichts
+
     for (Iterator<TypeTree> iterator = superInterfaces.iterator(); iterator.hasNext();) {
       TypeTree typeTree = iterator.next();
       superInterfacesNames.add(typeTree.toString());
