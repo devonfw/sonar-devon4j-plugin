@@ -10,7 +10,7 @@ import com.devonfw.ide.sonarqube.common.api.JavaType;
  */
 @Rule(key = "Devon4j:L6", name = "Devon Layer Service-Batch Check", //
     description = "Verify that service layer does not depend batch layer.", //
-    priority = Priority.MAJOR, tags = { "bug" })
+    priority = Priority.MAJOR, tags = { "architecture-violation" })
 public class DevonArchitectureLayerService2BatchCheck extends DevonArchitectureCheck {
 
   @Override

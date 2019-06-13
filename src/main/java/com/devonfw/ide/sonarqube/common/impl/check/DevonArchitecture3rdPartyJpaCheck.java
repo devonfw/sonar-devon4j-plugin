@@ -10,7 +10,7 @@ import com.devonfw.ide.sonarqube.common.api.JavaType;
  */
 @Rule(key = "Devon4j:E3", name = "Devon 3rd Party JPA Check", //
     description = "Verify that JPA is used in data-access and optionally in common for embeddables.", //
-    priority = Priority.CRITICAL, tags = { "bug" })
+    priority = Priority.CRITICAL, tags = { "architecture-violation" })
 public class DevonArchitecture3rdPartyJpaCheck extends DevonArchitecture3rdPartyCheck {
 
   @Override

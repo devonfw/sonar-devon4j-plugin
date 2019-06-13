@@ -12,7 +12,7 @@ import com.devonfw.ide.sonarqube.common.api.config.Component;
  */
 @Rule(key = "Devon4j:C3", name = "Devon Layer Service-Service Component Check", //
     description = "Verify that service layer does not depend service layer of another component.", //
-    priority = Priority.CRITICAL, tags = { "bug" })
+    priority = Priority.CRITICAL, tags = { "architecture-violation" })
 public class DevonArchitectureLayerService2Service4ComponentCheck extends DevonArchitectureComponentCheck {
 
   @Override

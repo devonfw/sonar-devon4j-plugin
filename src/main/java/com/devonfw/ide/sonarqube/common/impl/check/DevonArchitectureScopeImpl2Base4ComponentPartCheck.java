@@ -11,7 +11,7 @@ import com.devonfw.ide.sonarqube.common.api.JavaType;
  */
 @Rule(key = "Devon4j:S6", name = "Devon Scope Impl-Base Component-Part Check", //
     description = "Verify that impl scope does not depend on base scope from another component part.", //
-    priority = Priority.MAJOR, tags = { "bug" })
+    priority = Priority.MAJOR, tags = { "architecture-violation" })
 public class DevonArchitectureScopeImpl2Base4ComponentPartCheck extends DevonArchitectureCheck {
 
   @Override
