@@ -12,7 +12,7 @@ import com.devonfw.ide.sonarqube.common.api.JavaType;
  * {@link DevonArchitectureCheck} verifying the devon package conventions.
  */
 @Rule(key = "Devon4j:P1", name = "Devon Package Check", description = "Verify the devon package conventions.", //
-    priority = Priority.BLOCKER, tags = { "bug" })
+    priority = Priority.BLOCKER, tags = { "architecture-violation" })
 public class DevonArchitecturePackageCheck extends DevonArchitectureCheck {
 
   @Override

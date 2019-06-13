@@ -10,7 +10,7 @@ import com.devonfw.ide.sonarqube.common.api.JavaType;
  */
 @Rule(key = "Devon4j:S2", name = "Devon Scope Api-Base Check", //
     description = "Verify that api scope does not depend on base scope.", //
-    priority = Priority.MAJOR, tags = { "bug" })
+    priority = Priority.MAJOR, tags = { "architecture-violation" })
 public class DevonArchitectureScopeApi2BaseCheck extends DevonArchitectureCheck {
 
   @Override

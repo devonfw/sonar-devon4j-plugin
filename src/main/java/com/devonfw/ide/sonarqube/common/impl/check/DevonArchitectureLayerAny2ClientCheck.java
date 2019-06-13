@@ -10,7 +10,7 @@ import com.devonfw.ide.sonarqube.common.api.JavaType;
  */
 @Rule(key = "Devon4j:L2", name = "Devon Layer *-Client Check", //
     description = "Verify that only client layer may depend on client layer.", //
-    priority = Priority.BLOCKER, tags = { "bug" })
+    priority = Priority.BLOCKER, tags = { "architecture-violation" })
 public class DevonArchitectureLayerAny2ClientCheck extends DevonArchitectureCheck {
 
   @Override
