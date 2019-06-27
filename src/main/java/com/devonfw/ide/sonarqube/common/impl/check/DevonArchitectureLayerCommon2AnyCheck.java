@@ -10,7 +10,7 @@ import com.devonfw.ide.sonarqube.common.api.JavaType;
  */
 @Rule(key = "Devon4j:L1", name = "Devon Layer Common-* Check", //
     description = "Verify that common layer does not depend on any other layer.", //
-    priority = Priority.BLOCKER, tags = { "bug" })
+    priority = Priority.BLOCKER, tags = { "architecture-violation" })
 public class DevonArchitectureLayerCommon2AnyCheck extends DevonArchitectureCheck {
 
   @Override
