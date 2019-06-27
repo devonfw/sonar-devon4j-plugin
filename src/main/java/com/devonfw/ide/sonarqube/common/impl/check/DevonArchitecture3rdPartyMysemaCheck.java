@@ -10,7 +10,7 @@ import com.devonfw.ide.sonarqube.common.api.JavaType;
  */
 @Rule(key = "Devon4j:E2", name = "Devon 3rd Party Mysema Check", //
     description = "Verify that QueryDSL is used properly rather than legacy mysema API.", //
-    priority = Priority.BLOCKER, tags = { "bug" })
+    priority = Priority.BLOCKER, tags = { "architecture-violation" })
 public class DevonArchitecture3rdPartyMysemaCheck extends DevonArchitecture3rdPartyCheck {
 
   @Override

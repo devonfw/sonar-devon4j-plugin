@@ -10,7 +10,7 @@ import com.devonfw.ide.sonarqube.common.api.JavaType;
  */
 @Rule(key = "Devon4j:E1", name = "Devon 3rd Party Transactional Check", //
     description = "Verify that @Transactional is properly used from JEE.", //
-    priority = Priority.CRITICAL, tags = { "bug" })
+    priority = Priority.CRITICAL, tags = { "architecture-violation" })
 public class DevonArchitecture3rdPartyTransactionalCheck extends DevonArchitecture3rdPartyCheck {
 
   @Override

@@ -12,7 +12,7 @@ import com.devonfw.ide.sonarqube.common.api.config.Component;
  */
 @Rule(key = "Devon4j:C6", name = "Devon Layer Dataaccess-Dataaccess Component Check", //
     description = "Verify that dataaccess layer may not depend on the dataaccess layer of another component.", //
-    priority = Priority.MINOR, tags = { "bug" })
+    priority = Priority.MINOR, tags = { "architecture-violation" })
 public class DevonArchitectureLayerDataaccess2Dataaccess4ComponentCheck extends DevonArchitectureComponentCheck {
 
   @Override

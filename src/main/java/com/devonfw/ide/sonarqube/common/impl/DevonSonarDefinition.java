@@ -53,7 +53,7 @@ public class DevonSonarDefinition implements RulesDefinition {
       tags[i] = tags[i].toLowerCase(Locale.US);
     }
     rule.setTags(tags);
-    rule.setType(RuleType.BUG);
+    rule.setType(RuleType.CODE_SMELL);
     rule.setStatus(RuleStatus.valueOf(ruleAnnotation.status().toUpperCase(Locale.US)));
     rule.setHtmlDescription(ruleAnnotation.description());
     rule.setTemplate(AnnotationUtils.getAnnotation(ruleClass, RuleTemplate.class) != null);
