@@ -14,7 +14,7 @@ import com.devonfw.ide.sonarqube.common.api.JavaType;
  */
 @Rule(key = "Devon4j:E4", name = "Devon 3rd Party Hibernate Check", //
     description = "Verify that Hibernate is properly used (and JPA is preferred).", //
-    priority = Priority.CRITICAL, tags = { "bug" })
+    priority = Priority.CRITICAL, tags = { "architecture-violation" })
 public class DevonArchitecture3rdPartyHibernateCheck extends DevonArchitecture3rdPartyCheck {
 
   private static final Set<String> DISCOURAGED_HIBERNATE_ANNOTATIONS = new HashSet<>(

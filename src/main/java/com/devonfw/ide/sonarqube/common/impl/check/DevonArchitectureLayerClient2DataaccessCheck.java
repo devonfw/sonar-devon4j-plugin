@@ -10,7 +10,7 @@ import com.devonfw.ide.sonarqube.common.api.JavaType;
  */
 @Rule(key = "Devon4j:L4", name = "Devon Layer Client-Dataaccess Check", //
     description = "Verify that client layer does not depend dataaccess layer.", //
-    priority = Priority.BLOCKER, tags = { "bug" })
+    priority = Priority.BLOCKER, tags = { "architecture-violation" })
 public class DevonArchitectureLayerClient2DataaccessCheck extends DevonArchitectureCheck {
 
   @Override

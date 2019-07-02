@@ -10,7 +10,7 @@ import com.devonfw.ide.sonarqube.common.api.JavaType;
  */
 @Rule(key = "Devon4j:L8", name = "Devon Layer Service-Dataaccess Check", //
     description = "Verify that service layer does not depend on dataaccess layer.", //
-    priority = Priority.CRITICAL, tags = { "bug" })
+    priority = Priority.CRITICAL, tags = { "architecture-violation" })
 public class DevonArchitectureLayerService2DataaccessCheck extends DevonArchitectureCheck {
 
   @Override

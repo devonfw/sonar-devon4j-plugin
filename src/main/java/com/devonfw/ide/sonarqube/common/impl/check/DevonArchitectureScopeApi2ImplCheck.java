@@ -10,7 +10,7 @@ import com.devonfw.ide.sonarqube.common.api.JavaType;
  */
 @Rule(key = "Devon4j:S1", name = "Devon Scope Api-Impl Check", //
     description = "Verify that api scope does not depend on impl scope.", //
-    priority = Priority.BLOCKER, tags = { "bug" })
+    priority = Priority.BLOCKER, tags = { "architecture-violation" })
 public class DevonArchitectureScopeApi2ImplCheck extends DevonArchitectureCheck {
 
   @Override
