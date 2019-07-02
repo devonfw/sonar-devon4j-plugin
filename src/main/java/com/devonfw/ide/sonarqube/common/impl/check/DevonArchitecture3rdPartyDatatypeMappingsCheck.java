@@ -27,6 +27,7 @@ public class DevonArchitecture3rdPartyDatatypeMappingsCheck extends DevonArchite
 	       + "which implements the javax.persistence.AttributeConverter "
 	       + "instead of the javax.persistence.Convert annotation";
 	}
+
 	return null;
   }
 
