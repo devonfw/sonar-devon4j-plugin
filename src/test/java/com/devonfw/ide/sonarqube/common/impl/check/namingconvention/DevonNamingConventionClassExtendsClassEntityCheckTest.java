@@ -49,7 +49,7 @@ public class DevonNamingConventionClassExtendsClassEntityCheckTest {
   public void testIssueOnFileCaseTwo() {
 
     JavaCheckVerifier.verifyIssueOnFile(
-        "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassToCase6Check.java",
+        "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassImplCase6Check.java",
         "If a superclass has Uc.*Impl$ as prefix, then the subclass should also have Uc.*Impl$ as prefix.",
         new DevonNamingConventionClassExtendsClassImplCheck());
   }
