@@ -12,8 +12,6 @@ import org.sonar.plugins.java.Java;
 import org.sonar.plugins.java.api.JavaCheck;
 import org.sonar.squidbridge.annotations.RuleTemplate;
 
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyDatatypeMappingsCheck;
-
 /**
  * {@link RulesDefinition} for this plugin.
  */
@@ -56,15 +54,6 @@ public class DevonSonarDefinition implements RulesDefinition {
     }
     rule.setTags(tags);
     rule.setType(RuleType.CODE_SMELL);
-    /*
-     *  DELETE AFTER DEBUGGING
-     */
-    if(ruleClass.equals(DevonArchitecture3rdPartyDatatypeMappingsCheck.class)) {
-    	rule.setType(RuleType.BUG);
-    }
-    /*
-     *  DELETE AFTER DEBUGGING
-     */
     rule.setStatus(RuleStatus.valueOf(ruleAnnotation.status().toUpperCase(Locale.US)));
     rule.setHtmlDescription(ruleAnnotation.description());
     rule.setTemplate(AnnotationUtils.getAnnotation(ruleClass, RuleTemplate.class) != null);
