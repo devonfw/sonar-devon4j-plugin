@@ -2,9 +2,9 @@ package com.devonfw.ide.sonarqube.common.impl.check.namingconvention;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,20 +22,29 @@ import org.sonar.plugins.java.api.tree.TypeTree;
 
 import com.sonar.sslr.api.typed.ActionParser;
 
+/**
+ * Abstract base class for naming convention checks of interfaces
+ */
 public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implements JavaFileScanner {
 
   private JavaFileScannerContext context;
 
-  final protected String extendedInterface;
+  protected final String extendedInterface;
 
-  final protected String extendingInterfaceSuffix;
+  protected final String extendingInterfaceSuffix;
 
-  public DevonNamingConventionInterfaceExtendsInterfaceCheck(String pExtendedInterface,
-      String pExtendingInterfaceSuffix) {
+  /**
+   *
+   * The constructor.
+   * 
+   * @param extendedInterface
+   * @param extendingInterfaceSuffix
+   */
+  public DevonNamingConventionInterfaceExtendsInterfaceCheck(String extendedInterface,
+      String extendingInterfaceSuffix) {
 
-    this.extendedInterface = pExtendedInterface;
-    this.extendingInterfaceSuffix = pExtendingInterfaceSuffix;
-
+    this.extendedInterface = extendedInterface;
+    this.extendingInterfaceSuffix = extendingInterfaceSuffix;
   }
 
   @Override
@@ -57,11 +66,10 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
     if (!isInterface)
       return;
 
-    LinkedList<String> superInterfacesNames = new LinkedList<String>();
+    Set<String> superInterfacesNames = new LinkedHashSet<>();
     ListTree<TypeTree> superInterfaces = tree.superInterfaces();
 
-    for (Iterator<TypeTree> iterator = superInterfaces.iterator(); iterator.hasNext();) {
-      TypeTree typeTree = iterator.next();
+    for (TypeTree typeTree : superInterfaces) {
       superInterfacesNames.add(typeTree.toString());
     }
 
@@ -70,8 +78,7 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
 
     boolean contains = superInterfacesNames.contains(this.extendedInterface);
 
-    ArrayList<String> matchingInterfaces = (ArrayList<String>) getMatchingStrings(superInterfacesNames,
-        this.extendingInterfaceSuffix);
+    List<String> matchingInterfaces = getMatchingStrings(superInterfacesNames, this.extendingInterfaceSuffix);
 
     if (contains) {
 
@@ -113,24 +120,24 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
 
   private static ClassTree getTreeInstance(List<Tree> types) {
 
-    for (Iterator iterator = types.iterator(); iterator.hasNext();) {
-      Tree tree = (Tree) iterator.next();
+    for (Tree tree : types) {
       if (tree instanceof ClassTree) {
         return (ClassTree) tree;
       }
     }
+
     return null;
   }
 
-  List<String> getMatchingStrings(List<String> list, String regex) {
+  List<String> getMatchingStrings(Set<String> list, String regex) {
 
-    ArrayList<String> matches = new ArrayList<>();
+    List<String> matches = new ArrayList<>();
 
-    Pattern p = Pattern.compile(regex);
+    Pattern pattern = Pattern.compile(regex);
 
-    for (String s : list) {
-      if (p.matcher(s).matches()) {
-        matches.add(s);
+    for (String string : list) {
+      if (pattern.matcher(string).matches()) {
+        matches.add(string);
       }
     }
 

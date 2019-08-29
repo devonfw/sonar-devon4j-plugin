@@ -3,8 +3,9 @@ package com.devonfw.ide.sonarqube.common.impl.check.namingconvention;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,32 +25,50 @@ import org.sonar.plugins.java.api.tree.TypeTree;
 
 import com.sonar.sslr.api.typed.ActionParser;
 
+/**
+ * Abstract base class for naming convention checks of classes
+ */
 public abstract class DevonNamingConventionClassExtendsClassCheck implements JavaFileScanner {
 
   private JavaFileScannerContext context;
 
-  final protected String extendedSuperClass;
+  protected final String extendedSuperClass;
 
-  final protected String classSuffixRegEx;
+  protected final String classSuffixRegEx;
 
-  final protected Boolean isAbstract;
+  protected final Boolean isAbstract;
 
   protected String className;
 
-  protected List<String> interfacesToImplement = null;
+  protected List<String> interfacesToImplement;
 
-  public DevonNamingConventionClassExtendsClassCheck(String pExtendedSuperClass, String pClassSuffixRegEx,
-      Boolean pIsAbstract) {
+  /**
+   *
+   * The constructor.
+   *
+   * @param extendedSuperClass
+   * @param classSuffixRegEx
+   * @param isAbstract
+   */
+  public DevonNamingConventionClassExtendsClassCheck(String extendedSuperClass, String classSuffixRegEx,
+      Boolean isAbstract) {
 
-    this.extendedSuperClass = pExtendedSuperClass;
-    this.classSuffixRegEx = pClassSuffixRegEx;
-    this.isAbstract = pIsAbstract;
+    this.extendedSuperClass = extendedSuperClass;
+    this.classSuffixRegEx = classSuffixRegEx;
+    this.isAbstract = isAbstract;
   }
 
-  public DevonNamingConventionClassExtendsClassCheck(String pExtendedSuperClass, String pClassSuffixRegEx) {
+  /**
+   *
+   * The constructor.
+   *
+   * @param extendedSuperClass
+   * @param classSuffixRegEx
+   */
+  public DevonNamingConventionClassExtendsClassCheck(String extendedSuperClass, String classSuffixRegEx) {
 
-    this.extendedSuperClass = pExtendedSuperClass;
-    this.classSuffixRegEx = pClassSuffixRegEx;
+    this.extendedSuperClass = extendedSuperClass;
+    this.classSuffixRegEx = classSuffixRegEx;
     this.isAbstract = null;
   }
 
@@ -72,18 +91,16 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
 
     TypeTree superClass = tree.superClass();
 
-    LinkedList<String> superInterfacesNames = new LinkedList<String>();
+    Set<String> superInterfacesNames = new LinkedHashSet<>();
     ListTree<TypeTree> superInterfaces = tree.superInterfaces();
 
     IdentifierTree simpleName = tree.simpleName();
-    String className = simpleName.name();
 
-    this.className = className;
+    this.className = simpleName.name();
 
     init();
 
-    for (Iterator<TypeTree> iterator = superInterfaces.iterator(); iterator.hasNext();) {
-      TypeTree typeTree = iterator.next();
+    for (TypeTree typeTree : superInterfaces) {
       superInterfacesNames.add(typeTree.toString());
     }
 
@@ -97,7 +114,7 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
       if (superClassName.equals(this.extendedSuperClass)) {
 
         Pattern pattern = Pattern.compile(this.classSuffixRegEx);
-        Matcher matcher = pattern.matcher(className);
+        Matcher matcher = pattern.matcher(this.className);
         boolean endsWith = matcher.find();
 
         if (!endsWith) {
@@ -118,7 +135,7 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
         }
       } else if (Pattern.compile(this.classSuffixRegEx).matcher(superClassName).find()) {
 
-        if (!Pattern.compile(this.classSuffixRegEx).matcher(className).find()) {
+        if (!Pattern.compile(this.classSuffixRegEx).matcher(this.className).find()) {
           this.context.addIssueOnFile(this, "If a superclass has " + this.classSuffixRegEx
               + " as prefix, then the subclass should also have " + this.classSuffixRegEx + " as prefix.");
           return;
@@ -172,8 +189,8 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
 
   private static ClassTree getTreeInstance(List<Tree> types) {
 
-    for (Iterator iterator = types.iterator(); iterator.hasNext();) {
-      Tree tree = (Tree) iterator.next();
+    for (Iterator<Tree> iterator = types.iterator(); iterator.hasNext();) {
+      Tree tree = iterator.next();
       if (tree instanceof ClassTree) {
         return (ClassTree) tree;
       }
