@@ -2,7 +2,6 @@ package com.devonfw.ide.sonarqube.common.impl.check.namingconvention;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -189,8 +188,7 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
 
   private static ClassTree getTreeInstance(List<Tree> types) {
 
-    for (Iterator<Tree> iterator = types.iterator(); iterator.hasNext();) {
-      Tree tree = iterator.next();
+    for (Tree tree : types) {
       if (tree instanceof ClassTree) {
         return (ClassTree) tree;
       }
