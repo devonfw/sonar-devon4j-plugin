@@ -7,6 +7,7 @@ import org.sonar.plugins.java.api.CheckRegistrar;
 import org.sonar.plugins.java.api.JavaCheck;
 import org.sonarsource.api.sonarlint.SonarLintSide;
 
+import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyDatatypeMappingsCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyHibernateCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyJpaCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyMysemaCheck;
@@ -102,6 +103,7 @@ public class DevonSonarRegistrar implements CheckRegistrar {
     checks.add(DevonArchitecture3rdPartyJpaCheck.class); // E3
     checks.add(DevonArchitecture3rdPartyHibernateCheck.class); // E4
     checks.add(DevonArchitecture3rdPartyObjectsCheck.class); // E5
+    checks.add(DevonArchitecture3rdPartyDatatypeMappingsCheck.class); // E6
 
     checks.add(DevonNamingConventionClassExtendsClassCtoCheck.class); // E6
     checks.add(DevonNamingConventionClassExtendsClassDaoCheck.class); // E7
