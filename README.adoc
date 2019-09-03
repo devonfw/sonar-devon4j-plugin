@@ -102,8 +102,7 @@ Finally, there are rules checking the proper usage of third-party library code:
 * E3. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitecture3rdPartyJpaCheck.java[DevonArchitecture3rdPartyJpaCheck]
 * E4. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitecture3rdPartyHibernateCheck.java[DevonArchitecture3rdPartyHibernateCheck]
 * E5. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitecture3rdPartyObjectsCheck.java[DevonArchitecture3rdPartyObjectsCheck]
-* E6.
-https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitecture3rdPartyDatatypeMappingsCheck.java[DevonArchitecture3rdPartyDatatypeMappingsCheck]
+* E6. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitecture3rdPartyDatatypeMappingsCheck.java[DevonArchitecture3rdPartyDatatypeMappingsCheck]
 
 === Naming Convention Rules
 
