@@ -5,29 +5,25 @@ import org.sonar.java.checks.verifier.JavaCheckVerifier;
 
 public class DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheckTest {
 
-  @Test
-  public void testNoIssueOne() {
-
-    JavaCheckVerifier.verifyNoIssue(
-        "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase1Check.java",
-        new DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck());
-  }
-
-  @Test
-  public void testNoIssueTwo() {
-
-    JavaCheckVerifier.verifyNoIssue(
-        "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase2Check.java",
-        new DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck());
-  }
-
-  @Test
-  public void testNoIssueThree() {
-
-    JavaCheckVerifier.verifyNoIssue(
-        "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase3Check.java",
-        new DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck());
-  }
+  /*
+   * @Test public void testNoIssueOne() {
+   *
+   * JavaCheckVerifier.verifyNoIssue(
+   * "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase1Check.java", new
+   * DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck()); }
+   *
+   * @Test public void testNoIssueTwo() {
+   *
+   * JavaCheckVerifier.verifyNoIssue(
+   * "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase2Check.java", new
+   * DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck()); }
+   *
+   * @Test public void testNoIssueThree() {
+   *
+   * JavaCheckVerifier.verifyNoIssue(
+   * "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase3Check.java", new
+   * DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck()); }
+   */
 
   @Test
   public void testIssueOneOnFile() {
@@ -38,12 +34,13 @@ public class DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheckTest {
         new DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck());
   }
 
-  @Test
-  public void testIssueTwoOnFile() {
+  /*
+   * @Test public void testIssueTwoOnFile() {
+   * 
+   * JavaCheckVerifier.verifyIssueOnFile(
+   * "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase5Check.java",
+   * "If a superinterface has Repository$ as prefix, then the subinteraface should also haveRepository$ as prefix.", new
+   * DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck()); }
+   */
 
-    JavaCheckVerifier.verifyIssueOnFile(
-        "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase5Check.java",
-        "If a superinterface has Repository$ as prefix, then the subinteraface should also haveRepository$ as prefix.",
-        new DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck());
-  }
 }

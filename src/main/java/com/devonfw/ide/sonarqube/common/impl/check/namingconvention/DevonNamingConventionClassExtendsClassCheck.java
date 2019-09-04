@@ -1,15 +1,13 @@
 package com.devonfw.ide.sonarqube.common.impl.check.namingconvention;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.sonar.java.ast.parser.JavaParser;
-import org.sonar.java.model.JavaTree;
 import org.sonar.java.model.ModifiersUtils;
 import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
@@ -22,14 +20,10 @@ import org.sonar.plugins.java.api.tree.Tree;
 import org.sonar.plugins.java.api.tree.Tree.Kind;
 import org.sonar.plugins.java.api.tree.TypeTree;
 
-import com.sonar.sslr.api.typed.ActionParser;
-
 /**
  * Abstract base class for naming convention checks of classes
  */
 public abstract class DevonNamingConventionClassExtendsClassCheck implements JavaFileScanner {
-
-  private JavaFileScannerContext context;
 
   protected final String extendedSuperClass;
 
@@ -74,14 +68,15 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
   @Override
   public void scanFile(JavaFileScannerContext context) {
 
-    this.context = context;
+    Logger logger = Logger.getLogger("logger");
 
-    File file = context.getFile();
-
-    CompilationUnitTree parsedTree = parseJavaFile(file.getPath());
+    CompilationUnitTree parsedTree = context.getTree();
 
     List<Tree> types = parsedTree.types();
     ClassTree tree = getTreeInstance(types);
+
+    logger.log(Level.INFO, "Name of class: " + tree.simpleName().name());
+
     Kind kind = tree.kind();
 
     boolean isClass = kind.equals(Tree.Kind.CLASS);
@@ -117,7 +112,7 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
         boolean endsWith = matcher.find();
 
         if (!endsWith) {
-          this.context.addIssueOnFile(this, "Classes inheriting from " + this.extendedSuperClass + " should have "
+          context.addIssueOnFile(this, "Classes inheriting from " + this.extendedSuperClass + " should have "
               + this.classSuffixRegEx + " as prefix");
           return;
         }
@@ -126,7 +121,7 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
           boolean contains = superInterfacesNames.containsAll(this.interfacesToImplement);
 
           if (!contains) {
-            this.context.addIssueOnFile(this, "Classes extending " + this.extendedSuperClass
+            context.addIssueOnFile(this, "Classes extending " + this.extendedSuperClass
                 + " should implement an interface with the same name except the suffix");
             return;
 
@@ -135,7 +130,7 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
       } else if (Pattern.compile(this.classSuffixRegEx).matcher(superClassName).find()) {
 
         if (!Pattern.compile(this.classSuffixRegEx).matcher(this.className).find()) {
-          this.context.addIssueOnFile(this, "If a superclass has " + this.classSuffixRegEx
+          context.addIssueOnFile(this, "If a superclass has " + this.classSuffixRegEx
               + " as prefix, then the subclass should also have " + this.classSuffixRegEx + " as prefix.");
           return;
 
@@ -147,14 +142,13 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
         if (this.isAbstract) {
           if (!isAbstract) {
 
-            this.context.addIssueOnFile(this,
-                "Classes inheriting from " + this.extendedSuperClass + " should be abstract");
+            context.addIssueOnFile(this, "Classes inheriting from " + this.extendedSuperClass + " should be abstract");
             return;
           }
         } else {
           if (!this.isAbstract) {
             if (isAbstract) {
-              this.context.addIssueOnFile(this,
+              context.addIssueOnFile(this,
                   "Classes inheriting from " + this.extendedSuperClass + " should not be abstract");
               return;
             }
@@ -168,22 +162,6 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
   protected void init() {
 
     return;
-  }
-
-  private static CompilationUnitTree parseJavaFile(String path) {
-
-    ActionParser<Tree> parser = JavaParser.createParser();
-
-    File input = new File(path);
-
-    Tree javaFileTree = parser.parse(input);
-
-    CompilationUnitTree parsedTree = new JavaTree.CompilationUnitTreeImpl(null, new ArrayList<>(), new ArrayList<>(),
-        null);
-
-    parsedTree = (CompilationUnitTree) javaFileTree;
-
-    return parsedTree;
   }
 
   private static ClassTree getTreeInstance(List<Tree> types) {
