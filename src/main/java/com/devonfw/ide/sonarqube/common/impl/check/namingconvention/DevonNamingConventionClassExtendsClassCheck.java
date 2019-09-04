@@ -13,8 +13,6 @@ import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.ClassTree;
 import org.sonar.plugins.java.api.tree.CompilationUnitTree;
-import org.sonar.plugins.java.api.tree.IdentifierTree;
-import org.sonar.plugins.java.api.tree.ListTree;
 import org.sonar.plugins.java.api.tree.Modifier;
 import org.sonar.plugins.java.api.tree.Tree;
 import org.sonar.plugins.java.api.tree.Tree.Kind;
@@ -75,88 +73,80 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
     List<Tree> types = parsedTree.types();
     ClassTree tree = getTreeInstance(types);
 
-    logger.log(Level.INFO, "Name of class: " + tree.simpleName().name());
-
-    Kind kind = tree.kind();
-
-    boolean isClass = kind.equals(Tree.Kind.CLASS);
-    if (!isClass)
-      return;
-
-    TypeTree superClass = tree.superClass();
-
+    this.className = tree.simpleName().name();
+    String superClassName = "DEFAULT";
     Set<String> superInterfacesNames = new LinkedHashSet<>();
-    ListTree<TypeTree> superInterfaces = tree.superInterfaces();
-
-    IdentifierTree simpleName = tree.simpleName();
-
-    this.className = simpleName.name();
 
     init();
 
-    for (TypeTree typeTree : superInterfaces) {
+    for (TypeTree typeTree : tree.superInterfaces()) {
       superInterfacesNames.add(typeTree.toString());
     }
 
-    String superClassName = null;
-    if (superClass != null) {
-      superClassName = superClass.toString();
+    try {
+      superClassName = tree.superClass().toString();
+    } catch (NullPointerException ex) {
     }
 
-    if (superClassName != null) {
+    logger.log(Level.INFO, "Name of super class: " + superClassName);
+    logger.log(Level.INFO, "Name of class: " + this.className);
 
-      if (superClassName.equals(this.extendedSuperClass)) {
+    if (superClassName.equals("DEFAULT") || !tree.kind().equals(Kind.CLASS))
+      return;
 
-        Pattern pattern = Pattern.compile(this.classSuffixRegEx);
-        Matcher matcher = pattern.matcher(this.className);
-        boolean endsWith = matcher.find();
+    logger.log(Level.INFO, "STILL RUNNING");
 
-        if (!endsWith) {
-          context.addIssueOnFile(this, "Classes inheriting from " + this.extendedSuperClass + " should have "
-              + this.classSuffixRegEx + " as prefix");
-          return;
-        }
+    if (superClassName.equals(this.extendedSuperClass)) {
 
-        if (this.interfacesToImplement != null) {
-          boolean contains = superInterfacesNames.containsAll(this.interfacesToImplement);
+      Pattern pattern = Pattern.compile(this.classSuffixRegEx);
+      Matcher matcher = pattern.matcher(this.className);
+      boolean endsWith = matcher.find();
 
-          if (!contains) {
-            context.addIssueOnFile(this, "Classes extending " + this.extendedSuperClass
-                + " should implement an interface with the same name except the suffix");
-            return;
+      if (!endsWith) {
+        context.addIssueOnFile(this, "Classes inheriting from " + this.extendedSuperClass + " should have "
+            + this.classSuffixRegEx + " as prefix");
+        return;
+      }
 
-          }
-        }
-      } else if (Pattern.compile(this.classSuffixRegEx).matcher(superClassName).find()) {
+      if (this.interfacesToImplement != null) {
+        boolean contains = superInterfacesNames.containsAll(this.interfacesToImplement);
 
-        if (!Pattern.compile(this.classSuffixRegEx).matcher(this.className).find()) {
-          context.addIssueOnFile(this, "If a superclass has " + this.classSuffixRegEx
-              + " as prefix, then the subclass should also have " + this.classSuffixRegEx + " as prefix.");
+        if (!contains) {
+          context.addIssueOnFile(this, "Classes extending " + this.extendedSuperClass
+              + " should implement an interface with the same name except the suffix");
           return;
 
         }
       }
-      boolean isAbstract = isAbstract(tree);
+    } else if (Pattern.compile(this.classSuffixRegEx).matcher(superClassName).find()) {
 
-      if (this.isAbstract != null)
-        if (this.isAbstract) {
-          if (!isAbstract) {
+      if (!Pattern.compile(this.classSuffixRegEx).matcher(this.className).find()) {
+        context.addIssueOnFile(this, "If a superclass has " + this.classSuffixRegEx
+            + " as prefix, then the subclass should also have " + this.classSuffixRegEx + " as prefix.");
+        return;
 
-            context.addIssueOnFile(this, "Classes inheriting from " + this.extendedSuperClass + " should be abstract");
+      }
+    }
+    boolean isAbstract = isAbstract(tree);
+
+    if (this.isAbstract != null)
+      if (this.isAbstract) {
+        if (!isAbstract) {
+
+          context.addIssueOnFile(this, "Classes inheriting from " + this.extendedSuperClass + " should be abstract");
+          return;
+        }
+      } else {
+        if (!this.isAbstract) {
+          if (isAbstract) {
+            context.addIssueOnFile(this,
+                "Classes inheriting from " + this.extendedSuperClass + " should not be abstract");
             return;
           }
-        } else {
-          if (!this.isAbstract) {
-            if (isAbstract) {
-              context.addIssueOnFile(this,
-                  "Classes inheriting from " + this.extendedSuperClass + " should not be abstract");
-              return;
-            }
-          }
-
         }
 
-    }
+      }
+
   }
 
   protected void init() {

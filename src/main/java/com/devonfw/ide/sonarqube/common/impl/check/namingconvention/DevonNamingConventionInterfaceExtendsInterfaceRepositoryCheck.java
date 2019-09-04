@@ -9,7 +9,7 @@ import org.sonar.check.Rule;
  */
 @Rule(key = "Devon4j:N9", name = "Devon naming convention of inheriting interfaces (Repository)", //
     description = "Verify that Interfaces extending DefaultRepository shall end with Repository. In addition, "
-        + "interfaces that inherit from a interface with the suffix Repository must also have Repository as their suffix", //
+        + "interfaces that inherit from an interface with the suffix Repository must also have Repository as their suffix", //
     priority = Priority.CRITICAL, tags = { "architecture-violation" })
 public class DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck
     extends DevonNamingConventionInterfaceExtendsInterfaceCheck {

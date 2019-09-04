@@ -13,8 +13,6 @@ import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.ClassTree;
 import org.sonar.plugins.java.api.tree.CompilationUnitTree;
-import org.sonar.plugins.java.api.tree.IdentifierTree;
-import org.sonar.plugins.java.api.tree.ListTree;
 import org.sonar.plugins.java.api.tree.Tree;
 import org.sonar.plugins.java.api.tree.Tree.Kind;
 import org.sonar.plugins.java.api.tree.TypeTree;
@@ -52,24 +50,18 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
     List<Tree> types = parsedTree.types();
     ClassTree tree = getTreeInstance(types);
 
-    logger.log(Level.INFO, "Name of class: " + tree.simpleName().name());
+    String interfaceName = tree.simpleName().name();
 
-    Kind kind = tree.kind();
+    logger.log(Level.INFO, "Name of interface: " + interfaceName);
 
-    boolean isInterface = kind.equals(Tree.Kind.INTERFACE);
-
-    if (!isInterface)
+    if (!tree.kind().equals(Kind.INTERFACE))
       return;
 
     Set<String> superInterfacesNames = new LinkedHashSet<>();
-    ListTree<TypeTree> superInterfaces = tree.superInterfaces();
 
-    for (TypeTree typeTree : superInterfaces) {
+    for (TypeTree typeTree : tree.superInterfaces()) {
       superInterfacesNames.add(typeTree.toString());
     }
-
-    IdentifierTree simpleName = tree.simpleName();
-    String className = simpleName.name();
 
     boolean contains = superInterfacesNames.contains(this.extendedInterface);
 
@@ -78,21 +70,19 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
     if (contains) {
 
       Pattern pattern = Pattern.compile(this.extendingInterfaceSuffix);
-      Matcher matcher = pattern.matcher(className);
-      boolean endsWith = matcher.find();
+      Matcher matcher = pattern.matcher(interfaceName);
+      boolean endsWith = matcher.matches();
 
       if (!endsWith) {
         context.addIssueOnFile(this, "Interfaces inheriting from " + this.extendedInterface + " should have "
             + this.extendingInterfaceSuffix + " as prefix");
         return;
       }
-    } else if (!matchingInterfaces.isEmpty()) {
-      if (!className.endsWith(this.extendingInterfaceSuffix)) {
-        context.addIssueOnFile(this, "If a superinterface has " + this.extendingInterfaceSuffix
-            + " as prefix, then the subinteraface should also have" + this.extendingInterfaceSuffix + " as prefix.");
-        return;
-      }
 
+    } else if (!matchingInterfaces.isEmpty() && !interfaceName.endsWith(this.extendingInterfaceSuffix)) {
+      context.addIssueOnFile(this, "If a superinterface has " + this.extendingInterfaceSuffix
+          + " as prefix, then the subinterface should also have " + this.extendingInterfaceSuffix + " as prefix.");
+      return;
     }
 
   }
