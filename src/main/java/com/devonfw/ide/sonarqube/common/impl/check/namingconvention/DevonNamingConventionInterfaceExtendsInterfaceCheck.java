@@ -22,16 +22,22 @@ import org.sonar.plugins.java.api.tree.TypeTree;
  */
 public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implements JavaFileScanner {
 
+  /**
+   * See constructor
+   */
   protected final String extendedInterface;
 
+  /**
+   * See constructor
+   */
   protected final String extendingInterfaceSuffix;
 
   /**
-   *
    * The constructor.
    *
-   * @param extendedInterface
-   * @param extendingInterfaceSuffix
+   * @param extendedInterface If the currently checked interface has this in its super interfaces, rules apply.
+   * @param extendingInterfaceSuffix This needs to be the suffix of the checked interface if it extends certain other
+   *        interfaces.
    */
   public DevonNamingConventionInterfaceExtendsInterfaceCheck(String extendedInterface,
       String extendingInterfaceSuffix) {
@@ -40,6 +46,11 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
     this.extendingInterfaceSuffix = extendingInterfaceSuffix;
   }
 
+  /**
+   * Method called after parsing and semantic analysis has been done on file.
+   *
+   * @param context Context of analysis containing the parsed tree.
+   */
   @Override
   public void scanFile(JavaFileScannerContext context) {
 
@@ -51,23 +62,23 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
     ClassTree tree = getTreeInstance(types);
 
     String interfaceName = tree.simpleName().name();
+    Set<String> superInterfacesNames = new LinkedHashSet<>();
 
     logger.log(Level.INFO, "Name of interface: " + interfaceName);
 
+    // If checked file is not an interface, return
     if (!tree.kind().equals(Kind.INTERFACE))
       return;
 
-    Set<String> superInterfacesNames = new LinkedHashSet<>();
-
+    // Gets all super interfaces of the checked interface
     for (TypeTree typeTree : tree.superInterfaces()) {
       superInterfacesNames.add(typeTree.toString());
     }
 
-    boolean contains = superInterfacesNames.contains(this.extendedInterface);
-
+    // Checks if one of the super interfaces has 'Repository' as suffix
     List<String> matchingInterfaces = getMatchingStrings(superInterfacesNames, this.extendingInterfaceSuffix);
 
-    if (contains) {
+    if (superInterfacesNames.contains(this.extendedInterface)) {
 
       Pattern pattern = Pattern.compile(this.extendingInterfaceSuffix);
       Matcher matcher = pattern.matcher(interfaceName);
@@ -75,13 +86,13 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
 
       if (!endsWith) {
         context.addIssueOnFile(this, "Interfaces inheriting from " + this.extendedInterface + " should have "
-            + this.extendingInterfaceSuffix + " as prefix");
+            + this.extendingInterfaceSuffix + " as suffix");
         return;
       }
 
     } else if (!matchingInterfaces.isEmpty() && !interfaceName.endsWith(this.extendingInterfaceSuffix)) {
       context.addIssueOnFile(this, "If a superinterface has " + this.extendingInterfaceSuffix
-          + " as prefix, then the subinterface should also have " + this.extendingInterfaceSuffix + " as prefix.");
+          + " as suffix, then the subinterface should also have " + this.extendingInterfaceSuffix + " as suffix.");
       return;
     }
 
