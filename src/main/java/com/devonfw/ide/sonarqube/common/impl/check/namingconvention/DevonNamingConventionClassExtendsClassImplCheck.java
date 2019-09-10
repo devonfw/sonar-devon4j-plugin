@@ -24,7 +24,9 @@ public class DevonNamingConventionClassExtendsClassImplCheck extends DevonNaming
     super("AbstractUc", "Uc.*Impl$", false);
   }
 
-  @Override
+  /**
+   * Initializes the list of interfaces implemented by this class.
+   */
   public void init() {
 
     this.interfacesToImplement = new LinkedList<>();

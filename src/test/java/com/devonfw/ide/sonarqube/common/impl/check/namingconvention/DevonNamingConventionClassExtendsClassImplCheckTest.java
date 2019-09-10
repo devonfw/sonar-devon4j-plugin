@@ -3,7 +3,14 @@ package com.devonfw.ide.sonarqube.common.impl.check.namingconvention;
 import org.junit.Test;
 import org.sonar.java.checks.verifier.JavaCheckVerifier;
 
+/**
+ * Test of {@link DevonNamingConventionClassExtendsClassImplCheck}
+ */
 public class DevonNamingConventionClassExtendsClassImplCheckTest {
+
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassImplCheck}
+   */
   @Test
   public void testNoIssueCaseOne() {
 
@@ -12,6 +19,9 @@ public class DevonNamingConventionClassExtendsClassImplCheckTest {
         new DevonNamingConventionClassExtendsClassImplCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassImplCheck}
+   */
   @Test
   public void testNoIssueCaseTwo() {
 
@@ -20,6 +30,9 @@ public class DevonNamingConventionClassExtendsClassImplCheckTest {
         new DevonNamingConventionClassExtendsClassImplCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassImplCheck}
+   */
   @Test
   public void testNoIssueCaseThree() {
 
@@ -28,6 +41,9 @@ public class DevonNamingConventionClassExtendsClassImplCheckTest {
         new DevonNamingConventionClassExtendsClassImplCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassImplCheck}
+   */
   @Test
   public void testNoIssueCaseFour() {
 
@@ -36,6 +52,9 @@ public class DevonNamingConventionClassExtendsClassImplCheckTest {
         new DevonNamingConventionClassExtendsClassImplCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassImplCheck}
+   */
   @Test
   public void testIssueOnFileCaseOne() {
 
@@ -45,6 +64,9 @@ public class DevonNamingConventionClassExtendsClassImplCheckTest {
         new DevonNamingConventionClassExtendsClassImplCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassImplCheck}
+   */
   @Test
   public void testIssueOnFileCaseTwo() {
 
@@ -54,6 +76,9 @@ public class DevonNamingConventionClassExtendsClassImplCheckTest {
         new DevonNamingConventionClassExtendsClassImplCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassImplCheck}
+   */
   @Test
   public void testIssueOnFileCaseThree() {
 

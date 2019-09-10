@@ -4,11 +4,13 @@ import org.junit.Test;
 import org.sonar.java.checks.verifier.JavaCheckVerifier;
 
 /**
- * @author vhacimuf
- *
+ * Test of {@link DevonNamingConventionInterfaceExtendsInterfaceDaoCheck}
  */
 public class DevonNamingConventionInterfaceExtendsInterfaceDaoCheckTest {
 
+  /**
+   * Test of {@link DevonNamingConventionInterfaceExtendsInterfaceDaoCheck}
+   */
   @Test
   public void testNoIssueOne() {
 
@@ -17,6 +19,9 @@ public class DevonNamingConventionInterfaceExtendsInterfaceDaoCheckTest {
         new DevonNamingConventionInterfaceExtendsInterfaceDaoCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionInterfaceExtendsInterfaceDaoCheck}
+   */
   @Test
   public void testNoIssueTwo() {
 
@@ -25,6 +30,9 @@ public class DevonNamingConventionInterfaceExtendsInterfaceDaoCheckTest {
         new DevonNamingConventionInterfaceExtendsInterfaceDaoCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionInterfaceExtendsInterfaceDaoCheck}
+   */
   @Test
   public void testNoIssueThree() {
 
@@ -33,6 +41,9 @@ public class DevonNamingConventionInterfaceExtendsInterfaceDaoCheckTest {
         new DevonNamingConventionInterfaceExtendsInterfaceDaoCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionInterfaceExtendsInterfaceDaoCheck}
+   */
   @Test
   public void testIssueOneOnFile() {
 

@@ -3,7 +3,14 @@ package com.devonfw.ide.sonarqube.common.impl.check.namingconvention;
 import org.junit.Test;
 import org.sonar.java.checks.verifier.JavaCheckVerifier;
 
+/**
+ * Test of {@link DevonNamingConventionClassExtendsClassEtoCheck}
+ */
 public class DevonNamingConventionClassExtendsClassEtoCheckTest {
+
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassEtoCheck}
+   */
   @Test
   public void testNoIssueCaseOne() {
 
@@ -12,6 +19,9 @@ public class DevonNamingConventionClassExtendsClassEtoCheckTest {
         new DevonNamingConventionClassExtendsClassEtoCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassEtoCheck}
+   */
   @Test
   public void testNoIssueCaseTwo() {
 
@@ -20,6 +30,9 @@ public class DevonNamingConventionClassExtendsClassEtoCheckTest {
         new DevonNamingConventionClassExtendsClassEtoCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassEtoCheck}
+   */
   @Test
   public void testNoIssueCaseThree() {
 
@@ -28,21 +41,28 @@ public class DevonNamingConventionClassExtendsClassEtoCheckTest {
         new DevonNamingConventionClassExtendsClassEtoCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassEtoCheck}
+   */
   @Test
   public void testIssueOnFileCaseOne() {
 
     JavaCheckVerifier.verifyIssueOnFile(
         "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassEtoCase2Check.java",
-        "Classes inheriting from AbstractEto should have Eto$ as prefix",
+        "Classes inheriting from AbstractEto should have Eto$ as suffix",
         new DevonNamingConventionClassExtendsClassEtoCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassEtoCheck}
+   */
   @Test
   public void testIssueOnFileCaseTwo() {
 
     JavaCheckVerifier.verifyIssueOnFile(
         "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassEtoCase4Check.java",
-        "If a superclass has Eto$ as prefix, then the subclass should also have Eto$ as prefix.",
+        "If a superclass has Eto$ as suffix, then the subclass should also have Eto$ as suffix.",
         new DevonNamingConventionClassExtendsClassEtoCheck());
   }
+
 }

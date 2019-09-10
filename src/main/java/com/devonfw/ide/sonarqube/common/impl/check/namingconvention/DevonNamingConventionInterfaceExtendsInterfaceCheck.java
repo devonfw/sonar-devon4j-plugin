@@ -23,21 +23,20 @@ import org.sonar.plugins.java.api.tree.TypeTree;
 public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implements JavaFileScanner {
 
   /**
-   * See constructor
+   * If the currently checked interface has this in its super interfaces, rules apply.
    */
   protected final String extendedInterface;
 
   /**
-   * See constructor
+   * This needs to be the suffix of the checked interface if it extends certain other interfaces.
    */
   protected final String extendingInterfaceSuffix;
 
   /**
    * The constructor.
    *
-   * @param extendedInterface If the currently checked interface has this in its super interfaces, rules apply.
-   * @param extendingInterfaceSuffix This needs to be the suffix of the checked interface if it extends certain other
-   *        interfaces.
+   * @param extendedInterface See JavaDoc on variable declaration.
+   * @param extendingInterfaceSuffix See JavaDoc on variable declaration.
    */
   public DevonNamingConventionInterfaceExtendsInterfaceCheck(String extendedInterface,
       String extendingInterfaceSuffix) {
@@ -72,6 +71,7 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
 
     // Gets all super interfaces of the checked interface
     for (TypeTree typeTree : tree.superInterfaces()) {
+      logger.log(Level.INFO, "Name of super interface: " + typeTree.toString());
       superInterfacesNames.add(typeTree.toString());
     }
 
@@ -82,7 +82,7 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
 
       Pattern pattern = Pattern.compile(this.extendingInterfaceSuffix);
       Matcher matcher = pattern.matcher(interfaceName);
-      boolean endsWith = matcher.matches();
+      boolean endsWith = matcher.find();
 
       if (!endsWith) {
         context.addIssueOnFile(this, "Interfaces inheriting from " + this.extendedInterface + " should have "
@@ -92,7 +92,7 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
 
     } else if (!matchingInterfaces.isEmpty() && !interfaceName.endsWith(this.extendingInterfaceSuffix)) {
       context.addIssueOnFile(this, "If a superinterface has " + this.extendingInterfaceSuffix
-          + " as suffix, then the subinterface should also have " + this.extendingInterfaceSuffix + " as suffix.");
+          + " as suffix, then the subinterface should also have " + this.extendingInterfaceSuffix + " as suffix");
       return;
     }
 
@@ -123,4 +123,5 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
 
     return matches;
   }
+
 }

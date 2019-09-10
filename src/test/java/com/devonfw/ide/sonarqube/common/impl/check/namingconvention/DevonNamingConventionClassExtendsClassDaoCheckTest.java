@@ -3,7 +3,14 @@ package com.devonfw.ide.sonarqube.common.impl.check.namingconvention;
 import org.junit.Test;
 import org.sonar.java.checks.verifier.JavaCheckVerifier;
 
+/**
+ * Test of {@link DevonNamingConventionClassExtendsClassDaoCheck}
+ */
 public class DevonNamingConventionClassExtendsClassDaoCheckTest {
+
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassDaoCheck}
+   */
   @Test
   public void testNoIssueCaseOne() {
 
@@ -12,6 +19,9 @@ public class DevonNamingConventionClassExtendsClassDaoCheckTest {
         new DevonNamingConventionClassExtendsClassDaoCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassDaoCheck}
+   */
   @Test
   public void testNoIssueCaseTwo() {
 
@@ -20,6 +30,9 @@ public class DevonNamingConventionClassExtendsClassDaoCheckTest {
         new DevonNamingConventionClassExtendsClassDaoCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassDaoCheck}
+   */
   @Test
   public void testNoIssueCaseThree() {
 
@@ -28,6 +41,9 @@ public class DevonNamingConventionClassExtendsClassDaoCheckTest {
         new DevonNamingConventionClassExtendsClassDaoCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassDaoCheck}
+   */
   @Test
   public void testIssueOnFileCaseOne() {
 

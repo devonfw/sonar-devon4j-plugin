@@ -4,10 +4,13 @@ import org.junit.Test;
 import org.sonar.java.checks.verifier.JavaCheckVerifier;
 
 /**
- * @author vhacimuf
- *
+ * Test of {@link DevonNamingConventionClassExtendsClassToCheck}
  */
 public class DevonNamingConventionClassExtendsClassToCheckTest {
+
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassToCheck}
+   */
   @Test
   public void testNoIssueCaseOne() {
 
@@ -16,6 +19,9 @@ public class DevonNamingConventionClassExtendsClassToCheckTest {
         new DevonNamingConventionClassExtendsClassToCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassToCheck}
+   */
   @Test
   public void testNoIssueCaseTwo() {
 
@@ -24,6 +30,9 @@ public class DevonNamingConventionClassExtendsClassToCheckTest {
         new DevonNamingConventionClassExtendsClassToCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassToCheck}
+   */
   @Test
   public void testNoIssueCaseThree() {
 
@@ -32,6 +41,9 @@ public class DevonNamingConventionClassExtendsClassToCheckTest {
         new DevonNamingConventionClassExtendsClassToCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassToCheck}
+   */
   @Test
   public void testNoIssueCaseFour() {
 
@@ -40,6 +52,9 @@ public class DevonNamingConventionClassExtendsClassToCheckTest {
         new DevonNamingConventionClassExtendsClassToCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassToCheck}
+   */
   @Test
   public void testIssueOnFileCaseOne() {
 
@@ -49,6 +64,9 @@ public class DevonNamingConventionClassExtendsClassToCheckTest {
         new DevonNamingConventionClassExtendsClassToCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassToCheck}
+   */
   @Test
   public void testIssueOnFileCaseTwo() {
 
