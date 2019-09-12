@@ -34,22 +34,9 @@ public class DevonNamingConventionClassExtendsClassEtoCheckTest {
    * Test of {@link DevonNamingConventionClassExtendsClassEtoCheck}
    */
   @Test
-  public void testNoIssueCaseThree() {
-
-    JavaCheckVerifier.verifyNoIssue(
-        "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassEtoCase3Check.java",
-        new DevonNamingConventionClassExtendsClassEtoCheck());
-  }
-
-  /**
-   * Test of {@link DevonNamingConventionClassExtendsClassEtoCheck}
-   */
-  @Test
   public void testIssueOnFileCaseOne() {
 
-    JavaCheckVerifier.verifyIssueOnFile(
-        "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassEtoCase2Check.java",
-        "Classes inheriting from AbstractEto should have Eto$ as suffix",
+    JavaCheckVerifier.verify("src/test/files/namingconvention/DevonNamingConventionClassExtendsClassEtoCase2Check.java",
         new DevonNamingConventionClassExtendsClassEtoCheck());
   }
 
@@ -59,9 +46,17 @@ public class DevonNamingConventionClassExtendsClassEtoCheckTest {
   @Test
   public void testIssueOnFileCaseTwo() {
 
-    JavaCheckVerifier.verifyIssueOnFile(
-        "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassEtoCase4Check.java",
-        "If a superclass has Eto$ as suffix, then the subclass should also have Eto$ as suffix.",
+    JavaCheckVerifier.verify("src/test/files/namingconvention/DevonNamingConventionClassExtendsClassEtoCase4Check.java",
+        new DevonNamingConventionClassExtendsClassEtoCheck());
+  }
+
+  /**
+  *
+  */
+  @Test
+  public void testCaseFive() {
+
+    JavaCheckVerifier.verify("src/test/files/namingconvention/DevonNamingConventionClassExtendsClassEtoCase5Check.java",
         new DevonNamingConventionClassExtendsClassEtoCheck());
   }
 

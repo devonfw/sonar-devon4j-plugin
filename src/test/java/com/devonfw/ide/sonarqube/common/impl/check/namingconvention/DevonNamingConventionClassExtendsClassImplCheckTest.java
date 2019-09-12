@@ -58,9 +58,8 @@ public class DevonNamingConventionClassExtendsClassImplCheckTest {
   @Test
   public void testIssueOnFileCaseOne() {
 
-    JavaCheckVerifier.verifyIssueOnFile(
+    JavaCheckVerifier.verify(
         "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassImplCase2Check.java",
-        "Classes inheriting from AbstractUc should have Uc.*Impl$ as prefix",
         new DevonNamingConventionClassExtendsClassImplCheck());
   }
 
@@ -70,9 +69,8 @@ public class DevonNamingConventionClassExtendsClassImplCheckTest {
   @Test
   public void testIssueOnFileCaseTwo() {
 
-    JavaCheckVerifier.verifyIssueOnFile(
+    JavaCheckVerifier.verify(
         "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassImplCase6Check.java",
-        "If a superclass has Uc.*Impl$ as prefix, then the subclass should also have Uc.*Impl$ as prefix.",
         new DevonNamingConventionClassExtendsClassImplCheck());
   }
 
@@ -82,9 +80,8 @@ public class DevonNamingConventionClassExtendsClassImplCheckTest {
   @Test
   public void testIssueOnFileCaseThree() {
 
-    JavaCheckVerifier.verifyIssueOnFile(
+    JavaCheckVerifier.verify(
         "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassImplCase7Check.java",
-        "Classes inheriting from AbstractUc should not be abstract",
         new DevonNamingConventionClassExtendsClassImplCheck());
   }
 

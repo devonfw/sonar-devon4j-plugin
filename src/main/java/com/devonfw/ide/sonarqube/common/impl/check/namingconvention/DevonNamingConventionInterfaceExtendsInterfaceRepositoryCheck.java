@@ -19,7 +19,7 @@ public class DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck
    */
   public DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck() {
 
-    super("DefaultRepository", "Repository$");
+    super("DefaultRepository", ".*Repository");
   }
 
 }

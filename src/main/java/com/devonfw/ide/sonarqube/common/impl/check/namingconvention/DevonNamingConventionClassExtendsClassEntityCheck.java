@@ -18,7 +18,7 @@ public class DevonNamingConventionClassExtendsClassEntityCheck extends DevonNami
    */
   public DevonNamingConventionClassExtendsClassEntityCheck() {
 
-    super("ApplicationPersistenceEntity", "Entity$");
+    super("ApplicationPersistenceEntity", ".*Entity");
   }
 
 }

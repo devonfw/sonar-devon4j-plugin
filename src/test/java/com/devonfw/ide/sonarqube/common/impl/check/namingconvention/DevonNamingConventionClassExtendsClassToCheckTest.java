@@ -58,9 +58,7 @@ public class DevonNamingConventionClassExtendsClassToCheckTest {
   @Test
   public void testIssueOnFileCaseOne() {
 
-    JavaCheckVerifier.verifyIssueOnFile(
-        "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassToCase2Check.java",
-        "Classes inheriting from AbstractTo should have [^CEce]To$ as prefix",
+    JavaCheckVerifier.verify("src/test/files/namingconvention/DevonNamingConventionClassExtendsClassToCase2Check.java",
         new DevonNamingConventionClassExtendsClassToCheck());
   }
 
@@ -70,9 +68,7 @@ public class DevonNamingConventionClassExtendsClassToCheckTest {
   @Test
   public void testIssueOnFileCaseTwo() {
 
-    JavaCheckVerifier.verifyIssueOnFile(
-        "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassToCase6Check.java",
-        "If a superclass has [^CEce]To$ as prefix, then the subclass should also have [^CEce]To$ as prefix.",
+    JavaCheckVerifier.verify("src/test/files/namingconvention/DevonNamingConventionClassExtendsClassToCase6Check.java",
         new DevonNamingConventionClassExtendsClassToCheck());
   }
 

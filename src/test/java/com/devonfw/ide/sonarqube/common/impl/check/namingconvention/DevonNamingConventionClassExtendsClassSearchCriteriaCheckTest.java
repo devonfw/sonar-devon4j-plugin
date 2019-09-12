@@ -36,9 +36,8 @@ public class DevonNamingConventionClassExtendsClassSearchCriteriaCheckTest {
   @Test
   public void testIssueOnFileCaseOne() {
 
-    JavaCheckVerifier.verifyIssueOnFile(
+    JavaCheckVerifier.verify(
         "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassSearchCriteriaToCase2Check.java",
-        "Classes inheriting from AbstractSearchCriteriaTo should have SearchCriteriaTo$ as prefix",
         new DevonNamingConventionClassExtendsClassSearchCriteriaToCheck());
   }
 
@@ -48,9 +47,8 @@ public class DevonNamingConventionClassExtendsClassSearchCriteriaCheckTest {
   @Test
   public void testIssueOnFileCaseTwo() {
 
-    JavaCheckVerifier.verifyIssueOnFile(
+    JavaCheckVerifier.verify(
         "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassSearchCriteriaToCase4Check.java",
-        "If a superclass has SearchCriteriaTo$ as prefix, then the subclass should also have SearchCriteriaTo$ as prefix.",
         new DevonNamingConventionClassExtendsClassSearchCriteriaToCheck());
   }
 

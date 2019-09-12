@@ -45,11 +45,9 @@ public class DevonNamingConventionClassExtendsClassDaoCheckTest {
    * Test of {@link DevonNamingConventionClassExtendsClassDaoCheck}
    */
   @Test
-  public void testIssueOnFileCaseOne() {
+  public void testCaseOne() {
 
-    JavaCheckVerifier.verifyIssueOnFile(
-        "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassDaoCase2Check.java",
-        "Classes inheriting from AbstractDao should have DaoImpl$ as prefix",
+    JavaCheckVerifier.verify("src/test/files/namingconvention/DevonNamingConventionClassExtendsClassDaoCase2Check.java",
         new DevonNamingConventionClassExtendsClassDaoCheck());
   }
 }

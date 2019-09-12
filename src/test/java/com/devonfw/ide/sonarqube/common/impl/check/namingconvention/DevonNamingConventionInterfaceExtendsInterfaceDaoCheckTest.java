@@ -47,9 +47,8 @@ public class DevonNamingConventionInterfaceExtendsInterfaceDaoCheckTest {
   @Test
   public void testIssueOneOnFile() {
 
-    JavaCheckVerifier.verifyIssueOnFile(
+    JavaCheckVerifier.verify(
         "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceDaoCase4Check.java",
-        "Interfaces inheriting from Dao should have Dao$ as prefix",
         new DevonNamingConventionInterfaceExtendsInterfaceDaoCheck());
   }
 

@@ -18,6 +18,6 @@ public class DevonNamingConventionClassExtendsClassDaoCheck extends DevonNamingC
    */
   public DevonNamingConventionClassExtendsClassDaoCheck() {
 
-    super("AbstractDao", "DaoImpl$", false);
+    super("AbstractDao", ".*DaoImpl", false);
   }
 }

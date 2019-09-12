@@ -78,11 +78,11 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
     // Checks if one of the super interfaces has 'Repository' as suffix
     List<String> matchingInterfaces = getMatchingStrings(superInterfacesNames, this.extendingInterfaceSuffix);
 
-    if (superInterfacesNames.contains(this.extendedInterface)) {
+    Pattern pattern = Pattern.compile(this.extendingInterfaceSuffix);
+    Matcher matcher = pattern.matcher(interfaceName);
+    boolean endsWith = matcher.matches();
 
-      Pattern pattern = Pattern.compile(this.extendingInterfaceSuffix);
-      Matcher matcher = pattern.matcher(interfaceName);
-      boolean endsWith = matcher.find();
+    if (superInterfacesNames.contains(this.extendedInterface)) {
 
       if (!endsWith) {
         context.addIssueOnFile(this, "Interfaces inheriting from " + this.extendedInterface + " should have "
@@ -90,7 +90,7 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
         return;
       }
 
-    } else if (!matchingInterfaces.isEmpty() && !interfaceName.endsWith(this.extendingInterfaceSuffix)) {
+    } else if (!matchingInterfaces.isEmpty() && !endsWith) {
       context.addIssueOnFile(this, "If a superinterface has " + this.extendingInterfaceSuffix
           + " as suffix, then the subinterface should also have " + this.extendingInterfaceSuffix + " as suffix");
       return;

@@ -20,7 +20,7 @@ public class DevonNamingConventionClassExtendsClassSearchCriteriaToCheck
    */
   public DevonNamingConventionClassExtendsClassSearchCriteriaToCheck() {
 
-    super("AbstractSearchCriteriaTo", "SearchCriteriaTo$");
+    super("AbstractSearchCriteriaTo", ".*SearchCriteriaTo");
   }
 
 }

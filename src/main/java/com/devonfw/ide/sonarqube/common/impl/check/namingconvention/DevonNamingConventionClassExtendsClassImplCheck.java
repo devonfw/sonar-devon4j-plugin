@@ -21,12 +21,13 @@ public class DevonNamingConventionClassExtendsClassImplCheck extends DevonNaming
    */
   public DevonNamingConventionClassExtendsClassImplCheck() {
 
-    super("AbstractUc", "Uc.*Impl$", false);
+    super("AbstractUc", "Uc.*Impl", false);
   }
 
   /**
    * Initializes the list of interfaces implemented by this class.
    */
+  @Override
   public void init() {
 
     this.interfacesToImplement = new LinkedList<>();

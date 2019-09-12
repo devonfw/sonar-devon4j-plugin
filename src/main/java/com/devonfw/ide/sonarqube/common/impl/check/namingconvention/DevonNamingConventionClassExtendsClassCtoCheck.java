@@ -18,7 +18,7 @@ public class DevonNamingConventionClassExtendsClassCtoCheck extends DevonNamingC
    */
   public DevonNamingConventionClassExtendsClassCtoCheck() {
 
-    super("AbstractCto", "Cto$");
+    super("AbstractCto", ".*Cto");
   }
 
 }

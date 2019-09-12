@@ -17,7 +17,7 @@ public class DevonNamingConventionClassExtendsClassToCheck extends DevonNamingCo
    */
   public DevonNamingConventionClassExtendsClassToCheck() {
 
-    super("AbstractTo", "[^CEce]To$");
+    super("AbstractTo", ".*To");
   }
 
 }

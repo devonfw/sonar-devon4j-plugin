@@ -14,7 +14,6 @@ import org.sonar.plugins.java.api.tree.ClassTree;
 import org.sonar.plugins.java.api.tree.CompilationUnitTree;
 import org.sonar.plugins.java.api.tree.Modifier;
 import org.sonar.plugins.java.api.tree.Tree;
-import org.sonar.plugins.java.api.tree.Tree.Kind;
 import org.sonar.plugins.java.api.tree.TypeTree;
 
 /**
@@ -94,41 +93,43 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
     ClassTree tree = getTreeInstance(types);
 
     this.className = tree.simpleName().name();
-    String superClassName = "DEFAULT";
+    String superClassName;
     Set<String> superInterfacesNames = new LinkedHashSet<>();
 
     Pattern pattern = Pattern.compile(this.classSuffixRegEx);
 
     init();
 
-    for (TypeTree typeTree : tree.superInterfaces()) {
+    List<TypeTree> superInterfaces = tree.superInterfaces();
+    logger.log(Level.INFO, "Is superInterfaces empty? " + superInterfaces.isEmpty());
+    if (superInterfaces == null)
+      return;
+
+    for (TypeTree typeTree : superInterfaces) {
       superInterfacesNames.add(typeTree.toString());
       logger.log(Level.INFO, "Name of implemented interface: " + typeTree.toString());
     }
 
-    try {
-      superClassName = tree.superClass().toString();
-    } catch (NullPointerException ex) {
+    TypeTree superClass = tree.superClass();
+    if (superClass == null) {
+      return;
     }
+
+    superClassName = superClass.toString();
 
     logger.log(Level.INFO, "Name of super class: " + superClassName);
     logger.log(Level.INFO, "Name of class: " + this.className);
     logger.log(Level.INFO, "Class Suffix: " + this.classSuffixRegEx);
 
-    // Return if no super class or if checked file is not a class
-    if (superClassName.equals("DEFAULT") || !tree.kind().equals(Kind.CLASS))
-      return;
-
-    logger.log(Level.INFO, "STILL RUNNING");
-
     if (superClassName.equals(this.extendedSuperClass)) {
 
-      if (pattern.matcher(this.className).find()) {
+      if (!pattern.matcher(this.className).matches()) {
         context.addIssueOnFile(this, "Classes inheriting from " + this.extendedSuperClass + " should have "
             + this.classSuffixRegEx + " as suffix");
         return;
       }
 
+      // new rule
       if (this.interfacesToImplement != null) {
         boolean contains = superInterfacesNames.containsAll(this.interfacesToImplement);
 
@@ -136,12 +137,11 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
           context.addIssueOnFile(this, "Classes extending " + this.extendedSuperClass
               + " should implement an interface with the same name except the suffix");
           return;
-
         }
       }
-    } else if (pattern.matcher(superClassName).find()) {
+    } else if (pattern.matcher(superClassName).matches()) {
 
-      if (!pattern.matcher(this.className).find()) {
+      if (!pattern.matcher(this.className).matches()) {
         context.addIssueOnFile(this, "If a superclass has " + this.classSuffixRegEx
             + " as suffix, then the subclass should also have " + this.classSuffixRegEx + " as suffix");
         return;
@@ -149,6 +149,7 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
       }
     }
 
+    // new rule
     if (!this.isAbstract) {
       if (isAbstract(tree)) {
         context.addIssueOnFile(this, "Classes inheriting from " + this.extendedSuperClass + " should not be abstract");
