@@ -23,7 +23,7 @@ public class DevonNamingConventionClassExtendsClassDaoCheckTest {
    * Test of {@link DevonNamingConventionClassExtendsClassDaoCheck}
    */
   @Test
-  public void testNoIssueCaseTwo() {
+  public void testNoIssueCaseThree() {
 
     JavaCheckVerifier.verifyNoIssue(
         "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassDaoCase3Check.java",
@@ -34,7 +34,7 @@ public class DevonNamingConventionClassExtendsClassDaoCheckTest {
    * Test of {@link DevonNamingConventionClassExtendsClassDaoCheck}
    */
   @Test
-  public void testNoIssueCaseThree() {
+  public void testNoIssueCaseFour() {
 
     JavaCheckVerifier.verifyNoIssue(
         "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassDaoCase4Check.java",
@@ -45,7 +45,7 @@ public class DevonNamingConventionClassExtendsClassDaoCheckTest {
    * Test of {@link DevonNamingConventionClassExtendsClassDaoCheck}
    */
   @Test
-  public void testCaseOne() {
+  public void testIssueCaseTwo() {
 
     JavaCheckVerifier.verify("src/test/files/namingconvention/DevonNamingConventionClassExtendsClassDaoCase2Check.java",
         new DevonNamingConventionClassExtendsClassDaoCheck());

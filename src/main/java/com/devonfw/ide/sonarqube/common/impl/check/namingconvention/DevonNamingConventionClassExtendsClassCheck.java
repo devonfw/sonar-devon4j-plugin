@@ -1,10 +1,7 @@
 package com.devonfw.ide.sonarqube.common.impl.check.namingconvention;
 
-import java.util.LinkedHashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import org.sonar.java.model.ModifiersUtils;
@@ -17,14 +14,10 @@ import org.sonar.plugins.java.api.tree.Tree;
 import org.sonar.plugins.java.api.tree.TypeTree;
 
 /**
- * Abstract base class for naming convention checks of classes
+ * Abstract base class for naming convention checks of classes. This class only checks if the checked class has the same
+ * suffix as its superclass.
  */
 public abstract class DevonNamingConventionClassExtendsClassCheck implements JavaFileScanner {
-
-  /**
-   * If the currently checked class extends this class, rules apply
-   */
-  protected final String extendedSuperClass;
 
   /**
    * This needs to be the suffix of the checked class if it extends a certain other class.
@@ -32,49 +25,24 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
   protected final String classSuffixRegEx;
 
   /**
-   * Should the checked class be abstract or not?
-   */
-  protected final boolean isAbstract;
-
-  /**
    * Name of the checked class
    */
   protected String className;
 
   /**
-   * Interfaces implemented by the checked class
+   * Name of the superclass of the checked class
    */
-  protected List<String> interfacesToImplement;
+  protected String superClassName;
 
   /**
    *
    * The constructor.
    *
-   * @param extendedSuperClass See JavaDoc on variable declaration.
-   * @param classSuffixRegEx See JavaDoc on variable declaration.
-   * @param isAbstract See JavaDoc on variable declaration.
-   */
-  public DevonNamingConventionClassExtendsClassCheck(String extendedSuperClass, String classSuffixRegEx,
-      boolean isAbstract) {
-
-    this.extendedSuperClass = extendedSuperClass;
-    this.classSuffixRegEx = classSuffixRegEx;
-    this.isAbstract = isAbstract;
-  }
-
-  /**
-   *
-   * The constructor.
-   *
-   * @param extendedSuperClass See JavaDoc on variable declaration.
    * @param classSuffixRegEx See JavaDoc on variable declaration.
    */
-  public DevonNamingConventionClassExtendsClassCheck(String extendedSuperClass, String classSuffixRegEx) {
+  public DevonNamingConventionClassExtendsClassCheck(String classSuffixRegEx) {
 
-    this.extendedSuperClass = extendedSuperClass;
     this.classSuffixRegEx = classSuffixRegEx;
-    this.isAbstract = true; // Temporary Solution! There is no UC where a true value for isAbstract changes the flow of
-                            // this check.
   }
 
   /**
@@ -85,89 +53,27 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
   @Override
   public void scanFile(JavaFileScannerContext context) {
 
-    Logger logger = Logger.getLogger("logger");
-
-    CompilationUnitTree parsedTree = context.getTree();
-
-    List<Tree> types = parsedTree.types();
-    ClassTree tree = getTreeInstance(types);
-
+    ClassTree tree = getTreeInstance(context);
     this.className = tree.simpleName().name();
-    String superClassName;
-    Set<String> superInterfacesNames = new LinkedHashSet<>();
-
+    this.superClassName = getNameOfSuperClass(tree);
     Pattern pattern = Pattern.compile(this.classSuffixRegEx);
 
-    init();
-
-    List<TypeTree> superInterfaces = tree.superInterfaces();
-    logger.log(Level.INFO, "Is superInterfaces empty? " + superInterfaces.isEmpty());
-    if (superInterfaces == null)
-      return;
-
-    for (TypeTree typeTree : superInterfaces) {
-      superInterfacesNames.add(typeTree.toString());
-      logger.log(Level.INFO, "Name of implemented interface: " + typeTree.toString());
+    if (pattern.matcher(this.superClassName).matches() && !pattern.matcher(this.className).matches()) {
+      context.addIssueOnFile(this, "If a superclass has " + this.classSuffixRegEx
+          + " as suffix, then the subclass should also have " + this.classSuffixRegEx + " as suffix");
     }
-
-    TypeTree superClass = tree.superClass();
-    if (superClass == null) {
-      return;
-    }
-
-    superClassName = superClass.toString();
-
-    logger.log(Level.INFO, "Name of super class: " + superClassName);
-    logger.log(Level.INFO, "Name of class: " + this.className);
-    logger.log(Level.INFO, "Class Suffix: " + this.classSuffixRegEx);
-
-    if (superClassName.equals(this.extendedSuperClass)) {
-
-      if (!pattern.matcher(this.className).matches()) {
-        context.addIssueOnFile(this, "Classes inheriting from " + this.extendedSuperClass + " should have "
-            + this.classSuffixRegEx + " as suffix");
-        return;
-      }
-
-      // new rule
-      if (this.interfacesToImplement != null) {
-        boolean contains = superInterfacesNames.containsAll(this.interfacesToImplement);
-
-        if (!contains) {
-          context.addIssueOnFile(this, "Classes extending " + this.extendedSuperClass
-              + " should implement an interface with the same name except the suffix");
-          return;
-        }
-      }
-    } else if (pattern.matcher(superClassName).matches()) {
-
-      if (!pattern.matcher(this.className).matches()) {
-        context.addIssueOnFile(this, "If a superclass has " + this.classSuffixRegEx
-            + " as suffix, then the subclass should also have " + this.classSuffixRegEx + " as suffix");
-        return;
-
-      }
-    }
-
-    // new rule
-    if (!this.isAbstract) {
-      if (isAbstract(tree)) {
-        context.addIssueOnFile(this, "Classes inheriting from " + this.extendedSuperClass + " should not be abstract");
-        return;
-      }
-    }
-
   }
 
   /**
-   * Only needed for check on Impl classes. See {@link DevonNamingConventionClassExtendsClassImplCheck} for JavaDoc.
+   * Gets a tree instance from the current context.
+   *
+   * @param context Current context.
+   * @return Tree instance.
    */
-  protected void init() {
+  protected static ClassTree getTreeInstance(JavaFileScannerContext context) {
 
-    return;
-  }
-
-  private static ClassTree getTreeInstance(List<Tree> types) {
+    CompilationUnitTree parsedTree = context.getTree();
+    List<Tree> types = parsedTree.types();
 
     for (Tree tree : types) {
       if (tree instanceof ClassTree) {
@@ -177,7 +83,44 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
     return null;
   }
 
-  private static boolean isAbstract(ClassTree tree) {
+  /**
+   * Gets the name of the super class of the currently checked class.
+   *
+   * @param tree Tree currently being investigated.
+   * @return Name of the super class.
+   */
+  protected String getNameOfSuperClass(ClassTree tree) {
+
+    TypeTree superClass = tree.superClass();
+    if (superClass == null)
+      return null;
+    else
+      return tree.superClass().toString();
+  }
+
+  /**
+   * Gets the names of all the interfaces implemented by the currently checked class.
+   *
+   * @param tree Tree currently being investigated.
+   * @return Names of the implemented interfaces.
+   */
+  protected List<String> getSuperInterfacesNames(ClassTree tree) {
+
+    List<TypeTree> superInterfaces = tree.superInterfaces();
+    List<String> superInterfacesNames = new ArrayList<>();
+    for (TypeTree superInterface : superInterfaces) {
+      superInterfacesNames.add(superInterface.toString());
+    }
+    return superInterfacesNames;
+  }
+
+  /**
+   * Checks if the currently checked class is abstract or not.
+   *
+   * @param tree Tree currently being investigated.
+   * @return True or false.
+   */
+  protected static boolean isAbstract(ClassTree tree) {
 
     return ModifiersUtils.hasModifier(tree.modifiers(), Modifier.ABSTRACT);
   }

@@ -18,7 +18,7 @@ public class DevonNamingConventionClassExtendsClassEtoCheck extends DevonNamingC
    */
   public DevonNamingConventionClassExtendsClassEtoCheck() {
 
-    super("AbstractEto", ".*Eto");
+    super(".*Eto");
   }
 
 }

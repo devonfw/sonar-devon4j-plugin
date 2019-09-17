@@ -18,7 +18,7 @@ public class DevonNamingConventionInterfaceExtendsInterfaceDaoCheck
    */
   public DevonNamingConventionInterfaceExtendsInterfaceDaoCheck() {
 
-    super("Dao", ".*Dao");
+    super(".*Dao");
   }
 
 }

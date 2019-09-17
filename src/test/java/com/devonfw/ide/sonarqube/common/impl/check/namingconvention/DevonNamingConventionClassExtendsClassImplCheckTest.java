@@ -23,7 +23,7 @@ public class DevonNamingConventionClassExtendsClassImplCheckTest {
    * Test of {@link DevonNamingConventionClassExtendsClassImplCheck}
    */
   @Test
-  public void testNoIssueCaseTwo() {
+  public void testNoIssueCaseThree() {
 
     JavaCheckVerifier.verifyNoIssue(
         "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassImplCase3Check.java",
@@ -34,7 +34,7 @@ public class DevonNamingConventionClassExtendsClassImplCheckTest {
    * Test of {@link DevonNamingConventionClassExtendsClassImplCheck}
    */
   @Test
-  public void testNoIssueCaseThree() {
+  public void testNoIssueCaseFour() {
 
     JavaCheckVerifier.verifyNoIssue(
         "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassImplCase4Check.java",
@@ -45,7 +45,7 @@ public class DevonNamingConventionClassExtendsClassImplCheckTest {
    * Test of {@link DevonNamingConventionClassExtendsClassImplCheck}
    */
   @Test
-  public void testNoIssueCaseFour() {
+  public void testNoIssueCaseFive() {
 
     JavaCheckVerifier.verifyNoIssue(
         "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassImplCase5Check.java",
@@ -56,7 +56,7 @@ public class DevonNamingConventionClassExtendsClassImplCheckTest {
    * Test of {@link DevonNamingConventionClassExtendsClassImplCheck}
    */
   @Test
-  public void testIssueOnFileCaseOne() {
+  public void testIssueCaseTwo() {
 
     JavaCheckVerifier.verify(
         "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassImplCase2Check.java",
@@ -67,18 +67,7 @@ public class DevonNamingConventionClassExtendsClassImplCheckTest {
    * Test of {@link DevonNamingConventionClassExtendsClassImplCheck}
    */
   @Test
-  public void testIssueOnFileCaseTwo() {
-
-    JavaCheckVerifier.verify(
-        "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassImplCase6Check.java",
-        new DevonNamingConventionClassExtendsClassImplCheck());
-  }
-
-  /**
-   * Test of {@link DevonNamingConventionClassExtendsClassImplCheck}
-   */
-  @Test
-  public void testIssueOnFileCaseThree() {
+  public void testIssueCaseSeven() {
 
     JavaCheckVerifier.verify(
         "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassImplCase7Check.java",

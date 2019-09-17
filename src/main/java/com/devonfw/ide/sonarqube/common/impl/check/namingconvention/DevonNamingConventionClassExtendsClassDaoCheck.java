@@ -2,6 +2,7 @@ package com.devonfw.ide.sonarqube.common.impl.check.namingconvention;
 
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.plugins.java.api.JavaFileScannerContext;
 
 /**
  * {@link DevonNamingConventionClassExtendsClassCheck} verifying that non-abstract classes extending AbstractDao are
@@ -18,6 +19,18 @@ public class DevonNamingConventionClassExtendsClassDaoCheck extends DevonNamingC
    */
   public DevonNamingConventionClassExtendsClassDaoCheck() {
 
-    super("AbstractDao", ".*DaoImpl", false);
+    super(".*Dao");
+    // super(null) ???
   }
+
+  // super("AbstractDao", ".*DaoImpl"); <---- original super constructor
+
+  /**
+   * Classes of type DaoImpl must not be abstract.
+   */
+  @Override
+  public void scanFile(JavaFileScannerContext context) {
+
+  }
+
 }
