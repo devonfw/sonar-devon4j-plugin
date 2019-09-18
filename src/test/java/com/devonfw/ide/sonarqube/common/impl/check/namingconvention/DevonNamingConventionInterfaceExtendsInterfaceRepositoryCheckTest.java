@@ -12,7 +12,7 @@ public class DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheckTest {
    * Test of {@link DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck}
    */
   @Test
-  public void testNoIssueOne() {
+  public void testNoIssueCaseOne() {
 
     JavaCheckVerifier.verifyNoIssue(
         "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase1Check.java",
@@ -23,7 +23,7 @@ public class DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheckTest {
    * Test of {@link DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck}
    */
   @Test
-  public void testNoIssueTwo() {
+  public void testNoIssueCaseTwo() {
 
     JavaCheckVerifier.verifyNoIssue(
         "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase2Check.java",
@@ -34,7 +34,7 @@ public class DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheckTest {
    * Test of {@link DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck}
    */
   @Test
-  public void testNoIssueThree() {
+  public void testNoIssueCaseThree() {
 
     JavaCheckVerifier.verifyNoIssue(
         "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase3Check.java",
@@ -45,7 +45,7 @@ public class DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheckTest {
    * Test of {@link DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck}
    */
   @Test
-  public void testIssueOneOnFile() {
+  public void testIssueCaseFour() {
 
     JavaCheckVerifier.verify(
         "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase4Check.java",
@@ -56,7 +56,7 @@ public class DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheckTest {
    * Test of {@link DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck}
    */
   @Test
-  public void testIssueTwoOnFile() {
+  public void testIssueCaseFive() {
 
     JavaCheckVerifier.verify(
         "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase5Check.java",
@@ -67,7 +67,7 @@ public class DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheckTest {
    * Test of {@link DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck}
    */
   @Test
-  public void TestNoIssueFour() {
+  public void TestNoIssueCaseSix() {
 
     JavaCheckVerifier.verifyNoIssue(
         "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase6Check.java",

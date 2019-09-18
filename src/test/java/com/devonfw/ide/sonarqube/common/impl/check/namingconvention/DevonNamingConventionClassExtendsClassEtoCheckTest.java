@@ -23,7 +23,7 @@ public class DevonNamingConventionClassExtendsClassEtoCheckTest {
    * Test of {@link DevonNamingConventionClassExtendsClassEtoCheck}
    */
   @Test
-  public void testNoIssueCaseTwo() {
+  public void testNoIssueCaseThree() {
 
     JavaCheckVerifier.verifyNoIssue(
         "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassEtoCase3Check.java",
@@ -34,7 +34,7 @@ public class DevonNamingConventionClassExtendsClassEtoCheckTest {
    * Test of {@link DevonNamingConventionClassExtendsClassEtoCheck}
    */
   @Test
-  public void testIssueOnFileCaseOne() {
+  public void testIssueCaseTwo() {
 
     JavaCheckVerifier.verify("src/test/files/namingconvention/DevonNamingConventionClassExtendsClassEtoCase2Check.java",
         new DevonNamingConventionClassExtendsClassEtoCheck());
@@ -44,7 +44,7 @@ public class DevonNamingConventionClassExtendsClassEtoCheckTest {
    * Test of {@link DevonNamingConventionClassExtendsClassEtoCheck}
    */
   @Test
-  public void testIssueOnFileCaseTwo() {
+  public void testIssueCaseFour() {
 
     JavaCheckVerifier.verify("src/test/files/namingconvention/DevonNamingConventionClassExtendsClassEtoCase4Check.java",
         new DevonNamingConventionClassExtendsClassEtoCheck());
@@ -54,7 +54,7 @@ public class DevonNamingConventionClassExtendsClassEtoCheckTest {
   *
   */
   @Test
-  public void testCaseFive() {
+  public void testIssueCaseFive() {
 
     JavaCheckVerifier.verify("src/test/files/namingconvention/DevonNamingConventionClassExtendsClassEtoCase5Check.java",
         new DevonNamingConventionClassExtendsClassEtoCheck());

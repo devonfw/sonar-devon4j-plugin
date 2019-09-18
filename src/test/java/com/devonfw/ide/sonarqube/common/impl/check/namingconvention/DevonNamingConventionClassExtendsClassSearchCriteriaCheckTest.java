@@ -23,7 +23,7 @@ public class DevonNamingConventionClassExtendsClassSearchCriteriaCheckTest {
    * Test of {@link DevonNamingConventionClassExtendsClassSearchCriteriaToCheck}
    */
   @Test
-  public void testNoIssueCaseTwo() {
+  public void testNoIssueCaseThree() {
 
     JavaCheckVerifier.verifyNoIssue(
         "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassSearchCriteriaToCase3Check.java",
@@ -34,7 +34,7 @@ public class DevonNamingConventionClassExtendsClassSearchCriteriaCheckTest {
    * Test of {@link DevonNamingConventionClassExtendsClassSearchCriteriaToCheck}
    */
   @Test
-  public void testIssueOnFileCaseOne() {
+  public void testIssueCaseTwo() {
 
     JavaCheckVerifier.verify(
         "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassSearchCriteriaToCase2Check.java",
@@ -45,7 +45,7 @@ public class DevonNamingConventionClassExtendsClassSearchCriteriaCheckTest {
    * Test of {@link DevonNamingConventionClassExtendsClassSearchCriteriaToCheck}
    */
   @Test
-  public void testIssueOnFileCaseTwo() {
+  public void testIssueCaseFour() {
 
     JavaCheckVerifier.verify(
         "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassSearchCriteriaToCase4Check.java",

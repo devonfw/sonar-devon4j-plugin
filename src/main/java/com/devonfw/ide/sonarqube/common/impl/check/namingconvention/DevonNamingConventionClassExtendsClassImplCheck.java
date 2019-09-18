@@ -46,36 +46,27 @@ public class DevonNamingConventionClassExtendsClassImplCheck extends DevonNaming
     this.superClassName = getNameOfSuperClass(tree);
     this.superInterfacesNames = getSuperInterfacesNames(tree);
 
-    Pattern classNameRegEx = Pattern.compile(this.classSuffixRegEx);
-    Pattern superClassRegEx = Pattern.compile("AbstractUc");
     Pattern superInterfaceRegEx = Pattern.compile(tree.simpleName().name().replaceAll("Impl$", ""));
     logger.log(Level.INFO, "superInterfaceRegEx: " + superInterfaceRegEx.toString());
 
-    if (!isAnUcImplClass(classNameRegEx) && !isExtendingAbstractUc(superClassRegEx))
+    if (!isUcImplClass() && !isExtendingAbstractUc())
       return;
-    else if (isAnUcImplClass(classNameRegEx) && !isAbstract(tree) && isExtendingAbstractUc(superClassRegEx)
+    else if (isUcImplClass() && !isAbstract(tree) && isExtendingAbstractUc()
         && isImplementingCorrectInterface(superInterfaceRegEx))
       return;
     else
       context.addIssueOnFile(this, "Non-abstract classes inheriting from AbstractUc must begin with Uc, "
           + "end with Impl and implement an interface with the same name except the suffix Impl.");
-
-    // if (isAnUcImplClass(classNameRegEx) && !isAbstract(tree) && isExtendingAbstractUc(superClassRegEx)
-    // && isImplementingCorrectInterface(superInterfaceRegEx))
-    // return;
-    // else
-    // context.addIssueOnFile(this, "Non-abstract classes inheriting from AbstractUc must begin with Uc, "
-    // + "end with Impl and implement an interface with the same name except the suffix Impl.");
-
   }
 
   /**
    * Checks if the checked class is inheriting from AbstractUc.
    *
-   * @param superClassRegEx regular expression matched with the name of the super class.
    * @return True or false.
    */
-  protected boolean isExtendingAbstractUc(Pattern superClassRegEx) {
+  protected boolean isExtendingAbstractUc() {
+
+    Pattern superClassRegEx = Pattern.compile("AbstractUc");
 
     if (superClassRegEx.matcher(this.superClassName).matches())
       return true;
@@ -86,7 +77,7 @@ public class DevonNamingConventionClassExtendsClassImplCheck extends DevonNaming
   /**
    * Checks if the checked class is implementing the needed interface for Impl classes.
    *
-   * @param superInterfaceRegEx regular expression matched with the names of the implemented interfaces.
+   * @param superInterfaceRegEx Regular expression matched with the names of the implemented interfaces.
    * @return True or false.
    */
   protected boolean isImplementingCorrectInterface(Pattern superInterfaceRegEx) {
@@ -103,10 +94,11 @@ public class DevonNamingConventionClassExtendsClassImplCheck extends DevonNaming
   /**
    * Checks if the checked class is a Uc.*Impl class.
    *
-   * @param classNameRegEx regular expression matched with the name of the checked class.
    * @return True or false.
    */
-  protected boolean isAnUcImplClass(Pattern classNameRegEx) {
+  protected boolean isUcImplClass() {
+
+    Pattern classNameRegEx = Pattern.compile(this.classSuffixRegEx);
 
     if (classNameRegEx.matcher(this.className).matches())
       return true;

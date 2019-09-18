@@ -50,4 +50,25 @@ public class DevonNamingConventionClassExtendsClassDaoCheckTest {
     JavaCheckVerifier.verify("src/test/files/namingconvention/DevonNamingConventionClassExtendsClassDaoCase2Check.java",
         new DevonNamingConventionClassExtendsClassDaoCheck());
   }
+
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassDaoCheck}
+   */
+  @Test
+  public void testIssueCaseFive() {
+
+    JavaCheckVerifier.verify("src/test/files/namingconvention/DevonNamingConventionClassExtendsClassDaoCase5Check.java",
+        new DevonNamingConventionClassExtendsClassDaoCheck());
+  }
+
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassDaoCheck}
+   */
+  @Test
+  public void testIssueCaseSix() {
+
+    JavaCheckVerifier.verify("src/test/files/namingconvention/DevonNamingConventionClassExtendsClassDaoCase6Check.java",
+        new DevonNamingConventionClassExtendsClassDaoCheck());
+  }
+
 }
