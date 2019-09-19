@@ -4,6 +4,8 @@ import com.devonfw.application.testapplication.testcomponent.logic.api.TestCompo
 
 public class TestComponentImpl implements TestComponent {
 
+    public int testInteger;
+
     public void implementedMethod() {
 
     }

@@ -12,7 +12,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyHibe
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyJpaCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyMysemaCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyObjectsCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyPermissionCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.DevonUcImplSecurityConstraintCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyTransactionalCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureComponentDeclarationCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureComponentDependencyCheck;
@@ -97,7 +97,7 @@ public class DevonSonarRegistrar implements CheckRegistrar {
     checks.add(DevonArchitecture3rdPartyHibernateCheck.class); // E4
     checks.add(DevonArchitecture3rdPartyObjectsCheck.class); // E5
     checks.add(DevonArchitecture3rdPartyDatatypeMappingsCheck.class); // E6
-    checks.add(DevonArchitecture3rdPartyPermissionCheck.class); // E7
+    checks.add(DevonUcImplSecurityConstraintCheck.class); // E7
     return checks;
   }
 
