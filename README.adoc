@@ -91,7 +91,6 @@ image:DevonScopeRules.png["Devon Architecture Rules",link=DevonScopeRules.png]
 Additionally, there is a generic rule that checks the devonfw https://github.com/devonfw/devon4j/wiki/coding-conventions#packages[packaging conventions]:
 
 * P1. https://github.com/devonfw/sonar-devon-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/DevonArchitecturePackageCheck.java[DevonArchitecturePackageCheck]
-[DevonArchitecture3rdPartyTransactionalCheck]
 
 === 3rd Party Rules
 
