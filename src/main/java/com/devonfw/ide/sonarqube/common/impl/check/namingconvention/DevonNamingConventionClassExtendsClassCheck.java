@@ -22,7 +22,7 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
   /**
    * This needs to be the suffix of the checked class if it extends a certain other class.
    */
-  protected final String classSuffixRegEx;
+  protected final Pattern classSuffixRegEx;
 
   /**
    * Name of the checked class
@@ -38,11 +38,11 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
    *
    * The constructor.
    *
-   * @param classSuffixRegEx See JavaDoc on variable declaration.
+   * @param classSuffix See JavaDoc on variable declaration.
    */
-  public DevonNamingConventionClassExtendsClassCheck(String classSuffixRegEx) {
+  public DevonNamingConventionClassExtendsClassCheck(String classSuffix) {
 
-    this.classSuffixRegEx = classSuffixRegEx;
+    this.classSuffixRegEx = Pattern.compile(classSuffix);
   }
 
   /**
@@ -56,9 +56,9 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
     ClassTree tree = getTreeInstance(context);
     this.className = tree.simpleName().name();
     this.superClassName = getNameOfSuperClass(tree);
-    Pattern pattern = Pattern.compile(this.classSuffixRegEx);
 
-    if (pattern.matcher(this.superClassName).matches() && !pattern.matcher(this.className).matches()) {
+    if (this.classSuffixRegEx.matcher(this.superClassName).matches()
+        && !this.classSuffixRegEx.matcher(this.className).matches()) {
       context.addIssueOnFile(this, "If a superclass has " + this.classSuffixRegEx
           + " as suffix, then the subclass should also have " + this.classSuffixRegEx + " as suffix");
     }
@@ -92,10 +92,12 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
   protected String getNameOfSuperClass(ClassTree tree) {
 
     TypeTree superClass = tree.superClass();
-    if (superClass == null)
+
+    if (superClass == null) {
       return null;
-    else
+    } else {
       return tree.superClass().toString();
+    }
   }
 
   /**
@@ -108,9 +110,11 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
 
     List<TypeTree> superInterfaces = tree.superInterfaces();
     List<String> superInterfacesNames = new ArrayList<>();
+
     for (TypeTree superInterface : superInterfaces) {
       superInterfacesNames.add(superInterface.toString());
     }
+
     return superInterfacesNames;
   }
 

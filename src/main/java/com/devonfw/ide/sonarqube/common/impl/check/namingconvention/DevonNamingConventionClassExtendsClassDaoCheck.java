@@ -1,7 +1,5 @@
 package com.devonfw.ide.sonarqube.common.impl.check.namingconvention;
 
-import java.util.regex.Pattern;
-
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
@@ -17,12 +15,14 @@ import org.sonar.plugins.java.api.tree.ClassTree;
     priority = Priority.CRITICAL, tags = { "architecture-violation" })
 public class DevonNamingConventionClassExtendsClassDaoCheck extends DevonNamingConventionClassExtendsClassCheck {
 
+  private static final String DESIRED_SUPERCLASS_NAME = "AbstractDao";
+
   /**
-   * Calls the constructor of its base class with the parameters needed for a check on DaoImpl classes.
+   * Calls super constructor to compile the pattern classSuffiRegEx
    */
   public DevonNamingConventionClassExtendsClassDaoCheck() {
 
-    super(".*Dao");
+    super(".*DaoImpl");
   }
 
   /**
@@ -37,12 +37,13 @@ public class DevonNamingConventionClassExtendsClassDaoCheck extends DevonNamingC
     this.className = tree.simpleName().name();
     this.superClassName = tree.superClass().toString();
 
-    if (!isDaoImplClass() && !isExtendingAbstractDao())
+    if (!isDaoImplClass() && !isExtendingAbstractDao()) {
       return;
-    else if (isExtendingAbstractDao() && isDaoImplClass() && !isAbstract(tree))
+    } else if (isExtendingAbstractDao() && isDaoImplClass() && !isAbstract(tree)) {
       return;
-    else
+    } else {
       context.addIssueOnFile(this, "Classes of type .*DaoImpl must not be abstract and extend AbstractDao.");
+    }
   }
 
   /**
@@ -52,12 +53,11 @@ public class DevonNamingConventionClassExtendsClassDaoCheck extends DevonNamingC
    */
   protected boolean isExtendingAbstractDao() {
 
-    Pattern superClassRegEx = Pattern.compile("AbstractDao");
-
-    if (superClassRegEx.matcher(this.superClassName).matches())
+    if (DESIRED_SUPERCLASS_NAME.equals(this.superClassName)) {
       return true;
-    else
+    } else {
       return false;
+    }
   }
 
   /**
@@ -67,12 +67,11 @@ public class DevonNamingConventionClassExtendsClassDaoCheck extends DevonNamingC
    */
   protected boolean isDaoImplClass() {
 
-    Pattern classNameRegEx = Pattern.compile(".*DaoImpl");
-
-    if (classNameRegEx.matcher(this.className).matches())
+    if (this.classSuffixRegEx.matcher(this.className).matches()) {
       return true;
-    else
+    } else {
       return false;
+    }
   }
 
 }

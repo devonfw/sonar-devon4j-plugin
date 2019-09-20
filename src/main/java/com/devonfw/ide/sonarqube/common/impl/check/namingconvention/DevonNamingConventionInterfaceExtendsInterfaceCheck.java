@@ -20,7 +20,7 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
   /**
    * This needs to be the suffix of the checked interface if it extends certain other interfaces.
    */
-  protected final String extendingInterfaceSuffix;
+  protected final Pattern extendingInterfaceSuffixRegEx;
 
   /**
    * The constructor.
@@ -29,7 +29,7 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
    */
   public DevonNamingConventionInterfaceExtendsInterfaceCheck(String extendingInterfaceSuffix) {
 
-    this.extendingInterfaceSuffix = extendingInterfaceSuffix;
+    this.extendingInterfaceSuffixRegEx = Pattern.compile(extendingInterfaceSuffix);
   }
 
   /**
@@ -43,11 +43,12 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
     ClassTree tree = getTreeInstance(context);
     String interfaceName = tree.simpleName().name();
     Set<String> superInterfacesNames = getSuperInterfacesNames(tree);
-    Pattern pattern = Pattern.compile(this.extendingInterfaceSuffix);
 
-    if (doesSuperInterfaceHaveRegEx(superInterfacesNames, pattern) && !doesInterfaceHaveRegEx(interfaceName, pattern)) {
-      context.addIssueOnFile(this, "If a superinterface has " + this.extendingInterfaceSuffix
-          + " as suffix, then the subinterface should also have " + this.extendingInterfaceSuffix + " as suffix");
+    if (doesSuperInterfaceHaveRegEx(superInterfacesNames) && !doesInterfaceHaveRegEx(interfaceName)) {
+      context.addIssueOnFile(this,
+          "If a superinterface has " + this.extendingInterfaceSuffixRegEx.toString()
+              + " as suffix, then the subinterface should also have " + this.extendingInterfaceSuffixRegEx.toString()
+              + " as suffix");
       return;
     }
 
@@ -76,6 +77,7 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
   protected Set<String> getSuperInterfacesNames(ClassTree tree) {
 
     Set<String> superInterfacesNames = new LinkedHashSet<>();
+
     for (TypeTree typeTree : tree.superInterfaces()) {
       superInterfacesNames.add(typeTree.toString());
     }
@@ -86,28 +88,27 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
    * Checks if the name of the checked interface matches the reg ex pattern.
    *
    * @param interfaceName Name of the checked interface.
-   * @param pattern Regular expression matched with the name of the checked interface.
    * @return True or false.
    */
-  protected boolean doesInterfaceHaveRegEx(String interfaceName, Pattern pattern) {
+  protected boolean doesInterfaceHaveRegEx(String interfaceName) {
 
-    if (pattern.matcher(interfaceName).matches())
+    if (this.extendingInterfaceSuffixRegEx.matcher(interfaceName).matches()) {
       return true;
-    else
+    } else {
       return false;
+    }
   }
 
   /**
    * Checks if one of the super interfaces matches the reg ex pattern.
    *
    * @param superInterfaces List of super interfaces of the checked interface.
-   * @param pattern Regular expression matched with the names of the interfaces.
    * @return True or false.
    */
-  protected boolean doesSuperInterfaceHaveRegEx(Set<String> superInterfaces, Pattern pattern) {
+  protected boolean doesSuperInterfaceHaveRegEx(Set<String> superInterfaces) {
 
     for (String superInterface : superInterfaces) {
-      if (pattern.matcher(superInterface).matches()) {
+      if (this.extendingInterfaceSuffixRegEx.matcher(superInterface).matches()) {
         return true;
       }
     }

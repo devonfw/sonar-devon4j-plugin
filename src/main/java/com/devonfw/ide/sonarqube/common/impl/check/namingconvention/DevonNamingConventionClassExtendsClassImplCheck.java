@@ -1,9 +1,6 @@
 package com.devonfw.ide.sonarqube.common.impl.check.namingconvention;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Pattern;
 
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
@@ -21,10 +18,12 @@ import org.sonar.plugins.java.api.tree.ClassTree;
     priority = Priority.CRITICAL, tags = { "architecture-violation" })
 public class DevonNamingConventionClassExtendsClassImplCheck extends DevonNamingConventionClassExtendsClassCheck {
 
+  private static final String DESIRED_SUPERCLASS_NAME = "AbstractUc";
+
   private List<String> superInterfacesNames;
 
   /**
-   * Calls super constructor to set final field classSuffixRegEx with Uc.*Impl.
+   * Calls super constructor to compile the pattern classSuffixRegEx with Uc.*Impl.
    */
   public DevonNamingConventionClassExtendsClassImplCheck() {
 
@@ -39,24 +38,21 @@ public class DevonNamingConventionClassExtendsClassImplCheck extends DevonNaming
   @Override
   public void scanFile(JavaFileScannerContext context) {
 
-    Logger logger = Logger.getLogger("logger");
-
     ClassTree tree = getTreeInstance(context);
     this.className = tree.simpleName().name();
     this.superClassName = getNameOfSuperClass(tree);
     this.superInterfacesNames = getSuperInterfacesNames(tree);
+    String desiredSuperInterfaceName = tree.simpleName().name().replaceAll("Impl$", "");
 
-    Pattern superInterfaceRegEx = Pattern.compile(tree.simpleName().name().replaceAll("Impl$", ""));
-    logger.log(Level.INFO, "superInterfaceRegEx: " + superInterfaceRegEx.toString());
-
-    if (!isUcImplClass() && !isExtendingAbstractUc())
+    if (!isUcImplClass() && !isExtendingAbstractUc()) {
       return;
-    else if (isUcImplClass() && !isAbstract(tree) && isExtendingAbstractUc()
-        && isImplementingCorrectInterface(superInterfaceRegEx))
+    } else if (isUcImplClass() && !isAbstract(tree) && isExtendingAbstractUc()
+        && isImplementingCorrectInterface(desiredSuperInterfaceName)) {
       return;
-    else
-      context.addIssueOnFile(this, "Non-abstract classes inheriting from AbstractUc must begin with Uc, "
+    } else {
+      context.addIssueOnFile(this, "Non-abstract use-case classes must begin with Uc, "
           + "end with Impl and implement an interface with the same name except the suffix Impl.");
+    }
   }
 
   /**
@@ -66,27 +62,27 @@ public class DevonNamingConventionClassExtendsClassImplCheck extends DevonNaming
    */
   protected boolean isExtendingAbstractUc() {
 
-    Pattern superClassRegEx = Pattern.compile("AbstractUc");
-
-    if (superClassRegEx.matcher(this.superClassName).matches())
+    if (DESIRED_SUPERCLASS_NAME.equals(this.superClassName)) {
       return true;
-    else
+    } else {
       return false;
+    }
   }
 
   /**
    * Checks if the checked class is implementing the needed interface for Impl classes.
    *
-   * @param superInterfaceRegEx Regular expression matched with the names of the implemented interfaces.
+   * @param superInterface Regular expression matched with the names of the implemented interfaces.
    * @return True or false.
    */
-  protected boolean isImplementingCorrectInterface(Pattern superInterfaceRegEx) {
+  protected boolean isImplementingCorrectInterface(String superInterface) {
 
     for (String name : this.superInterfacesNames) {
-      if (superInterfaceRegEx.matcher(name).matches())
+      if (superInterface.equals(name)) {
         return true;
-      else
+      } else {
         return false;
+      }
     }
     return false;
   }
@@ -98,12 +94,11 @@ public class DevonNamingConventionClassExtendsClassImplCheck extends DevonNaming
    */
   protected boolean isUcImplClass() {
 
-    Pattern classNameRegEx = Pattern.compile(this.classSuffixRegEx);
-
-    if (classNameRegEx.matcher(this.className).matches())
+    if (this.classSuffixRegEx.matcher(this.className).matches()) {
       return true;
-    else
+    } else {
       return false;
+    }
   }
 
 }
