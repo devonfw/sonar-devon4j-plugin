@@ -1,8 +1,10 @@
 package com.devonfw.ide.sonarqube.common.impl.check;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
@@ -12,7 +14,9 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.ClassTree;
 import org.sonar.plugins.java.api.tree.CompilationUnitTree;
+import org.sonar.plugins.java.api.tree.MethodTree;
 import org.sonar.plugins.java.api.tree.Tree;
+import org.sonar.plugins.java.api.tree.TypeTree;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
 
@@ -25,127 +29,39 @@ import com.devonfw.ide.sonarqube.common.api.JavaType;
     priority = Priority.CRITICAL, tags = { "architecture-violation" })
 public class DevonUcImplSecurityConstraintCheck extends DevonArchitecture3rdPartyCheck {
 
+  private static final Logger logger = Logger.getGlobal();
+
   /**
+   * Method called after parsing and semantic analysis has been done on file.
    *
+   * @param context Context of analysis containing the parsed tree.
    */
   @Override
-  protected String checkDependency(final JavaType source, final JavaType target) {
+  public void scanFile(JavaFileScannerContext context) {
 
-    Logger logger = Logger.getLogger("Logger");
-    // String packageName = source.getPackage();
+    ReflectionUtil ru = getRU();
+    ClassTree tree = getClassTree(context);
+    TypeTree ucInterface = getUcInterface(tree);
+    if (ucInterface == null)
+      return;
+    List<MethodTree> methodsOfTree = getMethodsOfTree(tree);
 
-    if (!source.isScopeImpl())
-      return null;
-
-    Class<?> clazz;
-
-    logger.log(Level.INFO, "Class name: " + source.toString());
-
-    try {
-      clazz = Class.forName(source.getSimpleName());
-    } catch (ClassNotFoundException e) {
-      logger.log(Level.INFO, "Class was not found.");
-    }
-
-    // logger.log(Level.INFO, target.toString());
-    //
-    // ReflectionUtil ru = getRU();
-    //
-    // logger.log(Level.INFO, "Source package: " + source.getPackage());
-    //
-    // Set<String> classNames = ru.findClassNames(source.getPackage(), true);
-    // logger.log(Level.INFO, "Is classNames set empty? " + classNames.isEmpty());
-    // Set<Class<?>> classes = ru.loadClasses(classNames);
-    // logger.log(Level.INFO, "Is classes set empty? " + classes.isEmpty());
-    //
-    // // logger.log(Level.INFO,
-    // // "Package: " + packageName + ", Class name: " + source.getSimpleName() + ", " + source.toString());
-    // // logger.log(Level.INFO, "classNames is empty: " + classNames.isEmpty());
-    //
-    // // Set<Class<?>> classes = ru.loadClasses(classNames);
-    //
-    // for (Class<?> clazz : classes) {
-    //
-    // logger.log(Level.INFO, "Current class: " + clazz.toString());
-    //
-    // Method[] declaredMethods = clazz.getDeclaredMethods();
-    //
-    // for (Method method : declaredMethods) {
-    //
-    // logger.log(Level.INFO, "Current method: " + method.toString());
-    //
-    // Method parentMethod = ru.getParentMethod(method);
-    //
-    // logger.log(Level.INFO, parentMethod.toString());
-    //
-    // if (parentMethod != null) {
-    //
-    // Class<?> declaringClass = parentMethod.getDeclaringClass();
-    //
-    // logger.log(Level.INFO, "Declaring class of current method: " + declaringClass.getName());
-    //
-    // if (declaringClass.isInterface() && method.getAnnotation(RolesAllowed.class) == null
-    // && method.getAnnotation(PermitAll.class) == null && method.getAnnotation(DenyAll.class) == null) {
-    //
-    // /*
-    // * try { method.getAnnotation(RolesAllowed.class); return null; } catch(NullPointerException ex) {} try {
-    // * method.getAnnotation(PermitAll.class); return null; } catch(NullPointerException ex) {} try {
-    // * method.getAnnotation(DenyAll.class); return null; } catch(NullPointerException ex) {}
-    // */
-    //
-    // return "Please annotate all methods implementing public API methods from Use-Case interfaces with "
-    // + "security constraints (@DenyAll, @PermitAll, @RolesAllowed)";
-    // } else {
-    // return null;
-    // }
-    // }
-    // }
-    // }
-
-    return null;
+    logger.log(Level.INFO, "Name of UcInterface: " + ucInterface.toString());
   }
 
   /**
-  *
-  */
-  // @Override
-  // public void scanFile(JavaFileScannerContext context) {
-  //
-  // Logger logger = Logger.getLogger("logger");
-  // Class<?> clazz;
-  //
-  // ClassTree tree = getClassTree(context);
-  // logger.log(Level.INFO, tree.simpleName().toString());
-  // try {
-  // clazz = Class.forName(tree.simpleName().name());
-  // } catch (ClassNotFoundException e) {
-  // return;
-  // }
-  //
-  // logger.log(Level.INFO, "Class name from clazz: " + clazz.getSimpleName());
-  // logger.log(Level.INFO, "Class name: " + tree.simpleName().name());
-  //
-  // // TypeTree superInterface = tree.superInterfaces().get(0);
-  // //
-  // // logger.log(Level.INFO, "Super interface name: " + superInterface.toString());
-  // //
-  // // for (Tree member : tree.members()) {
-  // // if (member.kind().equals(Kind.METHOD)) {
-  // // logger.log(Level.INFO, "Super interface kind toString: " + superInterface.kind().toString()
-  // // + "; member toString: " + member.toString());
-  // // if (superInterface.toString().contains(member.toString())) {
-  // //
-  // // }
-  // // }
-  // // }
-  //
-  // }
+   * @return returns a bean of ReflectionUtil
+   */
+  public ReflectionUtil getRU() {
+
+    return new ReflectionUtilImpl();
+  }
 
   /**
-   * @param context Context on analysis containing the parsed tree.
-   * @return Returns class tree.
+   * @param context Context of analysis containing the parsed tree.
+   * @return Class tree.
    */
-  public ClassTree getClassTree(JavaFileScannerContext context) {
+  protected ClassTree getClassTree(JavaFileScannerContext context) {
 
     CompilationUnitTree parsedTree = context.getTree();
     List<Tree> types = parsedTree.types();
@@ -157,31 +73,65 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitecture3rdPart
     }
 
     return null;
-
   }
 
   /**
-   * Method called after parsing and semantic analysis has been done on file.
+   * Returns the Uc interface implemented by the checked class, if there is one.
    *
-   * @param context Context of analysis containing the parsed tree.
+   * @param tree Tree currently being investigated.
+   * @return TypeTree instance of the Uc interface.
+   */
+  protected TypeTree getUcInterface(ClassTree tree) {
+
+    String className = tree.simpleName().name();
+    List<TypeTree> interfaces = tree.superInterfaces();
+    Pattern interfaceRegEx = Pattern.compile(className.replaceAll("Impl", ""));
+
+    if (interfaces.isEmpty()) {
+      return null;
+    }
+
+    for (TypeTree interfaceTree : interfaces) {
+      if (interfaceRegEx.matcher(interfaceTree.toString()).matches())
+        return interfaceTree;
+    }
+
+    return null;
+  }
+
+  /**
+   * Returns all methods of the given tree.
+   *
+   * @param tree Tree currently being investigated.
+   * @return List of MethodTree.
+   */
+  protected List<MethodTree> getMethodsOfTree(ClassTree tree) {
+
+    List<Tree> membersOfTree = tree.members();
+    List<MethodTree> methodsOfTree = new ArrayList<>();
+
+    for (Tree member : membersOfTree) {
+      if (member.is(Tree.Kind.METHOD)) {
+        MethodTree method = (MethodTree) member;
+        methodsOfTree.add((MethodTree) member);
+        logger.log(Level.INFO, "Method of class " + tree.simpleName().name() + ": " + method.simpleName().name());
+      }
+    }
+
+    return methodsOfTree;
+  }
+
+  /**
+   * Called in case of a dependency that is devonfw compliant.
+   *
+   * @param source the {@link JavaType} to analyze.
+   * @param target the {@link JavaType} used by the source type (as dependency).
+   * @return the message of an issue to create due to an undesired dependency or {@code null} if dependency is fine.
    */
   @Override
-  public void scanFile(JavaFileScannerContext context) {
+  protected String checkDependency(JavaType source, JavaType target) {
 
-    Logger logger = Logger.getLogger("logger");
-    ClassTree tree = getClassTree(context);
-
-    if (tree.superInterfaces().isEmpty())
-      return;
-
-  }
-
-  /**
-   * @return returns a bean of ReflectionUtil
-   */
-  public ReflectionUtil getRU() {
-
-    return new ReflectionUtilImpl();
+    return null;
   }
 
 }
