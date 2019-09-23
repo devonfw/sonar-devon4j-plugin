@@ -1,8 +1,5 @@
-/*
- * This is a header...
- */
-package com.devonfw.ide.sonarqube.batch.api;
+package com.devonfw.application.mtsj.bookingmanagement.dataaccess.api;
 
-class UcClassImpl extends AbstractUc implements UcClass  {
-
+public class BookingEntity extends ApplicationPersistenceEntity implements Booking {
+    
 }
