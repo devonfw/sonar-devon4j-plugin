@@ -35,39 +35,26 @@ public class DevonNamingConventionClassExtendsClassDaoCheck extends DevonNamingC
 
     ClassTree tree = getTreeInstance(context);
     this.className = tree.simpleName().name();
-    this.superClassName = tree.superClass().toString();
+    this.superClassName = getNameOfSuperClass(tree);
 
-    if (!isDaoImplClass() && !isExtendingAbstractDao()) {
+    if (!isClassNameMatching() && !isSuperClassMatching()) {
       return;
-    } else if (isExtendingAbstractDao() && isDaoImplClass() && !isAbstract(tree)) {
+    } else if (isSuperClassMatching() && isClassNameMatching() && !isAbstract(tree)) {
       return;
     } else {
-      context.addIssueOnFile(this, "Classes of type .*DaoImpl must not be abstract and extend AbstractDao.");
+      context.addIssueOnFile(this, "DAO implementations must not be abstract and extend AbstractDao.");
     }
   }
 
   /**
-   * Checks if the checked class is inheriting from AbstractDao
+   * Checks if the checked class is inheriting from a certain class.
    *
    * @return True or false.
    */
-  protected boolean isExtendingAbstractDao() {
+  @Override
+  protected boolean isSuperClassMatching() {
 
     if (DESIRED_SUPERCLASS_NAME.equals(this.superClassName)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  /**
-   * Checks if the checked class is of type .*DaoImpl.
-   *
-   * @return True or false.
-   */
-  protected boolean isDaoImplClass() {
-
-    if (this.classSuffixRegEx.matcher(this.className).matches()) {
       return true;
     } else {
       return false;

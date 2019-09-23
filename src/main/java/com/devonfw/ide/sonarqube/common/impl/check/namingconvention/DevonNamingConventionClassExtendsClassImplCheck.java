@@ -44,28 +44,14 @@ public class DevonNamingConventionClassExtendsClassImplCheck extends DevonNaming
     this.superInterfacesNames = getSuperInterfacesNames(tree);
     String desiredSuperInterfaceName = tree.simpleName().name().replaceAll("Impl$", "");
 
-    if (!isUcImplClass() && !isExtendingAbstractUc()) {
+    if (!isClassNameMatching() && !isSuperClassMatching()) {
       return;
-    } else if (isUcImplClass() && !isAbstract(tree) && isExtendingAbstractUc()
+    } else if (isClassNameMatching() && !isAbstract(tree) && isSuperClassMatching()
         && isImplementingCorrectInterface(desiredSuperInterfaceName)) {
       return;
     } else {
       context.addIssueOnFile(this, "Non-abstract use-case classes must begin with Uc, "
           + "end with Impl and implement an interface with the same name except the suffix Impl.");
-    }
-  }
-
-  /**
-   * Checks if the checked class is inheriting from AbstractUc.
-   *
-   * @return True or false.
-   */
-  protected boolean isExtendingAbstractUc() {
-
-    if (DESIRED_SUPERCLASS_NAME.equals(this.superClassName)) {
-      return true;
-    } else {
-      return false;
     }
   }
 
@@ -88,13 +74,14 @@ public class DevonNamingConventionClassExtendsClassImplCheck extends DevonNaming
   }
 
   /**
-   * Checks if the checked class is a Uc.*Impl class.
+   * Checks if the checked class is inheriting from a certain class.
    *
    * @return True or false.
    */
-  protected boolean isUcImplClass() {
+  @Override
+  protected boolean isSuperClassMatching() {
 
-    if (this.classSuffixRegEx.matcher(this.className).matches()) {
+    if (DESIRED_SUPERCLASS_NAME.equals(this.superClassName)) {
       return true;
     } else {
       return false;

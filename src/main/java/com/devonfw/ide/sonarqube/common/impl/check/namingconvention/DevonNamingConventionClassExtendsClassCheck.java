@@ -57,8 +57,7 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
     this.className = tree.simpleName().name();
     this.superClassName = getNameOfSuperClass(tree);
 
-    if (this.classSuffixRegEx.matcher(this.superClassName).matches()
-        && !this.classSuffixRegEx.matcher(this.className).matches()) {
+    if (isSuperClassMatching() && !isClassNameMatching()) {
       context.addIssueOnFile(this, "If a superclass has " + this.classSuffixRegEx
           + " as suffix, then the subclass should also have " + this.classSuffixRegEx + " as suffix");
     }
@@ -127,6 +126,34 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
   protected static boolean isAbstract(ClassTree tree) {
 
     return ModifiersUtils.hasModifier(tree.modifiers(), Modifier.ABSTRACT);
+  }
+
+  /**
+   * Checks if the currently checked class is of a certain type.
+   *
+   * @return True or false.
+   */
+  protected boolean isClassNameMatching() {
+
+    if (this.classSuffixRegEx.matcher(this.className).matches()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Checks if the checked class is inheriting from a certain class.
+   *
+   * @return True or false.
+   */
+  protected boolean isSuperClassMatching() {
+
+    if (this.classSuffixRegEx.matcher(this.superClassName).matches()) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }
