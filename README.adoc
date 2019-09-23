@@ -1,8 +1,8 @@
-= sonar-devon-plugin
+= sonar-devon4j-plugin
 
 image:https://img.shields.io/github/license/devonfw/sonar-devon-plugin.svg?label=License["Apache License, Version 2.0",link=https://github.com/devonfw/sonar-devon-plugin/blob/master/LICENSE]
 image:https://img.shields.io/maven-central/v/com.devonfw.tools/sonar-devon-plugin.svg?label=Maven%20Central["Maven Central",link=https://search.maven.org/search?q=g:com.devonfw.tools&a=sonar-devon-plugin]
-image:https://travis-ci.org/devonfw/sonar-devon-plugin.svg?branch=master["Build Status",link="https://travis-ci.org/devonfw/sonar-devon-plugin"]
+image:https://travis-ci.org/devonfw/sonar-devon-plugin.svg?branch=master["Build Status",link="https://travis-ci.com/devonfw/sonar-devon-plugin"]
 
 Plugin for https://sonarqube.org[SonarQube] to validate https://github.com/devonfw-wiki/devon4j/wiki/coding-conventions#packages[devonfw architecture].
 
@@ -11,11 +11,11 @@ Plugin for https://sonarqube.org[SonarQube] to validate https://github.com/devon
 With http://devonfw.com[devonfw] you can build business applications very efficiently following elaborated https://github.com/devonfw/devon4j/wiki[guidelines and best practices].
 This includes a profound https://github.com/devonfw/devon4j/wiki/architecture[architecture blueprint] that is mapped to the code via clear https://github.com/devonfw/devon4j/wiki/coding-conventions#packages[packaging conventions].
 
-This `sonar-devon-plugin` provides a plugin extending https://sonarqube.org[SonarQube] with the ability to validate your code according to the devonfw architecture.
+This `sonar-devon4j-plugin` provides a plugin extending https://sonarqube.org[SonarQube] with the ability to validate your Java code according to the devonfw architecture.
 
 == Installation
 
-If you have https://sonarqube.org[SonarQube] installed, you only need to https://repo.maven.apache.org/maven2/com/devonfw/tools/sonar-devon-plugin/[download] and copy the latest version of this `sonar-devon-plugin` into the `extensions/plugins` folder of your SonarQube installation.
+If you have https://sonarqube.org[SonarQube] installed, you only need to https://repo.maven.apache.org/maven2/com/devonfw/tools/sonar-devon-plugin/[download] and copy the latest version of this `sonar-devon4j-plugin` into the `extensions/plugins` folder of your SonarQube installation.
 Further you need to import the devonfw quality profiles (or activate all the rules of this plugin in your quality profile).
 For further details read the https://github.com/devonfw/sonar-devon-plugin/wiki/guide-sonar-qube-setup[SonarQube setup guide]
 

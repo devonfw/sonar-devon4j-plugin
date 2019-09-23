@@ -1,12 +1,12 @@
-= Changelog of sonar-devon-plugin
+= Changelog of sonar-devon4j-plugin
 
-This file documents all notable changes to https://github.com/devonfw/sonar-devon-plugin[sonar-devon-plugin].
+This file documents all notable changes to https://github.com/devonfw/sonar-devon-plugin[sonar-devon4j-plugin].
 
 == 3.2.0
 
 This version marks the second official release. Next to the publication of this plugin on the SonarQube Marketplace, multiple new rules were added:
 
-* Checks for adherence to the Devon naming convention
+* Checks for adherence to the devonfw naming convention
 * Check for the correct mapping of of custom datatypes
 * Check for security constraint annotations on use-case implementation methods
 
@@ -20,9 +20,9 @@ Changes for this release can be found in https://github.com/devonfw/sonar-devon-
 
 == 3.0.0
 
-This is the first official release. In http://devonfw.com[devon] all released artifacts share the same version number.
+This is the first official release. In http://devonfw.com[devonfw] all released artifacts share the same version number.
 This allows to easily see which artifacts belong together and are guaranteed to be compatible. As this plugin was later
-added to devon, it started with the devon version for that moment in time what was 3.0.0.
+added to devonfw, it started with the devonfw version for that moment in time what was 3.0.0.
 
 Changes for this release can be found in https://github.com/devonfw/sonar-devon-plugin/milestone/1?closed=1[milestone 3.0.0].
 
