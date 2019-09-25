@@ -19,8 +19,10 @@ public class DevonArchitectureComponentDependencyCheck extends DevonArchitecture
   @Override
   protected String targetDependencyNotAllowed(Component sourceComponent, String targetComponentName) {
 
-    return "Access from component '" + sourceComponent.getName() + "' to '" + targetComponentName
-        + "' is not allowed. Only the following components are allowed dependencies: "
+    String sourceComponentName = sourceComponent.getName();
+
+    return "Access from component '" + sourceComponentName + "' to '" + targetComponentName + "' is not allowed. From '"
+        + sourceComponentName + "', only dependencies to the following components are allowed: "
         + sourceComponent.allDependencies() + "";
   }
 
