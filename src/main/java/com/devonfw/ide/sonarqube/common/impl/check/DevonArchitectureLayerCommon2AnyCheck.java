@@ -17,8 +17,8 @@ public class DevonArchitectureLayerCommon2AnyCheck extends DevonArchitectureChec
   protected String checkDependency(JavaType source, JavaType target) {
 
     if (source.isLayerCommon() && !target.isLayerCommon()) {
-      return "Code from common layer ('" + source.toString() + "') shall not depend on any other layer ('"
-          + target.toString() + "').";
+      return "Code from common layer shall not depend on any other layer. ('" + source.getComponent() + "."
+          + source.getLayer() + "' is dependent on '" + target.getComponent() + "." + target.getLayer() + "')";
     }
     return null;
   }

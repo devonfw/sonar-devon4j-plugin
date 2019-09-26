@@ -17,8 +17,9 @@ public class DevonArchitectureScopeApi2BaseCheck extends DevonArchitectureCheck 
   protected String checkDependency(JavaType source, JavaType target) {
 
     if (source.isScopeApi() && target.isScopeBase() && isSameComponentPart(source, target)) {
-      return "Code from api scope ('" + source.toString() + "') shall not depend on base scope ('" + target.toString()
-          + "').";
+      return "Code from api scope shall not depend on base scope. ('" + source.getComponent() + "." + source.getLayer()
+          + "." + source.getScope() + "' is dependent on '" + target.getComponent() + "." + target.getLayer() + "."
+          + target.getScope() + "')";
     }
     return null;
   }

@@ -17,8 +17,8 @@ public class DevonArchitectureLayerLogic2ServiceCheck extends DevonArchitectureC
   protected String checkDependency(JavaType source, JavaType target) {
 
     if (source.isLayerLogic() && target.isLayerService() && isSameRootApplication(source, target)) {
-      return "Code from logic layer ('" + source.toString() + "') shall not depend on service layer ('"
-          + target.toString() + "').";
+      return "Code from logic layer shall not depend on service layer. ('" + source.getComponent() + "."
+          + source.getLayer() + "' is dependent on '" + target.getComponent() + "." + target.getLayer() + "')";
     }
     return null;
   }

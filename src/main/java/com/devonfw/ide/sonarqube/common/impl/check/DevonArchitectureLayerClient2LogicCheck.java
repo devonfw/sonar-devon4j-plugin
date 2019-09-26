@@ -17,8 +17,8 @@ public class DevonArchitectureLayerClient2LogicCheck extends DevonArchitectureCh
   protected String checkDependency(JavaType source, JavaType target) {
 
     if (source.isLayerClient() && target.isLayerLogic()) {
-      return "Code from client layer ('" + source.toString() + "') shall not depend on logic layer ('"
-          + target.toString() + "').";
+      return "Code from client layer shall not depend on logic layer. ('" + source.getComponent() + "."
+          + source.getLayer() + "' is dependent on '" + target.getComponent() + "." + target.getLayer() + "')";
     }
     return null;
   }

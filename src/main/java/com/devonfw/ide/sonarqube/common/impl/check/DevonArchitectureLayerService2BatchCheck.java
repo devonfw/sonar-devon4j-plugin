@@ -17,8 +17,8 @@ public class DevonArchitectureLayerService2BatchCheck extends DevonArchitectureC
   protected String checkDependency(JavaType source, JavaType target) {
 
     if (source.isLayerService() && target.isLayerBatch()) {
-      return "Code from service layer ('" + source.toString() + "') shall not depend on batch layer ('"
-          + target.toString() + "').";
+      return "Code from service layer shall not depend on batch layer. ('" + source.getComponent() + "."
+          + source.getLayer() + "' is dependent on '" + target.getComponent() + "." + target.getLayer() + "')";
     }
     return null;
   }
