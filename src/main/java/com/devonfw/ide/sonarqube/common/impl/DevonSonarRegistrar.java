@@ -45,7 +45,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.namingconvention.DevonNamingC
 import com.devonfw.ide.sonarqube.common.impl.check.namingconvention.DevonNamingConventionClassExtendsClassDaoCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.namingconvention.DevonNamingConventionClassExtendsClassEntityCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.namingconvention.DevonNamingConventionClassExtendsClassEtoCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.namingconvention.DevonNamingConventionClassExtendsClassImplCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.namingconvention.DevonNamingConventionClassExtendsClassUcImplCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.namingconvention.DevonNamingConventionClassExtendsClassSearchCriteriaToCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.namingconvention.DevonNamingConventionClassExtendsClassToCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.namingconvention.DevonNamingConventionInterfaceExtendsInterfaceDaoCheck;
@@ -110,7 +110,7 @@ public class DevonSonarRegistrar implements CheckRegistrar {
     checks.add(DevonNamingConventionClassExtendsClassDaoCheck.class); // N2
     checks.add(DevonNamingConventionClassExtendsClassEntityCheck.class); // N3
     checks.add(DevonNamingConventionClassExtendsClassEtoCheck.class); // N4
-    checks.add(DevonNamingConventionClassExtendsClassImplCheck.class); // N5
+    checks.add(DevonNamingConventionClassExtendsClassUcImplCheck.class); // N5
     checks.add(DevonNamingConventionClassExtendsClassSearchCriteriaToCheck.class); // N6
     checks.add(DevonNamingConventionClassExtendsClassToCheck.class); // N7
     checks.add(DevonNamingConventionInterfaceExtendsInterfaceDaoCheck.class); // N8

@@ -5,7 +5,6 @@ import java.util.List;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
-import org.sonar.plugins.java.api.tree.ClassTree;
 
 /**
  * {@link DevonNamingConventionClassExtendsClassCheck} verifying that non-abstract classes inherited from AbstractUc are
@@ -16,7 +15,7 @@ import org.sonar.plugins.java.api.tree.ClassTree;
     description = "Verify that non-abstract classes inherited from AbstractUc must begin with Uc and end with Impl. "
         + "Also, the class must implement an interface with the same name except the suffix Impl.", //
     priority = Priority.CRITICAL, tags = { "architecture-violation" })
-public class DevonNamingConventionClassExtendsClassImplCheck extends DevonNamingConventionClassExtendsClassCheck {
+public class DevonNamingConventionClassExtendsClassUcImplCheck extends DevonNamingConventionClassExtendsClassCheck {
 
   private static final String DESIRED_SUPERCLASS_NAME = "AbstractUc";
 
@@ -25,28 +24,25 @@ public class DevonNamingConventionClassExtendsClassImplCheck extends DevonNaming
   /**
    * Calls super constructor to compile the pattern classSuffixRegEx with Uc.*Impl.
    */
-  public DevonNamingConventionClassExtendsClassImplCheck() {
+  public DevonNamingConventionClassExtendsClassUcImplCheck() {
 
     super("Uc.*Impl");
   }
 
   /**
-   * Method called after parsing and semantic analysis has been done on file.
    *
-   * @param context Context of analysis containing the parsed tree.
    */
   @Override
-  public void scanFile(JavaFileScannerContext context) {
+  protected void checkClassName(JavaFileScannerContext context) {
 
-    ClassTree tree = getTreeInstance(context);
-    this.className = tree.simpleName().name();
-    this.superClassName = getNameOfSuperClass(tree);
-    this.superInterfacesNames = getSuperInterfacesNames(tree);
-    String desiredSuperInterfaceName = tree.simpleName().name().replaceAll("Impl$", "");
+    super.checkClassName(context);
+
+    this.superInterfacesNames = getSuperInterfacesNames();
+    String desiredSuperInterfaceName = this.className.replaceAll("Impl$", "");
 
     if (!isClassNameMatching() && !isSuperClassMatching()) {
       return;
-    } else if (isClassNameMatching() && !isAbstract(tree) && isSuperClassMatching()
+    } else if (isClassNameMatching() && !isAbstract(this.tree) && isSuperClassMatching()
         && isImplementingCorrectInterface(desiredSuperInterfaceName)) {
       return;
     } else {
@@ -84,7 +80,7 @@ public class DevonNamingConventionClassExtendsClassImplCheck extends DevonNaming
     if (DESIRED_SUPERCLASS_NAME.equals(this.superClassName)) {
       return true;
     } else {
-      return false;
+      return super.isSuperClassMatching();
     }
   }
 

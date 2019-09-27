@@ -25,6 +25,11 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
   protected final Pattern classSuffixRegEx;
 
   /**
+   *
+   */
+  protected ClassTree tree;
+
+  /**
    * Name of the checked class
    */
   protected String className;
@@ -53,11 +58,23 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
   @Override
   public void scanFile(JavaFileScannerContext context) {
 
-    ClassTree tree = getTreeInstance(context);
-    this.className = tree.simpleName().name();
-    this.superClassName = getNameOfSuperClass(tree);
+    this.tree = getTreeInstance(context);
+    this.className = this.tree.simpleName().name();
+    this.superClassName = getNameOfSuperClass();
 
-    if (isSuperClassMatching() && !isClassNameMatching()) {
+    if (isSuperClassMatching()) {
+      checkClassName(context);
+    }
+  }
+
+  /**
+   * TODO
+   *
+   * @param context TODO
+   */
+  protected void checkClassName(JavaFileScannerContext context) {
+
+    if (!isClassNameMatching()) {
       context.addIssueOnFile(this, "If a superclass has " + this.classSuffixRegEx
           + " as suffix, then the subclass should also have " + this.classSuffixRegEx + " as suffix");
     }
@@ -85,29 +102,27 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
   /**
    * Gets the name of the super class of the currently checked class.
    *
-   * @param tree Tree currently being investigated.
    * @return Name of the super class.
    */
-  protected String getNameOfSuperClass(ClassTree tree) {
+  protected String getNameOfSuperClass() {
 
-    TypeTree superClass = tree.superClass();
+    TypeTree superClass = this.tree.superClass();
 
     if (superClass == null) {
       return null;
     } else {
-      return tree.superClass().toString();
+      return this.tree.superClass().toString();
     }
   }
 
   /**
    * Gets the names of all the interfaces implemented by the currently checked class.
    *
-   * @param tree Tree currently being investigated.
    * @return Names of the implemented interfaces.
    */
-  protected List<String> getSuperInterfacesNames(ClassTree tree) {
+  protected List<String> getSuperInterfacesNames() {
 
-    List<TypeTree> superInterfaces = tree.superInterfaces();
+    List<TypeTree> superInterfaces = this.tree.superInterfaces();
     List<String> superInterfacesNames = new ArrayList<>();
 
     for (TypeTree superInterface : superInterfaces) {
@@ -135,11 +150,7 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
    */
   protected boolean isClassNameMatching() {
 
-    if (this.classSuffixRegEx.matcher(this.className).matches()) {
-      return true;
-    } else {
-      return false;
-    }
+    return (this.classSuffixRegEx.matcher(this.className).matches());
   }
 
   /**
@@ -149,11 +160,7 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
    */
   protected boolean isSuperClassMatching() {
 
-    if (this.classSuffixRegEx.matcher(this.superClassName).matches()) {
-      return true;
-    } else {
-      return false;
-    }
+    return (this.classSuffixRegEx.matcher(this.superClassName).matches());
   }
 
 }
