@@ -17,8 +17,8 @@ public class DevonArchitectureLayerAny2ClientCheck extends DevonArchitectureChec
   protected String checkDependency(JavaType source, JavaType target) {
 
     if (!source.isLayerClient() && target.isLayerClient()) {
-      return "Code from any layer other than client ('" + source.toString() + "') shall not depend on client layer ('"
-          + target.toString() + "').";
+      return "Code from any layer other than client shall not depend on client layer. ('" + source.getComponent() + "."
+          + source.getLayer() + "' is dependent on '" + target.getComponent() + "." + target.getLayer() + "')";
     }
     return null;
   }

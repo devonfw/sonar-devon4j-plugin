@@ -20,8 +20,9 @@ public class DevonArchitectureLayerDataaccess2Dataaccess4ComponentCheck extends 
 
     if (source.isLayerDataAccess() && target.isLayerDataAccess()
         && !isSameOrGeneralComponentWithSameOrCommonLayer(source, target)) {
-      return "Code from dataaccess layer ('" + source.toString()
-          + "') shall not depend on dataaccess layer of a different component ('" + target.toString() + "').";
+      return "Code from dataaccess layer shall not depend on dataaccess layer of a different component. ('"
+          + source.getComponent() + "." + source.getLayer() + "' is dependent on '" + target.getComponent() + "."
+          + target.getLayer() + "')";
     }
     return null;
   }

@@ -19,8 +19,9 @@ public class DevonArchitectureLayerService2Service4ComponentCheck extends DevonA
   protected String checkDependency(JavaType source, Component sourceComponent, JavaType target) {
 
     if (source.isLayerService() && target.isLayerService()) {
-      return "Code from service layer ('" + source.toString()
-          + "') shall not depend on service layer of a different component ('" + target.toString() + "').";
+      return "Code from service layer shall not depend on service layer of a different component. ('"
+          + source.getComponent() + "." + source.getLayer() + "' is dependent on '" + target.getComponent() + "."
+          + target.getLayer() + "')";
     }
     return null;
   }

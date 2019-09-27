@@ -17,8 +17,8 @@ public class DevonArchitectureLayerClient2BatchCheck extends DevonArchitectureCh
   protected String checkDependency(JavaType source, JavaType target) {
 
     if (source.isLayerClient() && target.isLayerBatch()) {
-      return "Code from client layer ('" + source.toString() + "') shall not depend on batch layer ('"
-          + target.toString() + "').";
+      return "Code from client layer shall not depend on batch layer. ('" + source.getComponent() + "."
+          + source.getLayer() + "' is dependent on '" + target.getComponent() + "." + target.getLayer() + "')";
     }
     return null;
   }

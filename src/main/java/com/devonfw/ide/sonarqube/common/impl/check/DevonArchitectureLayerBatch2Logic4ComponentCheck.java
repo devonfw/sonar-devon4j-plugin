@@ -19,8 +19,9 @@ public class DevonArchitectureLayerBatch2Logic4ComponentCheck extends DevonArchi
   protected String checkDependency(JavaType source, Component sourceComponent, JavaType target) {
 
     if (source.isLayerBatch() && target.isLayerLogic()) {
-      return "Code from batch layer ('" + source.toString()
-          + "') shall not depend on logic layer of a different component ('" + target.toString() + "').";
+      return "Code from batch layer shall not depend on logic layer of a different component. ('"
+          + source.getComponent() + "." + source.getLayer() + "' is dependent on '" + target.getComponent() + "."
+          + target.getLayer() + "')";
     }
     return null;
   }

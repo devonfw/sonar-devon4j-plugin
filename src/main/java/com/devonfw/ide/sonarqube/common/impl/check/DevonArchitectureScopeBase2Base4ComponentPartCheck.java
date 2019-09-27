@@ -19,8 +19,9 @@ public class DevonArchitectureScopeBase2Base4ComponentPartCheck extends DevonArc
 
     if (source.isScopeBase() && target.isScopeBase() && !isSameComponentPart(source, target)
         && !isSameOrGeneralComponentWithSameOrCommonLayer(source, target)) {
-      return "Code from base scope ('" + source.toString()
-          + "') shall not depend on base scope of other component part ('" + target.toString() + "').";
+      return "Code from base scope shall not depend on base scope of other component part. ('" + source.getComponent()
+          + "." + source.getLayer() + "." + source.getScope() + "' is dependent on '" + target.getComponent() + "."
+          + target.getLayer() + "." + target.getScope() + "')";
     }
     return null;
   }
