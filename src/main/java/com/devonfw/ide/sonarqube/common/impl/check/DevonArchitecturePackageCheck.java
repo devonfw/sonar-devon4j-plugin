@@ -42,9 +42,7 @@ public class DevonArchitecturePackageCheck extends DevonArchitectureCheck {
         }
       }
     }
-    /**
-     * TODO: Find a way to break the lines.
-     */
+
     StringBuilder sb = new StringBuilder(64);
     sb.append("The package '");
     sb.append(source.toString());
