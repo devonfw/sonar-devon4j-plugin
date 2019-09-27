@@ -18,8 +18,9 @@ public class DevonArchitectureScopeImpl2Impl4ComponentPartCheck extends DevonArc
   protected String checkDependency(JavaType source, JavaType target) {
 
     if (source.isScopeImpl() && target.isScopeImpl() && !isSameComponentPart(source, target)) {
-      return "Code from impl scope ('" + source.toString()
-          + "') shall not depend on impl scope of other component part ('" + target.toString() + "').";
+      return "Code from impl scope shall not depend on impl scope of other component part. ('" + source.getComponent()
+          + "." + source.getLayer() + "." + source.getScope() + "' is dependent on '" + target.getComponent() + "."
+          + target.getLayer() + "." + target.getScope() + "')";
     }
     return null;
   }

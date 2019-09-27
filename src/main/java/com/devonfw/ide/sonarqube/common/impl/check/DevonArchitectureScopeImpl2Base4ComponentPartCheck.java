@@ -17,9 +17,11 @@ public class DevonArchitectureScopeImpl2Base4ComponentPartCheck extends DevonArc
   @Override
   protected String checkDependency(JavaType source, JavaType target) {
 
-    if (source.isScopeImpl() && target.isScopeBase() && !isSameOrGeneralComponentWithSameOrCommonLayer(source, target)) {
-      return "Code from impl scope ('" + source.toString()
-          + "') shall not depend on base scope of other component part ('" + target.toString() + "').";
+    if (source.isScopeImpl() && target.isScopeBase()
+        && !isSameOrGeneralComponentWithSameOrCommonLayer(source, target)) {
+      return "Code from impl scope shall not depend on base scope of other component part. ('" + source.getComponent()
+          + "." + source.getLayer() + "." + source.getScope() + "' is dependent on '" + target.getComponent() + "."
+          + target.getLayer() + "." + target.getScope() + "')";
     }
     return null;
   }

@@ -17,8 +17,8 @@ public class DevonArchitectureLayerClient2DataaccessCheck extends DevonArchitect
   protected String checkDependency(JavaType source, JavaType target) {
 
     if (source.isLayerClient() && target.isLayerDataAccess()) {
-      return "Code from client layer ('" + source.toString() + "') shall not depend on dataaccess layer ('"
-          + target.toString() + "').";
+      return "Code from client layer shall not depend on dataaccess layer. ('" + source.getComponent() + "."
+          + source.getLayer() + "' is dependent on '" + target.getComponent() + "." + target.getLayer() + "')";
     }
     return null;
   }
