@@ -30,24 +30,22 @@ public class DevonNamingConventionClassExtendsClassUcImplCheck extends DevonNami
   }
 
   /**
-   *
+   * Calls super implementation. If no issue was created there, class is not abstract, and it is implementing the
+   * correct interface, everything is compliant. Otherwise creates an issue.
    */
   @Override
-  protected void checkClassName(JavaFileScannerContext context) {
-
-    super.checkClassName(context);
+  protected boolean checkClassNameAndCreateIssue(JavaFileScannerContext context) {
 
     this.superInterfacesNames = getSuperInterfacesNames();
     String desiredSuperInterfaceName = this.className.replaceAll("Impl$", "");
 
-    if (!isClassNameMatching() && !isSuperClassMatching()) {
-      return;
-    } else if (isClassNameMatching() && !isAbstract(this.tree) && isSuperClassMatching()
+    if (!super.checkClassNameAndCreateIssue(context) && !isAbstract(this.tree)
         && isImplementingCorrectInterface(desiredSuperInterfaceName)) {
-      return;
+      return false;
     } else {
       context.addIssueOnFile(this, "Non-abstract use-case classes must begin with Uc, "
           + "end with Impl and implement an interface with the same name except the suffix Impl.");
+      return true;
     }
   }
 

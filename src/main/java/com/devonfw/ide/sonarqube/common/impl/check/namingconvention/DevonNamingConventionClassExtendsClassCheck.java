@@ -25,7 +25,7 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
   protected final Pattern classSuffixRegEx;
 
   /**
-   *
+   * Tree instance of the current context.
    */
   protected ClassTree tree;
 
@@ -63,21 +63,25 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
     this.superClassName = getNameOfSuperClass();
 
     if (isSuperClassMatching()) {
-      checkClassName(context);
+      checkClassNameAndCreateIssue(context);
     }
   }
 
   /**
-   * TODO
+   * Checks if class name is matching the given pattern. If not, creates an issue.
    *
-   * @param context TODO
+   * @param context Context of analysis containing the parsed tree.
+   * @return true if issue was created, false otherwise.
    */
-  protected void checkClassName(JavaFileScannerContext context) {
+  protected boolean checkClassNameAndCreateIssue(JavaFileScannerContext context) {
 
     if (!isClassNameMatching()) {
       context.addIssueOnFile(this, "If a superclass has " + this.classSuffixRegEx
           + " as suffix, then the subclass should also have " + this.classSuffixRegEx + " as suffix");
+      return true;
     }
+
+    return false;
   }
 
   /**

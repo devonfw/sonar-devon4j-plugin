@@ -25,19 +25,17 @@ public class DevonNamingConventionClassExtendsClassDaoCheck extends DevonNamingC
   }
 
   /**
-  *
-  */
+   * Calls super implementation. If no issue was created there and class is not abstract, everything is compliant.
+   * Otherwise creates an issue.
+   */
   @Override
-  protected void checkClassName(JavaFileScannerContext context) {
+  protected boolean checkClassNameAndCreateIssue(JavaFileScannerContext context) {
 
-    super.checkClassName(context);
-
-    if (!isClassNameMatching() && !isSuperClassMatching()) {
-      return;
-    } else if (isClassNameMatching() && !isAbstract(this.tree) && isSuperClassMatching()) {
-      return;
+    if (!super.checkClassNameAndCreateIssue(context) && !isAbstract(this.tree)) {
+      return false;
     } else {
       context.addIssueOnFile(this, "DAO implementations must not be abstract and extend AbstractDao.");
+      return true;
     }
   }
 
