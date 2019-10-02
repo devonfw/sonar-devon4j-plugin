@@ -1,4 +1,4 @@
-package com.devonfw.ide.sonarqube.common.impl.check;
+package com.devonfw.ide.sonarqube.common.impl.check.scope;
 
 import org.junit.Test;
 import org.sonar.java.checks.verifier.JavaCheckVerifier;
@@ -14,7 +14,7 @@ public class DevonArchitectureScopeApi2ImplCheckTest {
   @Test
   public void test() {
 
-    JavaCheckVerifier.verify("src/test/files/DevonArchitectureScopeApi2ImplCheck.java",
+    JavaCheckVerifier.verify("src/test/files/scope/DevonArchitectureScopeApi2ImplCheck.java",
         new DevonArchitectureScopeApi2ImplCheck());
   }
 

@@ -1,4 +1,4 @@
-package com.devonfw.ide.sonarqube.common.impl.check;
+package com.devonfw.ide.sonarqube.common.impl.check.layer;
 
 import org.junit.Test;
 import org.sonar.java.checks.verifier.JavaCheckVerifier;
@@ -14,7 +14,7 @@ public class DevonArchitectureLayerCommon2AnyCheckTest {
   @Test
   public void test() {
 
-    JavaCheckVerifier.verify("src/test/files/DevonArchitectureLayerCommon2AnyCheck.java",
+    JavaCheckVerifier.verify("src/test/files/layer/DevonArchitectureLayerCommon2AnyCheck.java",
         new DevonArchitectureLayerCommon2AnyCheck());
   }
 

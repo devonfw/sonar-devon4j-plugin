@@ -1,4 +1,4 @@
-package com.devonfw.ide.sonarqube.common.impl.check;
+package com.devonfw.ide.sonarqube.common.impl.check.component;
 
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
@@ -9,6 +9,7 @@ import com.devonfw.ide.sonarqube.common.api.JavaType;
 import com.devonfw.ide.sonarqube.common.api.config.Architecture;
 import com.devonfw.ide.sonarqube.common.api.config.Component;
 import com.devonfw.ide.sonarqube.common.api.config.Status;
+import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureComponentCheck;
 
 /**
  * {@link DevonArchitectureComponentCheck} verifying that a {@link Component} itself is properly defined in

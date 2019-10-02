@@ -1,4 +1,4 @@
-package com.devonfw.ide.sonarqube.common.impl.check;
+package com.devonfw.ide.sonarqube.common.impl.check.thirdparty;
 
 import org.junit.Test;
 import org.sonar.java.checks.verifier.JavaCheckVerifier;
@@ -14,7 +14,7 @@ public class DevonArchitecture3rdPartyJpaCheckTest {
   @Test
   public void testNOK() {
 
-    JavaCheckVerifier.verify("src/test/files/DevonArchitecture3rdPartyJpaCheck_NOK.java",
+    JavaCheckVerifier.verify("src/test/files/thirdparty/DevonArchitecture3rdPartyJpaCheck_NOK.java",
         new DevonArchitecture3rdPartyJpaCheck());
   }
 
@@ -24,7 +24,7 @@ public class DevonArchitecture3rdPartyJpaCheckTest {
   @Test
   public void testOK() {
 
-    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonArchitecture3rdPartyJpaCheck_OK.java",
+    JavaCheckVerifier.verifyNoIssue("src/test/files/thirdparty/DevonArchitecture3rdPartyJpaCheck_OK.java",
         new DevonArchitecture3rdPartyJpaCheck());
   }
 

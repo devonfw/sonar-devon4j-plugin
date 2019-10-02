@@ -1,4 +1,4 @@
-package com.devonfw.ide.sonarqube.common.impl.check;
+package com.devonfw.ide.sonarqube.common.impl.check.packaging;
 
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
@@ -7,6 +7,7 @@ import org.sonar.plugins.java.api.tree.ClassTree;
 import org.sonar.plugins.java.api.tree.Tree.Kind;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
+import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
 
 /**
  * {@link DevonArchitectureCheck} verifying the devon package conventions.

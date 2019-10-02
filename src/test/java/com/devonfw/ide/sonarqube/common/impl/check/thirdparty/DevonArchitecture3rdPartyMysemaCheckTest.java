@@ -1,4 +1,4 @@
-package com.devonfw.ide.sonarqube.common.impl.check;
+package com.devonfw.ide.sonarqube.common.impl.check.thirdparty;
 
 import org.junit.Test;
 import org.sonar.java.checks.verifier.JavaCheckVerifier;
@@ -14,7 +14,7 @@ public class DevonArchitecture3rdPartyMysemaCheckTest {
   @Test
   public void test() {
 
-    JavaCheckVerifier.verify("src/test/files/DevonArchitecture3rdPartyMysemaCheck.java",
+    JavaCheckVerifier.verify("src/test/files/thirdparty/DevonArchitecture3rdPartyMysemaCheck.java",
         new DevonArchitecture3rdPartyMysemaCheck());
   }
 

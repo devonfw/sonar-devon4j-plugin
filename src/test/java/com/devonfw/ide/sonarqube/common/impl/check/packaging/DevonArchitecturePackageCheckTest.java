@@ -1,4 +1,4 @@
-package com.devonfw.ide.sonarqube.common.impl.check;
+package com.devonfw.ide.sonarqube.common.impl.check.packaging;
 
 import org.junit.Test;
 import org.sonar.java.checks.verifier.JavaCheckVerifier;
@@ -14,7 +14,7 @@ public class DevonArchitecturePackageCheckTest {
   @Test
   public void testNoScope() {
 
-    JavaCheckVerifier.verify("src/test/files/DevonArchitecturePackageCheck_NoScope.java",
+    JavaCheckVerifier.verify("src/test/files/packaging/DevonArchitecturePackageCheck_NoScope.java",
         new DevonArchitecturePackageCheck());
   }
 
@@ -24,7 +24,7 @@ public class DevonArchitecturePackageCheckTest {
   @Test
   public void testIllegalLayer() {
 
-    JavaCheckVerifier.verify("src/test/files/DevonArchitecturePackageCheck_IllegalLayer.java",
+    JavaCheckVerifier.verify("src/test/files/packaging/DevonArchitecturePackageCheck_IllegalLayer.java",
         new DevonArchitecturePackageCheck());
   }
 
@@ -34,7 +34,7 @@ public class DevonArchitecturePackageCheckTest {
   @Test
   public void testIllegalRoot() {
 
-    JavaCheckVerifier.verify("src/test/files/DevonArchitecturePackageCheck_IllegalRoot.java",
+    JavaCheckVerifier.verify("src/test/files/packaging/DevonArchitecturePackageCheck_IllegalRoot.java",
         new DevonArchitecturePackageCheck());
   }
 
@@ -44,7 +44,7 @@ public class DevonArchitecturePackageCheckTest {
   @Test
   public void testNoIssue() {
 
-    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonArchitecturePackageCheck_OK.java",
+    JavaCheckVerifier.verifyNoIssue("src/test/files/packaging/DevonArchitecturePackageCheck_OK.java",
         new DevonArchitecturePackageCheck());
   }
 
@@ -54,7 +54,7 @@ public class DevonArchitecturePackageCheckTest {
   @Test
   public void testNoIssueSpringBootApp() {
 
-    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonArchitecturePackageCheck_OK_SpringBootApp.java",
+    JavaCheckVerifier.verifyNoIssue("src/test/files/packaging/DevonArchitecturePackageCheck_OK_SpringBootApp.java",
         new DevonArchitecturePackageCheck());
   }
 

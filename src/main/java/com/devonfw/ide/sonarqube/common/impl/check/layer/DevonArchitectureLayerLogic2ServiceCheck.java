@@ -1,9 +1,10 @@
-package com.devonfw.ide.sonarqube.common.impl.check;
+package com.devonfw.ide.sonarqube.common.impl.check.layer;
 
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
+import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
 
 /**
  * {@link DevonArchitectureCheck} verifying that code from logic layer does not depend on service layer (of same app).

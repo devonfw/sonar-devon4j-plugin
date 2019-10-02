@@ -1,10 +1,11 @@
-package com.devonfw.ide.sonarqube.common.impl.check;
+package com.devonfw.ide.sonarqube.common.impl.check.component;
 
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
 import com.devonfw.ide.sonarqube.common.api.config.Component;
+import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureComponentCheck;
 
 /**
  * {@link DevonArchitectureComponentCheck} verifying that the batch layer does not depend on the logic layer of another

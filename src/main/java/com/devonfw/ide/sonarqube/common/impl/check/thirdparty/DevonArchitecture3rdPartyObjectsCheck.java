@@ -1,9 +1,10 @@
-package com.devonfw.ide.sonarqube.common.impl.check;
+package com.devonfw.ide.sonarqube.common.impl.check.thirdparty;
 
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
+import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyCheck;
 
 /**
  * {@link DevonArchitecture3rdPartyCheck} verifying that {@link java.util.Objects} from JDK is used (rather than

@@ -1,4 +1,4 @@
-package com.devonfw.ide.sonarqube.common.impl.check;
+package com.devonfw.ide.sonarqube.common.impl.check.thirdparty;
 
 import org.junit.Test;
 import org.sonar.java.checks.verifier.JavaCheckVerifier;
@@ -14,7 +14,7 @@ public class DevonArchitecture3rdPartyTransactionalCheckTest {
   @Test
   public void test() {
 
-    JavaCheckVerifier.verify("src/test/files/DevonArchitecture3rdPartyTransactionalCheck.java",
+    JavaCheckVerifier.verify("src/test/files/thirdparty/DevonArchitecture3rdPartyTransactionalCheck.java",
         new DevonArchitecture3rdPartyTransactionalCheck());
   }
 
@@ -24,7 +24,7 @@ public class DevonArchitecture3rdPartyTransactionalCheckTest {
   @Test
   public void testApi() {
 
-    JavaCheckVerifier.verify("src/test/files/DevonArchitecture3rdPartyTransactionalCheck_Api.java",
+    JavaCheckVerifier.verify("src/test/files/thirdparty/DevonArchitecture3rdPartyTransactionalCheck_Api.java",
         new DevonArchitecture3rdPartyTransactionalCheck());
   }
 

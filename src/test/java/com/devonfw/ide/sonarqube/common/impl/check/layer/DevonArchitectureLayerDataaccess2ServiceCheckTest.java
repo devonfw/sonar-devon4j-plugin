@@ -1,4 +1,4 @@
-package com.devonfw.ide.sonarqube.common.impl.check;
+package com.devonfw.ide.sonarqube.common.impl.check.layer;
 
 /**
  * @author ssabah
@@ -20,7 +20,7 @@ public class DevonArchitectureLayerDataaccess2ServiceCheckTest {
   @Test
   public void test() {
 
-    JavaCheckVerifier.verify("src/test/files/DevonArchitectureLayerDataaccess2ServiceCheck.java",
+    JavaCheckVerifier.verify("src/test/files/layer/DevonArchitectureLayerDataaccess2ServiceCheck.java",
         new DevonArchitectureLayerDataaccess2ServiceCheck());
   }
 
