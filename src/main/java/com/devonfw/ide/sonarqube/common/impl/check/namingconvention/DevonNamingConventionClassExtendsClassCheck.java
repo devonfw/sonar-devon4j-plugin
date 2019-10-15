@@ -164,7 +164,11 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
    */
   protected boolean isSuperClassMatching() {
 
-    return (this.classSuffixRegEx.matcher(this.superClassName).matches());
+    if (this.superClassName == null) {
+      return false;
+    } else {
+      return (this.classSuffixRegEx.matcher(this.superClassName).matches());
+    }
   }
 
 }
