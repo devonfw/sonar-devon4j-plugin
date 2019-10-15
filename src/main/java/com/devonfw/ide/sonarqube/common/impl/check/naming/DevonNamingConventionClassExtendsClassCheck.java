@@ -76,11 +76,11 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
   protected boolean checkClassNameAndCreateIssue(JavaFileScannerContext context) {
 
     if (!isClassNameMatching()) {
-      context.addIssueOnFile(this, "If a superclass has " + this.classSuffixRegEx
+      context.reportIssue(this, this.tree, "If a superclass has " + this.classSuffixRegEx
           + " as suffix, then the subclass should also have " + this.classSuffixRegEx + " as suffix");
+
       return true;
     }
-
     return false;
   }
 
@@ -167,7 +167,7 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
     if (this.superClassName == null) {
       return false;
     } else {
-      return (this.classSuffixRegEx.matcher(this.superClassName).matches());
+      return this.classSuffixRegEx.matcher(this.superClassName).matches();
     }
   }
 

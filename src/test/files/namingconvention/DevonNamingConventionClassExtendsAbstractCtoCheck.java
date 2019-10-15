@@ -3,6 +3,6 @@
  */
 package com.devonfw.ide.sonarqube.batch.api;
 
-class MyClass extends AbstractCto { // Noncompliant
+class MyClass extends AbstractCto {  // Noncompliant
 
 }

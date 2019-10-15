@@ -1,8 +1,5 @@
-/*
- * This is a header...
- */
 package com.devonfw.ide.sonarqube.batch.api;
 
-class ClassOne extends ClassTwoTo{
+class ClassOne extends ClassTwoTo {  // Noncompliant
 
 }

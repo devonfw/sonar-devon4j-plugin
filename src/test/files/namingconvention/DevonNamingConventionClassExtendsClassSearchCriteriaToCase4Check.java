@@ -1,8 +1,5 @@
-/*
- * This is a header...
- */
 package com.devonfw.ide.sonarqube.batch.api;
 
-class MyClass extends MySecondClassSearchCriteriaTo {
+class MyClass extends MySecondClassSearchCriteriaTo {  // Noncompliant
 
 }

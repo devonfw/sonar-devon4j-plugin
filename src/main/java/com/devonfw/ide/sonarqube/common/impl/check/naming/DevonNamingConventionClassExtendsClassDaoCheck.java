@@ -34,7 +34,7 @@ public class DevonNamingConventionClassExtendsClassDaoCheck extends DevonNamingC
     if (!super.checkClassNameAndCreateIssue(context) && !isAbstract(this.tree)) {
       return false;
     } else {
-      context.addIssueOnFile(this, "DAO implementations must not be abstract and extend AbstractDao.");
+      context.reportIssue(this, this.tree, "DAO implementations must not be abstract and extend AbstractDao.");
       return true;
     }
   }
