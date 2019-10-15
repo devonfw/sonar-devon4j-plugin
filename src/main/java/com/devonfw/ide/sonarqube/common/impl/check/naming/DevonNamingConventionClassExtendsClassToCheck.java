@@ -9,7 +9,7 @@ import org.sonar.check.Rule;
  */
 @Rule(key = "Devon4j:N7", name = "Devon Naming Convention Check", //
     description = "Classes extending AbstractTo but neither AbstractEto nor AbstractCto shall end with To.", //
-    priority = Priority.CRITICAL, tags = { "architecture-violation" })
+    priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "naming" })
 public class DevonNamingConventionClassExtendsClassToCheck extends DevonNamingConventionClassExtendsClassCheck {
 
   /**

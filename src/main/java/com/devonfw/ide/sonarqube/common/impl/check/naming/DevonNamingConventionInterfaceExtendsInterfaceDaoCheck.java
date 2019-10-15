@@ -9,7 +9,7 @@ import org.sonar.check.Rule;
  */
 @Rule(key = "Devon4j:N8", name = "Devon naming convention of inheriting interfaces (Dao)", //
     description = "Verify that Interfaces extending Dao shall end with Dao.", //
-    priority = Priority.CRITICAL, tags = { "architecture-violation" })
+    priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "naming" })
 public class DevonNamingConventionInterfaceExtendsInterfaceDaoCheck
     extends DevonNamingConventionInterfaceExtendsInterfaceCheck {
 

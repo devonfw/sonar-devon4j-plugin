@@ -11,7 +11,7 @@ import org.sonar.check.Rule;
     description = "Verify that Classes extending AbstractSearchCriteriaTo shall end with SearchCriteriaTo. "
         + "In addition, classes that inherit from a class with the suffix SearchCriteriaTo must also "
         + "have SearchCriteriaTo as their suffix.", //
-    priority = Priority.CRITICAL, tags = { "architecture-violation" })
+    priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "naming" })
 public class DevonNamingConventionClassExtendsClassSearchCriteriaToCheck
     extends DevonNamingConventionClassExtendsClassCheck {
 

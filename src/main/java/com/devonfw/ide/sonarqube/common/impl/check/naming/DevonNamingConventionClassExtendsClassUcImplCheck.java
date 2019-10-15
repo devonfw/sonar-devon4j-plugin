@@ -14,7 +14,7 @@ import org.sonar.plugins.java.api.JavaFileScannerContext;
 @Rule(key = "Devon4j:N5", name = "Devon naming conventions of inheriting classes (Uc.*Impl)", //
     description = "Verify that non-abstract classes inherited from AbstractUc must begin with Uc and end with Impl. "
         + "Also, the class must implement an interface with the same name except the suffix Impl.", //
-    priority = Priority.CRITICAL, tags = { "architecture-violation" })
+    priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "naming" })
 public class DevonNamingConventionClassExtendsClassUcImplCheck extends DevonNamingConventionClassExtendsClassCheck {
 
   private static final String DESIRED_SUPERCLASS_NAME = "AbstractUc";
