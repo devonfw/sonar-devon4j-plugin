@@ -15,7 +15,7 @@ public class DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheckTest {
   public void testNoIssueCaseOne() {
 
     JavaCheckVerifier.verifyNoIssue(
-        "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase1Check.java",
+        "src/test/files/naming/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase1Check.java",
         new DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck());
   }
 
@@ -26,7 +26,7 @@ public class DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheckTest {
   public void testNoIssueCaseTwo() {
 
     JavaCheckVerifier.verifyNoIssue(
-        "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase2Check.java",
+        "src/test/files/naming/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase2Check.java",
         new DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck());
   }
 
@@ -37,7 +37,7 @@ public class DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheckTest {
   public void testNoIssueCaseThree() {
 
     JavaCheckVerifier.verifyNoIssue(
-        "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase3Check.java",
+        "src/test/files/naming/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase3Check.java",
         new DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck());
   }
 
@@ -48,7 +48,7 @@ public class DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheckTest {
   public void testIssueCaseFour() {
 
     JavaCheckVerifier.verify(
-        "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase4Check.java",
+        "src/test/files/naming/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase4Check.java",
         new DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck());
   }
 
@@ -59,7 +59,7 @@ public class DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheckTest {
   public void testIssueCaseFive() {
 
     JavaCheckVerifier.verify(
-        "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase5Check.java",
+        "src/test/files/naming/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase5Check.java",
         new DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck());
   }
 
@@ -70,7 +70,7 @@ public class DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheckTest {
   public void TestNoIssueCaseSix() {
 
     JavaCheckVerifier.verifyNoIssue(
-        "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase6Check.java",
+        "src/test/files/naming/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCase6Check.java",
         new DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck());
   }
 

@@ -14,8 +14,7 @@ public class DevonNamingConventionClassExtendsClassEtoCheckTest {
   @Test
   public void testNoIssueCaseOne() {
 
-    JavaCheckVerifier.verifyNoIssue(
-        "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassEtoCase1Check.java",
+    JavaCheckVerifier.verifyNoIssue("src/test/files/naming/DevonNamingConventionClassExtendsClassEtoCase1Check.java",
         new DevonNamingConventionClassExtendsClassEtoCheck());
   }
 
@@ -25,8 +24,7 @@ public class DevonNamingConventionClassExtendsClassEtoCheckTest {
   @Test
   public void testNoIssueCaseThree() {
 
-    JavaCheckVerifier.verifyNoIssue(
-        "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassEtoCase3Check.java",
+    JavaCheckVerifier.verifyNoIssue("src/test/files/naming/DevonNamingConventionClassExtendsClassEtoCase3Check.java",
         new DevonNamingConventionClassExtendsClassEtoCheck());
   }
 
@@ -36,7 +34,7 @@ public class DevonNamingConventionClassExtendsClassEtoCheckTest {
   @Test
   public void testIssueCaseTwo() {
 
-    JavaCheckVerifier.verify("src/test/files/namingconvention/DevonNamingConventionClassExtendsClassEtoCase2Check.java",
+    JavaCheckVerifier.verify("src/test/files/naming/DevonNamingConventionClassExtendsClassEtoCase2Check.java",
         new DevonNamingConventionClassExtendsClassEtoCheck());
   }
 
@@ -46,7 +44,7 @@ public class DevonNamingConventionClassExtendsClassEtoCheckTest {
   @Test
   public void testIssueCaseFour() {
 
-    JavaCheckVerifier.verify("src/test/files/namingconvention/DevonNamingConventionClassExtendsClassEtoCase4Check.java",
+    JavaCheckVerifier.verify("src/test/files/naming/DevonNamingConventionClassExtendsClassEtoCase4Check.java",
         new DevonNamingConventionClassExtendsClassEtoCheck());
   }
 
@@ -56,7 +54,7 @@ public class DevonNamingConventionClassExtendsClassEtoCheckTest {
   @Test
   public void testIssueCaseFive() {
 
-    JavaCheckVerifier.verify("src/test/files/namingconvention/DevonNamingConventionClassExtendsClassEtoCase5Check.java",
+    JavaCheckVerifier.verify("src/test/files/naming/DevonNamingConventionClassExtendsClassEtoCase5Check.java",
         new DevonNamingConventionClassExtendsClassEtoCheck());
   }
 

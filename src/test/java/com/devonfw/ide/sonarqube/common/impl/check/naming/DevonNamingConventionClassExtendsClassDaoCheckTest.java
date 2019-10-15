@@ -14,8 +14,7 @@ public class DevonNamingConventionClassExtendsClassDaoCheckTest {
   @Test
   public void testNoIssueCaseOne() {
 
-    JavaCheckVerifier.verifyNoIssue(
-        "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassDaoCase1Check.java",
+    JavaCheckVerifier.verifyNoIssue("src/test/files/naming/DevonNamingConventionClassExtendsClassDaoCase1Check.java",
         new DevonNamingConventionClassExtendsClassDaoCheck());
   }
 
@@ -25,8 +24,7 @@ public class DevonNamingConventionClassExtendsClassDaoCheckTest {
   @Test
   public void testNoIssueCaseThree() {
 
-    JavaCheckVerifier.verifyNoIssue(
-        "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassDaoCase3Check.java",
+    JavaCheckVerifier.verifyNoIssue("src/test/files/naming/DevonNamingConventionClassExtendsClassDaoCase3Check.java",
         new DevonNamingConventionClassExtendsClassDaoCheck());
   }
 
@@ -36,8 +34,7 @@ public class DevonNamingConventionClassExtendsClassDaoCheckTest {
   @Test
   public void testNoIssueCaseFour() {
 
-    JavaCheckVerifier.verifyNoIssue(
-        "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassDaoCase4Check.java",
+    JavaCheckVerifier.verifyNoIssue("src/test/files/naming/DevonNamingConventionClassExtendsClassDaoCase4Check.java",
         new DevonNamingConventionClassExtendsClassDaoCheck());
   }
 
@@ -47,7 +44,7 @@ public class DevonNamingConventionClassExtendsClassDaoCheckTest {
   @Test
   public void testIssueCaseTwo() {
 
-    JavaCheckVerifier.verify("src/test/files/namingconvention/DevonNamingConventionClassExtendsClassDaoCase2Check.java",
+    JavaCheckVerifier.verify("src/test/files/naming/DevonNamingConventionClassExtendsClassDaoCase2Check.java",
         new DevonNamingConventionClassExtendsClassDaoCheck());
   }
 
@@ -57,7 +54,7 @@ public class DevonNamingConventionClassExtendsClassDaoCheckTest {
   @Test
   public void testIssueCaseSix() {
 
-    JavaCheckVerifier.verify("src/test/files/namingconvention/DevonNamingConventionClassExtendsClassDaoCase6Check.java",
+    JavaCheckVerifier.verify("src/test/files/naming/DevonNamingConventionClassExtendsClassDaoCase6Check.java",
         new DevonNamingConventionClassExtendsClassDaoCheck());
   }
 

@@ -14,8 +14,7 @@ public class DevonNamingConventionClassExtendsClassImplCheckTest {
   @Test
   public void testNoIssueCaseOne() {
 
-    JavaCheckVerifier.verifyNoIssue(
-        "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassImplCase1Check.java",
+    JavaCheckVerifier.verifyNoIssue("src/test/files/naming/DevonNamingConventionClassExtendsClassImplCase1Check.java",
         new DevonNamingConventionClassExtendsClassUcImplCheck());
   }
 
@@ -25,8 +24,7 @@ public class DevonNamingConventionClassExtendsClassImplCheckTest {
   @Test
   public void testNoIssueCaseThree() {
 
-    JavaCheckVerifier.verifyNoIssue(
-        "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassImplCase3Check.java",
+    JavaCheckVerifier.verifyNoIssue("src/test/files/naming/DevonNamingConventionClassExtendsClassImplCase3Check.java",
         new DevonNamingConventionClassExtendsClassUcImplCheck());
   }
 
@@ -36,8 +34,7 @@ public class DevonNamingConventionClassExtendsClassImplCheckTest {
   @Test
   public void testNoIssueCaseFour() {
 
-    JavaCheckVerifier.verifyNoIssue(
-        "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassImplCase4Check.java",
+    JavaCheckVerifier.verifyNoIssue("src/test/files/naming/DevonNamingConventionClassExtendsClassImplCase4Check.java",
         new DevonNamingConventionClassExtendsClassUcImplCheck());
   }
 
@@ -47,8 +44,7 @@ public class DevonNamingConventionClassExtendsClassImplCheckTest {
   @Test
   public void testNoIssueCaseFive() {
 
-    JavaCheckVerifier.verifyNoIssue(
-        "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassImplCase5Check.java",
+    JavaCheckVerifier.verifyNoIssue("src/test/files/naming/DevonNamingConventionClassExtendsClassImplCase5Check.java",
         new DevonNamingConventionClassExtendsClassUcImplCheck());
   }
 
@@ -58,8 +54,7 @@ public class DevonNamingConventionClassExtendsClassImplCheckTest {
   @Test
   public void testIssueCaseTwo() {
 
-    JavaCheckVerifier.verify(
-        "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassImplCase2Check.java",
+    JavaCheckVerifier.verify("src/test/files/naming/DevonNamingConventionClassExtendsClassImplCase2Check.java",
         new DevonNamingConventionClassExtendsClassUcImplCheck());
   }
 
@@ -69,8 +64,7 @@ public class DevonNamingConventionClassExtendsClassImplCheckTest {
   @Test
   public void testIssueCaseSeven() {
 
-    JavaCheckVerifier.verify(
-        "src/test/files/namingconvention/DevonNamingConventionClassExtendsClassImplCase7Check.java",
+    JavaCheckVerifier.verify("src/test/files/naming/DevonNamingConventionClassExtendsClassImplCase7Check.java",
         new DevonNamingConventionClassExtendsClassUcImplCheck());
   }
 

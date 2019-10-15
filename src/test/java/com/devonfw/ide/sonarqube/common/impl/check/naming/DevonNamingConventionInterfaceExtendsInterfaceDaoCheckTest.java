@@ -15,7 +15,7 @@ public class DevonNamingConventionInterfaceExtendsInterfaceDaoCheckTest {
   public void testNoIssueCaseOne() {
 
     JavaCheckVerifier.verifyNoIssue(
-        "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceDaoCase1Check.java",
+        "src/test/files/naming/DevonNamingConventionInterfaceExtendsInterfaceDaoCase1Check.java",
         new DevonNamingConventionInterfaceExtendsInterfaceDaoCheck());
   }
 
@@ -26,7 +26,7 @@ public class DevonNamingConventionInterfaceExtendsInterfaceDaoCheckTest {
   public void testNoIssueCaseTwo() {
 
     JavaCheckVerifier.verifyNoIssue(
-        "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceDaoCase2Check.java",
+        "src/test/files/naming/DevonNamingConventionInterfaceExtendsInterfaceDaoCase2Check.java",
         new DevonNamingConventionInterfaceExtendsInterfaceDaoCheck());
   }
 
@@ -37,7 +37,7 @@ public class DevonNamingConventionInterfaceExtendsInterfaceDaoCheckTest {
   public void testNoIssueCaseThree() {
 
     JavaCheckVerifier.verifyNoIssue(
-        "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceDaoCase3Check.java",
+        "src/test/files/naming/DevonNamingConventionInterfaceExtendsInterfaceDaoCase3Check.java",
         new DevonNamingConventionInterfaceExtendsInterfaceDaoCheck());
   }
 
@@ -47,8 +47,7 @@ public class DevonNamingConventionInterfaceExtendsInterfaceDaoCheckTest {
   @Test
   public void testIssueCaseFour() {
 
-    JavaCheckVerifier.verify(
-        "src/test/files/namingconvention/DevonNamingConventionInterfaceExtendsInterfaceDaoCase4Check.java",
+    JavaCheckVerifier.verify("src/test/files/naming/DevonNamingConventionInterfaceExtendsInterfaceDaoCase4Check.java",
         new DevonNamingConventionInterfaceExtendsInterfaceDaoCheck());
   }
 
