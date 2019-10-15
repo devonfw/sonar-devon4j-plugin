@@ -1,4 +1,4 @@
-package com.devonfw.ide.sonarqube.common.impl.check.namingconvention;
+package com.devonfw.ide.sonarqube.common.impl.check.naming;
 
 import java.util.ArrayList;
 import java.util.List;

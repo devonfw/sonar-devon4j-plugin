@@ -1,4 +1,4 @@
-package com.devonfw.ide.sonarqube.common.impl.check.namingconvention;
+package com.devonfw.ide.sonarqube.common.impl.check.naming;
 
 import java.util.LinkedHashSet;
 import java.util.List;

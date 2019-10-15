@@ -1,4 +1,4 @@
-package com.devonfw.ide.sonarqube.common.impl.check.namingconvention;
+package com.devonfw.ide.sonarqube.common.impl.check.naming;
 
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;

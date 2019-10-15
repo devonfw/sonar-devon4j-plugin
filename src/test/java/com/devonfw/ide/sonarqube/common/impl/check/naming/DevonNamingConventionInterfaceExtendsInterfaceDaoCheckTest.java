@@ -1,4 +1,4 @@
-package com.devonfw.ide.sonarqube.common.impl.check.namingconvention;
+package com.devonfw.ide.sonarqube.common.impl.check.naming;
 
 import org.junit.Test;
 import org.sonar.java.checks.verifier.JavaCheckVerifier;
