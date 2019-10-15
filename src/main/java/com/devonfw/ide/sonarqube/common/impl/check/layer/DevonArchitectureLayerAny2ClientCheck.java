@@ -11,7 +11,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
  */
 @Rule(key = "Devon4j:L2", name = "Devon Layer *-Client Check", //
     description = "Verify that only client layer may depend on client layer.", //
-    priority = Priority.BLOCKER, tags = { "architecture-violation" })
+    priority = Priority.BLOCKER, tags = { "architecture-violation", "devonfw", "layer" })
 public class DevonArchitectureLayerAny2ClientCheck extends DevonArchitectureCheck {
 
   @Override

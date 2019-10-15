@@ -17,7 +17,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureComponentChe
  */
 @Rule(key = "Devon4j:C1", name = "Devon Component Declaration Check", //
     description = "Verify component is properly declared in architecture.json file.", //
-    priority = Priority.CRITICAL, tags = { "architecture-violation" })
+    priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "component" })
 public class DevonArchitectureComponentDeclarationCheck extends DevonArchitectureComponentCheck {
 
   @Override
