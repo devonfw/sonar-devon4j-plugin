@@ -5,7 +5,6 @@ import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.java.api.tree.ClassTree;
 import org.sonar.plugins.java.api.tree.CompilationUnitTree;
-import org.sonar.plugins.java.api.tree.IdentifierTree;
 import org.sonar.plugins.java.api.tree.ImportTree;
 import org.sonar.plugins.java.api.tree.MethodTree;
 import org.sonar.plugins.java.api.tree.NewClassTree;
@@ -97,13 +96,9 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
   @Override
   public void visitClass(ClassTree classTree) {
 
-    IdentifierTree simpleNameTree;
     String simpleName;
-
-    if ((simpleNameTree = classTree.simpleName()) == null) {
+    if ((simpleName = classTree.simpleName().name()) == null) {
       simpleName = "";
-    } else {
-      simpleName = simpleNameTree.name();
     }
     this.sourceType = new JavaType(this.sourcePackage, simpleName);
     if (classTree.parent() instanceof CompilationUnitTree) {
