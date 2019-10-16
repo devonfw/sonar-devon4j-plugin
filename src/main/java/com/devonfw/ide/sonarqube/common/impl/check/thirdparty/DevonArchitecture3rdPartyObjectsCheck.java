@@ -12,7 +12,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyChec
  */
 @Rule(key = "Devon4j:E5", name = "Devon 3rd Party Objects Check", //
     description = "Verify that Objects is used from JDK.", //
-    priority = Priority.CRITICAL, tags = { "architecture-violation" })
+    priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "thirdparty" })
 public class DevonArchitecture3rdPartyObjectsCheck extends DevonArchitecture3rdPartyCheck {
 
   @Override

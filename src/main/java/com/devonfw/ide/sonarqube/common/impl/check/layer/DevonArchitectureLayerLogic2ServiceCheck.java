@@ -11,7 +11,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
  */
 @Rule(key = "Devon4j:L9", name = "Devon Layer Logic-Service Check", //
     description = "Verify that logic layer does not depend on service layer (of same app).", //
-    priority = Priority.BLOCKER, tags = { "architecture-violation" })
+    priority = Priority.BLOCKER, tags = { "architecture-violation", "devonfw", "layer" })
 public class DevonArchitectureLayerLogic2ServiceCheck extends DevonArchitectureCheck {
 
   @Override

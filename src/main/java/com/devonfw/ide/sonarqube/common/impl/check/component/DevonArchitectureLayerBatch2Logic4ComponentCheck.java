@@ -13,7 +13,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureComponentChe
  */
 @Rule(key = "Devon4j:C7", name = "Devon Layer Batch-Logic Component Check", //
     description = "Verify that batch layer does not depend on logic layer of another component.", //
-    priority = Priority.CRITICAL, tags = { "architecture-violation" })
+    priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "component" })
 public class DevonArchitectureLayerBatch2Logic4ComponentCheck extends DevonArchitectureComponentCheck {
 
   @Override

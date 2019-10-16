@@ -15,11 +15,11 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyChec
  */
 @Rule(key = "Devon4j:E4", name = "Devon 3rd Party Hibernate Check", //
     description = "Verify that Hibernate is properly used (and JPA is preferred).", //
-    priority = Priority.CRITICAL, tags = { "architecture-violation" })
+    priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "thirdparty" })
 public class DevonArchitecture3rdPartyHibernateCheck extends DevonArchitecture3rdPartyCheck {
 
-  private static final Set<String> DISCOURAGED_HIBERNATE_ANNOTATIONS = new HashSet<>(
-      Arrays.asList("OrderBy", "Entity", "AccessType", "ForeignKey", "Cascade", "Index", "IndexColumn"));
+  private static final Set<String> DISCOURAGED_HIBERNATE_ANNOTATIONS =
+      new HashSet<>(Arrays.asList("OrderBy", "Entity", "AccessType", "ForeignKey", "Cascade", "Index", "IndexColumn"));
 
   @Override
   protected String checkDependency(JavaType source, JavaType target) {
