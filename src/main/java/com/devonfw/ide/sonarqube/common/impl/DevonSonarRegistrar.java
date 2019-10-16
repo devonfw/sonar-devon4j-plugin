@@ -26,6 +26,15 @@ import com.devonfw.ide.sonarqube.common.impl.check.layer.DevonArchitectureLayerD
 import com.devonfw.ide.sonarqube.common.impl.check.layer.DevonArchitectureLayerLogic2ServiceCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.layer.DevonArchitectureLayerService2BatchCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.layer.DevonArchitectureLayerService2DataaccessCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.naming.DevonNamingConventionClassExtendsClassCtoCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.naming.DevonNamingConventionClassExtendsClassDaoCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.naming.DevonNamingConventionClassExtendsClassEntityCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.naming.DevonNamingConventionClassExtendsClassEtoCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.naming.DevonNamingConventionClassExtendsClassSearchCriteriaToCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.naming.DevonNamingConventionClassExtendsClassToCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.naming.DevonNamingConventionClassExtendsClassUcImplCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.naming.DevonNamingConventionInterfaceExtendsInterfaceDaoCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.naming.DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.packaging.DevonArchitecturePackageCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.scope.DevonArchitectureScopeApi2Base4ComponentPartCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.scope.DevonArchitectureScopeApi2BaseCheck;
@@ -96,6 +105,16 @@ public class DevonSonarRegistrar implements CheckRegistrar {
     checks.add(DevonArchitecture3rdPartyHibernateCheck.class); // E4
     checks.add(DevonArchitecture3rdPartyObjectsCheck.class); // E5
     checks.add(DevonArchitecture3rdPartyDatatypeMappingsCheck.class); // E6
+
+    checks.add(DevonNamingConventionClassExtendsClassCtoCheck.class); // N1
+    checks.add(DevonNamingConventionClassExtendsClassDaoCheck.class); // N2
+    checks.add(DevonNamingConventionClassExtendsClassEntityCheck.class); // N3
+    checks.add(DevonNamingConventionClassExtendsClassEtoCheck.class); // N4
+    checks.add(DevonNamingConventionClassExtendsClassUcImplCheck.class); // N5
+    checks.add(DevonNamingConventionClassExtendsClassSearchCriteriaToCheck.class); // N6
+    checks.add(DevonNamingConventionClassExtendsClassToCheck.class); // N7
+    checks.add(DevonNamingConventionInterfaceExtendsInterfaceDaoCheck.class); // N8
+    checks.add(DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck.class); // N9
 
     return checks;
   }

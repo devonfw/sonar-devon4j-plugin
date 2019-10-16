@@ -11,7 +11,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyChec
  */
 @Rule(key = "Devon4j:E2", name = "Devon 3rd Party Mysema Check", //
     description = "Verify that QueryDSL is used properly rather than legacy mysema API.", //
-    priority = Priority.BLOCKER, tags = { "architecture-violation" })
+    priority = Priority.BLOCKER, tags = { "architecture-violation", "devonfw", "thirdparty" })
 public class DevonArchitecture3rdPartyMysemaCheck extends DevonArchitecture3rdPartyCheck {
 
   @Override
