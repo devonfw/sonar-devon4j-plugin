@@ -96,7 +96,10 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
   @Override
   public void visitClass(ClassTree classTree) {
 
-    String simpleName = classTree.simpleName().name();
+    String simpleName;
+    if ((simpleName = classTree.simpleName().name()) == null) {
+      simpleName = "";
+    }
     this.sourceType = new JavaType(this.sourcePackage, simpleName);
     if (classTree.parent() instanceof CompilationUnitTree) {
       String warning = createIssueForInvalidSourcePackage(this.sourceType, classTree);
