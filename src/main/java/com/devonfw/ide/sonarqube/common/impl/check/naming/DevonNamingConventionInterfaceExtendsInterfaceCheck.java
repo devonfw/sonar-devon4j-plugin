@@ -49,10 +49,6 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
           "If a superinterface has " + this.extendingInterfaceSuffixRegEx.toString()
               + " as suffix, then the subinterface should also have " + this.extendingInterfaceSuffixRegEx.toString()
               + " as suffix");
-      // context.addIssueOnFile(this,
-      // "If a superinterface has " + this.extendingInterfaceSuffixRegEx.toString()
-      // + " as suffix, then the subinterface should also have " + this.extendingInterfaceSuffixRegEx.toString()
-      // + " as suffix");
       return;
     }
 
