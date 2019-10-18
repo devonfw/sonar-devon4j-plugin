@@ -12,7 +12,7 @@ This version marks the second official release. Next to the publication of this 
 
 Also, issues raised by our rules will now be of type Code Smell and tagged with 'architecture-violation'.
 
-Changes for this release can be found in https://github.com/devonfw/sonar-devon-plugin/milestone/3?closed=1[milestone 3.2.0].
+Changes for this release can be found in https://github.com/devonfw/sonar-devon-plugin/milestone/2?closed=1[milestone 3.2.0].
 
 == 3.0.0
 
