@@ -1,0 +1,14 @@
+{
+    "name": "Devon Layer Batch-Logic Component Check",
+    "title": "Batch layer of one component should not depend on the logic layer of another component",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "component"
+    ],
+    "defaultSeverity": "Critical",
+    "sqKey": "C7",
+    "scope": "All"
+}

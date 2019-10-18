@@ -1,0 +1,14 @@
+{
+    "name": "Devon Layer Service-Service Component Check",
+    "title": "Service layers of different components should not depend on each other",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "component"
+    ],
+    "defaultSeverity": "Critical",
+    "sqKey": "C3",
+    "scope": "All"
+}

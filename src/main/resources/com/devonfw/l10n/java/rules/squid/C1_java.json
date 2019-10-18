@@ -1,0 +1,14 @@
+{
+    "name": "Devon Component Declaration Check",
+    "title": "Components should be properly declared in the architecture.json file",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "component"
+    ],
+    "defaultSeverity": "Critical",
+    "sqKey": "C1",
+    "scope": "All"
+}

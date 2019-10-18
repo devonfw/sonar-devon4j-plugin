@@ -1,0 +1,14 @@
+{
+    "name": "Devon Layer Dataaccess-Dataaccess Component Check",
+    "title": "Dataaccess layers of different components should not depend on each other",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "component"
+    ],
+    "defaultSeverity": "Critical",
+    "sqKey": "C6",
+    "scope": "All"
+}

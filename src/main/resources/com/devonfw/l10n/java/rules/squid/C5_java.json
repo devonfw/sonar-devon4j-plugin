@@ -1,0 +1,14 @@
+{
+    "name": "Devon Layer Logic-Dataaccess Component Check",
+    "title": "Logic layer of one component should not depend on the dataaccess layer of another component",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "component"
+    ],
+    "defaultSeverity": "Critical",
+    "sqKey": "C5",
+    "scope": "All"
+}

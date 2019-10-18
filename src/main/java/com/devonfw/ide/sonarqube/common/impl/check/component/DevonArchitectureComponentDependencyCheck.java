@@ -1,6 +1,5 @@
 package com.devonfw.ide.sonarqube.common.impl.check.component;
 
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
@@ -12,9 +11,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureComponentChe
  * {@link DevonArchitectureComponentCheck} verifying that a {@link Component} itself is properly defined in
  * {@link Architecture} and that the general {@link Component#getDependencies() dependencies} are not violated.
  */
-@Rule(key = "Devon4j:C2", name = "Devon Component Dependency Check", //
-    description = "Verify component only depends on components of declared dependencies from architecture.json file.", //
-    priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "component" })
+@Rule(key = "C2")
 public class DevonArchitectureComponentDependencyCheck extends DevonArchitectureComponentCheck {
 
   @Override
