@@ -23,7 +23,7 @@ public class DevonSonarDefinition implements RulesDefinition {
   @Override
   public void define(Context context) {
 
-    NewRepository repository = context.createRepository(REPOSITORY_KEY, Java.KEY).setName("Devon Java Rules");
+    NewRepository repository = context.createRepository(REPOSITORY_KEY, Java.KEY).setName("Sonar Devon4j Plugin");
 
     for (Class<? extends JavaCheck> check : DevonSonarRegistrar.checkClasses()) {
       addRule(repository, check);
