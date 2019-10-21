@@ -8,7 +8,7 @@
         "devonfw",
         "component"
     ],
-    "defaultSeverity": "Critical",
+    "severity": "Critical",
     "sqKey": "C7",
     "scope": "All"
 }

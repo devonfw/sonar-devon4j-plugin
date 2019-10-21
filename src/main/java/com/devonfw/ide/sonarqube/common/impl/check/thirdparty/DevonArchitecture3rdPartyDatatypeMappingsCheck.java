@@ -1,6 +1,5 @@
 package com.devonfw.ide.sonarqube.common.impl.check.thirdparty;
 
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
@@ -8,13 +7,11 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyChec
 
 /**
  * {@link DevonArchitecture3rdPartyCheck} verifying that datatypes are properly mapped
- * 
+ *
  * @author lniazman
  *
  */
-@Rule(key = "Devon4j:E6", name = "Devon 3rd Party Datatype Mappings Check", //
-    description = "Verify that datatypes are mapped to the JPA using the correct pattern", //
-    priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "thirdparty" }) //
+@Rule(key = "E6")
 public class DevonArchitecture3rdPartyDatatypeMappingsCheck extends DevonArchitecture3rdPartyCheck {
 
   @Override

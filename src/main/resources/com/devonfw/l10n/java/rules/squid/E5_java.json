@@ -1,0 +1,14 @@
+{
+    "name": "Devon 3rd Party Objects Check",
+    "title": "Objects should be used from JDK",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "thirdparty"
+    ],
+    "severity": "Critical",
+    "sqKey": "E5",
+    "scope": "All"
+}

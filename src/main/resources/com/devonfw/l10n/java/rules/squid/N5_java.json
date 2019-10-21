@@ -1,0 +1,14 @@
+{
+    "name": "Devon Naming Check of Use-Case Implementations",
+    "title": "Non-abstract classes inheriting from AbstractUc must begin with Uc and end with Impl. Also, the class must implement an interface with the same name except the suffix Impl",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "naming"
+    ],
+    "severity": "Critical",
+    "sqKey": "N5",
+    "scope": "All"
+}

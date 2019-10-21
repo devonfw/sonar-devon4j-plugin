@@ -1,0 +1,14 @@
+{
+    "name": "Devon Layer Client-Logic Check",
+    "title": "Client layer should not depend on logic layer",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "layer"
+    ],
+    "severity": "Blocker",
+    "sqKey": "L3",
+    "scope": "All"
+}

@@ -1,6 +1,5 @@
 package com.devonfw.ide.sonarqube.common.impl.check.thirdparty;
 
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
@@ -9,9 +8,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyChec
 /**
  * {@link DevonArchitecture3rdPartyCheck} verifying that the {@code JPA} is properly used.
  */
-@Rule(key = "Devon4j:E3", name = "Devon 3rd Party JPA Check", //
-    description = "Verify that JPA is used in data-access and optionally in common for embeddables.", //
-    priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "thirdparty" })
+@Rule(key = "E3")
 public class DevonArchitecture3rdPartyJpaCheck extends DevonArchitecture3rdPartyCheck {
 
   @Override

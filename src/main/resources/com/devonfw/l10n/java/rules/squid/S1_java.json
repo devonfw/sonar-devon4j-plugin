@@ -1,0 +1,14 @@
+{
+    "name": "Devon Scope Api-Impl Check",
+    "title": "Api scope should not depend on impl scope",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "scope"
+    ],
+    "severity": "Blocker",
+    "sqKey": "S1",
+    "scope": "All"
+}

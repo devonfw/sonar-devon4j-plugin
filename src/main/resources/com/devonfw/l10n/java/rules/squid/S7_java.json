@@ -1,0 +1,14 @@
+{
+    "name": "Devon Scope Base-Base Component-Part Check",
+    "title": "Base scope should not depend on base scope of another component part",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "scope"
+    ],
+    "severity": "Major",
+    "sqKey": "S7",
+    "scope": "All"
+}

@@ -1,0 +1,14 @@
+{
+    "name": "Devon Layer Client-batch Check",
+    "title": "Client layer should not depend on batch layer",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "layer"
+    ],
+    "severity": "Blocker",
+    "sqKey": "L5",
+    "scope": "All"
+}

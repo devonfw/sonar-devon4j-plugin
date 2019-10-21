@@ -1,5 +1,8 @@
 package com.devonfw.ide.sonarqube.common.impl;
 
+import java.io.IOException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 import org.apache.commons.lang.StringUtils;
@@ -12,6 +15,9 @@ import org.sonar.plugins.java.Java;
 import org.sonar.plugins.java.api.JavaCheck;
 import org.sonar.squidbridge.annotations.RuleTemplate;
 
+import com.google.common.io.Resources;
+import com.google.gson.Gson;
+
 /**
  * {@link RulesDefinition} for this plugin.
  */
@@ -19,6 +25,10 @@ public class DevonSonarDefinition implements RulesDefinition {
 
   /** Constant for the repository key used as unique ID. */
   public static final String REPOSITORY_KEY = "devon-java";
+
+  private static final String RESOURCE_BASE_PATH = "/com/devonfw/l10n/java/rules/squid";
+
+  private static final Gson GSON = new Gson();
 
   @Override
   public void define(Context context) {
@@ -38,25 +48,79 @@ public class DevonSonarDefinition implements RulesDefinition {
     if (ruleAnnotation == null) {
       throw new IllegalArgumentException("No Rule annotation was found on " + ruleClass);
     }
+
     String ruleKey = ruleAnnotation.key();
     if (StringUtils.isEmpty(ruleKey)) {
       throw new IllegalArgumentException("No key is defined in Rule annotation of " + ruleClass);
     }
+
     NewRule rule = repository.rule(ruleKey);
     if (rule == null) {
       throw new IllegalStateException("No rule was created for " + ruleClass + " in " + repository.key());
     }
-    rule.setName(ruleAnnotation.name());
-    rule.setSeverity(ruleAnnotation.priority().toString());
-    String[] tags = ruleAnnotation.tags();
+
+    RuleJsonConfig ruleJsonConfig = readRuleJson(ruleKey);
+    if (ruleJsonConfig == null) {
+      throw new IllegalStateException("No JSON configuration was found for " + ruleKey);
+    }
+    rule.setName(ruleJsonConfig.name);
+    rule.setSeverity(ruleJsonConfig.severity.toUpperCase(Locale.US));
+    String[] tags = ruleJsonConfig.tags;
     for (int i = 0; i < tags.length; i++) {
       tags[i] = tags[i].toLowerCase(Locale.US);
     }
     rule.setTags(tags);
+
+    String ruleHtmlDescription = readRuleHtml(ruleKey);
+    if (ruleHtmlDescription == null) {
+      throw new IllegalStateException("No HTML configuration was found for " + ruleKey);
+    }
+    rule.setHtmlDescription(ruleHtmlDescription);
+
     rule.setType(RuleType.CODE_SMELL);
-    rule.setStatus(RuleStatus.valueOf(ruleAnnotation.status().toUpperCase(Locale.US)));
-    rule.setHtmlDescription(ruleAnnotation.description());
+    rule.setStatus(RuleStatus.valueOf(ruleJsonConfig.status.toUpperCase(Locale.US)));
     rule.setTemplate(AnnotationUtils.getAnnotation(ruleClass, RuleTemplate.class) != null);
+  }
+
+  private RuleJsonConfig readRuleJson(String ruleKey) {
+
+    URL resource = DevonSonarDefinition.class.getResource(RESOURCE_BASE_PATH + "/" + ruleKey + "_java.json");
+    RuleJsonConfig ruleJsonConfig;
+    if ((ruleJsonConfig = GSON.fromJson(readResource(resource), RuleJsonConfig.class)) != null) {
+      return ruleJsonConfig;
+    } else {
+      return null;
+    }
+  }
+
+  private String readRuleHtml(String ruleKey) {
+
+    URL resource = DevonSonarDefinition.class.getResource(RESOURCE_BASE_PATH + "/" + ruleKey + "_java.html");
+    return readResource(resource);
+  }
+
+  private static String readResource(URL resource) {
+
+    try {
+      return Resources.toString(resource, StandardCharsets.UTF_8);
+    } catch (IOException e) {
+      throw new IllegalArgumentException("Failed to read: " + resource, e);
+    }
+  }
+
+  static class RuleJsonConfig {
+
+    String name;
+
+    String title;
+
+    String type;
+
+    String status;
+
+    String[] tags;
+
+    String severity;
   }
 
 }

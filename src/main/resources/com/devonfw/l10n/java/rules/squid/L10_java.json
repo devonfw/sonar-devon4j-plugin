@@ -1,0 +1,14 @@
+{
+    "name": "Devon Layer Dataaccess-Service Check",
+    "title": "Dataaccess layer should not depend on service layer",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "layer"
+    ],
+    "severity": "Blocker",
+    "sqKey": "L10",
+    "scope": "All"
+}

@@ -1,0 +1,14 @@
+{
+    "name": "Devon Naming Check of Dao Interfaces",
+    "title": "Interfaces inheriting from an interface with the suffix Dao must end with the same suffix",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "naming"
+    ],
+    "severity": "Critical",
+    "sqKey": "N8",
+    "scope": "All"
+}

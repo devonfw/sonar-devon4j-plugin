@@ -1,0 +1,14 @@
+{
+    "name": "Devon Scope Base-Impl Check",
+    "title": "Base scope should not depend on impl scope",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "scope"
+    ],
+    "severity": "Major",
+    "sqKey": "S3",
+    "scope": "All"
+}

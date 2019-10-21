@@ -1,0 +1,14 @@
+{
+    "name": "Devon Naming Check of Entity Classes",
+    "title": "Classes inheriting from a class with the suffix Entity must also end with Entity",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "naming"
+    ],
+    "severity": "Critical",
+    "sqKey": "N3",
+    "scope": "All"
+}

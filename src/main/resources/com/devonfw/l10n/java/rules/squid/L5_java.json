@@ -1,0 +1,14 @@
+{
+    "name": "Devon Layer Client-Dataaccess Check",
+    "title": "Client layer should not depend on dataaccess layer",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "layer"
+    ],
+    "severity": "Blocker",
+    "sqKey": "L4",
+    "scope": "All"
+}

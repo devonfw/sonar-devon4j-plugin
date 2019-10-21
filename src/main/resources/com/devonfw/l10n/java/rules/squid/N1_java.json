@@ -1,0 +1,14 @@
+{
+    "name": "Devon Naming Check of Classes inheriting Cto Classes",
+    "title": "Classes inheriting from Cto classes must end with the suffix Cto",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "naming"
+    ],
+    "severity": "Critical",
+    "sqKey": "N1",
+    "scope": "All"
+}

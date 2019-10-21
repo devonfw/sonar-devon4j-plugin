@@ -1,6 +1,5 @@
 package com.devonfw.ide.sonarqube.common.impl.check.layer;
 
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
@@ -9,9 +8,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
 /**
  * {@link DevonArchitectureCheck} verifying that code from service layer does not depend on dataaccess layer.
  */
-@Rule(key = "Devon4j:L8", name = "Devon Layer Service-Dataaccess Check", //
-    description = "Verify that service layer does not depend on dataaccess layer.", //
-    priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "layer" })
+@Rule(key = "L8")
 public class DevonArchitectureLayerService2DataaccessCheck extends DevonArchitectureCheck {
 
   @Override

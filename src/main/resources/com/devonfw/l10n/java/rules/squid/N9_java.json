@@ -1,0 +1,14 @@
+{
+    "name": "Devon Naming Check of Repository Interfaces",
+    "title": "Interfaces inheriting from an interface with the suffix Repository must end with the same suffix",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "naming"
+    ],
+    "severity": "Critical",
+    "sqKey": "N9",
+    "scope": "All"
+}

@@ -1,6 +1,5 @@
 package com.devonfw.ide.sonarqube.common.impl.check.scope;
 
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
@@ -10,9 +9,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
  * {@link DevonArchitectureCheck} to verify that code from impl scope does not depend on base scope from other component
  * part.
  */
-@Rule(key = "Devon4j:S6", name = "Devon Scope Impl-Base Component-Part Check", //
-    description = "Verify that impl scope does not depend on base scope from another component part.", //
-    priority = Priority.MAJOR, tags = { "architecture-violation", "devonfw", "scope" })
+@Rule(key = "S6")
 public class DevonArchitectureScopeImpl2Base4ComponentPartCheck extends DevonArchitectureCheck {
 
   @Override

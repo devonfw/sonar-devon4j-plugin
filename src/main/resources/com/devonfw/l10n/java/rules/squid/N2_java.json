@@ -1,0 +1,14 @@
+{
+    "name": "Devon Naming Check of DAO Implementations",
+    "title": "Non-abstract classes inheriting from AbstractDao must end with DaoImpl. In addition, classes that inherit from a class with the suffix Dao must also end with Dao",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "naming"
+    ],
+    "severity": "Critical",
+    "sqKey": "N2",
+    "scope": "All"
+}

@@ -1,0 +1,14 @@
+{
+    "name": "Devon 3rd Party Hibernate Check",
+    "title": "Hibernate should be used properly and JPA should be preferred",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "thirdparty"
+    ],
+    "severity": "Critical",
+    "sqKey": "E4",
+    "scope": "All"
+}

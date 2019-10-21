@@ -1,0 +1,14 @@
+{
+    "name": "Devon 3rd Party Mysema Check",
+    "title": "QueryDSL should be used instead of the legacy mysema API",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "thirdparty"
+    ],
+    "severity": "Blocker",
+    "sqKey": "E2",
+    "scope": "All"
+}

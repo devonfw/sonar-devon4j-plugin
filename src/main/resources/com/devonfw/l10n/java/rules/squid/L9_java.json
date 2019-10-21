@@ -1,0 +1,14 @@
+{
+    "name": "Devon Layer Logic-Service Check",
+    "title": "Logic layer should not depend on service layer",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "layer"
+    ],
+    "severity": "Blocker",
+    "sqKey": "L9",
+    "scope": "All"
+}

@@ -1,0 +1,14 @@
+{
+    "name": "Devon Scope Api-Base Check",
+    "title": "Api scope should not depend on base scope",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "scope"
+    ],
+    "severity": "Major",
+    "sqKey": "S2",
+    "scope": "All"
+}

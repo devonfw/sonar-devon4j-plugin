@@ -2,7 +2,6 @@ package com.devonfw.ide.sonarqube.common.impl.check.naming;
 
 import java.util.List;
 
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 
@@ -11,10 +10,7 @@ import org.sonar.plugins.java.api.JavaFileScannerContext;
  * following the devonfw naming convention by beginning with Uc and ending with Impl. They must also implement an
  * interface with the same name except for the suffix Impl.
  */
-@Rule(key = "Devon4j:N5", name = "Devon naming conventions of inheriting classes (Uc.*Impl)", //
-    description = "Verify that non-abstract classes inherited from AbstractUc must begin with Uc and end with Impl. "
-        + "Also, the class must implement an interface with the same name except the suffix Impl.", //
-    priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "naming" })
+@Rule(key = "N5")
 public class DevonNamingConventionClassExtendsClassUcImplCheck extends DevonNamingConventionClassExtendsClassCheck {
 
   private static final String DESIRED_SUPERCLASS_NAME = "AbstractUc";

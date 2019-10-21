@@ -1,0 +1,14 @@
+{
+    "name": "Devon Layer Common-* Check",
+    "title": "Common layer should not depend on another layer",
+    "type": "CODE_SMELL",
+    "status": "ready",
+    "tags": [
+        "architecture-violation",
+        "devonfw",
+        "layer"
+    ],
+    "severity": "Blocker",
+    "sqKey": "L1",
+    "scope": "All"
+}
