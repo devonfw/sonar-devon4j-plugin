@@ -7,7 +7,7 @@ import org.sonar.api.config.PropertyDefinition;
 /**
  * The {@link Plugin} to integrate devonfw architecture rules into SonarQube.
  */
-public class DevonSonarPlugin implements Plugin {
+public class SonarDevon4jPlugin implements Plugin {
 
   static final String CONFIG_KEY = "sonar.devon.config";
 

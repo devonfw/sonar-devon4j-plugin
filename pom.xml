@@ -134,7 +134,7 @@
         <configuration>
           <pluginKey>devon4j</pluginKey>
           <pluginName>Sonar Devon4j Plugin</pluginName>
-          <pluginClass>com.devonfw.ide.sonarqube.common.impl.DevonSonarPlugin</pluginClass>
+          <pluginClass>com.devonfw.ide.sonarqube.common.impl.SonarDevon4jPlugin</pluginClass>
           <sonarLintSupported>true</sonarLintSupported>
           <sonarQubeMinVersion>5.6</sonarQubeMinVersion> <!-- allow to depend on API 6.x but run on LTS -->
         </configuration>
