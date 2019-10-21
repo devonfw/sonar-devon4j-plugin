@@ -132,8 +132,8 @@
         <version>1.17</version>
         <extensions>true</extensions>
         <configuration>
-          <pluginKey>devon-java</pluginKey>
-          <pluginName>Devon Java Rules</pluginName>
+          <pluginKey>devon4j</pluginKey>
+          <pluginName>Sonar Devon4j Plugin</pluginName>
           <pluginClass>com.devonfw.ide.sonarqube.common.impl.DevonSonarPlugin</pluginClass>
           <sonarLintSupported>true</sonarLintSupported>
           <sonarQubeMinVersion>5.6</sonarQubeMinVersion> <!-- allow to depend on API 6.x but run on LTS -->

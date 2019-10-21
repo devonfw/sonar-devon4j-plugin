@@ -18,7 +18,7 @@ import org.sonar.squidbridge.annotations.RuleTemplate;
 public class DevonSonarDefinition implements RulesDefinition {
 
   /** Constant for the repository key used as unique ID. */
-  public static final String REPOSITORY_KEY = "devon-java";
+  public static final String REPOSITORY_KEY = "devon4j";
 
   @Override
   public void define(Context context) {
