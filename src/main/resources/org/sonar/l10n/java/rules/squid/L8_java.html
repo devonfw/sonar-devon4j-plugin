@@ -1,0 +1,16 @@
+<p>
+    This rule checks that service layer does not depend on dataaccess layer.
+    Allowed dependencies from the service layer:
+    <ul type='disc'>
+        <li>Logic layer of the same component</li>
+        <li>Common layer</li>
+    </ul>
+</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+    package com.devonfw.ide.sonarqube.<span style='color: blue'>service</span>.api;
+
+    import com.devonfw.ide.sonarqube.<span style='color: red'>dataaccess</span>.api.Bar;
+    
+    public class MyClass {}
+</pre>

@@ -1,0 +1,25 @@
+<p>
+    This rule checks that the logic layer of one component does not depend on the dataaccess layer of another component.
+    Allowed dependencies from the logic layer: 
+    <ul type='disc'>
+        <li>Logic layer of a different component</li>
+        <li>Dataaccess layer of the same component</li>
+        <li>Common layer</li>
+    </ul>
+</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+    package com.devonfw.ide.sonarqube.<span style='color: blue'></span>compA.logic</span>.api;
+
+    import com.devonfw.ide.sonarqube.<span style='color: red'></span>compB.dataaccess</span>.api.Bar;
+
+    public class MyClass {}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+    package com.devonfw.ide.sonarqube.<span style='color: blue'></span>compA.logic</span>.api;
+
+    import com.devonfw.ide.sonarqube.<span style='color: blue'></span>compB.logic</span>.api.Bar;
+
+    public class MyClass {}
+</pre>

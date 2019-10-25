@@ -1,0 +1,23 @@
+<p>
+    This rule checks that datatypes are mapped to the JPA using the correct pattern.
+    The use of the org.hibernate.Type and javax.persistence.Convert annotations is forbidden.
+    Instead use the javax.persistence.Convert annotation on a custom converter implementing the javax.persistence.AttributeConverter.
+</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+    package com.devonfw.ide.sonarqube.logic.impl;
+
+    <span style='color: red'>import org.hibernate.Type;</span>
+    <span style='color: red'>import javax.persistence.Convert;</span>
+
+    public class MyClass {}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+    package com.devonfw.ide.sonarqube.logic.impl;
+
+    <span style='color: green'>import javax.persistence.Converter;</span>
+    <span style='color: green'>import javax.persistence.AttributeConverter;</span>
+
+    <span style='color: green'>public class CustomConverter implements AttributeConverter {}</span>
+</pre>

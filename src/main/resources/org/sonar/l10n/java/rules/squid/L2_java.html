@@ -1,0 +1,17 @@
+<p>This rule checks that none of the other layers depend on client layer.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+    package com.devonfw.ide.sonarqube.<span style='color: blue'>service</span>.api;
+
+    import com.devonfw.ide.sonarqube.<span style='color: red'>client</span>.api.Bar;
+    
+    public class MyClass {}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+    package com.devonfw.ide.sonarqube.<span style='color: blue'>compA.common</span>.api;
+
+    import com.devonfw.ide.sonarqube.<span style='color: green'>compB.common</span>.api;
+
+    public class MyClass {}
+</pre>

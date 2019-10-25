@@ -1,0 +1,17 @@
+<p>This rule checks that QueryDSL is used properly rather than the legacy mysema API.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+    package com.devonfw.ide.sonarqube.dataaccess.api;
+
+    <span style='color: red'></span>import com.mysema.query.jpa.impl.JPAQuery;</span>
+    
+    public class MyClass {}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+    package com.devonfw.ide.sonarqube.dataaccess.api;
+
+    <span style='color: green'>import com.querydsl.jpa.impl.JPAQuery;</span>
+
+    public class MyClass {}
+</pre>

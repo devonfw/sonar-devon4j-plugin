@@ -1,0 +1,40 @@
+<p>
+    This rule checks that Hibernate is only used in the dataaccess layer. In any other layers, JPA should be preferred.
+    Only the use of the org.hibernate.validator package is allowed outside of the dataaccess layer.
+    Regardless of in which layer they are used, the following Hibernate annotations are forbidden:
+    <ul type='disc'>
+        <li>org.hibernate.annotations.OrderBy</li>
+        <li>org.hibernate.annotations.Entity</li>
+        <li>org.hibernate.annotations.AccessType</li>
+        <li>org.hibernate.annotations.ForeignKey</li>
+        <li>org.hibernate.annotations.Cascade</li>
+        <li>org.hibernate.annotations.Index</li>
+        <li>org.hibernate.annotations.IndexColumn</li>
+    </ul>
+    Also, Hibernate enver implementations and Hibernate internals should never be used directly or outside of the impl scope of a dataaccess layer.
+</p>
+<h2>Noncompliant Code Examples</h2>
+<pre>
+    package com.devonfw.ide.sonarqube.<span style='color: red'>logic</span>logic.impl;
+
+    <span style='color: red'>import org.hibernate.Session;</span>
+
+    public class MyClass {}
+</pre>
+<pre>
+    package com.devonfw.ide.sonarqube.dataaccess.api;
+
+    <span style='color: red'>import org.hibernate.annotations.OrderBy;</span>
+
+    public class MyClass {}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+    package com.devonfw.ide.sonarqube.<span style='color: green'>dataaccess.impl</span>;
+
+    <span style='color: green'>import org.hibernate.Session;</span>
+    <span style='color: green'>import org.hibernate.annotations.FilterDef;</span>
+    <span style='color: green'>import org.hibernate.envers.Audited;</span>
+
+    public class MyClass {}
+</pre>

@@ -26,7 +26,7 @@ public class DevonSonarDefinition implements RulesDefinition {
   /** Constant for the repository key used as unique ID. */
   public static final String REPOSITORY_KEY = "devon-java";
 
-  private static final String RESOURCE_BASE_PATH = "/com/devonfw/l10n/java/rules/squid";
+  private static final String RESOURCE_BASE_PATH = "/org/sonar/l10n/java/rules/squid";
 
   private static final Gson GSON = new Gson();
 

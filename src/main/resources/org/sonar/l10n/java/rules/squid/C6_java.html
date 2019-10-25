@@ -1,0 +1,20 @@
+<p>
+    This rule checks that the dataaccess layers of different components don't depend on each other. 
+    From the dataaccess layer, only dependencies to the common layer are allowed.
+</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+    package com.devonfw.ide.sonarqube.<span style='color: blue'></span>compA.dataaccess</span>.api;
+
+    import com.devonfw.ide.sonarqube.<span style='color: red'></span>compB.dataaccess</span>.api.Bar;
+
+    public class MyClass {}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+    package com.devonfw.ide.sonarqube.<span style='color: blue'></span>compA.logic</span>.api;
+
+    import com.devonfw.ide.sonarqube.<span style='color: blue'></span>general.common</span>.api.Bar;
+
+    public class MyClass {}
+</pre>
