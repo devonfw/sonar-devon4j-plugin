@@ -1,5 +1,5 @@
 <p>
-    This rule checks that Hibernate is only used in the dataaccess layer. In any other layers, JPA should be preferred.
+    This rule checks that Hibernate is only used in the dataaccess layer. In any other layer, JPA should be preferred.
     Only the use of the org.hibernate.validator package is allowed outside of the dataaccess layer.
     Regardless of in which layer they are used, the following Hibernate annotations are forbidden:
     <ul type='disc'>
@@ -15,7 +15,7 @@
 </p>
 <h2>Noncompliant Code Examples</h2>
 <pre>
-    package com.devonfw.ide.sonarqube.<span style='color: red'>logic</span>logic.impl;
+    package com.devonfw.ide.sonarqube.<span style='color: red'>logic</span>.impl;
 
     <span style='color: red'>import org.hibernate.Session;</span>
 
