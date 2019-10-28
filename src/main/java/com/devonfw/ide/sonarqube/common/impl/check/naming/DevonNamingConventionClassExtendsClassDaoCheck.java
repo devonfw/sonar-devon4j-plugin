@@ -1,5 +1,6 @@
 package com.devonfw.ide.sonarqube.common.impl.check.naming;
 
+import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 
@@ -7,7 +8,8 @@ import org.sonar.plugins.java.api.JavaFileScannerContext;
  * {@link DevonNamingConventionClassExtendsClassCheck} verifying that non-abstract classes extending AbstractDao are
  * following the devonfw naming convention by ending with DaoImpl.
  */
-@Rule(key = "N2")
+@Rule(key = "N2", name = "Devon Naming Check of DAO Implementations", //
+    priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "naming" })
 public class DevonNamingConventionClassExtendsClassDaoCheck extends DevonNamingConventionClassExtendsClassCheck {
 
   private static final String DESIRED_SUPERCLASS_NAME = "AbstractDao";

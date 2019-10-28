@@ -24,7 +24,7 @@ import com.google.gson.Gson;
 public class DevonSonarDefinition implements RulesDefinition {
 
   /** Constant for the repository key used as unique ID. */
-  public static final String REPOSITORY_KEY = "devon-java";
+  public static final String REPOSITORY_KEY = "Devon4j";
 
   private static final String RESOURCE_BASE_PATH = "/org/sonar/l10n/java/rules/squid";
 
@@ -33,7 +33,7 @@ public class DevonSonarDefinition implements RulesDefinition {
   @Override
   public void define(Context context) {
 
-    NewRepository repository = context.createRepository(REPOSITORY_KEY, Java.KEY).setName("Devon Java Rules");
+    NewRepository repository = context.createRepository(REPOSITORY_KEY, Java.KEY).setName("Devonfw Java Rules");
 
     for (Class<? extends JavaCheck> check : DevonSonarRegistrar.checkClasses()) {
       addRule(repository, check);
@@ -59,13 +59,9 @@ public class DevonSonarDefinition implements RulesDefinition {
       throw new IllegalStateException("No rule was created for " + ruleClass + " in " + repository.key());
     }
 
-    RuleJsonConfig ruleJsonConfig = readRuleJson(ruleKey);
-    if (ruleJsonConfig == null) {
-      throw new IllegalStateException("No JSON configuration was found for " + ruleKey);
-    }
-    rule.setName(ruleJsonConfig.name);
-    rule.setSeverity(ruleJsonConfig.severity.toUpperCase(Locale.US));
-    String[] tags = ruleJsonConfig.tags;
+    rule.setName(ruleAnnotation.name());
+    rule.setSeverity(ruleAnnotation.priority().toString());
+    String[] tags = ruleAnnotation.tags();
     for (int i = 0; i < tags.length; i++) {
       tags[i] = tags[i].toLowerCase(Locale.US);
     }
@@ -78,7 +74,7 @@ public class DevonSonarDefinition implements RulesDefinition {
     rule.setHtmlDescription(ruleHtmlDescription);
 
     rule.setType(RuleType.CODE_SMELL);
-    rule.setStatus(RuleStatus.valueOf(ruleJsonConfig.status.toUpperCase(Locale.US)));
+    rule.setStatus(RuleStatus.valueOf(ruleAnnotation.status().toUpperCase(Locale.US)));
     rule.setTemplate(AnnotationUtils.getAnnotation(ruleClass, RuleTemplate.class) != null);
   }
 
@@ -112,9 +108,7 @@ public class DevonSonarDefinition implements RulesDefinition {
 
     String name;
 
-    String title;
-
-    String type;
+    String description;
 
     String status;
 

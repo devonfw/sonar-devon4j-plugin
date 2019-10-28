@@ -1,5 +1,6 @@
 package com.devonfw.ide.sonarqube.common.impl.check.thirdparty;
 
+import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
@@ -8,7 +9,8 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyChec
 /**
  * {@link DevonArchitecture3rdPartyCheck} verifying that the {@code JPA} is properly used.
  */
-@Rule(key = "E3")
+@Rule(key = "E3", name = "Devon 3rd Party JPA Check", //
+    priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "thirdparty" })
 public class DevonArchitecture3rdPartyJpaCheck extends DevonArchitecture3rdPartyCheck {
 
   @Override

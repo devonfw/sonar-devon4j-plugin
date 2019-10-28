@@ -2,6 +2,7 @@ package com.devonfw.ide.sonarqube.common.impl.check.naming;
 
 import java.util.List;
 
+import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 
@@ -10,7 +11,8 @@ import org.sonar.plugins.java.api.JavaFileScannerContext;
  * following the devonfw naming convention by beginning with Uc and ending with Impl. They must also implement an
  * interface with the same name except for the suffix Impl.
  */
-@Rule(key = "N5")
+@Rule(key = "N5", name = "Devon Naming Check of Use-Case Implementations", //
+    priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "naming" })
 public class DevonNamingConventionClassExtendsClassUcImplCheck extends DevonNamingConventionClassExtendsClassCheck {
 
   private static final String DESIRED_SUPERCLASS_NAME = "AbstractUc";

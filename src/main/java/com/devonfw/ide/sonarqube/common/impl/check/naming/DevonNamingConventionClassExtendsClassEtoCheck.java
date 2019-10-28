@@ -1,12 +1,14 @@
 package com.devonfw.ide.sonarqube.common.impl.check.naming;
 
+import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
 /**
  * {@link DevonNamingConventionClassExtendsClassCheck} verifying that classes extending AbstractEto are following the
  * devonfw naming convention by ending with Eto.
  */
-@Rule(key = "N4")
+@Rule(key = "N4", name = "Devon Naming Check of Eto Classes", //
+    priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "naming" })
 public class DevonNamingConventionClassExtendsClassEtoCheck extends DevonNamingConventionClassExtendsClassCheck {
 
   /**

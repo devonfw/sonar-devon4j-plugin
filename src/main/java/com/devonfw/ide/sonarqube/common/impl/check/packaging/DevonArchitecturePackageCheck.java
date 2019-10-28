@@ -1,5 +1,6 @@
 package com.devonfw.ide.sonarqube.common.impl.check.packaging;
 
+import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.tree.AnnotationTree;
 import org.sonar.plugins.java.api.tree.ClassTree;
@@ -11,7 +12,8 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
 /**
  * {@link DevonArchitectureCheck} verifying the devon package conventions.
  */
-@Rule(key = "P1")
+@Rule(key = "P1", name = "Devon Package Check", //
+    priority = Priority.BLOCKER, tags = { "architecture-violation", "devonfw", "package" })
 public class DevonArchitecturePackageCheck extends DevonArchitectureCheck {
 
   @Override
