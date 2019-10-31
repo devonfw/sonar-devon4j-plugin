@@ -45,10 +45,8 @@ public class ConfigurationFactory {
    */
   public Configuration getConfiguration(File fileToScan) {
 
-    if (this.lastConfigFolderPath != null) {
-      if (fileToScan.getAbsolutePath().startsWith(this.lastConfigFolderPath)) {
-        return this.path2configMap.get(this.lastConfigFolderPath);
-      }
+    if (this.lastConfigFolderPath != null && fileToScan.getAbsolutePath().startsWith(this.lastConfigFolderPath)) {
+      return this.path2configMap.get(this.lastConfigFolderPath);
     }
     File configFile = findConfigFile(fileToScan.getParentFile());
     if (configFile == null) {

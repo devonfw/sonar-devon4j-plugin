@@ -225,8 +225,6 @@
                 <version>1.2</version>
               </additionalDependency>
             </additionalDependencies>
-            <!-- http://jira.codehaus.org/browse/MJAVADOC-308 -->
-            <!--<maxmemory>5048m</maxmemory> -->
             <notree>true</notree>
             <show>private</show>
             <encoding>${project.reporting.outputEncoding}</encoding>

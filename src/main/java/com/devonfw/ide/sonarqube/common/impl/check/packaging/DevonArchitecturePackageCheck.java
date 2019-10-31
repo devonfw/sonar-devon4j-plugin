@@ -28,19 +28,16 @@ public class DevonArchitecturePackageCheck extends DevonArchitectureCheck {
     if (source.isValid()) {
       return null;
     }
-    if (!source.isValidLayer() && !source.isValidScope()) {
-      if (classTree.kind() == Kind.CLASS) {
-        for (AnnotationTree annotation : classTree.modifiers().annotations()) {
-          String annotationType = getQualifiedName(annotation.annotationType());
-          if ("org.springframework.boot.autoconfigure.SpringBootApplication".equals(annotationType)) {
-            return null;
-          }
-        }
-        String classSimpleName = classTree.simpleName().name();
-        if (classSimpleName.matches("SpringBoot[a-zA-Z0-9]*App")
-            || classSimpleName.matches("[a-zA-Z0-9]*Application")) {
+    if (!source.isValidLayer() && !source.isValidScope() && classTree.kind() == Kind.CLASS) {
+      for (AnnotationTree annotation : classTree.modifiers().annotations()) {
+        String annotationType = getQualifiedName(annotation.annotationType());
+        if ("org.springframework.boot.autoconfigure.SpringBootApplication".equals(annotationType)) {
           return null;
         }
+      }
+      String classSimpleName = classTree.simpleName().name();
+      if (classSimpleName.matches("SpringBoot[a-zA-Z0-9]*App") || classSimpleName.matches("[a-zA-Z0-9]*Application")) {
+        return null;
       }
     }
 
