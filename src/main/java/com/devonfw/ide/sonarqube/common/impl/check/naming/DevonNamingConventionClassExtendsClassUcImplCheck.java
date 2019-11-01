@@ -57,12 +57,12 @@ public class DevonNamingConventionClassExtendsClassUcImplCheck extends DevonNami
    */
   protected boolean isImplementingCorrectInterface(String superInterface) {
 
+    boolean isImplementingCorrectInterface = false;
+
     for (String name : this.superInterfacesNames) {
-      if (superInterface.equals(name)) {
-        return true;
-      }
+      isImplementingCorrectInterface = superInterface.equals(name);
     }
-    return false;
+    return isImplementingCorrectInterface;
   }
 
   /**

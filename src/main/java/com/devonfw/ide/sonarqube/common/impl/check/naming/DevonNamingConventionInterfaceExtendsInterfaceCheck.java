@@ -91,11 +91,7 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
    */
   protected boolean doesInterfaceHaveRegEx(String interfaceName) {
 
-    if (this.extendingInterfaceSuffixRegEx.matcher(interfaceName).matches()) {
-      return true;
-    } else {
-      return false;
-    }
+    return this.extendingInterfaceSuffixRegEx.matcher(interfaceName).matches();
   }
 
   /**
