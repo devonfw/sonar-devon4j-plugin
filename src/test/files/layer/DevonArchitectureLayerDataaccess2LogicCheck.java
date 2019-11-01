@@ -15,8 +15,4 @@ class MyClass {
     return this.foo;
   }
 
-  public void init() {
-
-    this.foo = new com.devonfw.ide.sonarqube.logic.api.Foo();// Noncompliant
-  }
 }
