@@ -15,4 +15,8 @@ class MyClass {
     return this.foo;
   }
 
+  public void init() {
+
+    this.foo = new com.devonfw.ide.sonarqube.dataaccess.api.Foo();// Noncompliant
+  }
 }

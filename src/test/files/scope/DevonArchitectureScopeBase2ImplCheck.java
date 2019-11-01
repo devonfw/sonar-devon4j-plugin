@@ -11,5 +11,10 @@ class MyClass {
   public com.devonfw.ide.sonarqube.common.impl.Foo getFoo() { // Noncompliant
     return this.foo;
   }
-  
+
+  public void init() {
+
+    this.foo = new com.devonfw.ide.sonarqube.common.impl.Foo();// Noncompliant
+  }
+
 }

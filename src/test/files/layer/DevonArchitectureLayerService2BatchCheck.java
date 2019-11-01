@@ -14,5 +14,9 @@ class MyClass {
   public com.devonfw.ide.sonarqube.batch.api.Foo getFoo() { // Noncompliant
     return this.foo;
   }
-  
+
+  public void init() {
+
+    this.foo = new com.devonfw.ide.sonarqube.batch.api.Foo();// Noncompliant
+  }
 }
