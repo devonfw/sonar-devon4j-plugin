@@ -7,41 +7,49 @@ import org.sonar.plugins.java.api.CheckRegistrar;
 import org.sonar.plugins.java.api.JavaCheck;
 import org.sonarsource.api.sonarlint.SonarLintSide;
 
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyDatatypeMappingsCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyHibernateCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyJpaCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyMysemaCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyObjectsCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonUcImplSecurityConstraintCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyTransactionalCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureComponentDeclarationCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureComponentDependencyCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureLayerAny2ClientCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureLayerBatch2DataaccessCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureLayerBatch2Logic4ComponentCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureLayerBatch2ServiceCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureLayerClient2BatchCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureLayerClient2DataaccessCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureLayerClient2LogicCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureLayerCommon2AnyCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureLayerDataaccess2Dataaccess4ComponentCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureLayerDataaccess2LogicCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureLayerDataaccess2ServiceCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureLayerLogic2Dataaccess4ComponentCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureLayerLogic2ServiceCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureLayerService2BatchCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureLayerService2DataaccessCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureLayerService2Logic4ComponentCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureLayerService2Service4ComponentCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecturePackageCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureScopeApi2Base4ComponentPartCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureScopeApi2BaseCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureScopeApi2ImplCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureScopeBase2Base4ComponentPartCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureScopeBase2Impl4ComponentPartCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureScopeBase2ImplCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureScopeImpl2Base4ComponentPartCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureScopeImpl2Impl4ComponentPartCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.component.DevonArchitectureComponentDependencyCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.component.DevonArchitectureLayerBatch2Logic4ComponentCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.component.DevonArchitectureLayerDataaccess2Dataaccess4ComponentCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.component.DevonArchitectureLayerLogic2Dataaccess4ComponentCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.component.DevonArchitectureLayerService2Logic4ComponentCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.component.DevonArchitectureLayerService2Service4ComponentCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.layer.DevonArchitectureLayerAny2ClientCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.layer.DevonArchitectureLayerBatch2DataaccessCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.layer.DevonArchitectureLayerBatch2ServiceCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.layer.DevonArchitectureLayerClient2BatchCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.layer.DevonArchitectureLayerClient2DataaccessCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.layer.DevonArchitectureLayerClient2LogicCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.layer.DevonArchitectureLayerCommon2AnyCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.layer.DevonArchitectureLayerDataaccess2LogicCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.layer.DevonArchitectureLayerDataaccess2ServiceCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.layer.DevonArchitectureLayerLogic2ServiceCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.layer.DevonArchitectureLayerService2BatchCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.layer.DevonArchitectureLayerService2DataaccessCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.naming.DevonNamingConventionClassExtendsClassCtoCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.naming.DevonNamingConventionClassExtendsClassDaoCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.naming.DevonNamingConventionClassExtendsClassEntityCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.naming.DevonNamingConventionClassExtendsClassEtoCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.naming.DevonNamingConventionClassExtendsClassSearchCriteriaToCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.naming.DevonNamingConventionClassExtendsClassToCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.naming.DevonNamingConventionClassExtendsClassUcImplCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.naming.DevonNamingConventionInterfaceExtendsInterfaceDaoCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.naming.DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.packaging.DevonArchitecturePackageCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.scope.DevonArchitectureScopeApi2Base4ComponentPartCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.scope.DevonArchitectureScopeApi2BaseCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.scope.DevonArchitectureScopeApi2ImplCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.scope.DevonArchitectureScopeBase2Base4ComponentPartCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.scope.DevonArchitectureScopeBase2Impl4ComponentPartCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.scope.DevonArchitectureScopeBase2ImplCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.scope.DevonArchitectureScopeImpl2Base4ComponentPartCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.scope.DevonArchitectureScopeImpl2Impl4ComponentPartCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyDatatypeMappingsCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyHibernateCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyJpaCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyMysemaCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyObjectsCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyTransactionalCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.component.DevonArchitectureComponentDeclarationCheck;
 
 /**
  * {@link CheckRegistrar} for this plugin.
@@ -98,6 +106,17 @@ public class DevonSonarRegistrar implements CheckRegistrar {
     checks.add(DevonArchitecture3rdPartyObjectsCheck.class); // E5
     checks.add(DevonArchitecture3rdPartyDatatypeMappingsCheck.class); // E6
     checks.add(DevonUcImplSecurityConstraintCheck.class); // E7
+
+    checks.add(DevonNamingConventionClassExtendsClassCtoCheck.class); // N1
+    checks.add(DevonNamingConventionClassExtendsClassDaoCheck.class); // N2
+    checks.add(DevonNamingConventionClassExtendsClassEntityCheck.class); // N3
+    checks.add(DevonNamingConventionClassExtendsClassEtoCheck.class); // N4
+    checks.add(DevonNamingConventionClassExtendsClassUcImplCheck.class); // N5
+    checks.add(DevonNamingConventionClassExtendsClassSearchCriteriaToCheck.class); // N6
+    checks.add(DevonNamingConventionClassExtendsClassToCheck.class); // N7
+    checks.add(DevonNamingConventionInterfaceExtendsInterfaceDaoCheck.class); // N8
+    checks.add(DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck.class); // N9
+
     return checks;
   }
 

@@ -1,16 +1,24 @@
-= Changelog of sonar-devon-plugin
+= Changelog of sonar-devon4j-plugin
 
-This file documents all notable changes to https://github.com/devonfw/sonar-devon-plugin[sonar-devon-plugin].
+This file documents all notable changes to https://github.com/devonfw/sonar-devon4j-plugin[sonar-devon4j-plugin].
 
-== Unreleased 3.1.0
+== 3.2.0
 
-Changes for this release can be found in https://github.com/devonfw/sonar-devon-plugin/milestone/2?closed=1[milestone 3.1.0].
+This version marks the second official release. Next to the publication of this plugin on the SonarQube Marketplace, multiple new rules were added:
+
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/26[#26]: Renamed to `sonar-devon4j-plugin`
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/6[#6]: Added checks for naming convention
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/17[#17]: Added check for correct JPA mapping of custom datatypes
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/5[#5]: Resolved most sub-issues for marketplace (https://github.com/devonfw/sonar-devon4j-plugin/issues/8[#8], https://github.com/devonfw/sonar-devon4j-plugin/issues/9[#9], https://github.com/devonfw/sonar-devon4j-plugin/issues/10[#10], https://github.com/devonfw/sonar-devon4j-plugin/issues/11[#11])
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/18[#18]: Flag issues as `architecture-violation` instead of `bug`.
+
+Changes for this release can be found in https://github.com/devonfw/sonar-devon-plugin/milestone/2?closed=1[milestone 3.2.0].
 
 == 3.0.0
 
-This is the first official release. In http://devonfw.com[devon] all released artifacts share the same version number.
+This is the first official release. In http://devonfw.com[devonfw] all released artifacts share the same version number.
 This allows to easily see which artifacts belong together and are guaranteed to be compatible. As this plugin was later
-added to devon it started with the devon version for that moment in time what was 3.0.0.
+added to devonfw, it started with the devonfw version for that moment in time what was 3.0.0. As `3.1.0` of `devonfw` came out immediately after there never was a release `3.1.0` of this plugin. Starting with `3.2.0` this plugin is now officially part of `devonfw` and will be released consistently.
 
 Changes for this release can be found in https://github.com/devonfw/sonar-devon-plugin/milestone/1?closed=1[milestone 3.0.0].
 
