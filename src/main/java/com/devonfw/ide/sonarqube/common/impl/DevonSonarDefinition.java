@@ -55,7 +55,6 @@ public class DevonSonarDefinition implements RulesDefinition {
     rule.setType(RuleType.CODE_SMELL);
     rule.setStatus(RuleStatus.valueOf(ruleAnnotation.status().toUpperCase(Locale.US)));
     rule.setHtmlDescription(ruleAnnotation.description());
-    // rule.setTemplate(AnnotationUtils.getAnnotation(ruleClass, org.sonar.check.Rule.class) != null);
   }
 
 }
