@@ -14,18 +14,18 @@ public class DevonUcImplSecurityConstraintCheckTest {
   @Test
   public void case1() {
 
-    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonUcImplSecurityConstraintCheckCase1.java",
+    JavaCheckVerifier.verify("src/test/files/DevonUcImplSecurityConstraintCheckCase1.java",
         new DevonUcImplSecurityConstraintCheck());
   }
 
-  // /**
-  // * Test of {@link DevonUcImplSecurityConstraintCheckTest}
-  // */
-  // @Test
-  // public void case2() {
-  //
-  // JavaCheckVerifier.verifyNoIssue("src/test/files/DevonUcImplSecurityConstraintCheckCase2.java",
-  // new DevonUcImplSecurityConstraintCheck());
-  // }
+  /**
+   * Test of {@link DevonUcImplSecurityConstraintCheckTest}
+   */
+  @Test
+  public void case2() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonUcImplSecurityConstraintCheckCase2.java",
+        new DevonUcImplSecurityConstraintCheck());
+  }
 
 }

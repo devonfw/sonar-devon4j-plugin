@@ -1,17 +1,16 @@
 package com.devonfw.ide.sonarqube.common.impl.check;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Set;
 import java.util.regex.Pattern;
-
-import net.sf.mmm.util.reflect.api.ReflectionUtil;
-import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
+import org.sonar.plugins.java.api.tree.AnnotationTree;
 import org.sonar.plugins.java.api.tree.ClassTree;
 import org.sonar.plugins.java.api.tree.CompilationUnitTree;
 import org.sonar.plugins.java.api.tree.MethodTree;
@@ -26,10 +25,11 @@ import com.devonfw.ide.sonarqube.common.api.JavaType;
 @Rule(key = "Devon4j:E7", name = "Devon Uc Impl Security Constraint Check", //
     description = "Verify that all Use-Case implementation methods " //
         + "are annotated with a security constraint", //
-    priority = Priority.CRITICAL, tags = { "architecture-violation" })
-public class DevonUcImplSecurityConstraintCheck extends DevonArchitecture3rdPartyCheck {
+    priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw" })
+public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
 
-  private static final Logger logger = Logger.getGlobal();
+  private static final Set<String> REQUIRED_ANNOTATIONS = new HashSet<>(
+      Arrays.asList("DenyAll", "PermitAll", "RolesAllowed"));
 
   /**
    * Method called after parsing and semantic analysis has been done on file.
@@ -39,22 +39,22 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitecture3rdPart
   @Override
   public void scanFile(JavaFileScannerContext context) {
 
-    ReflectionUtil ru = getRU();
     ClassTree tree = getClassTree(context);
     TypeTree ucInterface = getUcInterface(tree);
-    if (ucInterface == null)
+
+    if (ucInterface == null) {
       return;
+    }
+
     List<MethodTree> methodsOfTree = getMethodsOfTree(tree);
-
-    logger.log(Level.INFO, "Name of UcInterface: " + ucInterface.toString());
-  }
-
-  /**
-   * @return returns a bean of ReflectionUtil
-   */
-  public ReflectionUtil getRU() {
-
-    return new ReflectionUtilImpl();
+    for (MethodTree method : methodsOfTree) {
+      if (!isMethodProperlyAnnotated(method)) {
+        context.reportIssue(this, method,
+            "This method is not properly annotated. "
+                + "Please use one of the following annotations on Use-Case implementation methods: "
+                + REQUIRED_ANNOTATIONS.toString());
+      }
+    }
   }
 
   /**
@@ -83,8 +83,8 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitecture3rdPart
    */
   protected TypeTree getUcInterface(ClassTree tree) {
 
-    String className = tree.simpleName().name();
     List<TypeTree> interfaces = tree.superInterfaces();
+    String className = tree.simpleName().name();
     Pattern interfaceRegEx = Pattern.compile(className.replaceAll("Impl", ""));
 
     if (interfaces.isEmpty()) {
@@ -92,8 +92,9 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitecture3rdPart
     }
 
     for (TypeTree interfaceTree : interfaces) {
-      if (interfaceRegEx.matcher(interfaceTree.toString()).matches())
+      if (interfaceRegEx.matcher(interfaceTree.toString()).matches()) {
         return interfaceTree;
+      }
     }
 
     return null;
@@ -112,13 +113,35 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitecture3rdPart
 
     for (Tree member : membersOfTree) {
       if (member.is(Tree.Kind.METHOD)) {
-        MethodTree method = (MethodTree) member;
         methodsOfTree.add((MethodTree) member);
-        logger.log(Level.INFO, "Method of class " + tree.simpleName().name() + ": " + method.simpleName().name());
       }
     }
 
     return methodsOfTree;
+  }
+
+  private boolean isMethodProperlyAnnotated(MethodTree method) {
+
+    List<AnnotationTree> annotationsOfMethod = method.modifiers().annotations();
+    boolean hasOverrideAnnotation = false;
+    boolean hasRequiredAnnotation = false;
+
+    for (AnnotationTree annotation : annotationsOfMethod) {
+      if (annotation.annotationType().toString().equals("Override")) {
+        hasOverrideAnnotation = true;
+      }
+
+      if (REQUIRED_ANNOTATIONS.contains(annotation.annotationType().toString())) {
+        hasRequiredAnnotation = true;
+      }
+    }
+
+    if ((!hasOverrideAnnotation) || (hasOverrideAnnotation && hasRequiredAnnotation)) {
+      return true;
+    } else {
+      return false;
+    }
+
   }
 
   /**

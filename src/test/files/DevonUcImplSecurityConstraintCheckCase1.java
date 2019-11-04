@@ -1,10 +1,8 @@
 package com.devonfw.testapplication.testcomponent.logic.impl;
 
-public class TestInterfaceImpl implements Test1, Test2, Test3, TestInterface {
+public class TestInterfaceImpl implements TestInterface {
 
-    private int testInt;
-    private String testString;
-
+    @Override                                   // Noncompliant
     private boolean testBoolMethod() {
         return true;
     }
@@ -12,11 +10,5 @@ public class TestInterfaceImpl implements Test1, Test2, Test3, TestInterface {
     private String testStringMethod() {
         return "TEST";
     }
-
-}
-
-public interface TestInterface {
-    
-    private int interfaceMethod();
 
 }

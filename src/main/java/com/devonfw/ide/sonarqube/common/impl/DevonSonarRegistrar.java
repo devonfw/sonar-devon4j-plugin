@@ -7,6 +7,8 @@ import org.sonar.plugins.java.api.CheckRegistrar;
 import org.sonar.plugins.java.api.JavaCheck;
 import org.sonarsource.api.sonarlint.SonarLintSide;
 
+import com.devonfw.ide.sonarqube.common.impl.check.DevonUcImplSecurityConstraintCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.component.DevonArchitectureComponentDeclarationCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.component.DevonArchitectureComponentDependencyCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.component.DevonArchitectureLayerBatch2Logic4ComponentCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.component.DevonArchitectureLayerDataaccess2Dataaccess4ComponentCheck;
@@ -49,7 +51,6 @@ import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3
 import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyMysemaCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyObjectsCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyTransactionalCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.component.DevonArchitectureComponentDeclarationCheck;
 
 /**
  * {@link CheckRegistrar} for this plugin.
