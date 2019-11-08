@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.sonar.api.batch.fs.InputFile;
+
 import com.devonfw.ide.sonarqube.common.api.config.Configuration;
 
 /**
@@ -31,40 +33,42 @@ public class ConfigurationFactory {
   }
 
   /**
-   * @param fileToScan the {@link File} to analyze.
+   * @param inputFile the {@link File} to analyze.
    * @return the {@link Configuration} responsible for the project owning the given {@link File}.
    */
-  public static Configuration get(File fileToScan) {
+  public static Configuration get(InputFile inputFile) {
 
-    return INSTANCE.getConfiguration(fileToScan);
+    return INSTANCE.getConfiguration(inputFile);
   }
 
   /**
-   * @param fileToScan the {@link File} to analyze.
+   * @param inputFile the {@link File} to analyze.
    * @return the {@link Configuration} responsible for the project owning the given {@link File}.
    */
-  public Configuration getConfiguration(File fileToScan) {
+  public Configuration getConfiguration(InputFile inputFile) {
 
     if (this.lastConfigFolderPath != null) {
-      if (fileToScan.getAbsolutePath().startsWith(this.lastConfigFolderPath)) {
+      if (inputFile.uri().getPath().startsWith(this.lastConfigFolderPath)) {
         return this.path2configMap.get(this.lastConfigFolderPath);
       }
     }
-    File configFile = findConfigFile(fileToScan.getParentFile());
+    String pathOfParent = inputFile.uri().getPath().replace(inputFile.filename(), "");
+    File configFile = findConfigFile(new File(pathOfParent));
     if (configFile == null) {
-      System.out.println("********** Configuration not found starting from " + fileToScan.getAbsolutePath());
+      System.out.println("********** Configuration not found starting from " + inputFile.uri().getPath());
       return null;
     }
     System.out.println("********** Configuration found at " + configFile.getAbsolutePath());
     File configFolder = configFile.getParentFile();
     String configFolderPath = configFolder.getAbsolutePath();
     if (!configFolderPath.endsWith(File.separator)) {
-      configFolderPath = configFolderPath + File.separator;
+      configFolderPath += File.separator;
     }
     Configuration configuration = this.mapper.fromJson(configFile);
     this.path2configMap.put(configFolderPath, configuration);
     this.lastConfigFolderPath = configFolderPath;
     return configuration;
+
   }
 
   private static File findConfigFile(File folder) {
