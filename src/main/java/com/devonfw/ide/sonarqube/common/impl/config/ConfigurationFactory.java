@@ -33,8 +33,8 @@ public class ConfigurationFactory {
   }
 
   /**
-   * @param inputFile the {@link File} to analyze.
-   * @return the {@link Configuration} responsible for the project owning the given {@link File}.
+   * @param inputFile the {@link InputFile} to analyze.
+   * @return the {@link Configuration} responsible for the project owning the given {@link InputFile}.
    */
   public static Configuration get(InputFile inputFile) {
 
@@ -42,8 +42,8 @@ public class ConfigurationFactory {
   }
 
   /**
-   * @param inputFile the {@link File} to analyze.
-   * @return the {@link Configuration} responsible for the project owning the given {@link File}.
+   * @param inputFile the {@link InputFile} to analyze.
+   * @return the {@link Configuration} responsible for the project owning the given {@link InputFile}.
    */
   public Configuration getConfiguration(InputFile inputFile) {
 
