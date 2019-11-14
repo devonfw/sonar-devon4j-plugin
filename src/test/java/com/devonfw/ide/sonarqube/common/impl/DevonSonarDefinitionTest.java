@@ -24,7 +24,7 @@ public class DevonSonarDefinitionTest extends ModuleTest {
     rulesDefinition.define(context);
     RulesDefinition.Repository repository = context.repository(DevonSonarDefinition.REPOSITORY_KEY);
 
-    assertThat(repository.name()).isEqualTo("Devonfw Java Rules");
+    assertThat(repository.name()).isEqualTo("devonfw Java Rules");
     assertThat(repository.language()).isEqualTo("java");
     assertThat(repository.rules().size()).isGreaterThanOrEqualTo(28);
 

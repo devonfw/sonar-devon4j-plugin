@@ -24,16 +24,16 @@ import com.google.gson.Gson;
 public class DevonSonarDefinition implements RulesDefinition {
 
   /** Constant for the repository key used as unique ID. */
-  public static final String REPOSITORY_KEY = "Devon4j";
+  public static final String REPOSITORY_KEY = "devon4j";
 
-  private static final String RESOURCE_BASE_PATH = "/org/sonar/l10n/java/rules/squid";
+  private static final String RESOURCE_BASE_PATH = "/com/devonfw/ide/sonarqube/common/rules/devon4j";
 
   private static final Gson GSON = new Gson();
 
   @Override
   public void define(Context context) {
 
-    NewRepository repository = context.createRepository(REPOSITORY_KEY, Java.KEY).setName("Devonfw Java Rules");
+    NewRepository repository = context.createRepository(REPOSITORY_KEY, Java.KEY).setName("devonfw Java Rules");
 
     for (Class<? extends JavaCheck> check : DevonSonarRegistrar.checkClasses()) {
       addRule(repository, check);
