@@ -10,7 +10,6 @@ import org.sonar.api.server.rule.RulesDefinitionAnnotationLoader;
 import org.sonar.api.utils.AnnotationUtils;
 import org.sonar.plugins.java.Java;
 import org.sonar.plugins.java.api.JavaCheck;
-import org.sonar.squidbridge.annotations.RuleTemplate;
 
 /**
  * {@link RulesDefinition} for this plugin.
@@ -56,7 +55,7 @@ public class DevonSonarDefinition implements RulesDefinition {
     rule.setType(RuleType.CODE_SMELL);
     rule.setStatus(RuleStatus.valueOf(ruleAnnotation.status().toUpperCase(Locale.US)));
     rule.setHtmlDescription(ruleAnnotation.description());
-    rule.setTemplate(AnnotationUtils.getAnnotation(ruleClass, RuleTemplate.class) != null);
+    rule.setTemplate(AnnotationUtils.getAnnotation(ruleClass, org.sonar.check.Rule.class) != null);
   }
 
 }
