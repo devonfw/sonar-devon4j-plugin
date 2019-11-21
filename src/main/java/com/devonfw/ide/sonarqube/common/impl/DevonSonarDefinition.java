@@ -17,12 +17,12 @@ import org.sonar.plugins.java.api.JavaCheck;
 public class DevonSonarDefinition implements RulesDefinition {
 
   /** Constant for the repository key used as unique ID. */
-  public static final String REPOSITORY_KEY = "devon-java";
+  public static final String REPOSITORY_KEY = "devon4j";
 
   @Override
   public void define(Context context) {
 
-    NewRepository repository = context.createRepository(REPOSITORY_KEY, Java.KEY).setName("Devon Java Rules");
+    NewRepository repository = context.createRepository(REPOSITORY_KEY, Java.KEY).setName("Sonar Devon4j Plugin");
 
     for (Class<? extends JavaCheck> check : DevonSonarRegistrar.checkClasses()) {
       addRule(repository, check);
@@ -55,6 +55,7 @@ public class DevonSonarDefinition implements RulesDefinition {
     rule.setType(RuleType.CODE_SMELL);
     rule.setStatus(RuleStatus.valueOf(ruleAnnotation.status().toUpperCase(Locale.US)));
     rule.setHtmlDescription(ruleAnnotation.description());
+    rule.setTemplate(AnnotationUtils.getAnnotation(ruleClass, org.sonar.check.Rule.class) != null);
   }
 
 }
