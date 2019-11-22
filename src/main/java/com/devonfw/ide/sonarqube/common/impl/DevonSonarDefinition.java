@@ -15,7 +15,6 @@ import org.sonar.plugins.java.Java;
 import org.sonar.plugins.java.api.JavaCheck;
 
 import com.google.common.io.Resources;
-import com.google.gson.Gson;
 
 /**
  * {@link RulesDefinition} for this plugin.
@@ -26,8 +25,6 @@ public class DevonSonarDefinition implements RulesDefinition {
   public static final String REPOSITORY_KEY = "devon4j";
 
   private static final String RESOURCE_BASE_PATH = "/com/devonfw/ide/sonarqube/common/rules/devon4j";
-
-  private static final Gson GSON = new Gson();
 
   @Override
   public void define(Context context) {
@@ -74,18 +71,7 @@ public class DevonSonarDefinition implements RulesDefinition {
 
     rule.setType(RuleType.CODE_SMELL);
     rule.setStatus(RuleStatus.valueOf(ruleAnnotation.status().toUpperCase(Locale.US)));
-    rule.setTemplate(AnnotationUtils.getAnnotation(ruleClass, RuleTemplate.class) != null);
-  }
-
-  private RuleJsonConfig readRuleJson(String ruleKey) {
-
-    URL resource = DevonSonarDefinition.class.getResource(RESOURCE_BASE_PATH + "/" + ruleKey + "_java.json");
-    RuleJsonConfig ruleJsonConfig;
-    if ((ruleJsonConfig = GSON.fromJson(readResource(resource), RuleJsonConfig.class)) != null) {
-      return ruleJsonConfig;
-    } else {
-      return null;
-    }
+    rule.setTemplate(AnnotationUtils.getAnnotation(ruleClass, org.sonar.check.Rule.class) != null);
   }
 
   private String readRuleHtml(String ruleKey) {
