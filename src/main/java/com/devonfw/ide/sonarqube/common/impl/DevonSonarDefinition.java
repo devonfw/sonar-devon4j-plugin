@@ -13,7 +13,6 @@ import org.sonar.api.server.rule.RulesDefinitionAnnotationLoader;
 import org.sonar.api.utils.AnnotationUtils;
 import org.sonar.plugins.java.Java;
 import org.sonar.plugins.java.api.JavaCheck;
-import org.sonar.squidbridge.annotations.RuleTemplate;
 
 import com.google.common.io.Resources;
 import com.google.gson.Gson;

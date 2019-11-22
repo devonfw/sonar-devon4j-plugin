@@ -9,18 +9,17 @@
   <packaging>sonar-plugin</packaging>
   <name>${project.artifactId}</name>
   <description>SonarQube Plugin with rules for static code analysis to validate architecture.</description>
-  <url>http://oasp.io/oasp4j/maven/oasp4j</url>
+  <url>https://github.com/devonfw/sonar-devon4j-plugin#sonar-devon4j-plugin</url>
   <inceptionYear>2017</inceptionYear>
 
   <properties>
     <java.version>1.8</java.version>
-    <java.plugin.version>4.7.1.9272</java.plugin.version>
-    <sonar.version>6.4</sonar.version>
+    <sonar.version>7.9.1</sonar.version>
     <devon4j.version>3.0.0</devon4j.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <java.plugin.version>4.7.1.9272</java.plugin.version>
-    <sslr.version>1.21</sslr.version>
+    <java.plugin.version>5.14.0.18788</java.plugin.version>
+    <sslr.version>1.23</sslr.version>
     <gson.version>2.6.2</gson.version>
   </properties>
 
@@ -94,7 +93,7 @@
     <dependency>
       <groupId>org.sonarsource.java</groupId>
       <artifactId>sonar-java-plugin</artifactId>
-      <version>4.14.0.11784</version>
+      <version>${java.plugin.version}</version>
       <scope>provided</scope>
     </dependency>
 
@@ -118,7 +117,7 @@
     <dependency>
       <groupId>org.codehaus.sonar-plugins.java</groupId>
       <artifactId>java-checks</artifactId>
-      <version>1.1</version>
+      <version>3.2</version>
       <scope>test</scope>
     </dependency>
 
@@ -132,9 +131,9 @@
         <version>1.17</version>
         <extensions>true</extensions>
         <configuration>
-          <pluginKey>devon-java</pluginKey>
-          <pluginName>Devon Java Rules</pluginName>
-          <pluginClass>com.devonfw.ide.sonarqube.common.impl.DevonSonarPlugin</pluginClass>
+          <pluginKey>devon4j</pluginKey>
+          <pluginName>Sonar Devon4j Plugin</pluginName>
+          <pluginClass>com.devonfw.ide.sonarqube.common.impl.SonarDevon4jPlugin</pluginClass>
           <sonarLintSupported>true</sonarLintSupported>
           <sonarQubeMinVersion>5.6</sonarQubeMinVersion> <!-- allow to depend on API 6.x but run on LTS -->
         </configuration>
@@ -258,7 +257,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-gpg-plugin</artifactId>
-          <version>1.5</version>
+          <version>1.6</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -266,9 +265,9 @@
           <version>2.2</version>
         </plugin>
         <plugin>
-          <groupId>org.codehaus.mojo</groupId>
+          <groupId>org.sonarsource.scanner.maven</groupId>
           <artifactId>sonar-maven-plugin</artifactId>
-          <version>3.4.0.905</version>
+          <version>3.7.0.1746</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -283,7 +282,7 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>flatten-maven-plugin</artifactId>
-          <version>1.0.0</version>
+          <version>1.0.1</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -293,7 +292,7 @@
         <plugin>
           <groupId>org.owasp</groupId>
           <artifactId>dependency-check-maven</artifactId>
-          <version>1.3.6</version>
+          <version>5.1.0</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -381,16 +380,16 @@
 
   <issueManagement>
     <system>GitHub</system>
-    <url>https://github.com/oasp/sonarqube-devon-plugin/issues</url>
+    <url>https://github.com/devonfw/sonar-devon4j-plugin/issues</url>
   </issueManagement>
 
   <scm>
-    <url>https://github.com/oasp/sonarqube-devon-plugin/tree/develop</url>
+    <url>https://github.com/devonfw/sonar-devon4j-plugin/tree/develop</url>
   </scm>
 
   <organization>
-    <name>OASP-Team</name>
-    <url>http://oasp.io/oasp4j/maven/team-list.html</url>
+    <name>devonfw</name>
+    <url>https://devonfw.com</url>
   </organization>
 
   <developers>
@@ -426,29 +425,18 @@
 
   <licenses>
     <license>
-      <name>Apache Software Licenese</name>
-      <url>http://oasp.github.io/terms-of-use.html</url>
+      <name>Apache Software License, Version 2.0</name>
+      <url>https://github.com/devonfw/sonar-devon4j-plugin/blob/master/LICENSE</url>
       <distribution>repo</distribution>
       <comments/>
     </license>
   </licenses>
 
   <distributionManagement>
-    <repository>
-      <id>oasp.releases</id>
-      <name>OASP Releases</name>
-      <url>http://oasp-ci.cloudapp.net/nexus/content/repositories/releases/</url>
-    </repository>
-    <snapshotRepository>
-      <id>oasp.snapshots</id>
-      <name>OASP Snapshots</name>
-      <url>http://oasp-ci.cloudapp.net/nexus/content/repositories/snapshots/</url>
-    </snapshotRepository>
     <site>
-      <id>oasp-site</id>
-      <url>file://${user.dir}/target/oasp4j/maven</url>
+      <id>site</id>
+      <url>file://${user.dir}/target/devon4j/maven</url>
     </site>
   </distributionManagement>
-
 
 </project>
