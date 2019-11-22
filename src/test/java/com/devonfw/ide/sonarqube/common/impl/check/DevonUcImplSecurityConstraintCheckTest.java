@@ -12,9 +12,9 @@ public class DevonUcImplSecurityConstraintCheckTest {
    * Test of {@link DevonUcImplSecurityConstraintCheckTest}
    */
   @Test
-  public void case1() {
+  public void nonCompliantCase() {
 
-    JavaCheckVerifier.verify("src/test/files/DevonUcImplSecurityConstraintCheckCase1.java",
+    JavaCheckVerifier.verify("src/test/files/DevonUcImplSecurityConstraintCheckNonCompliantCase.java",
         new DevonUcImplSecurityConstraintCheck());
   }
 
@@ -22,9 +22,29 @@ public class DevonUcImplSecurityConstraintCheckTest {
    * Test of {@link DevonUcImplSecurityConstraintCheckTest}
    */
   @Test
-  public void case2() {
+  public void denyAllCase() {
 
-    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonUcImplSecurityConstraintCheckCase2.java",
+    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonUcImplSecurityConstraintCheckDenyAllCase.java",
+        new DevonUcImplSecurityConstraintCheck());
+  }
+
+  /**
+   * Test of {@link DevonUcImplSecurityConstraintCheckTest}
+   */
+  @Test
+  public void rolesAllowedCase() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonUcImplSecurityConstraintCheckRolesAllowedCase.java",
+        new DevonUcImplSecurityConstraintCheck());
+  }
+
+  /**
+   * Test of {@link DevonUcImplSecurityConstraintCheckTest}
+   */
+  @Test
+  public void permitAllCase() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonUcImplSecurityConstraintCheckPermitAllCase.java",
         new DevonUcImplSecurityConstraintCheck());
   }
 
