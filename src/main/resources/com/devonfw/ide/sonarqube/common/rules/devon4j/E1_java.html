@@ -1,0 +1,28 @@
+<p>
+    This rule checks that the @Transactional annotation is properly used from JEE.
+    The use of the org.springframework.transaction.annotation.Transactional annotation is discouraged,
+    use the JEE standard javax.transaction.Transactional. Do not use this annotation in the api scope but to annotate implementations.
+</p>
+<h2>Noncompliant Code Examples</h2>
+<pre>
+    package com.devonfw.ide.sonarqube.logic.impl;
+
+    <span style='color: red'>import org.springframework.transaction.annotation.Transactional;</span>
+
+    public class MyClass {}
+</pre>
+<pre>
+    package com.devonfw.ide.sonarqube.common.<span style='color: red'>api</span>;
+
+    <span style='color: red'>import javax.transaction.Transactional;</span>
+
+    public class MyClass {}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+    package com.devonfw.ide.sonarqube.logic.<span style='color: green'>impl</span>;
+
+    <span style='color: green'>import javax.transaction.Transactional;</span>
+
+    public class MyClass {}
+</pre>

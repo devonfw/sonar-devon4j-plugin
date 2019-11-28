@@ -9,8 +9,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyChec
 /**
  * {@link DevonArchitecture3rdPartyCheck} verifying that the {@code JPA} is properly used.
  */
-@Rule(key = "Devon4j:E3", name = "Devon 3rd Party JPA Check", //
-    description = "Verify that JPA is used in data-access and optionally in common for embeddables.", //
+@Rule(key = "E3", name = "Devon 3rd Party JPA Check", //
     priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "thirdparty" })
 public class DevonArchitecture3rdPartyJpaCheck extends DevonArchitecture3rdPartyCheck {
 

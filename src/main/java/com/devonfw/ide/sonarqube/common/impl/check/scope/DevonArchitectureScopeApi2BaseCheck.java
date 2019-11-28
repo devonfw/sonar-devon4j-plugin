@@ -9,8 +9,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
 /**
  * {@link DevonArchitectureCheck} to verify that code from api scope does not depend on base scope.
  */
-@Rule(key = "Devon4j:S2", name = "Devon Scope Api-Base Check", //
-    description = "Verify that api scope does not depend on base scope.", //
+@Rule(key = "S2", name = "Devon Scope Api-Base Check", //
     priority = Priority.MAJOR, tags = { "architecture-violation", "devonfw", "scope" })
 public class DevonArchitectureScopeApi2BaseCheck extends DevonArchitectureCheck {
 

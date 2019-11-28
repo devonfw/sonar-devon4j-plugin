@@ -1,0 +1,17 @@
+<p>This rule checks that Objects is used from JDK.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+    package com.devonfw.ide.sonarqube.dataaccess.api;
+
+    <span style='color: red'>import com.google.common.base.Objects;</span>
+
+    public class MyClass {}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+    package com.devonfw.ide.sonarqube.dataaccess.api;
+
+    <span style='color: green'>import java.util.Objects;</span>
+
+    public class MyClass {}
+</pre>
