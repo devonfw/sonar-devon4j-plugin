@@ -20,11 +20,10 @@ import org.sonar.plugins.java.api.tree.TypeTree;
 import com.devonfw.ide.sonarqube.common.api.JavaType;
 
 /**
- * {@link DevonArchitecture3rdPartyCheck} ...
+ * {@link DevonArchitecture3rdPartyCheck} verifies that all Use-Case implementation methods are annotated with a
+ * security constraint from javax.annotation.security.
  */
-@Rule(key = "Devon4j:E7", name = "Devon Uc Impl Security Constraint Check", //
-    description = "Verify that all Use-Case implementation methods " //
-        + "are annotated with a security constraint", //
+@Rule(key = "E7", name = "Devon Uc Impl Security Constraint Check", //
     priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw" })
 public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
 
