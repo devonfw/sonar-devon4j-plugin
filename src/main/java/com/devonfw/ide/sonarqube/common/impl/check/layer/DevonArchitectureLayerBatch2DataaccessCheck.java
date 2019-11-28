@@ -9,8 +9,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
 /**
  * {@link DevonArchitectureCheck} verifying that batch layer does not depend dataaccess layer.
  */
-@Rule(key = "Devon4j:L11", name = "Devon Layer Batch-Dataaccess Check", //
-    description = "Verify that batch layer does not depend on dataaccess layer.", //
+@Rule(key = "L11", name = "Devon Layer Batch-Dataaccess Check", //
     priority = Priority.MAJOR, tags = { "architecture-violation", "devonfw", "layer" })
 public class DevonArchitectureLayerBatch2DataaccessCheck extends DevonArchitectureCheck {
 
