@@ -15,8 +15,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureComponentChe
  * {@link DevonArchitectureComponentCheck} verifying that a {@link Component} itself is properly defined in
  * {@link Architecture} and that the general {@link Component#getDependencies() dependencies} are not violated.
  */
-@Rule(key = "Devon4j:C1", name = "Devon Component Declaration Check", //
-    description = "Verify component is properly declared in architecture.json file.", //
+@Rule(key = "C1", name = "Devon Component Declaration Check", //
     priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "component" })
 public class DevonArchitectureComponentDeclarationCheck extends DevonArchitectureComponentCheck {
 

@@ -8,9 +8,7 @@ import org.sonar.plugins.java.api.JavaFileScannerContext;
  * {@link DevonNamingConventionClassExtendsClassCheck} verifying that non-abstract classes extending AbstractDao are
  * following the devonfw naming convention by ending with DaoImpl.
  */
-@Rule(key = "Devon4j:N2", name = "Devon naming conventions of inheriting classes (DaoImpl).", //
-    description = "Verify that non-abstract Classes extending AbstractDao shall end with DaoImpl. In addition, classes "
-        + "that inherit from a class with the suffix Dao must also have Dao as their suffix.", //
+@Rule(key = "N2", name = "Devon Naming Check of DAO Implementations", //
     priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "naming" })
 public class DevonNamingConventionClassExtendsClassDaoCheck extends DevonNamingConventionClassExtendsClassCheck {
 
