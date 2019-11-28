@@ -1,0 +1,12 @@
+<p>
+    This rule checks that dataaccess layer does not depend on logic layer.
+    From the dataaccess layer, only dependencies to the common layer are allowed.
+</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+    package com.devonfw.ide.sonarqube.<span style='color: blue'>dataaccess</span>.api;
+
+    import com.devonfw.ide.sonarqube.<span style='color: red'>logic</span>.api.Bar;
+    
+    public class MyClass {}
+</pre>

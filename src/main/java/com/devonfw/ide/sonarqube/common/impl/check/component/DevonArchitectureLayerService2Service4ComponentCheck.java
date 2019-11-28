@@ -11,8 +11,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureComponentChe
  * {@link DevonArchitectureComponentCheck} verifying that the service layer does not depend on the service layer of
  * another {@link Component}.
  */
-@Rule(key = "Devon4j:C3", name = "Devon Layer Service-Service Component Check", //
-    description = "Verify that service layer does not depend service layer of another component.", //
+@Rule(key = "C3", name = "Devon Layer Service-Service Component Check", //
     priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "component" })
 public class DevonArchitectureLayerService2Service4ComponentCheck extends DevonArchitectureComponentCheck {
 

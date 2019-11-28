@@ -7,8 +7,7 @@ import org.sonar.check.Rule;
  * {@link DevonNamingConventionClassExtendsClassCheck} verifying that classes directly extending AbstractTo are
  * following the devonfw naming convention by ending with To.
  */
-@Rule(key = "Devon4j:N7", name = "Devon Naming Convention Check", //
-    description = "Classes extending AbstractTo but neither AbstractEto nor AbstractCto shall end with To.", //
+@Rule(key = "N7", name = "Devon Naming Check of Transfer Object Classes", //
     priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "naming" })
 public class DevonNamingConventionClassExtendsClassToCheck extends DevonNamingConventionClassExtendsClassCheck {
 
