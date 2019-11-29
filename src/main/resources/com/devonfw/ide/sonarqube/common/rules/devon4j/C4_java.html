@@ -1,0 +1,16 @@
+<p>
+    This rule checks that the service layer of one component does not depend on the logic layer of another component.
+    Allowed dependencies from the service layer:
+    <ul type='disc'>
+        <li>Logic layer of the same component</li>
+        <li>Common layer</li>
+    </ul>
+</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+    package com.devonfw.ide.sonarqube.<span style='color: blue'>compA.service</span>.api;
+
+    import com.devonfw.ide.sonarqube.<span style='color: red'>compB.logic</span>.api.Bar;
+
+    public class MyClass {}
+</pre>

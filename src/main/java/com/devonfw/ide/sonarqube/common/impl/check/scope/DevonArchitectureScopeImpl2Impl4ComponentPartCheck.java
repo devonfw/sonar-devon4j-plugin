@@ -10,8 +10,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
  * {@link DevonArchitectureCheck} to verify that code from impl scope does not depend on impl scope of other component
  * part.
  */
-@Rule(key = "Devon4j:S8", name = "Devon Scope Impl-Impl Component-Part Check", //
-    description = "Verify that impl scope does not depend on impl scope from another component part.", //
+@Rule(key = "S8", name = "Devon Scope Impl-Impl Component-Part Check", //
     priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "scope" })
 public class DevonArchitectureScopeImpl2Impl4ComponentPartCheck extends DevonArchitectureCheck {
 

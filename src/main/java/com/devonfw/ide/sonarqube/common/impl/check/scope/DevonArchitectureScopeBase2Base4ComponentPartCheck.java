@@ -10,8 +10,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
  * {@link DevonArchitectureCheck} to verify that code from base scope does not depend on base scope from other component
  * part.
  */
-@Rule(key = "Devon4j:S7", name = "Devon Scope Base-Base Component-Part Check", //
-    description = "Verify that base scope does not depend on base scope from another component part.", //
+@Rule(key = "S7", name = "Devon Scope Base-Base Component-Part Check", //
     priority = Priority.MAJOR, tags = { "architecture-violation", "devonfw", "scope" })
 public class DevonArchitectureScopeBase2Base4ComponentPartCheck extends DevonArchitectureCheck {
 
