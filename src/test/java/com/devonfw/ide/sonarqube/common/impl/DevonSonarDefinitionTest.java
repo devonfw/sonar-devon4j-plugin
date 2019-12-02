@@ -28,14 +28,16 @@ public class DevonSonarDefinitionTest extends ModuleTest {
     assertThat(repository.language()).isEqualTo("java");
     assertThat(repository.rules().size()).isGreaterThanOrEqualTo(28);
 
-    // adding the checks number
-
     assertAllRuleParametersHaveDescription(repository);
   }
 
   private void assertAllRuleParametersHaveDescription(Repository repository) {
 
     for (Rule rule : repository.rules()) {
+      String ruleKey = rule.key();
+      assertThat(ruleKey).isNotEmpty();
+      assertThat(rule).isNotNull();
+      assertThat(repository.rule(ruleKey).htmlDescription()).isNotNull();
       for (Param param : rule.params()) {
         assertThat(param.description()).as("description for " + param.key()).isNotEmpty();
       }
