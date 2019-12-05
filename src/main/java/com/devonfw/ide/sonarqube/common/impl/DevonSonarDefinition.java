@@ -71,7 +71,6 @@ public class DevonSonarDefinition implements RulesDefinition {
 
     rule.setType(RuleType.CODE_SMELL);
     rule.setStatus(RuleStatus.valueOf(ruleAnnotation.status().toUpperCase(Locale.US)));
-    rule.setTemplate(AnnotationUtils.getAnnotation(ruleClass, org.sonar.check.Rule.class) != null);
   }
 
   private String readRuleHtml(String ruleKey) {
