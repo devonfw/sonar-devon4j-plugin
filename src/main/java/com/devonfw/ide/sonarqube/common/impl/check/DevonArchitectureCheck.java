@@ -1,5 +1,8 @@
 package com.devonfw.ide.sonarqube.common.impl.check;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.BaseTreeVisitor;
@@ -198,6 +201,26 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
     QualifiedNameVisitor qnameVisitor = new QualifiedNameVisitor();
     tree.accept(qnameVisitor);
     return qnameVisitor.getQualifiedName();
+  }
+
+  /**
+   * Returns all methods of the given tree.
+   *
+   * @param tree Tree currently being investigated.
+   * @return List of MethodTree.
+   */
+  protected List<MethodTree> getMethodsOfTree(ClassTree tree) {
+
+    List<Tree> membersOfTree = tree.members();
+    List<MethodTree> methodsOfTree = new ArrayList<>();
+
+    for (Tree member : membersOfTree) {
+      if (member.is(Tree.Kind.METHOD)) {
+        methodsOfTree.add((MethodTree) member);
+      }
+    }
+
+    return methodsOfTree;
   }
 
   /**

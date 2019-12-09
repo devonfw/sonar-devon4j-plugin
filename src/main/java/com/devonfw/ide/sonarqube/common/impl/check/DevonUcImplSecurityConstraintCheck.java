@@ -1,11 +1,9 @@
 package com.devonfw.ide.sonarqube.common.impl.check;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
@@ -83,40 +81,21 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
   protected TypeTree getUcInterface(ClassTree tree) {
 
     List<TypeTree> interfaces = tree.superInterfaces();
-    String className = tree.simpleName().name();
-    Pattern interfaceRegEx = Pattern.compile(className.replaceAll("Impl", ""));
 
     if (interfaces.isEmpty()) {
       return null;
     }
 
+    String className = tree.simpleName().name();
+    String interfaceName = className.replace("Impl", "");
+
     for (TypeTree interfaceTree : interfaces) {
-      if (interfaceRegEx.matcher(interfaceTree.toString()).matches()) {
+      if (interfaceTree.toString().equals(interfaceName)) {
         return interfaceTree;
       }
     }
 
     return null;
-  }
-
-  /**
-   * Returns all methods of the given tree.
-   *
-   * @param tree Tree currently being investigated.
-   * @return List of MethodTree.
-   */
-  protected List<MethodTree> getMethodsOfTree(ClassTree tree) {
-
-    List<Tree> membersOfTree = tree.members();
-    List<MethodTree> methodsOfTree = new ArrayList<>();
-
-    for (Tree member : membersOfTree) {
-      if (member.is(Tree.Kind.METHOD)) {
-        methodsOfTree.add((MethodTree) member);
-      }
-    }
-
-    return methodsOfTree;
   }
 
   private boolean isMethodProperlyAnnotated(MethodTree method) {
@@ -126,13 +105,17 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
     boolean hasRequiredAnnotation = false;
 
     for (AnnotationTree annotation : annotationsOfMethod) {
-      if (annotation.annotationType().toString().equals("Override")) {
+
+      String annotationType = annotation.annotationType().toString();
+
+      if (annotationType.equals("Override")) {
         hasOverrideAnnotation = true;
       }
 
-      if (REQUIRED_ANNOTATIONS.contains(annotation.annotationType().toString())) {
+      if (REQUIRED_ANNOTATIONS.contains(annotationType)) {
         hasRequiredAnnotation = true;
       }
+
     }
 
     if ((!hasOverrideAnnotation) || (hasOverrideAnnotation && hasRequiredAnnotation)) {
@@ -143,13 +126,6 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
 
   }
 
-  /**
-   * Called in case of a dependency that is devonfw compliant.
-   *
-   * @param source the {@link JavaType} to analyze.
-   * @param target the {@link JavaType} used by the source type (as dependency).
-   * @return the message of an issue to create due to an undesired dependency or {@code null} if dependency is fine.
-   */
   @Override
   protected String checkDependency(JavaType source, JavaType target) {
 
