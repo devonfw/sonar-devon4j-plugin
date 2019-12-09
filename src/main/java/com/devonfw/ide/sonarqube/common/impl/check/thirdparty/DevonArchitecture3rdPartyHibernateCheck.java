@@ -48,10 +48,10 @@ public class DevonArchitecture3rdPartyHibernateCheck extends DevonArchitecture3r
           return "Hibernate envers internals (" + target + ") should never be used directly.";
         }
 
-        if (!source.isScopeImpl()) {
-          return "Hibernate internals (" + target + ") should only be used in impl scope of dataaccess layer.";
-        }
+      }
 
+      if (!source.isScopeImpl()) {
+        return "Hibernate internals (" + target + ") should only be used in impl scope of dataaccess layer.";
       }
 
     }
