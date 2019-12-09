@@ -105,7 +105,7 @@ Finally, there are rules checking the proper usage of third-party library code:
 
 === Naming Convention Rules
 
-With the next update, we will add rules checking for adherence to our naming convention rules:
+With our 3.2.0 release, we added rules checking for adherence to our naming convention rules:
 
 * N1. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/naming/DevonNamingConventionClassExtendsClassCtoCheck.java[DevonNamingConventionClassExtendsClassCtoCheck]
 * N2. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/naming/DevonNamingConventionClassExtendsClassDaoCheck.java[DevonNamingConventionClassExtendsClassDaoCheck]
