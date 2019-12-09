@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.sonar.api.batch.fs.InputFile;
-
 import com.devonfw.ide.sonarqube.common.api.config.Configuration;
 
 /**
@@ -33,29 +31,30 @@ public class ConfigurationFactory {
   }
 
   /**
-   * @param inputFile the {@link InputFile} to analyze.
+   * @param path to the file to analyze.
    * @return the {@link Configuration} responsible for the project owning the given {@link File}.
    */
-  public static Configuration get(InputFile inputFile) {
+  public static Configuration get(String path) {
 
-    return INSTANCE.getConfiguration(inputFile);
+    return INSTANCE.getConfiguration(path);
   }
 
   /**
-   * @param inputFile the {@link InputFile} to analyze.
+   * @param path to the file to analyze.
    * @return the {@link Configuration} responsible for the project owning the given {@link File}.
    */
-  public Configuration getConfiguration(InputFile inputFile) {
+  public Configuration getConfiguration(String path) {
 
     if (this.lastConfigFolderPath != null) {
-      if (inputFile.uri().getPath().startsWith(this.lastConfigFolderPath)) {
+      if (path.startsWith(this.lastConfigFolderPath)) {
         return this.path2configMap.get(this.lastConfigFolderPath);
       }
     }
-    String pathOfParent = inputFile.uri().getPath().replace(inputFile.filename(), "");
+    int lastSlash = path.lastIndexOf("/");
+    String pathOfParent = path.substring(0, lastSlash);
     File configFile = findConfigFile(new File(pathOfParent));
     if (configFile == null) {
-      System.out.println("********** Configuration not found starting from " + inputFile.uri().getPath());
+      System.out.println("********** Configuration not found starting from " + path);
       return null;
     }
     System.out.println("********** Configuration found at " + configFile.getAbsolutePath());
