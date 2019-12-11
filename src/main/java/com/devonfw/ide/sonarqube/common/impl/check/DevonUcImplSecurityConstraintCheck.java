@@ -12,6 +12,7 @@ import org.sonar.plugins.java.api.tree.AnnotationTree;
 import org.sonar.plugins.java.api.tree.ClassTree;
 import org.sonar.plugins.java.api.tree.CompilationUnitTree;
 import org.sonar.plugins.java.api.tree.MethodTree;
+import org.sonar.plugins.java.api.tree.ModifierKeywordTree;
 import org.sonar.plugins.java.api.tree.Tree;
 import org.sonar.plugins.java.api.tree.TypeTree;
 
@@ -28,11 +29,6 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
   private static final Set<String> REQUIRED_ANNOTATIONS = new HashSet<>(
       Arrays.asList("DenyAll", "PermitAll", "RolesAllowed"));
 
-  /**
-   * Method called after parsing and semantic analysis has been done on file.
-   *
-   * @param context Context of analysis containing the parsed tree.
-   */
   @Override
   public void scanFile(JavaFileScannerContext context) {
 
@@ -45,7 +41,7 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
 
     List<MethodTree> methodsOfTree = getMethodsOfTree(tree);
     for (MethodTree method : methodsOfTree) {
-      if (!isMethodProperlyAnnotated(method)) {
+      if (isMethodPublic(method) && !isMethodProperlyAnnotated(method)) {
         context.reportIssue(this, method,
             "This method is not properly annotated. "
                 + "Please use one of the following annotations on Use-Case implementation methods: "
@@ -55,8 +51,8 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
   }
 
   /**
-   * @param context Context of analysis containing the parsed tree.
-   * @return Class tree.
+   * @param context of analysis containing the parsed tree.
+   * @return ClassTree instance.
    */
   protected ClassTree getClassTree(JavaFileScannerContext context) {
 
@@ -75,7 +71,7 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
   /**
    * Returns the Uc interface implemented by the checked class, if there is one.
    *
-   * @param tree Tree currently being investigated.
+   * @param tree currently being investigated.
    * @return TypeTree instance of the Uc interface.
    */
   protected TypeTree getUcInterface(ClassTree tree) {
@@ -98,6 +94,12 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
     return null;
   }
 
+  /**
+   * Checks if a method with an override annotation also has one of the required security annotations.
+   *
+   * @param method to be checked
+   * @return true or false depending on whether method is properly annotated or not
+   */
   private boolean isMethodProperlyAnnotated(MethodTree method) {
 
     List<AnnotationTree> annotationsOfMethod = method.modifiers().annotations();
@@ -118,12 +120,24 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
 
     }
 
-    if ((!hasOverrideAnnotation) || (hasOverrideAnnotation && hasRequiredAnnotation)) {
-      return true;
-    } else {
-      return false;
+    return ((!hasOverrideAnnotation) || (hasOverrideAnnotation && hasRequiredAnnotation));
+  }
+
+  /**
+   * Checks if a method has a public modifier.
+   *
+   * @param method to be checked
+   * @return true or false
+   */
+  private boolean isMethodPublic(MethodTree method) {
+
+    for (ModifierKeywordTree modifier : method.modifiers().modifiers()) {
+      if (modifier.modifier().toString().equals("PUBLIC")) {
+        return true;
+      }
     }
 
+    return false;
   }
 
   @Override
