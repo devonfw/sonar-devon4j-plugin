@@ -14,12 +14,11 @@
 
   <properties>
     <java.version>1.8</java.version>
-    <java.plugin.version>4.7.1.9272</java.plugin.version>
-    <sonar.version>6.4</sonar.version>
+    <sonar.version>7.9.1</sonar.version>
     <devon4j.version>3.0.0</devon4j.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <java.plugin.version>4.7.1.9272</java.plugin.version>
+    <java.plugin.version>5.14.0.18788</java.plugin.version>
     <sslr.version>1.21</sslr.version>
     <gson.version>2.6.2</gson.version>
   </properties>
@@ -94,7 +93,7 @@
     <dependency>
       <groupId>org.sonarsource.java</groupId>
       <artifactId>sonar-java-plugin</artifactId>
-      <version>4.14.0.11784</version>
+      <version>${java.plugin.version}</version>
       <scope>provided</scope>
     </dependency>
 
@@ -118,7 +117,7 @@
     <dependency>
       <groupId>org.codehaus.sonar-plugins.java</groupId>
       <artifactId>java-checks</artifactId>
-      <version>1.1</version>
+      <version>3.2</version>
       <scope>test</scope>
     </dependency>
 
@@ -266,9 +265,9 @@
           <version>2.2</version>
         </plugin>
         <plugin>
-          <groupId>org.codehaus.mojo</groupId>
+          <groupId>org.sonarsource.scanner.maven</groupId>
           <artifactId>sonar-maven-plugin</artifactId>
-          <version>3.4.0.905</version>
+          <version>3.7.0.1746</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
