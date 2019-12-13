@@ -124,8 +124,11 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
 
   private void checkIfDisallowed(String className, Tree tree) {
 
-    int lastDot = className.lastIndexOf('.');
+    if (!isTreeAndSourcePackageValid(tree)) {
+      return;
+    }
 
+    int lastDot = className.lastIndexOf('.');
     if (lastDot <= 0) {
       return;
     }
@@ -135,10 +138,6 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
     Devon4jPackage targetPkg = Devon4jPackage.of(pkgName);
     JavaType targetType = new JavaType(targetPkg, simpleName);
     String warning = null;
-
-    if (!isTreeAndSourcePackageValid(tree)) {
-      return;
-    }
 
     if (!targetPkg.isValid() || (targetPkg.getRoot() == null)) {
       if (isCheckDependencyOnInvalidPackage()) {
