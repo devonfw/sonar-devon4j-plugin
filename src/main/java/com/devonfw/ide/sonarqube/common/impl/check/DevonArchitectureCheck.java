@@ -124,7 +124,7 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
 
   private void checkIfDisallowed(String className, Tree tree) {
 
-    if (!isTreeAndSourcePackageValid(tree)) {
+    if (!isTreeAndSourcePackageValid(tree) || className == null) {
       return;
     }
 
