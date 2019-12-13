@@ -19,14 +19,11 @@ public class DevonArchitecture3rdPartyDatatypeMappingsCheck extends DevonArchite
   @Override
   protected String checkDependency(JavaType source, JavaType target) {
 
-    if (target.toString().equals("org.hibernate.Type")) {
-      return "Use the javax.persistence.Converter annotation on a custom converter "
-          + "which implements the javax.persistence.AttributeConverter "
-          + "instead of the org.hibernate.Type annotation";
-    } else if (target.toString().equals("javax.persistence.Convert")) {
-      return "Use the javax.persistence.Converter annotation on a custom converter "
-          + "which implements the javax.persistence.AttributeConverter "
-          + "instead of the javax.persistence.Convert annotation";
+    String targetString = target.toString();
+
+    if (targetString.equals("org.hibernate.Type") || targetString.equals("javax.persistence.Convert")) {
+      return "Use the javax.persistence.Converter annotation on a custom converter"
+          + " which implements the javax.persistence.AttributeConverter instead of the " + targetString + " annotation";
     }
 
     return null;
