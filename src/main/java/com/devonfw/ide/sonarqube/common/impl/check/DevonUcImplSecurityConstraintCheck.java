@@ -12,7 +12,6 @@ import org.sonar.plugins.java.api.tree.AnnotationTree;
 import org.sonar.plugins.java.api.tree.ClassTree;
 import org.sonar.plugins.java.api.tree.CompilationUnitTree;
 import org.sonar.plugins.java.api.tree.MethodTree;
-import org.sonar.plugins.java.api.tree.ModifierKeywordTree;
 import org.sonar.plugins.java.api.tree.Tree;
 import org.sonar.plugins.java.api.tree.TypeTree;
 
@@ -121,23 +120,6 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
     }
 
     return ((!hasOverrideAnnotation) || (hasOverrideAnnotation && hasRequiredAnnotation));
-  }
-
-  /**
-   * Checks if a method has a public modifier.
-   *
-   * @param method to be checked
-   * @return true or false
-   */
-  private boolean isMethodPublic(MethodTree method) {
-
-    for (ModifierKeywordTree modifier : method.modifiers().modifiers()) {
-      if (modifier.modifier().toString().equals("PUBLIC")) {
-        return true;
-      }
-    }
-
-    return false;
   }
 
   @Override

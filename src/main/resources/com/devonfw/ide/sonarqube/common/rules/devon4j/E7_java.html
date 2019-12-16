@@ -12,7 +12,7 @@
     public class TestInterfaceImpl implements TestInterface {
 
         @Override                                 
-        private boolean testBoolMethod() {
+        public boolean testBoolMethod() {
             return true;
         }
     }
@@ -20,33 +20,14 @@
 <h2>Compliant Solutions</h2>
 <pre>
     public class TestClassImpl implements TestClass {
-
-        @Override
-        @PermitAll
-        public void testMethod() {
-
-        }
-    }
-</pre>
-<br>
-<pre>
-    public class TestClassImpl implements TestClass {
-
-        @Override
-        @DenyAll
-        public void testMethod() {
-
-        }  
-    }
-</pre>
-<br>
-<pre>
-    public class TestClassImpl implements TestClass {
     
         @Override
-        @RolesAllowed("Administrator")
+        @RolesAllowed(ApplicationAccessControlConfig.PERMISSION_SAVE_ENTITY)
         public void ucImplMethod() {
     
         }
     }
 </pre>
+<p>
+    Note that while @DenyAll and @RolesAllowed are technically allowed, they should only be used in exceptional cases.
+</p>

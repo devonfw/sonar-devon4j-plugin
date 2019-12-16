@@ -11,6 +11,8 @@ import org.sonar.plugins.java.api.tree.CompilationUnitTree;
 import org.sonar.plugins.java.api.tree.IdentifierTree;
 import org.sonar.plugins.java.api.tree.ImportTree;
 import org.sonar.plugins.java.api.tree.MethodTree;
+import org.sonar.plugins.java.api.tree.Modifier;
+import org.sonar.plugins.java.api.tree.ModifierKeywordTree;
 import org.sonar.plugins.java.api.tree.NewClassTree;
 import org.sonar.plugins.java.api.tree.PackageDeclarationTree;
 import org.sonar.plugins.java.api.tree.Tree;
@@ -221,6 +223,23 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
     }
 
     return methodsOfTree;
+  }
+
+  /**
+   * Checks if a method has a public modifier.
+   *
+   * @param method to be checked
+   * @return true or false
+   */
+  protected boolean isMethodPublic(MethodTree method) {
+
+    for (ModifierKeywordTree modifier : method.modifiers().modifiers()) {
+      if (modifier.modifier() == Modifier.PUBLIC) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   /**
