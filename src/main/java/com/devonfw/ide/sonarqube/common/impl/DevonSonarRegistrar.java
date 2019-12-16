@@ -7,7 +7,6 @@ import org.sonar.plugins.java.api.CheckRegistrar;
 import org.sonar.plugins.java.api.JavaCheck;
 import org.sonarsource.api.sonarlint.SonarLintSide;
 
-import com.devonfw.ide.sonarqube.common.impl.check.DevonUcImplSecurityConstraintCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.component.DevonArchitectureComponentDeclarationCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.component.DevonArchitectureComponentDependencyCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.component.DevonArchitectureLayerBatch2Logic4ComponentCheck;
@@ -45,6 +44,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.scope.DevonArchitectureScopeB
 import com.devonfw.ide.sonarqube.common.impl.check.scope.DevonArchitectureScopeBase2ImplCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.scope.DevonArchitectureScopeImpl2Base4ComponentPartCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.scope.DevonArchitectureScopeImpl2Impl4ComponentPartCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.security.DevonUcImplSecurityConstraintCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyDatatypeMappingsCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyHibernateCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyJpaCheck;
@@ -106,7 +106,6 @@ public class DevonSonarRegistrar implements CheckRegistrar {
     checks.add(DevonArchitecture3rdPartyHibernateCheck.class); // E4
     checks.add(DevonArchitecture3rdPartyObjectsCheck.class); // E5
     checks.add(DevonArchitecture3rdPartyDatatypeMappingsCheck.class); // E6
-    checks.add(DevonUcImplSecurityConstraintCheck.class); // E7
 
     checks.add(DevonNamingConventionClassExtendsClassCtoCheck.class); // N1
     checks.add(DevonNamingConventionClassExtendsClassDaoCheck.class); // N2
@@ -117,6 +116,8 @@ public class DevonSonarRegistrar implements CheckRegistrar {
     checks.add(DevonNamingConventionClassExtendsClassToCheck.class); // N7
     checks.add(DevonNamingConventionInterfaceExtendsInterfaceDaoCheck.class); // N8
     checks.add(DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck.class); // N9
+
+    checks.add(DevonUcImplSecurityConstraintCheck.class); // Y1
 
     return checks;
   }
