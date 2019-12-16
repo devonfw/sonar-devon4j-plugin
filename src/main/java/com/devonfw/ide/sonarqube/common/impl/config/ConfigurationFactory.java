@@ -31,30 +31,28 @@ public class ConfigurationFactory {
   }
 
   /**
-   * @param path to the file to analyze.
+   * @param fileToScan the {@link File}to analyze.
    * @return the {@link Configuration} responsible for the project owning the given {@link File}.
    */
-  public static Configuration get(String path) {
+  public static Configuration get(File fileToScan) {
 
-    return INSTANCE.getConfiguration(path);
+    return INSTANCE.getConfiguration(fileToScan);
   }
 
   /**
-   * @param path to the file to analyze.
+   * @param fileToScan the {@link File} to analyze.
    * @return the {@link Configuration} responsible for the project owning the given {@link File}.
    */
-  public Configuration getConfiguration(String path) {
+  public Configuration getConfiguration(File fileToScan) {
 
     if (this.lastConfigFolderPath != null) {
-      if (path.startsWith(this.lastConfigFolderPath)) {
+      if (fileToScan.getAbsolutePath().startsWith(this.lastConfigFolderPath)) {
         return this.path2configMap.get(this.lastConfigFolderPath);
       }
     }
-    int lastSlash = path.lastIndexOf("/");
-    String pathOfParent = path.substring(0, lastSlash);
-    File configFile = findConfigFile(new File(pathOfParent));
+    File configFile = findConfigFile(fileToScan.getParentFile());
     if (configFile == null) {
-      System.out.println("********** Configuration not found starting from " + path);
+      System.out.println("********** Configuration not found starting from " + fileToScan.getAbsolutePath());
       return null;
     }
     System.out.println("********** Configuration found at " + configFile.getAbsolutePath());
