@@ -33,7 +33,7 @@ public class ConfigurationFactory {
   }
 
   /**
-   * @param fileToScan the {@link File} to analyze.
+   * @param fileToScan the {@link File}to analyze.
    * @return the {@link Configuration} responsible for the project owning the given {@link File}.
    */
   public static Configuration get(File fileToScan) {
