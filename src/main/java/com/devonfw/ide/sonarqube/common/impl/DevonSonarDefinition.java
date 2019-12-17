@@ -88,17 +88,4 @@ public class DevonSonarDefinition implements RulesDefinition {
     }
   }
 
-  static class RuleJsonConfig {
-
-    String name;
-
-    String description;
-
-    String status;
-
-    String[] tags;
-
-    String severity;
-  }
-
 }

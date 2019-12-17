@@ -3,6 +3,8 @@ package com.devonfw.ide.sonarqube.common.impl.config;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.devonfw.ide.sonarqube.common.api.config.Configuration;
 
@@ -45,17 +47,17 @@ public class ConfigurationFactory {
    */
   public Configuration getConfiguration(File fileToScan) {
 
-    if (this.lastConfigFolderPath != null) {
-      if (fileToScan.getAbsolutePath().startsWith(this.lastConfigFolderPath)) {
-        return this.path2configMap.get(this.lastConfigFolderPath);
-      }
+    Logger logger = Logger.getGlobal();
+
+    if (this.lastConfigFolderPath != null && fileToScan.getAbsolutePath().startsWith(this.lastConfigFolderPath)) {
+      return this.path2configMap.get(this.lastConfigFolderPath);
     }
     File configFile = findConfigFile(fileToScan.getParentFile());
     if (configFile == null) {
-      System.out.println("********** Configuration not found starting from " + fileToScan.getAbsolutePath());
+      logger.log(Level.INFO, "********** Configuration not found starting from " + fileToScan.getAbsolutePath());
       return null;
     }
-    System.out.println("********** Configuration found at " + configFile.getAbsolutePath());
+    logger.log(Level.INFO, "********** Configuration found at " + configFile.getAbsolutePath());
     File configFolder = configFile.getParentFile();
     String configFolderPath = configFolder.getAbsolutePath();
     if (!configFolderPath.endsWith(File.separator)) {

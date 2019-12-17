@@ -49,7 +49,6 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
           "If a superinterface has " + this.extendingInterfaceSuffixRegEx.toString()
               + " as suffix, then the subinterface should also have " + this.extendingInterfaceSuffixRegEx.toString()
               + " as suffix");
-      return;
     }
 
   }
@@ -92,11 +91,7 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
    */
   protected boolean doesInterfaceHaveRegEx(String interfaceName) {
 
-    if (this.extendingInterfaceSuffixRegEx.matcher(interfaceName).matches()) {
-      return true;
-    } else {
-      return false;
-    }
+    return this.extendingInterfaceSuffixRegEx.matcher(interfaceName).matches();
   }
 
   /**

@@ -124,47 +124,60 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
 
   private void checkIfDisallowed(String className, Tree tree) {
 
-    if (tree.is(Tree.Kind.INFERED_TYPE)) {
+    if (!isTreeAndSourcePackageValid(tree) || className == null) {
       return;
     }
-    if ((this.sourcePackage == null) || !this.sourcePackage.isValid()) {
-      return;
-    }
+
     int lastDot = className.lastIndexOf('.');
     if (lastDot <= 0) {
       return;
     }
+
     String pkgName = className.substring(0, lastDot);
     String simpleName = className.substring(lastDot + 1);
     Devon4jPackage targetPkg = Devon4jPackage.of(pkgName);
     JavaType targetType = new JavaType(targetPkg, simpleName);
     String warning = null;
+
     if (!targetPkg.isValid() || (targetPkg.getRoot() == null)) {
       if (isCheckDependencyOnInvalidPackage()) {
         warning = checkDependency(this.sourceType, targetType);
       }
     } else {
       String targetRoot = targetPkg.getRoot();
-      if ("com.devonfw".equals(targetRoot) && !isSameRootApplication(this.sourceType, targetType)) {
-        boolean targetDependencyAllowed;
-        String targetComponent = targetPkg.getComponent();
-        if (targetComponent.equals("jpa")) {
-          targetDependencyAllowed = this.sourcePackage.isLayerDataAccess();
-        } else if (targetComponent.equals("batch")) {
-          targetDependencyAllowed = this.sourcePackage.isLayerBatch();
-        } else {
-          targetDependencyAllowed = true;
-        }
-        if (targetDependencyAllowed) {
-          return;
-        }
+      if ("com.devonfw".equals(targetRoot) && !isSameRootApplication(this.sourceType, targetType)
+          && isTargetDependencyAllowed(targetPkg)) {
+        return;
       }
       warning = checkDependency(this.sourceType, targetType);
     }
+
     if (warning != null) {
       int line = tree.firstToken().line();
       this.context.addIssue(line, this, warning);
     }
+
+  }
+
+  private boolean isTreeAndSourcePackageValid(Tree tree) {
+
+    return (!tree.is(Tree.Kind.INFERED_TYPE) && this.sourcePackage != null && this.sourcePackage.isValid());
+  }
+
+  private boolean isTargetDependencyAllowed(Devon4jPackage targetPkg) {
+
+    boolean targetDependencyAllowed;
+    String targetComponent = targetPkg.getComponent();
+
+    if (targetComponent.equals("jpa")) {
+      targetDependencyAllowed = this.sourcePackage.isLayerDataAccess();
+    } else if (targetComponent.equals("batch")) {
+      targetDependencyAllowed = this.sourcePackage.isLayerBatch();
+    } else {
+      targetDependencyAllowed = true;
+    }
+
+    return targetDependencyAllowed;
   }
 
   /**
