@@ -1,5 +1,8 @@
 package com.devonfw.ide.sonarqube.common.impl.check;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.BaseTreeVisitor;
@@ -8,6 +11,8 @@ import org.sonar.plugins.java.api.tree.CompilationUnitTree;
 import org.sonar.plugins.java.api.tree.IdentifierTree;
 import org.sonar.plugins.java.api.tree.ImportTree;
 import org.sonar.plugins.java.api.tree.MethodTree;
+import org.sonar.plugins.java.api.tree.Modifier;
+import org.sonar.plugins.java.api.tree.ModifierKeywordTree;
 import org.sonar.plugins.java.api.tree.NewClassTree;
 import org.sonar.plugins.java.api.tree.PackageDeclarationTree;
 import org.sonar.plugins.java.api.tree.Tree;
@@ -211,6 +216,43 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
     QualifiedNameVisitor qnameVisitor = new QualifiedNameVisitor();
     tree.accept(qnameVisitor);
     return qnameVisitor.getQualifiedName();
+  }
+
+  /**
+   * Returns all methods of the given tree.
+   *
+   * @param tree Tree currently being investigated.
+   * @return List of MethodTree.
+   */
+  protected List<MethodTree> getMethodsOfTree(ClassTree tree) {
+
+    List<Tree> membersOfTree = tree.members();
+    List<MethodTree> methodsOfTree = new ArrayList<>();
+
+    for (Tree member : membersOfTree) {
+      if (member.is(Tree.Kind.METHOD)) {
+        methodsOfTree.add((MethodTree) member);
+      }
+    }
+
+    return methodsOfTree;
+  }
+
+  /**
+   * Checks if a method has a public modifier.
+   *
+   * @param method to be checked
+   * @return true or false
+   */
+  protected boolean isMethodPublic(MethodTree method) {
+
+    for (ModifierKeywordTree modifier : method.modifiers().modifiers()) {
+      if (modifier.modifier() == Modifier.PUBLIC) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   /**
