@@ -102,25 +102,28 @@
       <artifactId>devon4j-basic</artifactId>
       <version>${devon4j.version}</version>
     </dependency>
+    
     <dependency>
       <groupId>com.devonfw.java.modules</groupId>
       <artifactId>devon4j-test</artifactId>
       <version>${devon4j.version}</version>
       <scope>test</scope>
     </dependency>
+    
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
       <version>1.2.0</version>
       <scope>test</scope>
     </dependency>
+    
     <dependency>
       <groupId>org.codehaus.sonar-plugins.java</groupId>
       <artifactId>java-checks</artifactId>
       <version>3.2</version>
       <scope>test</scope>
     </dependency>
-
+    
   </dependencies>
 
   <build>
@@ -224,8 +227,6 @@
                 <version>1.2</version>
               </additionalDependency>
             </additionalDependencies>
-            <!-- http://jira.codehaus.org/browse/MJAVADOC-308 -->
-            <!--<maxmemory>5048m</maxmemory> -->
             <notree>true</notree>
             <show>private</show>
             <encoding>${project.reporting.outputEncoding}</encoding>

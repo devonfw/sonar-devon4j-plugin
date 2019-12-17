@@ -20,7 +20,7 @@ public abstract class DevonArchitectureComponentCheck extends DevonArchitectureC
   @Override
   public void scanFile(JavaFileScannerContext context) {
 
-    File fileToScan = context.getFile();
+    File fileToScan = new File(context.getInputFile().toString());
     this.configuration = ConfigurationFactory.get(fileToScan);
     if (this.configuration == null) {
       this.configuration = new Configuration();

@@ -57,11 +57,22 @@ public class DevonSonarDefinition implements RulesDefinition {
 
     rule.setName(ruleAnnotation.name());
     rule.setSeverity(ruleAnnotation.priority().toString());
+
     String[] tags = ruleAnnotation.tags();
+    boolean hasSecurityTag = false;
     for (int i = 0; i < tags.length; i++) {
       tags[i] = tags[i].toLowerCase(Locale.US);
+      if (tags[i].equals("security")) {
+        hasSecurityTag = true;
+      }
     }
     rule.setTags(tags);
+
+    if (hasSecurityTag) {
+      rule.setType(RuleType.VULNERABILITY);
+    } else {
+      rule.setType(RuleType.CODE_SMELL);
+    }
 
     String ruleHtmlDescription = readRuleHtml(ruleKey);
     if (ruleHtmlDescription == null) {
@@ -69,7 +80,6 @@ public class DevonSonarDefinition implements RulesDefinition {
     }
     rule.setHtmlDescription(ruleHtmlDescription);
 
-    rule.setType(RuleType.CODE_SMELL);
     rule.setStatus(RuleStatus.valueOf(ruleAnnotation.status().toUpperCase(Locale.US)));
   }
 
@@ -86,19 +96,6 @@ public class DevonSonarDefinition implements RulesDefinition {
     } catch (IOException e) {
       throw new IllegalArgumentException("Failed to read: " + resource, e);
     }
-  }
-
-  static class RuleJsonConfig {
-
-    String name;
-
-    String description;
-
-    String status;
-
-    String[] tags;
-
-    String severity;
   }
 
 }
