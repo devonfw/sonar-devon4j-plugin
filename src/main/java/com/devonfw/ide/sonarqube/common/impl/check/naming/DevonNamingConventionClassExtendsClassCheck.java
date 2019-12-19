@@ -59,6 +59,9 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
   public void scanFile(JavaFileScannerContext context) {
 
     this.tree = getTreeInstance(context);
+    if (this.tree == null) {
+      return;
+    }
     this.className = this.tree.simpleName().name();
     this.superClassName = getNameOfSuperClass();
 

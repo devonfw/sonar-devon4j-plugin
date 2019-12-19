@@ -36,13 +36,13 @@ public class Status {
    * @return the {@link List} of error messages collected whilst {@link Configuration#initialize(String) initializing}
    *         the {@link Configuration}.
    */
-  public List<String> getErrors() {
+  public List<String> getErrorsView() {
 
     return this.errorsView;
   }
 
   /**
-   * @return {@code true} if the {@link #getErrors() errors} have already been reported, {@code false} otherwise
+   * @return {@code true} if the {@link #getErrorsView() errors} have already been reported, {@code false} otherwise
    *         (initial default).
    * @see #setErrorsReported()
    */

@@ -41,6 +41,9 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
   public void scanFile(JavaFileScannerContext context) {
 
     ClassTree tree = getTreeInstance(context);
+    if (tree == null) {
+      return;
+    }
     String interfaceName = tree.simpleName().name();
     Set<String> superInterfacesNames = getSuperInterfacesNames(tree);
 

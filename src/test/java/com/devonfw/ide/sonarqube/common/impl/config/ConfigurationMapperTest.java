@@ -157,7 +157,7 @@ public class ConfigurationMapperTest extends ModuleTest {
     assertThat(config).isNotNull();
     Status status = config.status();
     assertThat(status).isNotNull();
-    assertThat(status.getErrors())
+    assertThat(status.getErrorsView())
         .containsExactly("Cyclic dependency detected: components->component1->component2->component3->component1");
   }
 
@@ -182,7 +182,7 @@ public class ConfigurationMapperTest extends ModuleTest {
     assertThat(config).isNotNull();
     Status status = config.status();
     assertThat(status).isNotNull();
-    assertThat(status.getErrors()).containsExactly("Duplicate architecture component 'component1'.");
+    assertThat(status.getErrorsView()).containsExactly("Duplicate architecture component 'component1'.");
   }
 
   /**
@@ -205,7 +205,7 @@ public class ConfigurationMapperTest extends ModuleTest {
     assertThat(config).isNotNull();
     Status status = config.status();
     assertThat(status).isNotNull();
-    assertThat(status.getErrors())
+    assertThat(status.getErrorsView())
         .containsExactly("Component 'component1' has dependency 'component2' but no such component is defined.");
   }
 
