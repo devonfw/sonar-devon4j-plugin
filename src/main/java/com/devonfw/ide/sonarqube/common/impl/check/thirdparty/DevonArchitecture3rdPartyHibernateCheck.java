@@ -37,17 +37,13 @@ public class DevonArchitecture3rdPartyHibernateCheck extends DevonArchitecture3r
             + ").";
       }
 
-      if (targetPackageName.startsWith("org.hibernate.envers")) {
+      if (isNotImplementingHibernateEnversInImplScope(source, targetSimpleName, targetPackageName)) {
+        return "Hibernate envers implementation (" + target
+            + ") should only be used in impl scope of dataaccess layer.";
+      }
 
-        if (isNotImplementingHibernateEnversInImplScope(source, targetSimpleName, targetPackageName)) {
-          return "Hibernate envers implementation (" + target
-              + ") should only be used in impl scope of dataaccess layer.";
-        }
-
-        if (targetPackageName.contains("internal")) {
-          return "Hibernate envers internals (" + target + ") should never be used directly.";
-        }
-
+      if (isImplementingHibernateEnversInternalsDirectly(targetPackageName)) {
+        return "Hibernate envers internals (" + target + ") should never be used directly.";
       }
 
       if (!source.isScopeImpl()) {
@@ -69,9 +65,14 @@ public class DevonArchitecture3rdPartyHibernateCheck extends DevonArchitecture3r
   private boolean isNotImplementingHibernateEnversInImplScope(JavaType source, String targetSimpleName,
       String targetPackageName) {
 
-    return !source.isScopeImpl()
+    return (targetPackageName.startsWith("org.hibernate.envers")) && !source.isScopeImpl()
         && (!targetPackageName.equals("org.hibernate.envers") || targetSimpleName.startsWith("Default")
             || targetSimpleName.contains("Listener") || targetSimpleName.contains("Reader"));
+  }
+
+  private boolean isImplementingHibernateEnversInternalsDirectly(String targetPackageName) {
+
+    return targetPackageName.startsWith("org.hibernate.envers") && targetPackageName.contains("internal");
   }
 
 }

@@ -120,7 +120,7 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
 
     }
 
-    return ((!hasOverrideAnnotation) || (hasOverrideAnnotation && hasRequiredAnnotation));
+    return (!hasOverrideAnnotation || hasRequiredAnnotation);
   }
 
   @Override

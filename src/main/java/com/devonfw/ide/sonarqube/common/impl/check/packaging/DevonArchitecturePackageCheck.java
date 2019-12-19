@@ -29,10 +29,9 @@ public class DevonArchitecturePackageCheck extends DevonArchitectureCheck {
       return null;
     }
 
-    if (!source.isValidLayer() && !source.isValidScope() && classTree.kind() == Kind.CLASS) {
-      if (isSpringBootApplicationClass(classTree)) {
-        return null;
-      }
+    if (!source.isValidLayer() && !source.isValidScope() && classTree.kind() == Kind.CLASS
+        && isSpringBootApplicationClass(classTree)) {
+      return null;
     }
 
     return buildIssueString(source);
@@ -47,11 +46,8 @@ public class DevonArchitecturePackageCheck extends DevonArchitectureCheck {
       }
     }
     String classSimpleName = classTree.simpleName().name();
-    if (classSimpleName.matches("SpringBoot[a-zA-Z0-9]*App") || classSimpleName.matches("[a-zA-Z0-9]*Application")) {
-      return true;
-    }
 
-    return false;
+    return classSimpleName.matches("SpringBoot[a-zA-Z0-9]*App") || classSimpleName.matches("[a-zA-Z0-9]*Application");
   }
 
   private String buildIssueString(JavaType source) {
