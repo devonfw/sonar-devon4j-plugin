@@ -10,9 +10,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
-import org.sonar.api.utils.AnnotationUtils;
 import org.sonar.check.Rule;
-import org.sonar.plugins.java.api.JavaCheck;
 import org.sonarsource.api.sonarlint.SonarLintSide;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -71,8 +69,7 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
       }
 
       if (repoKey != null && ruleKey != null && severity != null) {
-        NewBuiltInActiveRule activeRule = devonfwJava.activateRule(repoKey, ruleKey);
-        activeRule.overrideSeverity(severity.toUpperCase());
+        devonfwJava.activateRule(repoKey, ruleKey);
       }
 
     }
@@ -80,10 +77,10 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
     /*
      * Activates devon4j rules
      */
-    for (Class<? extends JavaCheck> check : DevonSonarRegistrar.checkClasses()) {
-      ruleAnnotation = AnnotationUtils.getAnnotation(check, Rule.class);
-      devonfwJava.activateRule(DevonSonarDefinition.REPOSITORY_KEY, ruleAnnotation.key());
-    }
+    // for (Class<? extends JavaCheck> check : DevonSonarRegistrar.checkClasses()) {
+    // ruleAnnotation = AnnotationUtils.getAnnotation(check, Rule.class);
+    // devonfwJava.activateRule(DevonSonarDefinition.REPOSITORY_KEY, ruleAnnotation.key());
+    // }
 
     devonfwJava.setDefault(true);
     devonfwJava.done();

@@ -1093,200 +1093,259 @@
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:C1</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>C1</key>
       <priority>CRITICAL</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:C2</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>C2</key>
       <priority>CRITICAL</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:C3</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>C3</key>
       <priority>CRITICAL</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:C4</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>C4</key>
       <priority>CRITICAL</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:C5</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>C5</key>
       <priority>CRITICAL</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:C6</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>C6</key>
       <priority>MINOR</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:C7</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>C7</key>
       <priority>CRITICAL</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:E1</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>E1</key>
       <priority>CRITICAL</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:E2</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>E2</key>
       <priority>BLOCKER</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:E3</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>E3</key>
       <priority>CRITICAL</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:E4</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>E4</key>
       <priority>CRITICAL</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:E5</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>E5</key>
       <priority>CRITICAL</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:L1</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>E6</key>
+      <priority>CRITICAL</priority>
+    </rule>
+    <rule>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>L1</key>
       <priority>BLOCKER</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:L10</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>L10</key>
       <priority>BLOCKER</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:L11</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>L11</key>
       <priority>MAJOR</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:L12</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>L12</key>
       <priority>BLOCKER</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:L2</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>L2</key>
       <priority>BLOCKER</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:L3</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>L3</key>
       <priority>BLOCKER</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:L4</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>L4</key>
       <priority>BLOCKER</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:L5</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>L5</key>
       <priority>BLOCKER</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:L6</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>L6</key>
       <priority>MAJOR</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:L7</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>L7</key>
       <priority>BLOCKER</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:L8</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>L8</key>
       <priority>CRITICAL</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:L9</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>L9</key>
       <priority>BLOCKER</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:P1</key>
-      <priority>BLOCKER</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:S1</key>
-      <priority>BLOCKER</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:S2</key>
-      <priority>MAJOR</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:S3</key>
-      <priority>MAJOR</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:S4</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>N1</key>
       <priority>CRITICAL</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:S5</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>N2</key>
+      <priority>CRITICAL</priority>
+      <parameters/>
+    </rule>
+    <rule>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>N3</key>
+      <priority>CRITICAL</priority>
+      <parameters/>
+    </rule>
+    <rule>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>N4</key>
+      <priority>CRITICAL</priority>
+      <parameters/>
+    </rule>
+    <rule>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>N5</key>
+      <priority>CRITICAL</priority>
+      <parameters/>
+    </rule>
+    <rule>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>N6</key>
+      <priority>CRITICAL</priority>
+      <parameters/>
+    </rule>
+    <rule>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>N7</key>
+      <priority>CRITICAL</priority>
+      <parameters/>
+    </rule>
+    <rule>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>N8</key>
+      <priority>CRITICAL</priority>
+      <parameters/>
+    </rule>
+    <rule>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>N9</key>
+      <priority>CRITICAL</priority>
+      <parameters/>
+    </rule>
+    <rule>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>P1</key>
       <priority>BLOCKER</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:S6</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>S1</key>
+      <priority>BLOCKER</priority>
+      <parameters/>
+    </rule>
+    <rule>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>S2</key>
       <priority>MAJOR</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:S7</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>S3</key>
       <priority>MAJOR</priority>
       <parameters/>
     </rule>
     <rule>
-      <repositoryKey>devon-java</repositoryKey>
-      <key>Devon4j:S8</key>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>S4</key>
+      <priority>CRITICAL</priority>
+      <parameters/>
+    </rule>
+    <rule>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>S5</key>
+      <priority>BLOCKER</priority>
+      <parameters/>
+    </rule>
+    <rule>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>S6</key>
+      <priority>MAJOR</priority>
+      <parameters/>
+    </rule>
+    <rule>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>S7</key>
+      <priority>MAJOR</priority>
+      <parameters/>
+    </rule>
+    <rule>
+      <repositoryKey>devon4j</repositoryKey>
+      <key>S8</key>
       <priority>CRITICAL</priority>
       <parameters/>
     </rule>
