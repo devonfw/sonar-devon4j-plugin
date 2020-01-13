@@ -1,9 +1,7 @@
-package com.devonfw.ide.sonarqube.common.impl.check;
+package com.devonfw.ide.sonarqube.common.impl.check.security;
 
 import org.junit.Test;
 import org.sonar.java.checks.verifier.JavaCheckVerifier;
-
-import com.devonfw.ide.sonarqube.common.impl.check.security.DevonUcImplSecurityConstraintCheck;
 
 /**
  * Test of {@link DevonUcImplSecurityConstraintCheck}
@@ -16,7 +14,7 @@ public class DevonUcImplSecurityConstraintCheckTest {
   @Test
   public void nonCompliantCase() {
 
-    JavaCheckVerifier.verify("src/test/files/DevonUcImplSecurityConstraintCheckNonCompliantCase.java",
+    JavaCheckVerifier.verify("src/test/files/security/DevonUcImplSecurityConstraintCheckNonCompliantCase.java",
         new DevonUcImplSecurityConstraintCheck());
   }
 
@@ -26,7 +24,7 @@ public class DevonUcImplSecurityConstraintCheckTest {
   @Test
   public void denyAllCase() {
 
-    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonUcImplSecurityConstraintCheckDenyAllCase.java",
+    JavaCheckVerifier.verifyNoIssue("src/test/files/security/DevonUcImplSecurityConstraintCheckDenyAllCase.java",
         new DevonUcImplSecurityConstraintCheck());
   }
 
@@ -36,7 +34,7 @@ public class DevonUcImplSecurityConstraintCheckTest {
   @Test
   public void rolesAllowedCase() {
 
-    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonUcImplSecurityConstraintCheckRolesAllowedCase.java",
+    JavaCheckVerifier.verifyNoIssue("src/test/files/security/DevonUcImplSecurityConstraintCheckRolesAllowedCase.java",
         new DevonUcImplSecurityConstraintCheck());
   }
 
@@ -46,7 +44,7 @@ public class DevonUcImplSecurityConstraintCheckTest {
   @Test
   public void permitAllCase() {
 
-    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonUcImplSecurityConstraintCheckPermitAllCase.java",
+    JavaCheckVerifier.verifyNoIssue("src/test/files/security/DevonUcImplSecurityConstraintCheckPermitAllCase.java",
         new DevonUcImplSecurityConstraintCheck());
   }
 
