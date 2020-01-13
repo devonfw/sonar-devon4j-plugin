@@ -3,6 +3,6 @@
  */
 package com.devonfw.ide.sonarqube.batch.api;
 
-class UcClassImpl extends AbstractUc implements UcClass  {
+class UcClassImpl extends AbstractUc implements UcClass, TestInterface {
 
 }
