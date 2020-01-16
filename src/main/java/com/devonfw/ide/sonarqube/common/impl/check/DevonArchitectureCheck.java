@@ -1,5 +1,8 @@
 package com.devonfw.ide.sonarqube.common.impl.check;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.BaseTreeVisitor;
@@ -8,6 +11,8 @@ import org.sonar.plugins.java.api.tree.CompilationUnitTree;
 import org.sonar.plugins.java.api.tree.IdentifierTree;
 import org.sonar.plugins.java.api.tree.ImportTree;
 import org.sonar.plugins.java.api.tree.MethodTree;
+import org.sonar.plugins.java.api.tree.Modifier;
+import org.sonar.plugins.java.api.tree.ModifierKeywordTree;
 import org.sonar.plugins.java.api.tree.NewClassTree;
 import org.sonar.plugins.java.api.tree.PackageDeclarationTree;
 import org.sonar.plugins.java.api.tree.Tree;
@@ -124,47 +129,60 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
 
   private void checkIfDisallowed(String className, Tree tree) {
 
-    if (tree.is(Tree.Kind.INFERED_TYPE)) {
+    if (!isTreeAndSourcePackageValid(tree) || className == null) {
       return;
     }
-    if ((this.sourcePackage == null) || !this.sourcePackage.isValid()) {
-      return;
-    }
+
     int lastDot = className.lastIndexOf('.');
     if (lastDot <= 0) {
       return;
     }
+
     String pkgName = className.substring(0, lastDot);
     String simpleName = className.substring(lastDot + 1);
     Devon4jPackage targetPkg = Devon4jPackage.of(pkgName);
     JavaType targetType = new JavaType(targetPkg, simpleName);
     String warning = null;
+
     if (!targetPkg.isValid() || (targetPkg.getRoot() == null)) {
       if (isCheckDependencyOnInvalidPackage()) {
         warning = checkDependency(this.sourceType, targetType);
       }
     } else {
       String targetRoot = targetPkg.getRoot();
-      if ("com.devonfw".equals(targetRoot) && !isSameRootApplication(this.sourceType, targetType)) {
-        boolean targetDependencyAllowed;
-        String targetComponent = targetPkg.getComponent();
-        if (targetComponent.equals("jpa")) {
-          targetDependencyAllowed = this.sourcePackage.isLayerDataAccess();
-        } else if (targetComponent.equals("batch")) {
-          targetDependencyAllowed = this.sourcePackage.isLayerBatch();
-        } else {
-          targetDependencyAllowed = true;
-        }
-        if (targetDependencyAllowed) {
-          return;
-        }
+      if ("com.devonfw".equals(targetRoot) && !isSameRootApplication(this.sourceType, targetType)
+          && isTargetDependencyAllowed(targetPkg)) {
+        return;
       }
       warning = checkDependency(this.sourceType, targetType);
     }
+
     if (warning != null) {
       int line = tree.firstToken().line();
       this.context.addIssue(line, this, warning);
     }
+
+  }
+
+  private boolean isTreeAndSourcePackageValid(Tree tree) {
+
+    return (!tree.is(Tree.Kind.INFERED_TYPE) && this.sourcePackage != null && this.sourcePackage.isValid());
+  }
+
+  private boolean isTargetDependencyAllowed(Devon4jPackage targetPkg) {
+
+    boolean targetDependencyAllowed;
+    String targetComponent = targetPkg.getComponent();
+
+    if (targetComponent.equals("jpa")) {
+      targetDependencyAllowed = this.sourcePackage.isLayerDataAccess();
+    } else if (targetComponent.equals("batch")) {
+      targetDependencyAllowed = this.sourcePackage.isLayerBatch();
+    } else {
+      targetDependencyAllowed = true;
+    }
+
+    return targetDependencyAllowed;
   }
 
   /**
@@ -198,6 +216,43 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
     QualifiedNameVisitor qnameVisitor = new QualifiedNameVisitor();
     tree.accept(qnameVisitor);
     return qnameVisitor.getQualifiedName();
+  }
+
+  /**
+   * Returns all methods of the given tree.
+   *
+   * @param tree Tree currently being investigated.
+   * @return List of MethodTree.
+   */
+  protected List<MethodTree> getMethodsOfTree(ClassTree tree) {
+
+    List<Tree> membersOfTree = tree.members();
+    List<MethodTree> methodsOfTree = new ArrayList<>();
+
+    for (Tree member : membersOfTree) {
+      if (member.is(Tree.Kind.METHOD)) {
+        methodsOfTree.add((MethodTree) member);
+      }
+    }
+
+    return methodsOfTree;
+  }
+
+  /**
+   * Checks if a method has a public modifier.
+   *
+   * @param method to be checked
+   * @return true or false
+   */
+  protected boolean isMethodPublic(MethodTree method) {
+
+    for (ModifierKeywordTree modifier : method.modifiers().modifiers()) {
+      if (modifier.modifier() == Modifier.PUBLIC) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   /**

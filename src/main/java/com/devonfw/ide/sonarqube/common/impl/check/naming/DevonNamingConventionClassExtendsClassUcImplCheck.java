@@ -58,8 +58,6 @@ public class DevonNamingConventionClassExtendsClassUcImplCheck extends DevonNami
     for (String name : this.superInterfacesNames) {
       if (superInterface.equals(name)) {
         return true;
-      } else {
-        return false;
       }
     }
     return false;

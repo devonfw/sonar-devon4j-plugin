@@ -3,6 +3,8 @@ package com.devonfw.ide.sonarqube.common.api.config;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The status of the {@link Configuration}.
@@ -62,12 +64,14 @@ public class Status {
    */
   void addError(String error) {
 
+    Logger logger = Logger.getGlobal();
+
     assert !this.errorsReported;
     if (this.errors.isEmpty()) {
-      System.out.println("ERROR: Illegal configuration file: " + this.source);
+      logger.log(Level.WARNING, "ERROR: Illegal configuration file: " + this.source);
     }
     this.errors.add(error);
-    System.out.println("ERROR: " + error);
+    logger.log(Level.WARNING, "ERROR: " + error);
   }
 
 }

@@ -44,6 +44,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.scope.DevonArchitectureScopeB
 import com.devonfw.ide.sonarqube.common.impl.check.scope.DevonArchitectureScopeBase2ImplCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.scope.DevonArchitectureScopeImpl2Base4ComponentPartCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.scope.DevonArchitectureScopeImpl2Impl4ComponentPartCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.security.DevonUcImplSecurityConstraintCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyDatatypeMappingsCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyHibernateCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyJpaCheck;
@@ -115,6 +116,8 @@ public class DevonSonarRegistrar implements CheckRegistrar {
     checks.add(DevonNamingConventionClassExtendsClassToCheck.class); // N7
     checks.add(DevonNamingConventionInterfaceExtendsInterfaceDaoCheck.class); // N8
     checks.add(DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck.class); // N9
+
+    checks.add(DevonUcImplSecurityConstraintCheck.class); // Y1
 
     return checks;
   }
