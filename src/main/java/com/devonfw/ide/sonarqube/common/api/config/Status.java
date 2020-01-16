@@ -13,9 +13,9 @@ import java.util.logging.Logger;
  */
 public class Status {
 
-  private final List<String> errors;
+  private final List<String> errorsMutable;
 
-  private final List<String> errorsView;
+  private final List<String> errors;
 
   private boolean errorsReported;
 
@@ -27,8 +27,8 @@ public class Status {
   public Status() {
 
     super();
-    this.errors = new ArrayList<>();
-    this.errorsView = Collections.unmodifiableList(this.errors);
+    this.errorsMutable = new ArrayList<>();
+    this.errors = Collections.unmodifiableList(this.errorsMutable);
     this.source = Configuration.ARCHITECTURE_JSON;
   }
 
@@ -36,13 +36,13 @@ public class Status {
    * @return the {@link List} of error messages collected whilst {@link Configuration#initialize(String) initializing}
    *         the {@link Configuration}.
    */
-  public List<String> getErrorsView() {
+  public List<String> getErrors() {
 
-    return this.errorsView;
+    return this.errors;
   }
 
   /**
-   * @return {@code true} if the {@link #getErrorsView() errors} have already been reported, {@code false} otherwise
+   * @return {@code true} if the {@link #getErrors() errors} have already been reported, {@code false} otherwise
    *         (initial default).
    * @see #setErrorsReported()
    */
@@ -67,10 +67,10 @@ public class Status {
     Logger logger = Logger.getGlobal();
 
     assert !this.errorsReported;
-    if (this.errors.isEmpty()) {
+    if (this.errorsMutable.isEmpty()) {
       logger.log(Level.WARNING, "ERROR: Illegal configuration file: " + this.source);
     }
-    this.errors.add(error);
+    this.errorsMutable.add(error);
     logger.log(Level.WARNING, "ERROR: " + error);
   }
 
