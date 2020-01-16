@@ -39,7 +39,7 @@ public class DevonArchitectureComponentDeclarationCheck extends DevonArchitectur
     super.onConfigurationSet(context);
     Status status = getConfiguration().status();
     if (!status.isErrorsReported()) {
-      for (String error : status.getErrorsView()) {
+      for (String error : status.getErrors()) {
         context.addIssue(0, this, error);
       }
       status.setErrorsReported();
