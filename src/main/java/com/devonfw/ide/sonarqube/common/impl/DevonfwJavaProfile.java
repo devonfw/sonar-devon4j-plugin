@@ -2,6 +2,9 @@ package com.devonfw.ide.sonarqube.common.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -10,7 +13,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
-import org.sonar.check.Rule;
 import org.sonarsource.api.sonarlint.SonarLintSide;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -22,6 +24,9 @@ import org.xml.sax.SAXException;
 @SonarLintSide
 public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
 
+  private static final Set<String> FORBIDDEN_RULE_KEYS = new HashSet<>(
+      Arrays.asList("S2076", "S2078", "S3318", "S2070", "S4142"));
+
   private static final String DEVONFW_JAVA = "/com/devonfw/ide/sonarqube/common/rules/devon4j/devonfwJava.xml";
 
   private static final Logger logger = Logger.getGlobal();
@@ -30,59 +35,40 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
   public void define(Context context) {
 
     NewBuiltInQualityProfile devonfwJava = context.createBuiltInQualityProfile("devonfw Java", "java");
-    Rule ruleAnnotation;
     NodeList ruleList = readQualityProfileXml();
     NodeList childrenOfRule;
+    NewBuiltInActiveRule currentRule;
     String repoKey = null;
     String ruleKey = null;
     String severity = null;
 
-    logger.log(Level.INFO, "Number of rules: " + ruleList.getLength());
-
-    /*
-     * Activates external rules
-     */
     for (int i = 0; i < ruleList.getLength(); i++) {
 
       childrenOfRule = ruleList.item(i).getChildNodes();
 
       for (int j = 0; j < childrenOfRule.getLength(); j++) {
 
-        if (childrenOfRule.item(j).getNodeName().equals("repositoryKey")) {
-          repoKey = childrenOfRule.item(j).getTextContent();
-        } else {
-          repoKey = null;
-        }
-
-        if (childrenOfRule.item(j).getNodeName().equals("key")) {
-          ruleKey = childrenOfRule.item(j).getTextContent();
-        } else {
-          ruleKey = null;
-        }
-
-        if (childrenOfRule.item(j).getNodeName().equals("priority")) {
-          severity = childrenOfRule.item(j).getTextContent();
-        } else {
-          severity = null;
+        switch (childrenOfRule.item(j).getNodeName()) {
+          case "repositoryKey":
+            repoKey = childrenOfRule.item(j).getTextContent();
+            break;
+          case "key":
+            ruleKey = childrenOfRule.item(j).getTextContent();
+            break;
+          case "priority":
+            severity = childrenOfRule.item(j).getTextContent();
+            break;
         }
 
       }
 
-      if (repoKey != null && ruleKey != null && severity != null) {
-        devonfwJava.activateRule(repoKey, ruleKey);
+      if (repoKey.equals("devon4j") || repoKey.equals("squid") && !FORBIDDEN_RULE_KEYS.contains(ruleKey)) {
+        currentRule = devonfwJava.activateRule(repoKey, ruleKey);
+        currentRule.overrideSeverity(severity);
       }
 
     }
 
-    /*
-     * Activates devon4j rules
-     */
-    // for (Class<? extends JavaCheck> check : DevonSonarRegistrar.checkClasses()) {
-    // ruleAnnotation = AnnotationUtils.getAnnotation(check, Rule.class);
-    // devonfwJava.activateRule(DevonSonarDefinition.REPOSITORY_KEY, ruleAnnotation.key());
-    // }
-
-    devonfwJava.setDefault(true);
     devonfwJava.done();
 
   }
