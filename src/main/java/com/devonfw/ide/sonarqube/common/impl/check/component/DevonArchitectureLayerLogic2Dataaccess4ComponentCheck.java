@@ -11,7 +11,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureComponentChe
  * {@link DevonArchitectureComponentCheck} verifying that a logic layer does not depend on the dataaccess layer of
  * another {@link Component}.
  */
-@Rule(key = "C5", name = "Devon Layer Logic-Dataaccess Component Check", //
+@Rule(key = "C5", name = "devonfw Layer Logic-Dataaccess Component Check", //
     priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "component" })
 public class DevonArchitectureLayerLogic2Dataaccess4ComponentCheck extends DevonArchitectureComponentCheck {
 

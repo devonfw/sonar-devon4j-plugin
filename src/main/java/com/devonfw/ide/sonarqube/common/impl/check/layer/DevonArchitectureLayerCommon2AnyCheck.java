@@ -9,7 +9,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
 /**
  * {@link DevonArchitectureCheck} verifying that common layer does not depend on any other layer.
  */
-@Rule(key = "L1", name = "Devon Layer Common-* Check", //
+@Rule(key = "L1", name = "devonfw Layer Common-* Check", //
     priority = Priority.BLOCKER, tags = { "architecture-violation", "devonfw", "layer" })
 public class DevonArchitectureLayerCommon2AnyCheck extends DevonArchitectureCheck {
 

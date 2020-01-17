@@ -9,7 +9,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyChec
 /**
  * {@link DevonArchitecture3rdPartyCheck} verifying that {@literal @Transactional} is properly used from JEE.
  */
-@Rule(key = "E1", name = "Devon 3rd Party Transactional Check", //
+@Rule(key = "E1", name = "devonfw 3rd Party Transactional Check", //
     priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "thirdparty" })
 public class DevonArchitecture3rdPartyTransactionalCheck extends DevonArchitecture3rdPartyCheck {
 

@@ -9,7 +9,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
 /**
  * {@link DevonArchitectureCheck} verifying that client layer does not depend on dataaccess layer.
  */
-@Rule(key = "L4", name = "Devon Layer Client-Dataaccess Check", //
+@Rule(key = "L4", name = "devonfw Layer Client-Dataaccess Check", //
     priority = Priority.BLOCKER, tags = { "architecture-violation", "devonfw", "layer" })
 public class DevonArchitectureLayerClient2DataaccessCheck extends DevonArchitectureCheck {
 

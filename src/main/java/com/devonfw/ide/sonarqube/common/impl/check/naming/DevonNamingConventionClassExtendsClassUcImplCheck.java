@@ -11,7 +11,7 @@ import org.sonar.plugins.java.api.JavaFileScannerContext;
  * following the devonfw naming convention by beginning with Uc and ending with Impl. They must also implement an
  * interface with the same name except for the suffix Impl.
  */
-@Rule(key = "N5", name = "Devon Naming Check of Use-Case Implementations", //
+@Rule(key = "N5", name = "devonfw Naming Check of Use-Case Implementations", //
     priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "naming" })
 public class DevonNamingConventionClassExtendsClassUcImplCheck extends DevonNamingConventionClassExtendsClassCheck {
 
