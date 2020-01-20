@@ -22,7 +22,9 @@ public class DevonfwJavaProfileTest extends ModuleTest {
     BuiltInQualityProfilesDefinition.Context context = new BuiltInQualityProfilesDefinition.Context();
     profileDef.define(context);
     BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = context.profile("java", "devonfw Java");
+
     assertThat(profile.language()).isEqualTo(Java.KEY);
+    assertThat(profile.rules().size()).isEqualTo(1522);
   }
 
 }
