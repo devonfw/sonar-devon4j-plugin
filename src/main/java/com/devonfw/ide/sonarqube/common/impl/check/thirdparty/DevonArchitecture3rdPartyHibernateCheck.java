@@ -23,32 +23,55 @@ public class DevonArchitecture3rdPartyHibernateCheck extends DevonArchitecture3r
   @Override
   protected String checkDependency(JavaType source, JavaType target) {
 
-    if (target.getPackage().startsWith("org.hibernate") && !target.getPackage().startsWith("org.hibernate.validator")) {
-      if (source.isLayerDataAccess()) {
-        String targetSimpleName = target.getSimpleName();
-        if (target.getPackage().equals("org.hibernate.annotations")) {
-          if (DISCOURAGED_HIBERNATE_ANNOTATIONS.contains(targetSimpleName)) {
-            return "Standard JPA annotations should be used instead of this proprietary hibernate annotation (" + target
-                + ").";
-          }
-        } else if (target.getPackage().startsWith("org.hibernate.envers")) {
-          if (!source.isScopeImpl()) {
-            if (!target.getPackage().equals("org.hibernate.envers") || targetSimpleName.startsWith("Default")
-                || targetSimpleName.contains("Listener") || targetSimpleName.contains("Reader")) {
-              return "Hibernate envers implementation (" + target
-                  + ") should only be used in impl scope of dataaccess layer.";
-            }
-          } else if (target.getPackage().contains("internal")) {
-            return "Hibernate envers internals (" + target + ") should never be used directly.";
-          }
-        } else if (!source.isScopeImpl()) {
-          return "Hibernate internals (" + target + ") should only be used in impl scope of dataaccess layer.";
-        }
-      } else {
+    String targetSimpleName = target.getSimpleName();
+    String targetPackageName = target.getPackage();
+
+    if (targetPackageName.startsWith("org.hibernate") && !targetPackageName.startsWith("org.hibernate.validator")) {
+
+      if (!source.isLayerDataAccess()) {
         return "Hibernate (" + target + ") should only be used in dataaccess layer.";
       }
+
+      if (isUsingProprietaryHibernateAnnotation(targetSimpleName, targetPackageName)) {
+        return "Standard JPA annotations should be used instead of this proprietary hibernate annotation (" + target
+            + ").";
+      }
+
+      if (targetPackageName.startsWith("org.hibernate.envers")) {
+
+        if (isNotImplementingHibernateEnversInImplScope(source, targetSimpleName, targetPackageName)) {
+          return "Hibernate envers implementation (" + target
+              + ") should only be used in impl scope of dataaccess layer.";
+        }
+
+        if (targetPackageName.contains("internal")) {
+          return "Hibernate envers internals (" + target + ") should never be used directly.";
+        }
+
+      }
+
+      if (!source.isScopeImpl()) {
+        return "Hibernate internals (" + target + ") should only be used in impl scope of dataaccess layer.";
+      }
+
     }
+
     return null;
+
+  }
+
+  private boolean isUsingProprietaryHibernateAnnotation(String targetSimpleName, String targetPackageName) {
+
+    return targetPackageName.equals("org.hibernate.annotations")
+        && DISCOURAGED_HIBERNATE_ANNOTATIONS.contains(targetSimpleName);
+  }
+
+  private boolean isNotImplementingHibernateEnversInImplScope(JavaType source, String targetSimpleName,
+      String targetPackageName) {
+
+    return !source.isScopeImpl()
+        && (!targetPackageName.equals("org.hibernate.envers") || targetSimpleName.startsWith("Default")
+            || targetSimpleName.contains("Listener") || targetSimpleName.contains("Reader"));
   }
 
 }
