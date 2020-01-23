@@ -2,6 +2,13 @@
 
 This file documents all notable changes to https://github.com/devonfw/sonar-devon4j-plugin[sonar-devon4j-plugin].
 
+== 3.2.2
+
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/16[#16]: Added 'devonfw Java' quality profile
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/57[#57]: Increased test coverage
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/60[#60]: Fixed a bug in one of the naming checks
+* Some further organisational changes and code cleanup
+
 == 3.2.1
 
 With this version, we made our initial entry into the SonarQube marketplace. Next to some organisational changes like the renaming of our plugin key or updated dependencies, there are also some new features and various fixes:

@@ -15,9 +15,7 @@ This `sonar-devon4j-plugin` provides a plugin extending https://sonarqube.org[So
 
 == Installation
 
-If you have https://sonarqube.org[SonarQube] installed, you only need to https://repo.maven.apache.org/maven2/com/devonfw/tools/sonar-devon4j-plugin/[download] and copy the latest version of this `sonar-devon4j-plugin` into the `extensions/plugins` folder of your SonarQube installation.
-Further you need to import the devonfw quality profiles (or activate all the rules of this plugin in your quality profile).
-For further details read the https://github.com/devonfw/sonar-devon4j-plugin/wiki/guide-sonar-qube-setup[SonarQube setup guide]
+If you have https://sonarqube.org[SonarQube] installed, you only need to https://repo.maven.apache.org/maven2/com/devonfw/tools/sonar-devon4j-plugin/[download] and copy the latest version of this `sonar-devon4j-plugin` into the `extensions/plugins` folder of your SonarQube installation. For further details read the https://github.com/devonfw/sonar-devon4j-plugin/wiki/guide-sonar-qube-setup[SonarQube setup guide]
 
 == Configuration
 
@@ -121,3 +119,16 @@ With our 3.2.0 release, we added rules checking for adherence to our naming conv
 As of version 3.2.1, we have started adding security-related rules to our plugin:
 
 * Y1. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/security/DevonUcImplSecurityConstraintCheck.java[DevonUcImplSecurityConstraintCheck]
+
+== devonfw Java Quality Profile
+
+This plugin comes with a quality profile containing not only the aforementioned rules, but also rules from other plugins that are vital to ensure optimal code quality. Make sure to import the following plugins into your SonarQube instance, so that you are able to fully use this profile:
+
+* https://github.com/checkstyle/sonar-checkstyle/releases/tag/4.27[Checkstyle]
+* https://github.com/QualInsight/qualinsight-plugins-sonarqube-smell/releases/tag/qualinsight-plugins-sonarqube-smell-4.0.0[Code Smells]
+* https://github.com/spotbugs/sonar-findbugs/releases/tag/3.11.1[FindBugs]
+* https://github.com/jensgerdes/sonar-pmd/releases/tag/3.2.1[PMD]
+
+You can either associate this profile with certain projects or set it as default to make it active for every project. If you want to make changes to the profile, just create a copy of it where you can then include or exclude rules from it.
+
+For further information on quality profiles and their setup, please follow the https://docs.sonarqube.org/latest/instance-administration/quality-profiles/[SonarQube documentation on Quality Profiles].
