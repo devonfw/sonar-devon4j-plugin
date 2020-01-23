@@ -13,6 +13,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
+import org.sonar.plugins.java.Java;
 import org.sonarsource.api.sonarlint.SonarLintSide;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -42,7 +43,7 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
   @Override
   public void define(Context context) {
 
-    NewBuiltInQualityProfile devonfwJava = context.createBuiltInQualityProfile("devonfw Java", "java");
+    NewBuiltInQualityProfile devonfwJava = context.createBuiltInQualityProfile("devonfw Java", Java.KEY);
     NodeList ruleList = readQualityProfileXml();
     NodeList childrenOfRule;
     NewBuiltInActiveRule currentRule;
@@ -102,6 +103,14 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
       return null;
     }
 
+  }
+
+  /**
+   * @return deprecated or unavailable rule keys that should not be added to the profile
+   */
+  public static Set<String> getForbiddenRuleKeys() {
+
+    return DevonfwJavaProfile.FORBIDDEN_RULE_KEYS;
   }
 
 }
