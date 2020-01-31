@@ -1,9 +1,9 @@
 <p>This rule checks that interfaces inheriting from an interface with the suffix Repository end with the same suffix.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-    public interface <span style='color: red'>TestInterface</span> extends DefaultRepository {}
+    public interface <del style='color: #979696'><span style='color: #FFB000'>TestInterface</span></del> extends DefaultRepository {}
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-    public interface <span style='color: green'>UserRepository</span> extends DefaultRepository {}
+    public interface <u style='color: #979696'><span style='color: #648FFF'>UserRepository</span></u> extends DefaultRepository {}
 </pre>
