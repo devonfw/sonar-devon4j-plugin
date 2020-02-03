@@ -76,9 +76,8 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
   protected boolean checkClassNameAndCreateIssue(JavaFileScannerContext context) {
 
     if (!isClassNameMatching()) {
-      context.reportIssue(this, this.tree, "If a superclass has " + this.classSuffixRegEx
+      context.addIssue(this.tree.openBraceToken().line(), this, "If a superclass has " + this.classSuffixRegEx
           + " as suffix, then the subclass should also have " + this.classSuffixRegEx + " as suffix");
-
       return true;
     }
     return false;

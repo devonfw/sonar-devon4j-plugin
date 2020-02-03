@@ -41,7 +41,7 @@ public class DevonNamingConventionClassExtendsClassUcImplCheck extends DevonNami
         && isImplementingCorrectInterface(desiredSuperInterfaceName)) {
       return false;
     } else {
-      context.reportIssue(this, this.tree, "Non-abstract use-case classes must begin with Uc, "
+      context.addIssue(this.tree.openBraceToken().line(), this, "Non-abstract use-case classes must begin with Uc, "
           + "end with Impl and implement an interface with the same name except the suffix Impl.");
       return true;
     }
