@@ -78,10 +78,9 @@ public class DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheckTest {
    * Test of {@link DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck}
    */
   @Test
-  public void TestPackageInfoCase() {
+  public void testPackageInfoCase() {
 
-    JavaCheckVerifier.verifyNoIssue(
-        "src/test/files/naming/DevonNamingConventionInterfaceExtendsInterfacePackageInfoCheck.java",
+    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonNPEOnPackageInfoCheck.java",
         new DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck());
   }
 

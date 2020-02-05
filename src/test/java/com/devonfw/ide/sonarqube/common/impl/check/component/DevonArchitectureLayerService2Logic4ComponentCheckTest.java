@@ -17,4 +17,15 @@ public class DevonArchitectureLayerService2Logic4ComponentCheckTest {
     JavaCheckVerifier.verify("src/test/files/component/DevonArchitectureComponentLayerServiceLogicCheck.java",
         new DevonArchitectureLayerService2Logic4ComponentCheck());
   }
+
+  /**
+   * Test of {@link DevonArchitectureLayerService2Logic4ComponentCheck}
+   */
+  @Test
+  public void testPackageInfoCase() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonNPEOnPackageInfoCheck.java",
+        new DevonArchitectureLayerService2Logic4ComponentCheck());
+  }
+
 }

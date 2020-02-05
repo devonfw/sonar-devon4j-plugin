@@ -52,4 +52,14 @@ public class DevonNamingConventionClassExtendsClassSearchCriteriaCheckTest {
         new DevonNamingConventionClassExtendsClassSearchCriteriaToCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassSearchCriteriaToCheck}
+   */
+  @Test
+  public void testPackageInfoCase() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonNPEOnPackageInfoCheck.java",
+        new DevonNamingConventionClassExtendsClassSearchCriteriaToCheck());
+  }
+
 }
