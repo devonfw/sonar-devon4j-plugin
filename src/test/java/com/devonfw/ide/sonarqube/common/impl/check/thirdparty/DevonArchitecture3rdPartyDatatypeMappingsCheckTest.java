@@ -44,4 +44,16 @@ public class DevonArchitecture3rdPartyDatatypeMappingsCheckTest {
         new DevonArchitecture3rdPartyDatatypeMappingsCheck());
   }
 
+  /**
+   * Test of {@link DevonArchitecture3rdPartyDatatypeMappingsCheck} This test checks if the check does not throw an
+   * exception when investigating a file without imports
+   */
+  @Test
+  public void testNoTarget() {
+
+    JavaCheckVerifier.verifyNoIssue(
+        "src/test/files/thirdparty/DevonArchitecture3rdPartyDatatypeMappingsCheck_NoTarget.java",
+        new DevonArchitecture3rdPartyDatatypeMappingsCheck());
+  }
+
 }
