@@ -36,12 +36,15 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
 
   private int packageLine;
 
+  private List<ImportTree> imports;
+
   /**
    * The constructor.
    */
   public DevonArchitectureCheck() {
 
     super();
+    this.imports = new ArrayList<>();
   }
 
   /**
@@ -56,6 +59,7 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
   @Override
   public void scanFile(JavaFileScannerContext fileContext) {
 
+    this.imports.clear();
     this.context = fileContext;
     scan(fileContext.getTree());
     this.context = null;
@@ -65,8 +69,7 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
   @Override
   public void visitImport(ImportTree tree) {
 
-    String qualifiedName = getQualifiedName(tree.qualifiedIdentifier());
-    checkIfDisallowed(qualifiedName, tree);
+    this.imports.add(tree);
     super.visitImport(tree);
   }
 
@@ -110,6 +113,10 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
       simpleName = simpleNameTree.name();
     }
     this.sourceType = new JavaType(this.sourcePackage, simpleName);
+    for (ImportTree tree : this.imports) {
+      String qualifiedName = getQualifiedName(tree.qualifiedIdentifier());
+      checkIfDisallowed(qualifiedName, tree);
+    }
     if (classTree.parent() instanceof CompilationUnitTree) {
       String warning = createIssueForInvalidSourcePackage(this.sourceType, classTree);
       if (warning != null) {
