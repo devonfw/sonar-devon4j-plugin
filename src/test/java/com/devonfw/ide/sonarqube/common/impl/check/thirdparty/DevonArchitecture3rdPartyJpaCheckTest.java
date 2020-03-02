@@ -31,17 +31,14 @@ public class DevonArchitecture3rdPartyJpaCheckTest {
   }
 
   /**
-   * TODO: source.getSimpleName() returns null. Implement a way to get the name of the class currently being
-   * investigated.
-   *
    * Test of {@link DevonArchitecture3rdPartyJpaCheck} verifies that the use of JPA for embeddables in the common layer
    * is not flagged.
    */
-  // @Test
-  // public void testOKCommon() {
-  //
-  // JavaCheckVerifier.verifyNoIssue("src/test/files/thirdparty/DevonArchitecture3rdPartyJpaCheck_OKCommon.java",
-  // new DevonArchitecture3rdPartyJpaCheck());
-  // }
+  @Test
+  public void testOKCommon() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/thirdparty/DevonArchitecture3rdPartyJpaCheck_OKCommon.java",
+        new DevonArchitecture3rdPartyJpaCheck());
+  }
 
 }
