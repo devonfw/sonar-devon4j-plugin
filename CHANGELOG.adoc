@@ -2,6 +2,21 @@
 
 This file documents all notable changes to https://github.com/devonfw/sonar-devon4j-plugin[sonar-devon4j-plugin].
 
+== 3.3.0
+
+In version 3.3.0 the following issues were resolved:
+
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/60[#60]: Fixed a bug in the naming check for Use-Case implementation classes
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/67[#67]: Fixed a bug where the whole body of a method or a class was marked as the issue location. Now only the method / class headers will be highlighted.
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/68[#68]: Made our rule descriptions more accessible by using better readable colors as well as alternative visual cues
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/71[#71]: Fixed a bug where a NPE could be thrown
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/74[#74]: Fixed a bug where a method always returned null
+
+Unrelated to any specific issues, there was some refactoring and cleaning up done with the following two PRs:
+
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/66[PR #66]: Refactored the prefixes of our rule names from 'Devon' to 'devonfw'
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/65[PR #65]: Sorted security-related test files into their own package
+
 == 3.2.1
 
 With this version, we made our initial entry into the SonarQube marketplace. Next to some organisational changes like the renaming of our plugin key or updated dependencies, there are also some new features and various fixes:
