@@ -42,7 +42,7 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
     List<MethodTree> methodsOfTree = getMethodsOfTree(tree);
     for (MethodTree method : methodsOfTree) {
       if (isMethodPublic(method) && !isMethodProperlyAnnotated(method)) {
-        context.reportIssue(this, method,
+        context.addIssue(method.openParenToken().line(), this,
             "This method is not properly annotated. "
                 + "Please use one of the following annotations on Use-Case implementation methods: "
                 + REQUIRED_ANNOTATIONS.toString());
