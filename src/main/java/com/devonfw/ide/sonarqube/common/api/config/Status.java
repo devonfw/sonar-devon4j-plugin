@@ -13,9 +13,9 @@ import java.util.logging.Logger;
  */
 public class Status {
 
-  private final List<String> errors;
+  private final List<String> errorsMutable;
 
-  private final List<String> errorsView;
+  private final List<String> errors;
 
   private boolean errorsReported;
 
@@ -27,8 +27,8 @@ public class Status {
   public Status() {
 
     super();
-    this.errors = new ArrayList<>();
-    this.errorsView = Collections.unmodifiableList(this.errors);
+    this.errorsMutable = new ArrayList<>();
+    this.errors = Collections.unmodifiableList(this.errorsMutable);
     this.source = Configuration.ARCHITECTURE_JSON;
   }
 
@@ -38,7 +38,7 @@ public class Status {
    */
   public List<String> getErrors() {
 
-    return this.errorsView;
+    return this.errors;
   }
 
   /**
@@ -67,10 +67,10 @@ public class Status {
     Logger logger = Logger.getGlobal();
 
     assert !this.errorsReported;
-    if (this.errors.isEmpty()) {
+    if (this.errorsMutable.isEmpty()) {
       logger.log(Level.WARNING, "ERROR: Illegal configuration file: " + this.source);
     }
-    this.errors.add(error);
+    this.errorsMutable.add(error);
     logger.log(Level.WARNING, "ERROR: " + error);
   }
 
