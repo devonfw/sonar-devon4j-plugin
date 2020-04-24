@@ -13,7 +13,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyChec
 /**
  * {@link DevonArchitecture3rdPartyCheck} verifying that the {@code JPA} is properly used.
  */
-@Rule(key = "E4", name = "Devon 3rd Party Hibernate Check", //
+@Rule(key = "E4", name = "devonfw 3rd Party Hibernate Check", //
     priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "thirdparty" })
 public class DevonArchitecture3rdPartyHibernateCheck extends DevonArchitecture3rdPartyCheck {
 
