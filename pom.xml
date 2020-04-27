@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.devonfw.tools</groupId>
   <artifactId>sonar-devon4j-plugin</artifactId>
-  <version>2020.04.001-SNAPSHOT</version>
+  <version>2020.04.001</version>
   <packaging>sonar-plugin</packaging>
   <name>${project.artifactId}</name>
   <description>SonarQube Plugin with rules for static code analysis to validate architecture.</description>
