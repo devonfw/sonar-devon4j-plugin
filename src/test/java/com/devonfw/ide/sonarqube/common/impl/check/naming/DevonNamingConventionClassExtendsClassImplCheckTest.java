@@ -68,4 +68,14 @@ public class DevonNamingConventionClassExtendsClassImplCheckTest {
         new DevonNamingConventionClassExtendsClassUcImplCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassUcImplCheck}
+   */
+  @Test
+  public void testPackageInfoCase() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonNPEOnPackageInfoCheck.java",
+        new DevonNamingConventionClassExtendsClassUcImplCheck());
+  }
+
 }

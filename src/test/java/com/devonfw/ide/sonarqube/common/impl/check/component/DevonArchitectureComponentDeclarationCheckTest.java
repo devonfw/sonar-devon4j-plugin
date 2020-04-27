@@ -18,4 +18,14 @@ public class DevonArchitectureComponentDeclarationCheckTest {
         new DevonArchitectureComponentDeclarationCheck());
   }
 
+  /**
+   * Test of {@link DevonArchitectureComponentDeclarationCheck}
+   */
+  @Test
+  public void testPackageInfoCase() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonNPEOnPackageInfoCheck.java",
+        new DevonArchitectureComponentDeclarationCheck());
+  }
+
 }

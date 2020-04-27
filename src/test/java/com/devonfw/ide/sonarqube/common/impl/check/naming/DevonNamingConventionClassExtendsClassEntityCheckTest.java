@@ -48,4 +48,14 @@ public class DevonNamingConventionClassExtendsClassEntityCheckTest {
         new DevonNamingConventionClassExtendsClassEntityCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassEntityCheck}
+   */
+  @Test
+  public void testPackageInfoCase() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonNPEOnPackageInfoCheck.java",
+        new DevonNamingConventionClassExtendsClassEntityCheck());
+  }
+
 }

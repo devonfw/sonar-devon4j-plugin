@@ -74,4 +74,14 @@ public class DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheckTest {
         new DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck}
+   */
+  @Test
+  public void testPackageInfoCase() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonNPEOnPackageInfoCheck.java",
+        new DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck());
+  }
+
 }

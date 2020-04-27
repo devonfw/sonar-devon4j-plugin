@@ -51,4 +51,14 @@ public class DevonNamingConventionInterfaceExtendsInterfaceDaoCheckTest {
         new DevonNamingConventionInterfaceExtendsInterfaceDaoCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionInterfaceExtendsInterfaceDaoCheck}
+   */
+  @Test
+  public void testPackageInfoCase() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonNPEOnPackageInfoCheck.java",
+        new DevonNamingConventionInterfaceExtendsInterfaceDaoCheck());
+  }
+
 }
