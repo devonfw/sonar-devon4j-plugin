@@ -45,7 +45,7 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
     Set<String> superInterfacesNames = getSuperInterfacesNames(tree);
 
     if (doesSuperInterfaceHaveRegEx(superInterfacesNames) && !doesInterfaceHaveRegEx(interfaceName)) {
-      context.reportIssue(this, tree,
+      context.addIssue(tree.openBraceToken().line(), this,
           "If a superinterface has " + this.extendingInterfaceSuffixRegEx.toString()
               + " as suffix, then the subinterface should also have " + this.extendingInterfaceSuffixRegEx.toString()
               + " as suffix");

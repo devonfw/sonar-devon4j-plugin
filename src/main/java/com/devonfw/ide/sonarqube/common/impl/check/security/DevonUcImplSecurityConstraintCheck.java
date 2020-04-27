@@ -22,7 +22,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
  * {@link DevonArchitectureCheck} verifies that all Use-Case implementation methods are annotated with a security
  * constraint from javax.annotation.security.
  */
-@Rule(key = "Y1", name = "Devon Uc Impl Security Constraint Check", //
+@Rule(key = "Y1", name = "devonfw Uc Impl Security Constraint Check", //
     priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "security" })
 public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
 
@@ -42,7 +42,7 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
     List<MethodTree> methodsOfTree = getMethodsOfTree(tree);
     for (MethodTree method : methodsOfTree) {
       if (isMethodPublic(method) && !isMethodProperlyAnnotated(method)) {
-        context.reportIssue(this, method,
+        context.addIssue(method.openParenToken().line(), this,
             "This method is not properly annotated. "
                 + "Please use one of the following annotations on Use-Case implementation methods: "
                 + REQUIRED_ANNOTATIONS.toString());
@@ -120,7 +120,7 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
 
     }
 
-    return ((!hasOverrideAnnotation) || (hasOverrideAnnotation && hasRequiredAnnotation));
+    return (!hasOverrideAnnotation || hasRequiredAnnotation);
   }
 
   @Override
