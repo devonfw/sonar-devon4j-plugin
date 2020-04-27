@@ -58,4 +58,14 @@ public class DevonArchitecturePackageCheckTest {
         new DevonArchitecturePackageCheck());
   }
 
+  /**
+   * Test of {@link DevonArchitecturePackageCheck}
+   */
+  @Test
+  public void testPackageInfoCase() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonNPEOnPackageInfoCheck.java",
+        new DevonArchitecturePackageCheck());
+  }
+
 }
