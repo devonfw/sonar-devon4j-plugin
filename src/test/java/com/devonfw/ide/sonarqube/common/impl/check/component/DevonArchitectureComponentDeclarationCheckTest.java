@@ -19,6 +19,15 @@ public class DevonArchitectureComponentDeclarationCheckTest {
   }
 
   /**
+   * Test of {@link DevonArchitectureComponentDeclarationCheck}.
+   */
+  public void testOk() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/component/DevonArchitectureComponentDeclarationCheck_OK.java",
+        new DevonArchitectureComponentDeclarationCheck());
+  }
+
+  /**
    * Test of {@link DevonArchitectureComponentDeclarationCheck}
    */
   @Test

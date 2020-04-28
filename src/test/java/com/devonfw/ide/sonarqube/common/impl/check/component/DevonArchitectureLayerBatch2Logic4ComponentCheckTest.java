@@ -8,15 +8,15 @@ import org.sonar.java.checks.verifier.JavaCheckVerifier;
  */
 public class DevonArchitectureLayerBatch2Logic4ComponentCheckTest {
 
-  // /**
-  // * Test of {@link DevonArchitectureLayerBatch2Logic4ComponentCheck}.
-  // */
-  // @Test
-  // public void testOK() {
-  //
-  // JavaCheckVerifier.verifyNoIssue("src/test/files/component/DevonArchitectureLayerBatch2Logic4ComponentCheck_OK.java",
-  // new DevonArchitectureLayerBatch2Logic4ComponentCheck());
-  // }
+  /**
+   * Test of {@link DevonArchitectureLayerBatch2Logic4ComponentCheck}.
+   */
+  @Test
+  public void testOK() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/component/DevonArchitectureLayerBatch2Logic4ComponentCheck_OK.java",
+        new DevonArchitectureLayerBatch2Logic4ComponentCheck());
+  }
 
   /**
    * Test of {@link DevonArchitectureLayerBatch2Logic4ComponentCheck}.
