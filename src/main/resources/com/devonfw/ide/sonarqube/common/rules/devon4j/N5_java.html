@@ -1,0 +1,15 @@
+<p>
+    This rule checks that non-abstract classes inheriting from AbstractUc begin with Uc, 
+    end with Impl and implement an interface with the same name except the suffix Impl.
+</p>
+<h2>Noncompliant Code Examples</h2>
+<pre>
+    public class <del style='color:#979696'><span style='color: #FFB000'>UcTestImpl</span></del> extends AbstractUc {}
+</pre>
+<pre>
+    public abstract class <del style='color: #979696'><span style='color: #FFB000'>UcClass</span></del> extends AbstractUc {}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+    public class <u style = 'color: #979696'><span style='color: #648FFF'>UcTestImpl</span></u> extends AbstractUc implements UcTest {}
+</pre>

@@ -6,7 +6,6 @@ import org.sonar.api.server.rule.RulesDefinition.Param;
 import org.sonar.api.server.rule.RulesDefinition.Repository;
 import org.sonar.api.server.rule.RulesDefinition.Rule;
 
-import com.devonfw.ide.sonarqube.common.impl.DevonSonarDefinition;
 import com.devonfw.module.test.common.base.ModuleTest;
 
 /**
@@ -25,11 +24,9 @@ public class DevonSonarDefinitionTest extends ModuleTest {
     rulesDefinition.define(context);
     RulesDefinition.Repository repository = context.repository(DevonSonarDefinition.REPOSITORY_KEY);
 
-    assertThat(repository.name()).isEqualTo("Devon Java Rules");
+    assertThat(repository.name()).isEqualTo("devonfw Java Rules");
     assertThat(repository.language()).isEqualTo("java");
     assertThat(repository.rules().size()).isGreaterThanOrEqualTo(28);
-
-    // adding the checks number
 
     assertAllRuleParametersHaveDescription(repository);
   }
@@ -37,6 +34,10 @@ public class DevonSonarDefinitionTest extends ModuleTest {
   private void assertAllRuleParametersHaveDescription(Repository repository) {
 
     for (Rule rule : repository.rules()) {
+      String ruleKey = rule.key();
+      assertThat(ruleKey).isNotEmpty();
+      assertThat(rule).isNotNull();
+      assertThat(repository.rule(ruleKey).htmlDescription()).isNotNull();
       for (Param param : rule.params()) {
         assertThat(param.description()).as("description for " + param.key()).isNotEmpty();
       }

@@ -1,0 +1,9 @@
+<p>This rule checks that classes inheriting from entity classes end with the suffix Entity.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+    public class <del style='color: #979696'><span style='color: #FFB000'>TestClass</span></del> extends SuperEntity {}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+    public class <u style='color: #979696'><span style='color: #648FFF'>TestEntity</span></u> extends SuperEntity {}
+</pre>

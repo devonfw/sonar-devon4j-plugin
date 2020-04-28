@@ -3,6 +3,8 @@ package com.devonfw.ide.sonarqube.common.api.config;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The status of the {@link Configuration}.
@@ -11,9 +13,9 @@ import java.util.List;
  */
 public class Status {
 
-  private final List<String> errors;
+  private final List<String> errorsMutable;
 
-  private final List<String> errorsView;
+  private final List<String> errors;
 
   private boolean errorsReported;
 
@@ -25,8 +27,8 @@ public class Status {
   public Status() {
 
     super();
-    this.errors = new ArrayList<>();
-    this.errorsView = Collections.unmodifiableList(this.errors);
+    this.errorsMutable = new ArrayList<>();
+    this.errors = Collections.unmodifiableList(this.errorsMutable);
     this.source = Configuration.ARCHITECTURE_JSON;
   }
 
@@ -36,7 +38,7 @@ public class Status {
    */
   public List<String> getErrors() {
 
-    return this.errorsView;
+    return this.errors;
   }
 
   /**
@@ -62,12 +64,14 @@ public class Status {
    */
   void addError(String error) {
 
+    Logger logger = Logger.getGlobal();
+
     assert !this.errorsReported;
-    if (this.errors.isEmpty()) {
-      System.out.println("ERROR: Illegal configuration file: " + this.source);
+    if (this.errorsMutable.isEmpty()) {
+      logger.log(Level.WARNING, "ERROR: Illegal configuration file: " + this.source);
     }
-    this.errors.add(error);
-    System.out.println("ERROR: " + error);
+    this.errorsMutable.add(error);
+    logger.log(Level.WARNING, "ERROR: " + error);
   }
 
 }
