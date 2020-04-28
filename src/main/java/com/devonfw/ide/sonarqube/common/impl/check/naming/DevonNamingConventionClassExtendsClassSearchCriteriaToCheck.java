@@ -7,7 +7,7 @@ import org.sonar.check.Rule;
  * {@link DevonNamingConventionClassExtendsClassCheck} verifying that classes extending AbstractSearchCriteriaTo are
  * following the devonfw naming convention by ending with SearchCriteriaTo.
  */
-@Rule(key = "N6", name = "Devon Naming Check of SearchCriteriaTo Classes", //
+@Rule(key = "N6", name = "devonfw Naming Check of SearchCriteriaTo Classes", //
     priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "naming" })
 public class DevonNamingConventionClassExtendsClassSearchCriteriaToCheck
     extends DevonNamingConventionClassExtendsClassCheck {

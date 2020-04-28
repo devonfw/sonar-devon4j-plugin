@@ -58,4 +58,14 @@ public class DevonNamingConventionClassExtendsClassEtoCheckTest {
         new DevonNamingConventionClassExtendsClassEtoCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassEtoCheck}
+   */
+  @Test
+  public void testPackageInfoCase() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonNPEOnPackageInfoCheck.java",
+        new DevonNamingConventionClassExtendsClassEtoCheck());
+  }
+
 }

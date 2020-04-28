@@ -28,4 +28,14 @@ public class DevonArchitectureLayerBatch2Logic4ComponentCheckTest {
         new DevonArchitectureLayerBatch2Logic4ComponentCheck());
   }
 
+  /**
+   * Test of {@link DevonArchitectureLayerBatch2Logic4ComponentCheck}
+   */
+  @Test
+  public void testPackageInfoCase() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonNPEOnPackageInfoCheck.java",
+        new DevonArchitectureLayerBatch2Logic4ComponentCheck());
+  }
+
 }

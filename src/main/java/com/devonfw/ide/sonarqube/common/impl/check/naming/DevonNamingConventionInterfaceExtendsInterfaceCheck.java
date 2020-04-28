@@ -3,6 +3,8 @@ package com.devonfw.ide.sonarqube.common.impl.check.naming;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import org.sonar.plugins.java.api.JavaFileScanner;
@@ -16,6 +18,8 @@ import org.sonar.plugins.java.api.tree.TypeTree;
  * Abstract base class for naming convention checks of interfaces
  */
 public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implements JavaFileScanner {
+
+  private static final Logger logger = Logger.getGlobal();
 
   /**
    * This needs to be the suffix of the checked interface if it extends certain other interfaces.
@@ -41,11 +45,15 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
   public void scanFile(JavaFileScannerContext context) {
 
     ClassTree tree = getTreeInstance(context);
+    if (tree == null) {
+      logger.log(Level.INFO, "Tree currently being investigated is not of type ClassTree.");
+      return;
+    }
     String interfaceName = tree.simpleName().name();
     Set<String> superInterfacesNames = getSuperInterfacesNames(tree);
 
     if (doesSuperInterfaceHaveRegEx(superInterfacesNames) && !doesInterfaceHaveRegEx(interfaceName)) {
-      context.reportIssue(this, tree,
+      context.addIssue(tree.openBraceToken().line(), this,
           "If a superinterface has " + this.extendingInterfaceSuffixRegEx.toString()
               + " as suffix, then the subinterface should also have " + this.extendingInterfaceSuffixRegEx.toString()
               + " as suffix");

@@ -2,6 +2,8 @@ package com.devonfw.ide.sonarqube.common.impl.check.naming;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import org.sonar.java.model.ModifiersUtils;
@@ -18,6 +20,8 @@ import org.sonar.plugins.java.api.tree.TypeTree;
  * suffix as its superclass.
  */
 public abstract class DevonNamingConventionClassExtendsClassCheck implements JavaFileScanner {
+
+  private static final Logger logger = Logger.getGlobal();
 
   /**
    * This needs to be the suffix of the checked class if it extends a certain other class.
@@ -59,6 +63,10 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
   public void scanFile(JavaFileScannerContext context) {
 
     this.tree = getTreeInstance(context);
+    if (this.tree == null) {
+      logger.log(Level.INFO, "Tree currently being investigated is not of type ClassTree.");
+      return;
+    }
     this.className = this.tree.simpleName().name();
     this.superClassName = getNameOfSuperClass();
 
@@ -76,9 +84,8 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
   protected boolean checkClassNameAndCreateIssue(JavaFileScannerContext context) {
 
     if (!isClassNameMatching()) {
-      context.reportIssue(this, this.tree, "If a superclass has " + this.classSuffixRegEx
+      context.addIssue(this.tree.openBraceToken().line(), this, "If a superclass has " + this.classSuffixRegEx
           + " as suffix, then the subclass should also have " + this.classSuffixRegEx + " as suffix");
-
       return true;
     }
     return false;

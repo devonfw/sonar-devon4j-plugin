@@ -28,4 +28,14 @@ public class DevonArchitectureComponentDependencyCheckTest {
         new DevonArchitectureComponentDependencyCheck());
   }
 
+  /**
+   * Test of {@link DevonArchitectureComponentDependencyCheck}
+   */
+  @Test
+  public void testPackageInfoCase() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonNPEOnPackageInfoCheck.java",
+        new DevonArchitectureComponentDependencyCheck());
+  }
+
 }

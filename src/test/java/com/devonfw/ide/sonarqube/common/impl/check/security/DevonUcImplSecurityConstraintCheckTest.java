@@ -48,4 +48,14 @@ public class DevonUcImplSecurityConstraintCheckTest {
         new DevonUcImplSecurityConstraintCheck());
   }
 
+  /**
+   * Test of {@link DevonUcImplSecurityConstraintCheck}
+   */
+  @Test
+  public void testPackageInfoCase() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonNPEOnPackageInfoCheck.java",
+        new DevonUcImplSecurityConstraintCheck());
+  }
+
 }

@@ -41,4 +41,14 @@ public class DevonArchitectureLayerLogic2Dataaccess4ComponentCheckTest {
         new DevonArchitectureLayerLogic2Dataaccess4ComponentCheck());
   }
 
+  /**
+   * Test of {@link DevonArchitectureLayerLogic2Dataaccess4ComponentCheck}
+   */
+  @Test
+  public void testPackageInfoCase() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonNPEOnPackageInfoCheck.java",
+        new DevonArchitectureLayerLogic2Dataaccess4ComponentCheck());
+  }
+
 }

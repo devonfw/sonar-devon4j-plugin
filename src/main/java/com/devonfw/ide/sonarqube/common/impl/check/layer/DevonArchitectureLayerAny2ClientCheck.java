@@ -9,7 +9,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
 /**
  * {@link DevonArchitectureCheck} verifying that only client layer code may depend on client layer.
  */
-@Rule(key = "L2", name = "Devon Layer *-Client Check", //
+@Rule(key = "L2", name = "devonfw Layer *-Client Check", //
     priority = Priority.BLOCKER, tags = { "architecture-violation", "devonfw", "layer" })
 public class DevonArchitectureLayerAny2ClientCheck extends DevonArchitectureCheck {
 

@@ -2,17 +2,17 @@ package com.devonfw.testapplication.testcomponent.logic.impl;
 
 public class TestInterfaceImpl implements TestInterface {
 
-    @Override                                   // Noncompliant
-    public boolean testBoolMethod() {
+    @Override                                      
+    public boolean testBoolMethod() {               // Noncompliant
         return true;
     }
 
-    private String testStringMethod() {
+    private String testStringMethod() {     
         return "TEST";
     }
 
-    @Override
-    protected boolean overriddenHelperMethod() {
+    @Override                                       
+    protected boolean overriddenHelperMethod() {    
 
     }
 

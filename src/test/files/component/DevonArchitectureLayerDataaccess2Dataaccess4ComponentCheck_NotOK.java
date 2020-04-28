@@ -7,10 +7,6 @@ import com.devonfw.ide.sonarqube.compB.dataaccess.api.Bar; // Noncompliant
 
 class MyClass {
 
-  private Bar bar;
-
-  public static class NestedClass {
-
-  }
+  private Bar bar;  
 
 }

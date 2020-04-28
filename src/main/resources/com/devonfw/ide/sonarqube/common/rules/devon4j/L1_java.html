@@ -1,11 +1,11 @@
 <p>This rule checks that common layer does not depend on another layer.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-    package com.devonfw.ide.sonarqube.<span style='color: blue'>common</span>.api;
+    package com.devonfw.ide.sonarqube.<span style='color: #785EF0'>common</span>.api;
 
-    import com.devonfw.ide.sonarqube.<span style='color: red'>client</span>.api.Foo;
-    import com.devonfw.ide.sonarqube.<span style='color: red'>service</span>.api.Bar;
-    import com.devonfw.ide.sonarqube.<span style='color: red'>logic</span>.api.Some;
+    import com.devonfw.ide.sonarqube.<del style='color: #979696'><span style='color: #FFB000'>client</span></del>.api.Foo;
+    import com.devonfw.ide.sonarqube.<del style='color: #979696'><span style='color: #FFB000'>service</span></del>.api.Bar;
+    import com.devonfw.ide.sonarqube.<del style='color: #979696'><span style='color: #FFB000'>logic</span></del>.api.Some;
     
     public class MyClass {}
 </pre>
