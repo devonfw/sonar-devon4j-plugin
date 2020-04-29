@@ -2,8 +2,6 @@ package com.devonfw.ide.sonarqube.common.impl.check.naming;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import org.sonar.java.model.ModifiersUtils;
@@ -20,17 +18,10 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
  */
 public abstract class DevonNamingConventionClassExtendsClassCheck extends DevonArchitectureCheck {
 
-  private static final Logger logger = Logger.getGlobal();
-
   /**
    * This needs to be the suffix of the checked class if it extends a certain other class.
    */
   protected final Pattern classSuffixRegEx;
-
-  /**
-   * Tree instance of the current context.
-   */
-  protected ClassTree tree;
 
   /**
    * Name of the checked class
@@ -59,31 +50,27 @@ public abstract class DevonNamingConventionClassExtendsClassCheck extends DevonA
    * @param context Context of analysis containing the parsed tree.
    */
   @Override
-  public void scanFile(JavaFileScannerContext context) {
+  public void doScanFile(ClassTree tree, JavaFileScannerContext context) {
 
-    this.tree = getClassTree(context);
-    if (this.tree == null) {
-      logger.log(Level.INFO, "Tree currently being investigated is not of type ClassTree.");
-      return;
-    }
-    this.className = this.tree.simpleName().name();
-    this.superClassName = getNameOfSuperClass();
+    this.className = tree.simpleName().name();
+    this.superClassName = getNameOfSuperClass(tree);
 
     if (isSuperClassMatching()) {
-      checkClassNameAndCreateIssue(context);
+      checkClassNameAndCreateIssue(tree, context);
     }
   }
 
   /**
    * Checks if class name is matching the given pattern. If not, creates an issue.
    *
+   * @param tree Tree currently being investigated.
    * @param context Context of analysis containing the parsed tree.
    * @return true if issue was created, false otherwise.
    */
-  protected boolean checkClassNameAndCreateIssue(JavaFileScannerContext context) {
+  protected boolean checkClassNameAndCreateIssue(ClassTree tree, JavaFileScannerContext context) {
 
     if (!isClassNameMatching()) {
-      context.addIssue(this.tree.openBraceToken().line(), this, "If a superclass has " + this.classSuffixRegEx
+      context.addIssue(tree.openBraceToken().line(), this, "If a superclass has " + this.classSuffixRegEx
           + " as suffix, then the subclass should also have " + this.classSuffixRegEx + " as suffix");
       return true;
     }
@@ -93,27 +80,29 @@ public abstract class DevonNamingConventionClassExtendsClassCheck extends DevonA
   /**
    * Gets the name of the super class of the currently checked class.
    *
+   * @param tree Tree currently being investigated.
    * @return Name of the super class.
    */
-  protected String getNameOfSuperClass() {
+  protected String getNameOfSuperClass(ClassTree tree) {
 
-    TypeTree superClass = this.tree.superClass();
+    TypeTree superClass = tree.superClass();
 
     if (superClass == null) {
       return null;
     } else {
-      return this.tree.superClass().toString();
+      return tree.superClass().toString();
     }
   }
 
   /**
    * Gets the names of all the interfaces implemented by the currently checked class.
    *
+   * @param tree Tree currently being investigated.
    * @return Names of the implemented interfaces.
    */
-  protected List<String> getSuperInterfacesNames() {
+  protected List<String> getSuperInterfacesNames(ClassTree tree) {
 
-    List<TypeTree> superInterfaces = this.tree.superInterfaces();
+    List<TypeTree> superInterfaces = tree.superInterfaces();
     List<String> superInterfacesNames = new ArrayList<>();
 
     for (TypeTree superInterface : superInterfaces) {

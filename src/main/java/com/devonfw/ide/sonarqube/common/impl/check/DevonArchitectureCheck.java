@@ -2,6 +2,8 @@ package com.devonfw.ide.sonarqube.common.impl.check;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
@@ -38,6 +40,8 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
 
   private List<ImportTree> imports;
 
+  private static final Logger logger = Logger.getGlobal();
+
   /**
    * The constructor.
    */
@@ -57,13 +61,17 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
   protected abstract String checkDependency(JavaType source, JavaType target);
 
   @Override
-  public void scanFile(JavaFileScannerContext fileContext) {
+  public final void scanFile(JavaFileScannerContext fileContext) {
 
-    this.imports.clear();
-    this.context = fileContext;
-    scan(fileContext.getTree());
-    this.context = null;
-    this.sourcePackage = null;
+    ClassTree tree = getClassTree(fileContext);
+
+    if (tree == null) {
+      logger.log(Level.INFO, "Tree currently being investigated is not of type ClassTree.");
+      return;
+    } else {
+      doScanFile(tree, fileContext);
+    }
+
   }
 
   @Override
@@ -226,6 +234,36 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
   }
 
   /**
+   * @param fileContext of analysis containing the parsed tree.
+   * @return ClassTree instance.
+   */
+  protected ClassTree getClassTree(JavaFileScannerContext fileContext) {
+
+    CompilationUnitTree parsedTree = fileContext.getTree();
+    List<Tree> types = parsedTree.types();
+
+    for (Tree tree : types) {
+      if (tree instanceof ClassTree) {
+        return (ClassTree) tree;
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * @param tree Tree currently being investigated.
+   * @param fileContext of analysis containing the parsed tree.
+   */
+  protected void doScanFile(ClassTree tree, JavaFileScannerContext fileContext) {
+
+    this.imports.clear();
+    scan(tree);
+    this.context = null;
+    this.sourcePackage = null;
+  }
+
+  /**
    * Returns all methods of the given tree.
    *
    * @param tree Tree currently being investigated.
@@ -243,24 +281,6 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
     }
 
     return methodsOfTree;
-  }
-
-  /**
-   * @param javaFileScannerContext of analysis containing the parsed tree.
-   * @return ClassTree instance.
-   */
-  protected ClassTree getClassTree(JavaFileScannerContext javaFileScannerContext) {
-
-    CompilationUnitTree parsedTree = javaFileScannerContext.getTree();
-    List<Tree> types = parsedTree.types();
-
-    for (Tree tree : types) {
-      if (tree instanceof ClassTree) {
-        return (ClassTree) tree;
-      }
-    }
-
-    return null;
   }
 
   /**

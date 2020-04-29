@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
@@ -26,19 +24,11 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
     priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "security" })
 public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
 
-  private static final Logger logger = Logger.getGlobal();
-
   private static final Set<String> REQUIRED_ANNOTATIONS = new HashSet<>(
       Arrays.asList("DenyAll", "PermitAll", "RolesAllowed"));
 
   @Override
-  public void scanFile(JavaFileScannerContext context) {
-
-    ClassTree tree = getClassTree(context);
-    if (tree == null) {
-      logger.log(Level.INFO, "Tree currently being investigated is not of type ClassTree.");
-      return;
-    }
+  protected void doScanFile(ClassTree tree, JavaFileScannerContext context) {
 
     TypeTree ucInterface = getUcInterface(tree);
 
