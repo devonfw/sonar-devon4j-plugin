@@ -7,7 +7,7 @@ import org.sonar.check.Rule;
  * {@link DevonNamingConventionClassExtendsClassCheck} verifying that classes extending AbstractCto are following the
  * devonfw naming convention by ending with Cto.
  */
-@Rule(key = "N1", name = "Devon Naming Check of Cto Classes", //
+@Rule(key = "N1", name = "devonfw Naming Check of Cto Classes", //
     priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "naming" })
 public class DevonNamingConventionClassExtendsClassCtoCheck extends DevonNamingConventionClassExtendsClassCheck {
 

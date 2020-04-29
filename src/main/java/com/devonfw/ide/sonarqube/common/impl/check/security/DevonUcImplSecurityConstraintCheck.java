@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
@@ -22,9 +24,11 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
  * {@link DevonArchitectureCheck} verifies that all Use-Case implementation methods are annotated with a security
  * constraint from javax.annotation.security.
  */
-@Rule(key = "Y1", name = "Devon Uc Impl Security Constraint Check", //
+@Rule(key = "Y1", name = "devonfw Uc Impl Security Constraint Check", //
     priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "security" })
 public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
+
+  private static final Logger logger = Logger.getGlobal();
 
   private static final Set<String> REQUIRED_ANNOTATIONS = new HashSet<>(
       Arrays.asList("DenyAll", "PermitAll", "RolesAllowed"));
@@ -33,6 +37,11 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
   public void scanFile(JavaFileScannerContext context) {
 
     ClassTree tree = getClassTree(context);
+    if (tree == null) {
+      logger.log(Level.INFO, "Tree currently being investigated is not of type ClassTree.");
+      return;
+    }
+
     TypeTree ucInterface = getUcInterface(tree);
 
     if (ucInterface == null) {
@@ -42,7 +51,7 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
     List<MethodTree> methodsOfTree = getMethodsOfTree(tree);
     for (MethodTree method : methodsOfTree) {
       if (isMethodPublic(method) && !isMethodProperlyAnnotated(method)) {
-        context.reportIssue(this, method,
+        context.addIssue(method.openParenToken().line(), this,
             "This method is not properly annotated. "
                 + "Please use one of the following annotations on Use-Case implementation methods: "
                 + REQUIRED_ANNOTATIONS.toString());
@@ -120,7 +129,7 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
 
     }
 
-    return ((!hasOverrideAnnotation) || (hasOverrideAnnotation && hasRequiredAnnotation));
+    return (!hasOverrideAnnotation || hasRequiredAnnotation);
   }
 
   @Override

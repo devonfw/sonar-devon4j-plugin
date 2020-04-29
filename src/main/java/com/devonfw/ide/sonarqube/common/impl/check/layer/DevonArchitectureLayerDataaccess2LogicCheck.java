@@ -9,7 +9,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
 /**
  * {@link DevonArchitectureCheck} verifying that dataaccess layer does not depend on logic layer.
  */
-@Rule(key = "L12", name = "Devon Layer Dataaccess-Logic Check", //
+@Rule(key = "L12", name = "devonfw Layer Dataaccess-Logic Check", //
     priority = Priority.BLOCKER, tags = { "architecture-violation", "devonfw", "layer" })
 public class DevonArchitectureLayerDataaccess2LogicCheck extends DevonArchitectureCheck {
 

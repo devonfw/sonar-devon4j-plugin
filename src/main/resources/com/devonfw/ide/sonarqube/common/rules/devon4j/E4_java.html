@@ -15,9 +15,9 @@
 </p>
 <h2>Noncompliant Code Examples</h2>
 <pre>
-    package com.devonfw.ide.sonarqube.<span style='color: red'>logic</span>.impl;
+    package com.devonfw.ide.sonarqube.<del style='color: #979696'><span style='color: #FFB000'>logic</span></del>.impl;
 
-    <span style='color: red'>import org.hibernate.Session;</span>
+    <del style='color: #979696'><span style='color: #FFB000'>import org.hibernate.Session;</span></del>
 
     public class MyClass {}
 </pre>
@@ -25,17 +25,17 @@
 <pre>
     package com.devonfw.ide.sonarqube.dataaccess.api;
 
-    <span style='color: red'>import org.hibernate.annotations.OrderBy;</span>
+    <del style='color: #979696'><span style='color: #FFB000'>import org.hibernate.annotations.OrderBy;</span></del>
 
     public class MyClass {}
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-    package com.devonfw.ide.sonarqube.<span style='color: green'>dataaccess.impl</span>;
+    package com.devonfw.ide.sonarqube.<u style='color: #979696'><span style='color: #648FFF'>dataaccess.impl</span></u>;
 
-    <span style='color: green'>import org.hibernate.Session;</span>
-    <span style='color: green'>import org.hibernate.annotations.FilterDef;</span>
-    <span style='color: green'>import org.hibernate.envers.Audited;</span>
+    <u style='color: #979696'><span style='color: #648FFF'>import org.hibernate.Session;</span></u>
+    <u style='color: #979696'><span style='color: #648FFF'>import org.hibernate.annotations.FilterDef;</span></u>
+    <u style='color: #979696'><span style='color: #648FFF'>import org.hibernate.envers.Audited;</span></u>
 
     public class MyClass {}
 </pre>

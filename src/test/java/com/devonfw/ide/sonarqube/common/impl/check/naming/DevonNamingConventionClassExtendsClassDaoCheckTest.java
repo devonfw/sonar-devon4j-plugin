@@ -58,4 +58,14 @@ public class DevonNamingConventionClassExtendsClassDaoCheckTest {
         new DevonNamingConventionClassExtendsClassDaoCheck());
   }
 
+  /**
+   * Test of {@link DevonNamingConventionClassExtendsClassDaoCheck}
+   */
+  @Test
+  public void testPackageInfoCase() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonNPEOnPackageInfoCheck.java",
+        new DevonNamingConventionClassExtendsClassDaoCheck());
+  }
+
 }

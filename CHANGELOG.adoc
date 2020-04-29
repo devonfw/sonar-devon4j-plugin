@@ -2,12 +2,22 @@
 
 This file documents all notable changes to https://github.com/devonfw/sonar-devon4j-plugin[sonar-devon4j-plugin].
 
-== 3.2.2
+== 2020.04.001
 
-* https://github.com/devonfw/sonar-devon4j-plugin/issues/16[#16]: Added 'devonfw Java' quality profile
-* https://github.com/devonfw/sonar-devon4j-plugin/issues/57[#57]: Increased test coverage
-* https://github.com/devonfw/sonar-devon4j-plugin/issues/60[#60]: Fixed a bug in one of the naming checks
-* Some further organisational changes and code cleanup
+This is the first version using our new versioning scheme. Here, the following issues were resolved:
+
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/60[#60]: Fixed a bug in the naming check for Use-Case implementation classes
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/67[#67]: Fixed a bug where the whole body of a method or a class was marked as the issue location. Now only the method / class headers will be highlighted.
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/68[#68]: Made our rule descriptions more accessible by using better readable colors as well as alternative visual cues
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/71[#71]: Fixed a bug where a NPE could be thrown
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/74[#74]: Fixed a bug where a method always returned null
+
+Unrelated to any specific issues, there was some refactoring and cleaning up done with the following two PRs:
+
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/66[PR #66]: Refactored the prefixes of our rule names from 'Devon' to 'devonfw'
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/65[PR #65]: Sorted security-related test files into their own package
+
+Changes for this release can be found in https://github.com/devonfw/sonar-devon4j-plugin/milestone/3?closed=1[milestone 2020.04.001].
 
 == 3.2.1
 

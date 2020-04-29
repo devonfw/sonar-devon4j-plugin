@@ -12,7 +12,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyChec
  * @author lniazman
  *
  */
-@Rule(key = "E6", name = "Devon 3rd Party Datatype Mappings Check", //
+@Rule(key = "E6", name = "devonfw 3rd Party Datatype Mappings Check", //
     priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "thirdparty" })
 public class DevonArchitecture3rdPartyDatatypeMappingsCheck extends DevonArchitecture3rdPartyCheck {
 
