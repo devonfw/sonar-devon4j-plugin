@@ -7,19 +7,18 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import org.sonar.java.model.ModifiersUtils;
-import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.ClassTree;
-import org.sonar.plugins.java.api.tree.CompilationUnitTree;
 import org.sonar.plugins.java.api.tree.Modifier;
-import org.sonar.plugins.java.api.tree.Tree;
 import org.sonar.plugins.java.api.tree.TypeTree;
+
+import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
 
 /**
  * Abstract base class for naming convention checks of classes. This class only checks if the checked class has the same
  * suffix as its superclass.
  */
-public abstract class DevonNamingConventionClassExtendsClassCheck implements JavaFileScanner {
+public abstract class DevonNamingConventionClassExtendsClassCheck extends DevonArchitectureCheck {
 
   private static final Logger logger = Logger.getGlobal();
 
@@ -62,7 +61,7 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
   @Override
   public void scanFile(JavaFileScannerContext context) {
 
-    this.tree = getTreeInstance(context);
+    this.tree = getClassTree(context);
     if (this.tree == null) {
       logger.log(Level.INFO, "Tree currently being investigated is not of type ClassTree.");
       return;
@@ -89,25 +88,6 @@ public abstract class DevonNamingConventionClassExtendsClassCheck implements Jav
       return true;
     }
     return false;
-  }
-
-  /**
-   * Gets a tree instance from the current context.
-   *
-   * @param context Current context.
-   * @return Tree instance.
-   */
-  protected static ClassTree getTreeInstance(JavaFileScannerContext context) {
-
-    CompilationUnitTree parsedTree = context.getTree();
-    List<Tree> types = parsedTree.types();
-
-    for (Tree tree : types) {
-      if (tree instanceof ClassTree) {
-        return (ClassTree) tree;
-      }
-    }
-    return null;
   }
 
   /**

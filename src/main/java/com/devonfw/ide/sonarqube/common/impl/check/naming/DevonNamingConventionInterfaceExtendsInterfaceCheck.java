@@ -1,23 +1,21 @@
 package com.devonfw.ide.sonarqube.common.impl.check.naming;
 
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
-import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.ClassTree;
-import org.sonar.plugins.java.api.tree.CompilationUnitTree;
-import org.sonar.plugins.java.api.tree.Tree;
 import org.sonar.plugins.java.api.tree.TypeTree;
+
+import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
 
 /**
  * Abstract base class for naming convention checks of interfaces
  */
-public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implements JavaFileScanner {
+public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck extends DevonArchitectureCheck {
 
   private static final Logger logger = Logger.getGlobal();
 
@@ -44,7 +42,7 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
   @Override
   public void scanFile(JavaFileScannerContext context) {
 
-    ClassTree tree = getTreeInstance(context);
+    ClassTree tree = getClassTree(context);
     if (tree == null) {
       logger.log(Level.INFO, "Tree currently being investigated is not of type ClassTree.");
       return;
@@ -59,20 +57,6 @@ public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck implem
               + " as suffix");
     }
 
-  }
-
-  private static ClassTree getTreeInstance(JavaFileScannerContext context) {
-
-    CompilationUnitTree parsedTree = context.getTree();
-    List<Tree> types = parsedTree.types();
-
-    for (Tree tree : types) {
-      if (tree instanceof ClassTree) {
-        return (ClassTree) tree;
-      }
-    }
-
-    return null;
   }
 
   /**

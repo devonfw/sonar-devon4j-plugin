@@ -246,6 +246,24 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
   }
 
   /**
+   * @param javaFileScannerContext of analysis containing the parsed tree.
+   * @return ClassTree instance.
+   */
+  protected ClassTree getClassTree(JavaFileScannerContext javaFileScannerContext) {
+
+    CompilationUnitTree parsedTree = javaFileScannerContext.getTree();
+    List<Tree> types = parsedTree.types();
+
+    for (Tree tree : types) {
+      if (tree instanceof ClassTree) {
+        return (ClassTree) tree;
+      }
+    }
+
+    return null;
+  }
+
+  /**
    * Checks if a method has a public modifier.
    *
    * @param method to be checked

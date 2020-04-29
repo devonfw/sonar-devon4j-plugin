@@ -3,6 +3,8 @@ package com.devonfw.ide.sonarqube.common.impl.check.naming;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
+import com.devonfw.ide.sonarqube.common.api.JavaType;
+
 /**
  * {@link DevonNamingConventionClassExtendsClassCheck} verifying that classes extending AbstractSearchCriteriaTo are
  * following the devonfw naming convention by ending with SearchCriteriaTo.
@@ -18,6 +20,12 @@ public class DevonNamingConventionClassExtendsClassSearchCriteriaToCheck
   public DevonNamingConventionClassExtendsClassSearchCriteriaToCheck() {
 
     super(".*SearchCriteriaTo");
+  }
+
+  @Override
+  protected String checkDependency(JavaType source, JavaType target) {
+
+    return null;
   }
 
 }

@@ -6,6 +6,8 @@ import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 
+import com.devonfw.ide.sonarqube.common.api.JavaType;
+
 /**
  * {@link DevonNamingConventionClassExtendsClassCheck} verifying that non-abstract classes inherited from AbstractUc are
  * following the devonfw naming convention by beginning with Uc and ending with Impl. They must also implement an
@@ -76,6 +78,12 @@ public class DevonNamingConventionClassExtendsClassUcImplCheck extends DevonNami
     } else {
       return super.isSuperClassMatching();
     }
+  }
+
+  @Override
+  protected String checkDependency(JavaType source, JavaType target) {
+
+    return null;
   }
 
 }

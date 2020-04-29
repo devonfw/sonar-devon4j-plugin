@@ -12,9 +12,7 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.AnnotationTree;
 import org.sonar.plugins.java.api.tree.ClassTree;
-import org.sonar.plugins.java.api.tree.CompilationUnitTree;
 import org.sonar.plugins.java.api.tree.MethodTree;
-import org.sonar.plugins.java.api.tree.Tree;
 import org.sonar.plugins.java.api.tree.TypeTree;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
@@ -57,24 +55,6 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
                 + REQUIRED_ANNOTATIONS.toString());
       }
     }
-  }
-
-  /**
-   * @param context of analysis containing the parsed tree.
-   * @return ClassTree instance.
-   */
-  protected ClassTree getClassTree(JavaFileScannerContext context) {
-
-    CompilationUnitTree parsedTree = context.getTree();
-    List<Tree> types = parsedTree.types();
-
-    for (Tree tree : types) {
-      if (tree instanceof ClassTree) {
-        return (ClassTree) tree;
-      }
-    }
-
-    return null;
   }
 
   /**

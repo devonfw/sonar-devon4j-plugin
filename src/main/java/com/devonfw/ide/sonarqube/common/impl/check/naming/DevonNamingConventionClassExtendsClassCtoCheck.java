@@ -3,6 +3,8 @@ package com.devonfw.ide.sonarqube.common.impl.check.naming;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
+import com.devonfw.ide.sonarqube.common.api.JavaType;
+
 /**
  * {@link DevonNamingConventionClassExtendsClassCheck} verifying that classes extending AbstractCto are following the
  * devonfw naming convention by ending with Cto.
@@ -17,6 +19,12 @@ public class DevonNamingConventionClassExtendsClassCtoCheck extends DevonNamingC
   public DevonNamingConventionClassExtendsClassCtoCheck() {
 
     super(".*Cto");
+  }
+
+  @Override
+  protected String checkDependency(JavaType source, JavaType target) {
+
+    return null;
   }
 
 }
