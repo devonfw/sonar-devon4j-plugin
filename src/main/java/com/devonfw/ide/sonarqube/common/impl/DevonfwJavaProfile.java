@@ -84,9 +84,7 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
 
   private NodeList readQualityProfileXml() {
 
-    InputStream inputStream = DevonfwJavaProfile.class.getResourceAsStream(DEVONFW_JAVA);
-
-    try {
+    try (InputStream inputStream = DevonfwJavaProfile.class.getResourceAsStream(DEVONFW_JAVA)) {
       DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
       DocumentBuilder builder = dbFactory.newDocumentBuilder();
       Document document = builder.parse(inputStream);
