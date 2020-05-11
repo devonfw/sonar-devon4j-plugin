@@ -15,9 +15,6 @@
   <properties>
     <java.version>1.8</java.version>
     <sonar.version>7.9.1</sonar.version>
-    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-    <sonar.jacoco.reportPaths>${project.baseDir}/../target/jacoco.exec</sonar.jacoco.reportPaths>
     <devon4j.version>2020.04.001</devon4j.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -144,38 +141,7 @@
           <sonarQubeMinVersion>5.6</sonarQubeMinVersion> <!-- allow to depend on API 6.x but run on LTS -->
         </configuration>
       </plugin>
-
-      <!-- ADDITIONAL -->
-
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.5</version>
-        <configuration>
-          <skip>${maven.test.skip}</skip>
-          <destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
-          <dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
-          <output>file</output>
-          <append>true</append>
-        </configuration>
-        <executions>
-          <execution>
-            <id>jacoco-initialize</id>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-            <phase>test-compile</phase>
-          </execution>
-          <execution>
-            <id>jacoco-site</id>
-            <goals>
-              <goal>report</goal>
-            </goals>
-            <phase>verify</phase>
-          </execution>
-        </executions>
-      </plugin>
-  
+      
       <!-- configure java compiler -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -332,6 +298,32 @@
   </build>
 
   <profiles>
+	  <profile>
+	    <id>jacoco-report</id>
+	    <build>
+	      <plugins>
+		      <plugin>
+		        <groupId>org.jacoco</groupId>
+		        <artifactId>jacoco-maven-plugin</artifactId>
+		        <version>0.8.5</version>
+		        <executions>
+		          <execution>
+		            <id>prepare-agent</id>
+		            <goals>
+		              <goal>prepare-agent</goal>
+		            </goals>
+		          </execution>
+		          <execution>
+		            <id>report</id>
+		            <goals>
+		              <goal>report</goal>
+		            </goals>
+		          </execution>
+		        </executions>
+		      </plugin>
+	      </plugins>
+	    </build>
+	  </profile>
     <profile>
       <id>doclint-disabled</id>
       <activation>
