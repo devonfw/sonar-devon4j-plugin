@@ -258,7 +258,8 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
   protected void doScanFile(ClassTree tree, JavaFileScannerContext fileContext) {
 
     this.imports.clear();
-    scan(tree);
+    this.context = fileContext;
+    scan(fileContext.getTree());
     this.context = null;
     this.sourcePackage = null;
   }
