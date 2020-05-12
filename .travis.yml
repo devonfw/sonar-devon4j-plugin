@@ -10,7 +10,7 @@ addons:
 
 script:
   - if [ $TRAVIS_BRANCH == "master" ] && [ $TRAVIS_PULL_REQUEST == "false" ]; 
-    then mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=devonfw_sonar-devon4j-plugin -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=comdevonfw;
+    then mvn clean -Pjacoco-report install sonar:sonar -Dsonar.projectKey=devonfw_sonar-devon4j-plugin -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=comdevonfw;
     else mvn clean install;
     fi
 
