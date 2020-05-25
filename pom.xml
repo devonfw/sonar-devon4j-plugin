@@ -3,6 +3,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.devonfw</groupId>
+    <artifactId>maven-parent</artifactId>
+    <version>1</version>
+  </parent>
   <groupId>com.devonfw.tools</groupId>
   <artifactId>sonar-devon4j-plugin</artifactId>
   <version>2020.04.002-SNAPSHOT</version>
@@ -13,6 +18,7 @@
   <inceptionYear>2017</inceptionYear>
 
   <properties>
+    <github.repository>https://github.com/devonfw/sonar-devon4j-plugin</github.repository>
     <java.version>1.8</java.version>
     <sonar.version>7.9.1</sonar.version>
     <devon4j.version>2020.04.001</devon4j.version>
@@ -305,7 +311,6 @@
           <plugin>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.8.5</version>
             <executions>
               <execution>
                 <id>prepare-agent</id>
