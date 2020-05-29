@@ -52,12 +52,15 @@ public class ConfigurationFactory {
     if (this.lastConfigFolderPath != null && fileToScan.getAbsolutePath().startsWith(this.lastConfigFolderPath)) {
       return this.path2configMap.get(this.lastConfigFolderPath);
     }
+
     File configFile = findConfigFile(fileToScan.getParentFile());
     if (configFile == null) {
       logger.log(Level.INFO, "********** Configuration not found starting from " + fileToScan.getAbsolutePath());
       return null;
     }
+
     logger.log(Level.INFO, "********** Configuration found at " + configFile.getAbsolutePath());
+
     File configFolder = configFile.getParentFile();
     String configFolderPath = configFolder.getAbsolutePath();
     if (!configFolderPath.endsWith(File.separator)) {
@@ -74,10 +77,23 @@ public class ConfigurationFactory {
     if (folder == null) {
       return null;
     }
+
     File configFile = new File(folder, Configuration.ARCHITECTURE_JSON);
     if (configFile.exists()) {
       return configFile;
     }
+
+    String canonicalPathOfFolder = folder.getAbsolutePath();
+    File parentFolder = folder.getParentFile();
+    if (parentFolder == null) {
+      int indexOfLastBackslash = canonicalPathOfFolder.lastIndexOf("\\");
+      configFile = new File(canonicalPathOfFolder.substring(0, indexOfLastBackslash), Configuration.ARCHITECTURE_JSON);
+    }
+
+    if (configFile.exists()) {
+      return configFile;
+    }
+
     return findConfigFile(folder.getParentFile());
   }
 
