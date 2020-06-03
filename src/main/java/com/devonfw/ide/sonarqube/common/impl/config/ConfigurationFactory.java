@@ -83,18 +83,26 @@ public class ConfigurationFactory {
       return configFile;
     }
 
-    String canonicalPathOfFolder = folder.getAbsolutePath();
     File parentFolder = folder.getParentFile();
     if (parentFolder == null) {
-      int indexOfLastBackslash = canonicalPathOfFolder.lastIndexOf("\\");
-      configFile = new File(canonicalPathOfFolder.substring(0, indexOfLastBackslash), Configuration.ARCHITECTURE_JSON);
+      return findConfigFileOutsideOfProject(folder);
     }
+
+    return findConfigFile(parentFolder);
+  }
+
+  private static File findConfigFileOutsideOfProject(File folder) {
+
+    String pathOfFolder = folder.getAbsolutePath();
+    int indexOfLastBackslash = pathOfFolder.lastIndexOf("\\");
+    File parentFolder = new File(pathOfFolder.substring(0, indexOfLastBackslash));
+    File configFile = new File(parentFolder, Configuration.ARCHITECTURE_JSON);
 
     if (configFile.exists()) {
       return configFile;
     }
 
-    return findConfigFile(folder.getParentFile());
+    return findConfigFileOutsideOfProject(parentFolder);
   }
 
 }
