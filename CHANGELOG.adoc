@@ -2,7 +2,7 @@
 
 This file documents all notable changes to https://github.com/devonfw/sonar-devon4j-plugin[sonar-devon4j-plugin].
 
-== 2020.08.001
+== 2020.04.002
 
 * https://github.com/devonfw/sonar-devon4j-plugin/issues/77[#77]: Fixed a bug where the architecture.json could not be found in multi-module projects
 
