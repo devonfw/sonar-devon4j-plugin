@@ -20,13 +20,19 @@ public class DevonArchitecture3rdPartyHibernateCheck extends DevonArchitecture3r
   private static final Set<String> DISCOURAGED_HIBERNATE_ANNOTATIONS = new HashSet<>(
       Arrays.asList("OrderBy", "Entity", "AccessType", "ForeignKey", "Cascade", "Index", "IndexColumn"));
 
+  private static final String ORG_HIBERNATE_ENVERS = "org.hibernate.envers";
+
+  private static final String ORG_HIBERNATE_VALIDATOR = "org.hibernate.validator";
+
+  private static final String ORG_HIBERNATE_ANNOTATIONS = "org.hibernate.annotations";
+
   @Override
   protected String checkDependency(JavaType source, JavaType target) {
 
     String targetSimpleName = target.getSimpleName();
     String targetPackageName = target.getPackage();
 
-    if (targetPackageName.startsWith("org.hibernate") && !targetPackageName.startsWith("org.hibernate.validator")) {
+    if (targetPackageName.startsWith("org.hibernate") && !targetPackageName.startsWith(ORG_HIBERNATE_VALIDATOR)) {
 
       if (!source.isLayerDataAccess()) {
         return "Hibernate (" + target + ") should only be used in dataaccess layer.";
@@ -58,21 +64,21 @@ public class DevonArchitecture3rdPartyHibernateCheck extends DevonArchitecture3r
 
   private boolean isUsingProprietaryHibernateAnnotation(String targetSimpleName, String targetPackageName) {
 
-    return targetPackageName.equals("org.hibernate.annotations")
+    return targetPackageName.equals(ORG_HIBERNATE_ANNOTATIONS)
         && DISCOURAGED_HIBERNATE_ANNOTATIONS.contains(targetSimpleName);
   }
 
   private boolean isNotImplementingHibernateEnversInImplScope(JavaType source, String targetSimpleName,
       String targetPackageName) {
 
-    return (targetPackageName.startsWith("org.hibernate.envers")) && !source.isScopeImpl()
-        && (!targetPackageName.equals("org.hibernate.envers") || targetSimpleName.startsWith("Default")
+    return (targetPackageName.startsWith(ORG_HIBERNATE_ENVERS)) && !source.isScopeImpl()
+        && (!targetPackageName.equals(ORG_HIBERNATE_ENVERS) || targetSimpleName.startsWith("Default")
             || targetSimpleName.contains("Listener") || targetSimpleName.contains("Reader"));
   }
 
   private boolean isImplementingHibernateEnversInternalsDirectly(String targetPackageName) {
 
-    return targetPackageName.startsWith("org.hibernate.envers") && targetPackageName.contains("internal");
+    return targetPackageName.startsWith(ORG_HIBERNATE_ENVERS) && targetPackageName.contains("internal");
   }
 
 }
