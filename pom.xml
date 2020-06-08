@@ -6,7 +6,7 @@
   <parent>
     <groupId>com.devonfw</groupId>
     <artifactId>maven-parent</artifactId>
-    <version>1</version>
+    <version>5</version>
   </parent>
   <groupId>com.devonfw.tools</groupId>
   <artifactId>sonar-devon4j-plugin</artifactId>
@@ -18,7 +18,7 @@
   <inceptionYear>2017</inceptionYear>
 
   <properties>
-    <github.repository>https://github.com/devonfw/sonar-devon4j-plugin</github.repository>
+    <github.repository>sonar-devon4j-plugin</github.repository>
     <java.version>1.8</java.version>
     <sonar.version>7.9.1</sonar.version>
     <devon4j.version>2020.04.001</devon4j.version>
