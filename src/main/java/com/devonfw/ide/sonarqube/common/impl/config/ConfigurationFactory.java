@@ -53,7 +53,7 @@ public class ConfigurationFactory {
       return this.path2configMap.get(this.lastConfigFolderPath);
     }
 
-    File configFile = findConfigFile(fileToScan.getParentFile());
+    File configFile = findConfigFile(fileToScan.getAbsoluteFile().getParentFile());
     if (configFile == null) {
       logger.log(Level.INFO, () -> "********** Configuration not found starting from " + fileToScan.getAbsolutePath());
       return null;
@@ -81,7 +81,7 @@ public class ConfigurationFactory {
       return configFile;
     }
 
-    return findConfigFile(folder.getParentFile().getAbsoluteFile());
+    return findConfigFile(folder.getParentFile());
   }
 
 }
