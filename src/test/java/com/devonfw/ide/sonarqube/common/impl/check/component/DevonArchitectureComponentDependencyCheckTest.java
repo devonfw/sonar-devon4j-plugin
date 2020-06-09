@@ -12,9 +12,19 @@ public class DevonArchitectureComponentDependencyCheckTest {
    * Test of {@link DevonArchitectureComponentDependencyCheck}.
    */
   @Test
-  public void test() {
+  public void testNotOK() {
 
-    JavaCheckVerifier.verify("src/test/files/component/DevonArchitectureComponentDependencyCheck.java",
+    JavaCheckVerifier.verify("src/test/files/component/DevonArchitectureComponentDependencyCheck_NotOK.java",
+        new DevonArchitectureComponentDependencyCheck());
+  }
+
+  /**
+   * Test of {@link DevonArchitectureComponentDependencyCheck}.
+   */
+  @Test
+  public void testOK() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/component/DevonArchitectureComponentDependencyCheck_OK.java",
         new DevonArchitectureComponentDependencyCheck());
   }
 
