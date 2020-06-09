@@ -54,10 +54,10 @@ public class ConfigurationFactory {
     }
     File configFile = findConfigFile(fileToScan.getParentFile());
     if (configFile == null) {
-      logger.log(Level.INFO, "********** Configuration not found starting from " + fileToScan.getAbsolutePath());
+      logger.log(Level.INFO, () -> "********** Configuration not found starting from " + fileToScan.getAbsolutePath());
       return null;
     }
-    logger.log(Level.INFO, "********** Configuration found at " + configFile.getAbsolutePath());
+    logger.log(Level.INFO, () -> "********** Configuration found at " + configFile.getAbsolutePath());
     File configFolder = configFile.getParentFile();
     String configFolderPath = configFolder.getAbsolutePath();
     if (!configFolderPath.endsWith(File.separator)) {

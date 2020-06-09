@@ -68,10 +68,10 @@ public class Status {
 
     assert !this.errorsReported;
     if (this.errorsMutable.isEmpty()) {
-      logger.log(Level.WARNING, "ERROR: Illegal configuration file: " + this.source);
+      logger.log(Level.WARNING, () -> "ERROR: Illegal configuration file: " + this.source);
     }
     this.errorsMutable.add(error);
-    logger.log(Level.WARNING, "ERROR: " + error);
+    logger.log(Level.WARNING, () -> "ERROR: " + error);
   }
 
 }
