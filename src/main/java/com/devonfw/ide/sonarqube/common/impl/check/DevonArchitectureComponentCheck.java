@@ -27,7 +27,6 @@ public abstract class DevonArchitectureComponentCheck extends DevonArchitectureC
       this.configuration = new Configuration();
     }
     onConfigurationSet(context);
-    super.doScanFile(tree, context);
   }
 
   /**

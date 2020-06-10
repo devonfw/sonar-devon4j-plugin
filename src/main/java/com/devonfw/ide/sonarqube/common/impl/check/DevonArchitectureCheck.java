@@ -63,15 +63,21 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
   @Override
   public final void scanFile(JavaFileScannerContext fileContext) {
 
-    ClassTree tree = getClassTree(fileContext);
+    this.imports.clear();
+    this.context = fileContext;
+
+    ClassTree tree = getClassTree(this.context);
 
     if (tree == null) {
       logger.log(Level.INFO, "Tree currently being investigated is not of type ClassTree.");
       return;
     } else {
-      doScanFile(tree, fileContext);
+      doScanFile(tree, this.context);
+      scan(this.context.getTree());
     }
 
+    this.context = null;
+    this.sourcePackage = null;
   }
 
   @Override
@@ -257,11 +263,6 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
    */
   protected void doScanFile(ClassTree tree, JavaFileScannerContext fileContext) {
 
-    this.imports.clear();
-    this.context = fileContext;
-    scan(fileContext.getTree());
-    this.context = null;
-    this.sourcePackage = null;
   }
 
   /**
