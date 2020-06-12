@@ -141,7 +141,7 @@
           <sonarQubeMinVersion>5.6</sonarQubeMinVersion> <!-- allow to depend on API 6.x but run on LTS -->
         </configuration>
       </plugin>
-
+      
       <!-- configure java compiler -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -298,6 +298,32 @@
   </build>
 
   <profiles>
+    <profile>
+      <id>jacoco-report</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.5</version>
+            <executions>
+              <execution>
+                <id>prepare-agent</id>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>report</id>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
     <profile>
       <id>doclint-disabled</id>
       <activation>
