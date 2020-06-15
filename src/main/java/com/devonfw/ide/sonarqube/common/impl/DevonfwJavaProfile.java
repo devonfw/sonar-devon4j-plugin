@@ -2,9 +2,6 @@ package com.devonfw.ide.sonarqube.common.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,17 +21,6 @@ import org.xml.sax.SAXException;
  */
 @SonarLintSide
 public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
-
-  private static final Set<String> FORBIDDEN_RULE_KEYS = new HashSet<>(Arrays.asList(
-      /* squid repo */
-      "S2076", "S2078", "S3318", "S2070", "S4142",
-      /* findbugs repo */
-      "VA_FORMAT_STRING_ARG_MISMATCH", "VA_FORMAT_STRING_MISSING_ARGUMENT", "VA_FORMAT_STRING_EXTRA_ARGUMENTS_PASSED",
-      "VA_FORMAT_STRING_BAD_CONVERSION_FROM_ARRAY", "VA_FORMAT_STRING_BAD_ARGUMENT",
-      "VA_FORMAT_STRING_BAD_CONVERSION_TO_BOOLEAN", "VA_FORMAT_STRING_NO_PREVIOUS_ARGUMENT", "VA_FORMAT_STRING_ILLEGAL",
-      "VA_FORMAT_STRING_BAD_CONVERSION", "VA_FORMAT_STRING_EXPECTED_MESSAGE_FORMAT_SUPPLIED",
-      /* fb-contrib repo */
-      "SPP_NULL_CHECK_ON_MAP_SUBSET_ACCESSOR", "SPP_NULL_CHECK_ON_OPTIONAL", "SPP_USE_CONTAINSKEY"));
 
   private static final String DEVONFW_JAVA = "/com/devonfw/ide/sonarqube/common/rules/devon4j/devonfwJava.xml";
 
@@ -68,18 +54,13 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
             severity = childrenOfRule.item(j).getTextContent();
             break;
         }
-
       }
 
-      if (!FORBIDDEN_RULE_KEYS.contains(ruleKey)) {
-        currentRule = devonfwJava.activateRule(repoKey, ruleKey);
-        currentRule.overrideSeverity(severity);
-      }
-
+      currentRule = devonfwJava.activateRule(repoKey, ruleKey);
+      currentRule.overrideSeverity(severity);
     }
 
     devonfwJava.done();
-
   }
 
   private NodeList readQualityProfileXml() {
@@ -100,15 +81,6 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
       logger.log(Level.WARNING, "There was a problem parsing the file.");
       return null;
     }
-
-  }
-
-  /**
-   * @return deprecated or unavailable rule keys that should not be added to the profile
-   */
-  public static Set<String> getForbiddenRuleKeys() {
-
-    return DevonfwJavaProfile.FORBIDDEN_RULE_KEYS;
   }
 
 }

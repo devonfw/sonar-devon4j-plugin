@@ -37,7 +37,7 @@ public class DevonfwJavaProfileTest extends ModuleTest {
     // Assertions
     assertThat(profile.language()).isEqualTo(Java.KEY);
     assertThat(profile.name()).isEqualTo("devonfw Java");
-    assertThat(ruleKeys).doesNotContainAnyElementsOf(DevonfwJavaProfile.getForbiddenRuleKeys());
+    assertThat(ruleKeys.size()).isEqualTo(1521);
   }
 
 }

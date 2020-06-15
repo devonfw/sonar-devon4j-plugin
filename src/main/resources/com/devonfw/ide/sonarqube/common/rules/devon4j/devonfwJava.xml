@@ -2592,18 +2592,6 @@
     </rule>
     <rule>
       <repositoryKey>fb-contrib</repositoryKey>
-      <key>SPP_NULL_CHECK_ON_MAP_SUBSET_ACCESSOR</key>
-      <priority>MAJOR</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>fb-contrib</repositoryKey>
-      <key>SPP_NULL_CHECK_ON_OPTIONAL</key>
-      <priority>MAJOR</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>fb-contrib</repositoryKey>
       <key>SPP_SERIALVER_SHOULD_BE_PRIVATE</key>
       <priority>INFO</priority>
       <parameters/>
@@ -2672,12 +2660,6 @@
       <repositoryKey>fb-contrib</repositoryKey>
       <key>SPP_USE_CHARAT</key>
       <priority>MAJOR</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>fb-contrib</repositoryKey>
-      <key>SPP_USE_CONTAINSKEY</key>
-      <priority>INFO</priority>
       <parameters/>
     </rule>
     <rule>
@@ -5652,66 +5634,6 @@
     </rule>
     <rule>
       <repositoryKey>findbugs</repositoryKey>
-      <key>VA_FORMAT_STRING_ARG_MISMATCH</key>
-      <priority>MAJOR</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>findbugs</repositoryKey>
-      <key>VA_FORMAT_STRING_BAD_ARGUMENT</key>
-      <priority>MAJOR</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>findbugs</repositoryKey>
-      <key>VA_FORMAT_STRING_BAD_CONVERSION</key>
-      <priority>MAJOR</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>findbugs</repositoryKey>
-      <key>VA_FORMAT_STRING_BAD_CONVERSION_FROM_ARRAY</key>
-      <priority>MAJOR</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>findbugs</repositoryKey>
-      <key>VA_FORMAT_STRING_BAD_CONVERSION_TO_BOOLEAN</key>
-      <priority>INFO</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>findbugs</repositoryKey>
-      <key>VA_FORMAT_STRING_EXPECTED_MESSAGE_FORMAT_SUPPLIED</key>
-      <priority>MAJOR</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>findbugs</repositoryKey>
-      <key>VA_FORMAT_STRING_EXTRA_ARGUMENTS_PASSED</key>
-      <priority>MAJOR</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>findbugs</repositoryKey>
-      <key>VA_FORMAT_STRING_ILLEGAL</key>
-      <priority>MAJOR</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>findbugs</repositoryKey>
-      <key>VA_FORMAT_STRING_MISSING_ARGUMENT</key>
-      <priority>MAJOR</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>findbugs</repositoryKey>
-      <key>VA_FORMAT_STRING_NO_PREVIOUS_ARGUMENT</key>
-      <priority>MAJOR</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>findbugs</repositoryKey>
       <key>VA_FORMAT_STRING_USES_NEWLINE</key>
       <priority>MAJOR</priority>
       <parameters/>
@@ -8502,26 +8424,8 @@
     </rule>
     <rule>
       <repositoryKey>squid</repositoryKey>
-      <key>S2070</key>
-      <priority>CRITICAL</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>squid</repositoryKey>
-      <key>S2076</key>
-      <priority>CRITICAL</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>squid</repositoryKey>
       <key>S2077</key>
       <priority>BLOCKER</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>squid</repositoryKey>
-      <key>S2078</key>
-      <priority>CRITICAL</priority>
       <parameters/>
     </rule>
     <rule>
@@ -8970,12 +8874,6 @@
     </rule>
     <rule>
       <repositoryKey>squid</repositoryKey>
-      <key>S2258</key>
-      <priority>BLOCKER</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>squid</repositoryKey>
       <key>S2259</key>
       <priority>MAJOR</priority>
       <parameters/>
@@ -9007,18 +8905,6 @@
     <rule>
       <repositoryKey>squid</repositoryKey>
       <key>S2276</key>
-      <priority>BLOCKER</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>squid</repositoryKey>
-      <key>S2277</key>
-      <priority>CRITICAL</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>squid</repositoryKey>
-      <key>S2278</key>
       <priority>BLOCKER</priority>
       <parameters/>
     </rule>
@@ -9495,18 +9381,6 @@
     </rule>
     <rule>
       <repositoryKey>squid</repositoryKey>
-      <key>S3318</key>
-      <priority>MAJOR</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>squid</repositoryKey>
-      <key>S3340</key>
-      <priority>MINOR</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>squid</repositoryKey>
       <key>S3346</key>
       <priority>MAJOR</priority>
       <parameters/>
@@ -9813,12 +9687,6 @@
     </rule>
     <rule>
       <repositoryKey>squid</repositoryKey>
-      <key>S4142</key>
-      <priority>MAJOR</priority>
-      <parameters/>
-    </rule>
-    <rule>
-      <repositoryKey>squid</repositoryKey>
       <key>S4143</key>
       <priority>MAJOR</priority>
       <parameters/>
@@ -9880,6 +9748,18 @@
       <repositoryKey>squid</repositoryKey>
       <key>S4349</key>
       <priority>MINOR</priority>
+      <parameters/>
+    </rule>
+    <rule>
+      <repositoryKey>java</repositoryKey>
+      <key>S5542</key>
+      <priority>BLOCKER</priority>
+      <parameters/>
+    </rule>
+    <rule>
+      <repositoryKey>java</repositoryKey>
+      <key>S5547</key>
+      <priority>CRITICAL</priority>
       <parameters/>
     </rule>
     <rule>
