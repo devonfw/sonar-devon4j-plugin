@@ -3,6 +3,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.devonfw</groupId>
+    <artifactId>maven-parent</artifactId>
+    <version>5</version>
+  </parent>
   <groupId>com.devonfw.tools</groupId>
   <artifactId>sonar-devon4j-plugin</artifactId>
   <version>2020.04.002-SNAPSHOT</version>
@@ -13,9 +18,10 @@
   <inceptionYear>2017</inceptionYear>
 
   <properties>
+    <github.repository>sonar-devon4j-plugin</github.repository>
     <java.version>1.8</java.version>
     <sonar.version>7.9.1</sonar.version>
-    <devon4j.version>2020.04.001</devon4j.version>
+    <devon4j.version>2020.04.002</devon4j.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.plugin.version>5.14.0.18788</java.plugin.version>
@@ -141,7 +147,7 @@
           <sonarQubeMinVersion>5.6</sonarQubeMinVersion> <!-- allow to depend on API 6.x but run on LTS -->
         </configuration>
       </plugin>
-
+      
       <!-- configure java compiler -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -298,6 +304,31 @@
   </build>
 
   <profiles>
+    <profile>
+      <id>jacoco-report</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>prepare-agent</id>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>report</id>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
     <profile>
       <id>doclint-disabled</id>
       <activation>

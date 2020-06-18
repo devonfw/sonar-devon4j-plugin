@@ -14,7 +14,16 @@ public class DevonArchitectureComponentDeclarationCheckTest {
   @Test
   public void test() {
 
-    JavaCheckVerifier.verify("src/test/files/component/DevonArchitectureComponentDeclarationCheck.java",
+    JavaCheckVerifier.verify("src/test/files/component/DevonArchitectureComponentDeclarationCheck_NotOK.java",
+        new DevonArchitectureComponentDeclarationCheck());
+  }
+
+  /**
+   * Test of {@link DevonArchitectureComponentDeclarationCheck}.
+   */
+  public void testOk() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/component/DevonArchitectureComponentDeclarationCheck_OK.java",
         new DevonArchitectureComponentDeclarationCheck());
   }
 
@@ -25,6 +34,16 @@ public class DevonArchitectureComponentDeclarationCheckTest {
   public void testPackageInfoCase() {
 
     JavaCheckVerifier.verifyNoIssue("src/test/files/DevonNPEOnPackageInfoCheck.java",
+        new DevonArchitectureComponentDeclarationCheck());
+  }
+
+  /**
+   * Test of {@link DevonArchitectureComponentDeclarationCheck}
+   */
+  @Test
+  public void testNoIssue() {
+
+    JavaCheckVerifier.verifyNoIssue("src/test/files/component/DevonArchitectureComponentDeclarationCheck_OK.java",
         new DevonArchitectureComponentDeclarationCheck());
   }
 

@@ -12,9 +12,32 @@ public class DevonArchitectureLayerDataaccess2Dataaccess4ComponentCheckTest {
    * Test of {@link DevonArchitectureLayerDataaccess2Dataaccess4ComponentCheck}.
    */
   @Test
-  public void test() {
+  public void testOKSameComponent() {
 
-    JavaCheckVerifier.verify("src/test/files/component/DevonArchitectureLayerDataaccess2Dataaccess4ComponentCheck.java",
+    JavaCheckVerifier.verifyNoIssue(
+        "src/test/files/component/DevonArchitectureLayerDataaccess2Dataaccess4ComponentCheck_OKSameComponent.java",
+        new DevonArchitectureLayerDataaccess2Dataaccess4ComponentCheck());
+  }
+
+  /**
+   * Test of {@link DevonArchitectureLayerDataaccess2Dataaccess4ComponentCheck}.
+   */
+  @Test
+  public void testOKDifferentComponent() {
+
+    JavaCheckVerifier.verifyNoIssue(
+        "src/test/files/component/DevonArchitectureLayerDataaccess2Dataaccess4ComponentCheck_OKDifferentComponent.java",
+        new DevonArchitectureLayerDataaccess2Dataaccess4ComponentCheck());
+  }
+
+  /**
+   * Test of {@link DevonArchitectureLayerDataaccess2Dataaccess4ComponentCheck}.
+   */
+  @Test
+  public void testNotOK() {
+
+    JavaCheckVerifier.verify(
+        "src/test/files/component/DevonArchitectureLayerDataaccess2Dataaccess4ComponentCheck_NotOK.java",
         new DevonArchitectureLayerDataaccess2Dataaccess4ComponentCheck());
   }
 

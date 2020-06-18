@@ -12,19 +12,20 @@ public class DevonArchitectureLayerService2Service4ComponentCheckTest {
    * Test of {@link DevonArchitectureLayerService2Service4ComponentCheck}.
    */
   @Test
-  public void test() {
+  public void testNotOK() {
 
-    JavaCheckVerifier.verify("src/test/files/component/DevonArchitectureLayerService2Service4ComponentCheck.java",
+    JavaCheckVerifier.verify("src/test/files/component/DevonArchitectureLayerService2Service4ComponentCheck_NotOK.java",
         new DevonArchitectureLayerService2Service4ComponentCheck());
   }
 
   /**
-   * Test of {@link DevonArchitectureLayerService2Service4ComponentCheck}
+   * Test of {@link DevonArchitectureLayerService2Service4ComponentCheck}.
    */
   @Test
-  public void testPackageInfoCase() {
+  public void testOK() {
 
-    JavaCheckVerifier.verifyNoIssue("src/test/files/DevonNPEOnPackageInfoCheck.java",
+    JavaCheckVerifier.verifyNoIssue(
+        "src/test/files/component/DevonArchitectureLayerService2Service4ComponentCheck_OK.java",
         new DevonArchitectureLayerService2Service4ComponentCheck());
   }
 
