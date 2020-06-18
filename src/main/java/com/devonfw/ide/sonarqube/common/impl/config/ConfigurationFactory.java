@@ -52,7 +52,8 @@ public class ConfigurationFactory {
     if (this.lastConfigFolderPath != null && fileToScan.getAbsolutePath().startsWith(this.lastConfigFolderPath)) {
       return this.path2configMap.get(this.lastConfigFolderPath);
     }
-    File configFile = findConfigFile(fileToScan.getParentFile());
+
+    File configFile = findConfigFile(fileToScan.getAbsoluteFile().getParentFile());
     if (configFile == null) {
       logger.log(Level.INFO, () -> "********** Configuration not found starting from " + fileToScan.getAbsolutePath());
       return null;
@@ -74,10 +75,12 @@ public class ConfigurationFactory {
     if (folder == null) {
       return null;
     }
+
     File configFile = new File(folder, Configuration.ARCHITECTURE_JSON);
     if (configFile.exists()) {
       return configFile;
     }
+
     return findConfigFile(folder.getParentFile());
   }
 
