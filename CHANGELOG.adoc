@@ -6,6 +6,7 @@ This file documents all notable changes to https://github.com/devonfw/sonar-devo
 
 * https://github.com/devonfw/sonar-devon4j-plugin/issues/73[#73]: Increased code coverage of tests
 * https://github.com/devonfw/sonar-devon4j-plugin/issues/77[#77]: Fixed a bug where the architecture.json could not be found in multi-module projects
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/81[#81]: Improved redundant code parts
 * https://github.com/devonfw/sonar-devon4j-plugin/issues/83[#83]: Integrated the devonfw maven-parent as parent pom.xml
 * https://github.com/devonfw/sonar-devon4j-plugin/issues/88[#88]: Fixed remaining code smells thrown by SonarCloud analysis
 
