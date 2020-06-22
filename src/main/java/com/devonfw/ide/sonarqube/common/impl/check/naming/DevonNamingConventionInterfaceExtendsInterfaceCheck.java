@@ -8,12 +8,12 @@ import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.ClassTree;
 import org.sonar.plugins.java.api.tree.TypeTree;
 
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCodeCheck;
 
 /**
  * Abstract base class for naming convention checks of interfaces
  */
-public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck extends DevonArchitectureCheck {
+public abstract class DevonNamingConventionInterfaceExtendsInterfaceCheck extends DevonArchitectureCodeCheck {
 
   /**
    * This needs to be the suffix of the checked interface if it extends certain other interfaces.

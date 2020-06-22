@@ -5,8 +5,6 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.ClassTree;
 
-import com.devonfw.ide.sonarqube.common.api.JavaType;
-
 /**
  * {@link DevonNamingConventionClassExtendsClassCheck} verifying that non-abstract classes extending AbstractDao are
  * following the devonfw naming convention by ending with DaoImpl.
@@ -54,12 +52,6 @@ public class DevonNamingConventionClassExtendsClassDaoCheck extends DevonNamingC
     } else {
       return super.isSuperClassMatching();
     }
-  }
-
-  @Override
-  protected String checkDependency(JavaType source, JavaType target) {
-
-    return null;
   }
 
 }

@@ -13,8 +13,8 @@ import org.sonar.plugins.java.api.tree.ClassTree;
 import org.sonar.plugins.java.api.tree.MethodTree;
 import org.sonar.plugins.java.api.tree.TypeTree;
 
-import com.devonfw.ide.sonarqube.common.api.JavaType;
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCodeCheck;
 
 /**
  * {@link DevonArchitectureCheck} verifies that all Use-Case implementation methods are annotated with a security
@@ -22,7 +22,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
  */
 @Rule(key = "Y1", name = "devonfw Uc Impl Security Constraint Check", //
     priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "security" })
-public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
+public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCodeCheck {
 
   private static final Set<String> REQUIRED_ANNOTATIONS = new HashSet<>(
       Arrays.asList("DenyAll", "PermitAll", "RolesAllowed"));
@@ -100,12 +100,6 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
     }
 
     return (!hasOverrideAnnotation || hasRequiredAnnotation);
-  }
-
-  @Override
-  protected String checkDependency(JavaType source, JavaType target) {
-
-    return null;
   }
 
 }

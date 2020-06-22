@@ -10,13 +10,13 @@ import org.sonar.plugins.java.api.tree.ClassTree;
 import org.sonar.plugins.java.api.tree.Modifier;
 import org.sonar.plugins.java.api.tree.TypeTree;
 
-import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCodeCheck;
 
 /**
  * Abstract base class for naming convention checks of classes. This class only checks if the checked class has the same
  * suffix as its superclass.
  */
-public abstract class DevonNamingConventionClassExtendsClassCheck extends DevonArchitectureCheck {
+public abstract class DevonNamingConventionClassExtendsClassCheck extends DevonArchitectureCodeCheck {
 
   /**
    * This needs to be the suffix of the checked class if it extends a certain other class.

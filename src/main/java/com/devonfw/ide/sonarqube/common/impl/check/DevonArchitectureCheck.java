@@ -258,14 +258,6 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
   }
 
   /**
-   * @param tree Tree currently being investigated.
-   * @param fileContext of analysis containing the parsed tree.
-   */
-  protected void doScanFile(ClassTree tree, JavaFileScannerContext fileContext) {
-
-  }
-
-  /**
    * Returns all methods of the given tree.
    *
    * @param tree Tree currently being investigated.
@@ -311,6 +303,12 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
 
     return null;
   }
+
+  /**
+   * @param tree Tree currently being investigated.
+   * @param fileContext of analysis containing the parsed tree.
+   */
+  protected abstract void doScanFile(ClassTree tree, JavaFileScannerContext fileContext);
 
   /**
    * @param source the {@link JavaType} of the source type.
