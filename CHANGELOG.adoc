@@ -15,11 +15,12 @@ This is the first version using our new versioning scheme. Here, the following i
 * https://github.com/devonfw/sonar-devon4j-plugin/issues/68[#68]: Made our rule descriptions more accessible by using better readable colors as well as alternative visual cues
 * https://github.com/devonfw/sonar-devon4j-plugin/issues/71[#71]: Fixed a bug where a NPE could be thrown
 * https://github.com/devonfw/sonar-devon4j-plugin/issues/74[#74]: Fixed a bug where a method always returned null
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/80[#80]: Fixed a bug where the code coverage report was not generated
 
 Unrelated to any specific issues, there was some refactoring and cleaning up done with the following two PRs:
 
-* https://github.com/devonfw/sonar-devon4j-plugin/issues/66[PR #66]: Refactored the prefixes of our rule names from 'Devon' to 'devonfw'
 * https://github.com/devonfw/sonar-devon4j-plugin/issues/65[PR #65]: Sorted security-related test files into their own package
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/66[PR #66]: Refactored the prefixes of our rule names from 'Devon' to 'devonfw'
 
 Changes for this release can be found in https://github.com/devonfw/sonar-devon4j-plugin/milestone/3?closed=1[milestone 2020.04.001].
 
