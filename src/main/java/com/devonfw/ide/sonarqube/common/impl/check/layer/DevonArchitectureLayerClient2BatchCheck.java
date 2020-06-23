@@ -5,13 +5,14 @@ import org.sonar.check.Rule;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureImportCheck;
 
 /**
  * {@link DevonArchitectureCheck} verifying that client layer does not depend on batch layer.
  */
 @Rule(key = "L5", name = "devonfw Layer Client-Batch Check", //
     priority = Priority.BLOCKER, tags = { "architecture-violation", "devonfw", "layer" })
-public class DevonArchitectureLayerClient2BatchCheck extends DevonArchitectureCheck {
+public class DevonArchitectureLayerClient2BatchCheck extends DevonArchitectureImportCheck {
 
   @Override
   protected String checkDependency(JavaType source, JavaType target) {

@@ -4,21 +4,17 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.AnnotationTree;
 import org.sonar.plugins.java.api.tree.ClassTree;
-import org.sonar.plugins.java.api.tree.CompilationUnitTree;
 import org.sonar.plugins.java.api.tree.MethodTree;
-import org.sonar.plugins.java.api.tree.Tree;
 import org.sonar.plugins.java.api.tree.TypeTree;
 
-import com.devonfw.ide.sonarqube.common.api.JavaType;
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCodeCheck;
 
 /**
  * {@link DevonArchitectureCheck} verifies that all Use-Case implementation methods are annotated with a security
@@ -26,21 +22,13 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
  */
 @Rule(key = "Y1", name = "devonfw Uc Impl Security Constraint Check", //
     priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "security" })
-public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
-
-  private static final Logger logger = Logger.getGlobal();
+public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCodeCheck {
 
   private static final Set<String> REQUIRED_ANNOTATIONS = new HashSet<>(
       Arrays.asList("DenyAll", "PermitAll", "RolesAllowed"));
 
   @Override
-  public void scanFile(JavaFileScannerContext context) {
-
-    ClassTree tree = getClassTree(context);
-    if (tree == null) {
-      logger.log(Level.INFO, "Tree currently being investigated is not of type ClassTree.");
-      return;
-    }
+  protected void doScanFile(ClassTree tree, JavaFileScannerContext context) {
 
     TypeTree ucInterface = getUcInterface(tree);
 
@@ -57,24 +45,6 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
                 + REQUIRED_ANNOTATIONS.toString());
       }
     }
-  }
-
-  /**
-   * @param context of analysis containing the parsed tree.
-   * @return ClassTree instance.
-   */
-  protected ClassTree getClassTree(JavaFileScannerContext context) {
-
-    CompilationUnitTree parsedTree = context.getTree();
-    List<Tree> types = parsedTree.types();
-
-    for (Tree tree : types) {
-      if (tree instanceof ClassTree) {
-        return (ClassTree) tree;
-      }
-    }
-
-    return null;
   }
 
   /**
@@ -130,12 +100,6 @@ public class DevonUcImplSecurityConstraintCheck extends DevonArchitectureCheck {
     }
 
     return (!hasOverrideAnnotation || hasRequiredAnnotation);
-  }
-
-  @Override
-  protected String checkDependency(JavaType source, JavaType target) {
-
-    return null;
   }
 
 }

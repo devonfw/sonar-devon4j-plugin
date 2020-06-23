@@ -3,6 +3,7 @@ package com.devonfw.ide.sonarqube.common.impl.check.naming;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
+import org.sonar.plugins.java.api.tree.ClassTree;
 
 /**
  * {@link DevonNamingConventionClassExtendsClassCheck} verifying that non-abstract classes extending AbstractDao are
@@ -27,12 +28,12 @@ public class DevonNamingConventionClassExtendsClassDaoCheck extends DevonNamingC
    * Otherwise creates an issue.
    */
   @Override
-  protected boolean checkClassNameAndCreateIssue(JavaFileScannerContext context) {
+  protected boolean checkClassNameAndCreateIssue(ClassTree tree, JavaFileScannerContext context) {
 
-    if (!super.checkClassNameAndCreateIssue(context) && !isAbstract(this.tree)) {
+    if (!super.checkClassNameAndCreateIssue(tree, context) && !isAbstract(tree)) {
       return false;
     } else {
-      context.addIssue(this.tree.openBraceToken().line(), this,
+      context.addIssue(tree.openBraceToken().line(), this,
           "DAO implementations must not be abstract and extend AbstractDao.");
       return true;
     }
