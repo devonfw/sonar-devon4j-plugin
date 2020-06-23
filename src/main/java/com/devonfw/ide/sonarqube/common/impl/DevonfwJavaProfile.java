@@ -30,7 +30,8 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
   public void define(Context context) {
 
     NewBuiltInQualityProfile devonfwJava = context.createBuiltInQualityProfile("devonfw Java", Java.KEY);
-    NodeList ruleList = readQualityProfileXml();
+    Document parsedXml = readQualityProfileXml();
+    NodeList ruleList = parsedXml.getElementsByTagName("rule");
     NodeList childrenOfRule;
     NewBuiltInActiveRule currentRule;
     String repoKey = null;
@@ -63,13 +64,13 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
     devonfwJava.done();
   }
 
-  private NodeList readQualityProfileXml() {
+  private Document readQualityProfileXml() {
 
     try (InputStream inputStream = DevonfwJavaProfile.class.getResourceAsStream(DEVONFW_JAVA)) {
       DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
       DocumentBuilder builder = dbFactory.newDocumentBuilder();
       Document document = builder.parse(inputStream);
-      return document.getElementsByTagName("rule");
+      return document;
     } catch (ParserConfigurationException pc) {
       logger.log(Level.WARNING, "There was a problem configuring the parser.");
       return null;
