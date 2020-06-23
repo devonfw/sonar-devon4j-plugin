@@ -5,13 +5,14 @@ import org.sonar.check.Rule;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureImportCheck;
 
 /**
  * {@link DevonArchitectureCheck} verifying that client layer does not depend on logic layer.
  */
 @Rule(key = "L3", name = "devonfw Layer Client-Logic Check", //
     priority = Priority.BLOCKER, tags = { "architecture-violation", "devonfw", "layer" })
-public class DevonArchitectureLayerClient2LogicCheck extends DevonArchitectureCheck {
+public class DevonArchitectureLayerClient2LogicCheck extends DevonArchitectureImportCheck {
 
   @Override
   protected String checkDependency(JavaType source, JavaType target) {

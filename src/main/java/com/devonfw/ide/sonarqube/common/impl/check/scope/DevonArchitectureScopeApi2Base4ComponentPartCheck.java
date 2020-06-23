@@ -5,6 +5,7 @@ import org.sonar.check.Rule;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureImportCheck;
 
 /**
  * {@link DevonArchitectureCheck} to verify that code from base scope does not depend on base scope from other component
@@ -12,7 +13,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
  */
 @Rule(key = "S4", name = "devonfw Scope Api-Base Component-Part Check", //
     priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "scope" })
-public class DevonArchitectureScopeApi2Base4ComponentPartCheck extends DevonArchitectureCheck {
+public class DevonArchitectureScopeApi2Base4ComponentPartCheck extends DevonArchitectureImportCheck {
 
   @Override
   protected String checkDependency(JavaType source, JavaType target) {

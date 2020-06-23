@@ -5,6 +5,7 @@ import java.util.List;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
+import org.sonar.plugins.java.api.tree.ClassTree;
 
 /**
  * {@link DevonNamingConventionClassExtendsClassCheck} verifying that non-abstract classes inherited from AbstractUc are
@@ -32,16 +33,16 @@ public class DevonNamingConventionClassExtendsClassUcImplCheck extends DevonNami
    * correct interface, everything is compliant. Otherwise creates an issue.
    */
   @Override
-  protected boolean checkClassNameAndCreateIssue(JavaFileScannerContext context) {
+  protected boolean checkClassNameAndCreateIssue(ClassTree tree, JavaFileScannerContext context) {
 
-    this.superInterfacesNames = getSuperInterfacesNames();
+    this.superInterfacesNames = getSuperInterfacesNames(tree);
     String desiredSuperInterfaceName = this.className.replaceAll("Impl$", "");
 
-    if (!super.checkClassNameAndCreateIssue(context) && !isAbstract(this.tree)
+    if (!super.checkClassNameAndCreateIssue(tree, context) && !isAbstract(tree)
         && isImplementingCorrectInterface(desiredSuperInterfaceName)) {
       return false;
     } else {
-      context.addIssue(this.tree.openBraceToken().line(), this, "Non-abstract use-case classes must begin with Uc, "
+      context.addIssue(tree.openBraceToken().line(), this, "Non-abstract use-case classes must begin with Uc, "
           + "end with Impl and implement an interface with the same name except the suffix Impl.");
       return true;
     }
