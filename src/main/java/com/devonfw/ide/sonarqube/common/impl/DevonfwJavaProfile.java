@@ -118,6 +118,7 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
       String line = "";
       String[] splitLine;
       while ((line = reader.readLine()) != null) {
+        logger.log(Level.INFO, line);
         splitLine = line.split(" ");
         pluginList.add(splitLine[splitLine.length - 1]);
       }
@@ -133,32 +134,32 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
 
   private void disableRepoKeys(List<String> pluginList) {
 
-    boolean qualinsight = false;
-    boolean pmd = false;
-    boolean checkstyle = false;
-    boolean findbugs = false;
+    boolean hasQualinsightPlugin = false;
+    boolean hasPMDPlugin = false;
+    boolean hasCheckstylePlugin = false;
+    boolean hasFindbugsPlugin = false;
     String currentPlugin;
 
     for (int i = 0; i < pluginList.size(); i++) {
       currentPlugin = pluginList.get(i);
       if (currentPlugin.contains(QUALINSIGHT)) {
-        qualinsight = true;
+        hasQualinsightPlugin = true;
       } else if (currentPlugin.contains(PMD)) {
-        pmd = true;
+        hasPMDPlugin = true;
       } else if (currentPlugin.contains(CHECKSTYLE)) {
-        checkstyle = true;
+        hasCheckstylePlugin = true;
       } else if (currentPlugin.contains(FINDBUGS)) {
-        findbugs = true;
+        hasFindbugsPlugin = true;
       }
     }
 
-    if (qualinsight == false) {
+    if (!hasQualinsightPlugin) {
       disableQualinsight();
-    } else if (pmd == false) {
+    } else if (!hasPMDPlugin) {
       disablePMD();
-    } else if (checkstyle == false) {
+    } else if (!hasCheckstylePlugin) {
       disableCheckstyle();
-    } else if (findbugs == false) {
+    } else if (!hasFindbugsPlugin) {
       disableFindbugs();
     }
   }
