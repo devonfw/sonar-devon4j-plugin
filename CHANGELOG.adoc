@@ -1,16 +1,80 @@
-= Changelog of sonar-devon-plugin
+= Changelog of sonar-devon4j-plugin
 
-This file documents all notable changes to https://github.com/devonfw/sonar-devon-plugin[sonar-devon-plugin].
+This file documents all notable changes to https://github.com/devonfw/sonar-devon4j-plugin[sonar-devon4j-plugin].
 
-== Unreleased 3.1.0
+== 2020.04.002
 
-Changes for this release can be found in https://github.com/devonfw/sonar-devon-plugin/milestone/2?closed=1[milestone 3.1.0].
+This release fixes some bugs and adds some minor improvements:
+
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/73[#73]: Increased code coverage of tests
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/77[#77]: Fixed a bug where the architecture.json could not be found in multi-module projects
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/81[#81]: Improved redundant code parts
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/83[#83]: Integrated the devonfw maven-parent as parent pom.xml
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/88[#88]: Fixed remaining code smells thrown by SonarCloud analysis
+* https://github.com/devonfw/sonar-devon4j-plugin/pull/90[PR #90]: Updated Readme
+* https://github.com/devonfw/sonar-devon4j-plugin/pull/91[PR #91]: Updated Changelog
+
+Changes for this release can be found in https://github.com/devonfw/sonar-devon4j-plugin/milestone/5?closed=1[milestone 2020.04.002].
+
+== 2020.04.001
+
+This is the first version using our new versioning scheme. Here, the following issues were resolved:
+
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/60[#60]: Fixed a bug in the naming check for Use-Case implementation classes
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/67[#67]: Fixed a bug where the whole body of a method or a class was marked as the issue location. Now only the method / class headers will be highlighted.
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/68[#68]: Made our rule descriptions more accessible by using better readable colors as well as alternative visual cues
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/71[#71]: Fixed a bug where a NPE could be thrown
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/74[#74]: Fixed a bug where a method always returned null
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/80[#80]: Fixed a bug where the code coverage report was not generated
+
+Unrelated to any specific issues, there was some refactoring and cleaning up done with the following two PRs:
+
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/65[PR #65]: Sorted security-related test files into their own package
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/66[PR #66]: Refactored the prefixes of our rule names from `Devon` to `devonfw`
+
+Changes for this release can be found in https://github.com/devonfw/sonar-devon4j-plugin/milestone/3?closed=1[milestone 2020.04.001].
+
+== 3.2.1
+
+With this version, we made our initial entry into the SonarQube marketplace. Next to some organisational changes like the renaming of our plugin key or updated dependencies, there are also some new features and various fixes:
+
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/5[#5]: Published on SonarQube marketplace
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/14[#14]: Added check for correct annotation on Use-Case implementation methods
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/15[#15]: Added documentation as well as code examples to the rules
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/41[#41]: Reworked complexity issues and bugs found by the SonarCloud analysis
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/42[#42]: Removed a duplicate class
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/44[#44]: Fixed failing build when using Java 11
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/46[#46]: Fixed failing Travis CI builds on new PRs
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/53[#53]: Removed reference to a deprecated method
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/57[#57]: Increased test coverage on new code
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/62[#62]: Created release of version 3.2.1 and staged it to Maven Central
+
+Further PRs for documentation updates and other improvements:
+
+* https://github.com/devonfw/sonar-devon4j-plugin/pull/38[PR #38]: Fixed some links and typos in the Readme
+* https://github.com/devonfw/sonar-devon4j-plugin/pull/55[PR #55]: Updated Changelog and Readme
+* https://github.com/devonfw/sonar-devon4j-plugin/pull/59[PR #59]: Minor optimization and code cleanup of the datatype mappings rule
+* https://github.com/devonfw/sonar-devon4j-plugin/pull/61[PR #61]: Added security rules to Readme
+
+Changes for this release can be found in https://github.com/devonfw/sonar-devon4j-plugin/milestone/4?closed=1[milestone 3.2.1].
+
+== 3.2.0
+
+This version marks the second official release, with multiple new rules and fixes:
+
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/26[#26]: Renamed to `sonar-devon4j-plugin`
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/6[#6]: Added checks for naming convention
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/17[#17]: Added check for correct JPA mapping of custom datatypes
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/5[#5]: Resolved most sub-issues for marketplace (https://github.com/devonfw/sonar-devon4j-plugin/issues/8[#8], https://github.com/devonfw/sonar-devon4j-plugin/issues/9[#9], https://github.com/devonfw/sonar-devon4j-plugin/issues/10[#10], https://github.com/devonfw/sonar-devon4j-plugin/issues/11[#11])
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/18[#18]: Flag issues as `architecture-violation` instead of `bug`.
+
+Changes for this release can be found in https://github.com/devonfw/sonar-devon-plugin/milestone/2?closed=1[milestone 3.2.0].
 
 == 3.0.0
 
-This is the first official release. In http://devonfw.com[devon] all released artifacts share the same version number.
+This is the first official release. In http://devonfw.com[devonfw] all released artifacts share the same version number.
 This allows to easily see which artifacts belong together and are guaranteed to be compatible. As this plugin was later
-added to devon it started with the devon version for that moment in time what was 3.0.0.
+added to devonfw, it started with the devonfw version for that moment in time what was 3.0.0. As `3.1.0` of `devonfw` came out immediately after there never was a release `3.1.0` of this plugin. Starting with `3.2.0` this plugin is now officially part of `devonfw` and will be released consistently.
 
 Changes for this release can be found in https://github.com/devonfw/sonar-devon-plugin/milestone/1?closed=1[milestone 3.0.0].
 

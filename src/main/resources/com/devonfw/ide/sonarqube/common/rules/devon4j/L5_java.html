@@ -1,0 +1,16 @@
+<p>
+    This rule checks that client layer does not depend on batch layer.
+    Allowed dependencies from client layer:
+    <ul type='disc'>
+        <li>Client layer of another component</li>
+        <li>Service layer of the same component</li>
+    </ul>
+</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+    package com.devonfw.ide.sonarqube.<span style='color: #785EF0'>client</span>.api;
+
+    import com.devonfw.ide.sonarqube.<del style='color: #979696'><span style='color: #FFB000'>batch</span></del>.api.Bar;
+    
+    public class MyClass {}
+</pre>
