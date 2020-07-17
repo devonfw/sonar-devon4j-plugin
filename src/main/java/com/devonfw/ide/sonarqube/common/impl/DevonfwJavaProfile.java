@@ -43,6 +43,18 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
 
   private static List<String> FORBIDDEN_REPO_KEYS = new ArrayList<>();
 
+  private boolean testEnv = false;
+
+  // Use this constructor only for testing purposes
+  DevonfwJavaProfile(boolean testEnv) {
+
+    this.testEnv = testEnv;
+  }
+
+  DevonfwJavaProfile() {
+
+  }
+
   @Override
   public void define(Context context) {
 
@@ -109,8 +121,14 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
   private List<String> getPlugins() {
 
     String command = "cmd /c dir";
-    File pluginDirectory = new File("extensions\\plugins");
+    File pluginDirectory = null;
     List<String> pluginList = new ArrayList<>();
+
+    if (!this.testEnv) {
+      pluginDirectory = new File("extensions/plugins");
+    } else {
+      pluginDirectory = new File("src/test/files/qualityprofile/extensions/plugins");
+    }
 
     try {
       Process process = HOST_ENVIRONMENT.exec(command, null, pluginDirectory);
@@ -118,7 +136,6 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
       String line = "";
       String[] splitLine;
       while ((line = reader.readLine()) != null) {
-        logger.log(Level.INFO, line);
         splitLine = line.split(" ");
         pluginList.add(splitLine[splitLine.length - 1]);
       }

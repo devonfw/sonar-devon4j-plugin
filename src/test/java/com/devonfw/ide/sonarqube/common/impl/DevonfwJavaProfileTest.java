@@ -23,9 +23,12 @@ public class DevonfwJavaProfileTest extends ModuleTest {
   public void test() {
 
     // Create new test profile
-    DevonfwJavaProfile profileDef = new DevonfwJavaProfile();
+    boolean testEnv = true;
+    DevonfwJavaProfile profileDef = new DevonfwJavaProfile(testEnv);
+
     BuiltInQualityProfilesDefinition.Context context = new BuiltInQualityProfilesDefinition.Context();
     profileDef.define(context);
+
     BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = context.profile(Java.KEY, "devonfw Java");
 
     // Get all rule keys
@@ -38,5 +41,4 @@ public class DevonfwJavaProfileTest extends ModuleTest {
     assertThat(profile.language()).isEqualTo(Java.KEY);
     assertThat(profile.name()).isEqualTo("devonfw Java");
   }
-
 }
