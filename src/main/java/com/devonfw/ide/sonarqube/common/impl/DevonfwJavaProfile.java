@@ -112,7 +112,6 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
       logger.log(Level.WARNING, "There was a problem configuring the parser.");
       return null;
     } catch (IOException io) {
-      io.printStackTrace();
       logger.log(Level.WARNING, "There was a problem reading the file.");
       return null;
     } catch (SAXException sax) {
@@ -137,53 +136,51 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
       Process process = HOST_ENVIRONMENT.exec(command, null, pluginDirectory);
       BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
       String line = "";
-      String[] splitLine;
+      String currentPlugin;
       while ((line = reader.readLine()) != null) {
-        splitLine = line.split(" ");
-        logger.log(Level.INFO, "Current plugin: " + splitLine[splitLine.length - 1]);
-        pluginList.add(splitLine[splitLine.length - 1]);
+        currentPlugin = trimPluginNames(line);
+        if (currentPlugin != null) {
+          pluginList.add(currentPlugin);
+        }
       }
       reader.close();
       return pluginList;
     } catch (IOException io) {
       logger.log(Level.INFO, "Command could not be executed");
-      io.printStackTrace();
     }
 
     return null;
   }
 
+  private String trimPluginNames(String line) {
+
+    String[] splitLine = line.split(" ");
+    String currentPlugin = null;
+
+    if (splitLine[splitLine.length - 1].endsWith(".jar")) {
+      currentPlugin = splitLine[splitLine.length - 1];
+      currentPlugin = currentPlugin.split("-[0-9]")[0];
+      return currentPlugin;
+    }
+
+    return currentPlugin;
+  }
+
   private void disableRepoKeys(List<String> pluginList) {
 
-    boolean hasQualinsightPlugin = false;
-    boolean hasPMDPlugin = false;
-    boolean hasCheckstylePlugin = false;
-    boolean hasFindbugsPlugin = false;
-    String currentPlugin;
-
-    for (int i = 0; i < pluginList.size(); i++) {
-      currentPlugin = pluginList.get(i);
-      if (currentPlugin.contains(QUALINSIGHT)) {
-        hasQualinsightPlugin = true;
-      } else if (currentPlugin.contains(PMD)) {
-        hasPMDPlugin = true;
-      } else if (currentPlugin.contains(CHECKSTYLE)) {
-        hasCheckstylePlugin = true;
-      } else if (currentPlugin.contains(FINDBUGS)) {
-        hasFindbugsPlugin = true;
-      }
-    }
-
-    if (!hasQualinsightPlugin) {
+    if (!pluginList.contains(QUALINSIGHT)) {
       disableQualinsight();
     }
-    if (!hasPMDPlugin) {
+
+    if (!pluginList.contains(PMD)) {
       disablePMD();
     }
-    if (!hasCheckstylePlugin) {
+
+    if (!pluginList.contains(CHECKSTYLE)) {
       disableCheckstyle();
     }
-    if (!hasFindbugsPlugin) {
+
+    if (!pluginList.contains(FINDBUGS)) {
       disableFindbugs();
     }
   }
