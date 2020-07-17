@@ -138,6 +138,7 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
       String line = "";
       String currentPlugin;
       while ((line = reader.readLine()) != null) {
+        logger.log(Level.INFO, "Log of current line: " + line);
         currentPlugin = trimPluginNames(line);
         if (currentPlugin != null) {
           pluginList.add(currentPlugin);
