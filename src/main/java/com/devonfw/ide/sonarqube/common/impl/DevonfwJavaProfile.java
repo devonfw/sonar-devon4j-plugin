@@ -51,7 +51,10 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
     this.testEnv = testEnv;
   }
 
-  DevonfwJavaProfile() {
+  /**
+   * The constructor
+   */
+  public DevonfwJavaProfile() {
 
   }
 
@@ -124,10 +127,10 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
     File pluginDirectory = null;
     List<String> pluginList = new ArrayList<>();
 
-    if (!this.testEnv) {
-      pluginDirectory = new File("extensions/plugins");
-    } else {
+    if (this.testEnv) {
       pluginDirectory = new File("src/test/files/qualityprofile/extensions/plugins");
+    } else {
+      pluginDirectory = new File("extensions/plugins");
     }
 
     try {
@@ -137,6 +140,7 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
       String[] splitLine;
       while ((line = reader.readLine()) != null) {
         splitLine = line.split(" ");
+        logger.log(Level.INFO, "Current plugin: " + splitLine[splitLine.length - 1]);
         pluginList.add(splitLine[splitLine.length - 1]);
       }
       reader.close();
@@ -172,11 +176,14 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
 
     if (!hasQualinsightPlugin) {
       disableQualinsight();
-    } else if (!hasPMDPlugin) {
+    }
+    if (!hasPMDPlugin) {
       disablePMD();
-    } else if (!hasCheckstylePlugin) {
+    }
+    if (!hasCheckstylePlugin) {
       disableCheckstyle();
-    } else if (!hasFindbugsPlugin) {
+    }
+    if (!hasFindbugsPlugin) {
       disableFindbugs();
     }
   }
