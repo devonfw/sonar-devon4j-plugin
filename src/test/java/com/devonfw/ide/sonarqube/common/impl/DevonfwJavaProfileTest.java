@@ -1,13 +1,10 @@
 package com.devonfw.ide.sonarqube.common.impl;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.junit.Test;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
-import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.BuiltInActiveRule;
 import org.sonar.plugins.java.Java;
 
 import com.devonfw.module.test.common.base.ModuleTest;
@@ -37,13 +34,8 @@ public class DevonfwJavaProfileTest extends ModuleTest {
     }
     BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = context.profile(Java.KEY, "devonfw Java");
 
-    // Get all rule keys
-    Set<String> ruleKeys = new HashSet<>();
-    for (BuiltInActiveRule rule : profile.rules()) {
-      ruleKeys.add(rule.ruleKey());
-    }
-
     // Assertions
+    assertThat(profile.rules()).isNotEmpty();
     assertThat(profile.language()).isEqualTo(Java.KEY);
     assertThat(profile.name()).isEqualTo("devonfw Java");
   }
