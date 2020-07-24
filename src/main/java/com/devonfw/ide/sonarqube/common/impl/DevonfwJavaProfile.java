@@ -149,9 +149,8 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
     } catch (IOException io) {
       logger.log(Level.INFO, "Command could not be executed");
       io.printStackTrace();
+      return new ArrayList<>();
     }
-
-    return null;
   }
 
   private String trimPluginNames(String line) {
