@@ -63,6 +63,10 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
 
     NewBuiltInQualityProfile devonfwJava = context.createBuiltInQualityProfile("devonfw Java", Java.KEY);
     Document parsedXml = readQualityProfileXml();
+    if (parsedXml == null) {
+      logger.log(Level.INFO, "The XML file could not be read.");
+      return;
+    }
     NodeList ruleList = parsedXml.getElementsByTagName("rule");
     NodeList childrenOfRule;
     List<String> pluginList = getPlugins();
@@ -78,7 +82,6 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
       childrenOfRule = ruleList.item(i).getChildNodes();
 
       for (int j = 0; j < childrenOfRule.getLength(); j++) {
-
         switch (childrenOfRule.item(j).getNodeName()) {
           case "repositoryKey":
             repoKey = childrenOfRule.item(j).getTextContent();
@@ -89,12 +92,16 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
           case "priority":
             severity = childrenOfRule.item(j).getTextContent();
             break;
+          default:
+            break;
         }
       }
 
-      if (!FORBIDDEN_REPO_KEYS.contains(repoKey)) {
+      if (!(FORBIDDEN_REPO_KEYS.contains(repoKey) || repoKey == null || ruleKey == null)) {
         currentRule = devonfwJava.activateRule(repoKey, ruleKey);
-        currentRule.overrideSeverity(severity);
+        if (severity != null) {
+          currentRule.overrideSeverity(severity);
+        }
       }
     }
 
@@ -106,8 +113,7 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
     try (InputStream inputStream = DevonfwJavaProfile.class.getResourceAsStream(DEVONFW_JAVA)) {
       DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
       DocumentBuilder builder = dbFactory.newDocumentBuilder();
-      Document document = builder.parse(inputStream);
-      return document;
+      return builder.parse(inputStream);
     } catch (ParserConfigurationException pc) {
       logger.log(Level.WARNING, "There was a problem configuring the parser.");
       return null;
@@ -138,7 +144,6 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
       String line = "";
       String currentPlugin;
       while ((line = reader.readLine()) != null) {
-        logger.log(Level.INFO, "Log of current line: " + line);
         currentPlugin = trimPluginNames(line);
         if (currentPlugin != null) {
           pluginList.add(currentPlugin);
@@ -148,7 +153,6 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
       return pluginList;
     } catch (IOException io) {
       logger.log(Level.INFO, "Command could not be executed");
-      io.printStackTrace();
       return new ArrayList<>();
     }
   }

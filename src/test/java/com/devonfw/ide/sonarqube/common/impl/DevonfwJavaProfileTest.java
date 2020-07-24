@@ -1,8 +1,5 @@
 package com.devonfw.ide.sonarqube.common.impl;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.junit.Test;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonar.plugins.java.Java;
@@ -26,12 +23,7 @@ public class DevonfwJavaProfileTest extends ModuleTest {
     DevonfwJavaProfile profileDef = new DevonfwJavaProfile(testEnv);
 
     BuiltInQualityProfilesDefinition.Context context = new BuiltInQualityProfilesDefinition.Context();
-    try {
-      profileDef.define(context);
-    } catch (NullPointerException npe) {
-      Logger.getGlobal().log(Level.INFO, "NPE thrown.");
-      npe.printStackTrace();
-    }
+    profileDef.define(context);
     BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = context.profile(Java.KEY, "devonfw Java");
 
     // Assertions
