@@ -75,7 +75,7 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
     NewBuiltInActiveRule currentRule;
     String repoKey = null;
     String ruleKey = null;
-    String severity = null;
+    String severity = "";
 
     for (int i = 0; i < ruleList.getLength(); i++) {
 
@@ -99,7 +99,7 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
 
       if (!(FORBIDDEN_REPO_KEYS.contains(repoKey) || repoKey == null || ruleKey == null)) {
         currentRule = devonfwJava.activateRule(repoKey, ruleKey);
-        if (severity != null) {
+        if (severity.isEmpty()) {
           currentRule.overrideSeverity(severity);
         }
       }
