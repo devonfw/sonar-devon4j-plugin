@@ -174,42 +174,22 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
   private void disableRepoKeys(List<String> pluginList) {
 
     if (!pluginList.contains(QUALINSIGHT)) {
-      disableQualinsight();
+      FORBIDDEN_REPO_KEYS.add("qualinsight-smells");
     }
 
     if (!pluginList.contains(PMD)) {
-      disablePMD();
+      FORBIDDEN_REPO_KEYS.add("pmd");
+      FORBIDDEN_REPO_KEYS.add("pmd-unit-tests");
     }
 
     if (!pluginList.contains(CHECKSTYLE)) {
-      disableCheckstyle();
+      FORBIDDEN_REPO_KEYS.add("checkstyle");
     }
 
     if (!pluginList.contains(FINDBUGS)) {
-      disableFindbugs();
+      FORBIDDEN_REPO_KEYS.add("findbugs");
+      FORBIDDEN_REPO_KEYS.add("findsecbugs");
+      FORBIDDEN_REPO_KEYS.add("fb-contrib");
     }
-  }
-
-  private void disableQualinsight() {
-
-    FORBIDDEN_REPO_KEYS.add("qualinsight-smells");
-  }
-
-  private void disablePMD() {
-
-    FORBIDDEN_REPO_KEYS.add("pmd");
-    FORBIDDEN_REPO_KEYS.add("pmd-unit-tests");
-  }
-
-  private void disableCheckstyle() {
-
-    FORBIDDEN_REPO_KEYS.add("checkstyle");
-  }
-
-  private void disableFindbugs() {
-
-    FORBIDDEN_REPO_KEYS.add("findbugs");
-    FORBIDDEN_REPO_KEYS.add("findsecbugs");
-    FORBIDDEN_REPO_KEYS.add("fb-contrib");
   }
 }
