@@ -1,5 +1,7 @@
 package com.devonfw.ide.sonarqube.common.impl;
 
+import java.io.File;
+
 import org.junit.Test;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonar.plugins.java.Java;
@@ -19,8 +21,8 @@ public class DevonfwJavaProfileTest extends ModuleTest {
   public void test() {
 
     // Create new test profile
-    boolean testEnv = true;
-    DevonfwJavaProfile profileDef = new DevonfwJavaProfile(testEnv);
+    File pluginDir = new File("src/test/files/qualityprofile/extensions/plugins");
+    DevonfwJavaProfile profileDef = new DevonfwJavaProfile(pluginDir);
 
     BuiltInQualityProfilesDefinition.Context context = new BuiltInQualityProfilesDefinition.Context();
     profileDef.define(context);

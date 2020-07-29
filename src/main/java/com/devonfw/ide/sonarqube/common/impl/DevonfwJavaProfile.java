@@ -27,7 +27,9 @@ import org.xml.sax.SAXException;
 @SonarLintSide
 public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
 
-  private static final String DEVONFW_JAVA = "/com/devonfw/ide/sonarqube/common/rules/devon4j/devonfwJava.xml";
+  private static final String DEVON4J_XML = "/com/devonfw/ide/sonarqube/common/rules/devon4j/devon4j.xml";
+
+  private static File PLUGIN_DIRECTORY = new File("extensions/plugins");
 
   private static final Logger logger = Logger.getGlobal();
 
@@ -43,12 +45,10 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
 
   private static List<String> FORBIDDEN_REPO_KEYS = new ArrayList<>();
 
-  private boolean testEnv = false;
-
   // Use this constructor only for testing purposes
-  DevonfwJavaProfile(boolean testEnv) {
+  DevonfwJavaProfile(File PLUGIN_DIRECTORY) {
 
-    this.testEnv = testEnv;
+    DevonfwJavaProfile.PLUGIN_DIRECTORY = PLUGIN_DIRECTORY;
   }
 
   /**
@@ -110,7 +110,7 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
 
   private Document readQualityProfileXml() {
 
-    try (InputStream inputStream = DevonfwJavaProfile.class.getResourceAsStream(DEVONFW_JAVA)) {
+    try (InputStream inputStream = DevonfwJavaProfile.class.getResourceAsStream(DEVON4J_XML)) {
       DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
       DocumentBuilder builder = dbFactory.newDocumentBuilder();
       return builder.parse(inputStream);
@@ -129,17 +129,16 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
   private List<String> getPlugins() {
 
     String command = "cmd /c dir";
-    File pluginDirectory = null;
     List<String> pluginList = new ArrayList<>();
 
-    if (this.testEnv) {
-      pluginDirectory = new File("src/test/files/qualityprofile/extensions/plugins");
-    } else {
-      pluginDirectory = new File("extensions/plugins");
-    }
+    // if (this.testEnv) {
+    // pluginDirectory = new File("src/test/files/qualityprofile/extensions/plugins");
+    // } else {
+    // pluginDirectory = new File("extensions/plugins");
+    // }
 
     try {
-      Process process = HOST_ENVIRONMENT.exec(command, null, pluginDirectory);
+      Process process = HOST_ENVIRONMENT.exec(command, null, PLUGIN_DIRECTORY);
       BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
       String line = "";
       String currentPlugin;
