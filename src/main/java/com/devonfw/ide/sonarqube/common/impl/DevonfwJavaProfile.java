@@ -1,14 +1,14 @@
 package com.devonfw.ide.sonarqube.common.impl;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -29,11 +29,7 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
 
   private static final String DEVON4J_XML = "/com/devonfw/ide/sonarqube/common/rules/devon4j/devon4j.xml";
 
-  private static File PLUGIN_DIRECTORY = new File("extensions/plugins");
-
   private static final Logger logger = Logger.getGlobal();
-
-  private static final Runtime HOST_ENVIRONMENT = Runtime.getRuntime();
 
   private static final String QUALINSIGHT = "qualinsight-plugins-sonarqube-smell-plugin";
 
@@ -45,10 +41,14 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
 
   private static List<String> FORBIDDEN_REPO_KEYS = new ArrayList<>();
 
-  // Use this constructor only for testing purposes
-  DevonfwJavaProfile(File PLUGIN_DIRECTORY) {
+  private File pluginDirectory;
 
-    DevonfwJavaProfile.PLUGIN_DIRECTORY = PLUGIN_DIRECTORY;
+  private List<String> pluginList;
+
+  // Use this constructor only for testing purposes
+  DevonfwJavaProfile(File pluginDirectory) {
+
+    this.pluginDirectory = pluginDirectory;
   }
 
   /**
@@ -56,6 +56,7 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
    */
   public DevonfwJavaProfile() {
 
+    this(new File("extensions/plugins"));
   }
 
   @Override
@@ -69,8 +70,7 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
     }
     NodeList ruleList = parsedXml.getElementsByTagName("rule");
     NodeList childrenOfRule;
-    List<String> pluginList = getPlugins();
-    disableRepoKeys(pluginList);
+    disableRepoKeys();
 
     NewBuiltInActiveRule currentRule;
     String repoKey = null;
@@ -128,64 +128,41 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
 
   private List<String> getPlugins() {
 
-    String command = "cmd /c dir";
-    List<String> pluginList = new ArrayList<>();
+    if (this.pluginList == null) {
+      File[] fileList = this.pluginDirectory.listFiles(f -> f.getName().endsWith(".jar") && f.isFile());
+      this.pluginList = Arrays.asList(fileList).stream().map(f -> f.getName()).collect(Collectors.toList());
+    }
 
-    // if (this.testEnv) {
-    // pluginDirectory = new File("src/test/files/qualityprofile/extensions/plugins");
-    // } else {
-    // pluginDirectory = new File("extensions/plugins");
-    // }
+    return this.pluginList;
+  }
 
-    try {
-      Process process = HOST_ENVIRONMENT.exec(command, null, PLUGIN_DIRECTORY);
-      BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-      String line = "";
-      String currentPlugin;
-      while ((line = reader.readLine()) != null) {
-        currentPlugin = trimPluginNames(line);
-        if (currentPlugin != null) {
-          pluginList.add(currentPlugin);
-        }
+  private boolean hasPlugin(String name) {
+
+    for (String plugin : getPlugins()) {
+      if (plugin.contains(name)) {
+        return true;
       }
-      reader.close();
-      return pluginList;
-    } catch (IOException io) {
-      logger.log(Level.INFO, "Command could not be executed");
-      return new ArrayList<>();
-    }
-  }
-
-  private String trimPluginNames(String line) {
-
-    String[] splitLine = line.split(" ");
-    String currentPlugin = null;
-
-    if (splitLine[splitLine.length - 1].endsWith(".jar")) {
-      currentPlugin = splitLine[splitLine.length - 1];
-      currentPlugin = currentPlugin.split("-[0-9]")[0];
-      return currentPlugin;
     }
 
-    return currentPlugin;
+    return false;
   }
 
-  private void disableRepoKeys(List<String> pluginList) {
+  private void disableRepoKeys() {
 
-    if (!pluginList.contains(QUALINSIGHT)) {
+    if (!hasPlugin(QUALINSIGHT)) {
       FORBIDDEN_REPO_KEYS.add("qualinsight-smells");
     }
 
-    if (!pluginList.contains(PMD)) {
+    if (!hasPlugin(PMD)) {
       FORBIDDEN_REPO_KEYS.add("pmd");
       FORBIDDEN_REPO_KEYS.add("pmd-unit-tests");
     }
 
-    if (!pluginList.contains(CHECKSTYLE)) {
+    if (!hasPlugin(CHECKSTYLE)) {
       FORBIDDEN_REPO_KEYS.add("checkstyle");
     }
 
-    if (!pluginList.contains(FINDBUGS)) {
+    if (!hasPlugin(FINDBUGS)) {
       FORBIDDEN_REPO_KEYS.add("findbugs");
       FORBIDDEN_REPO_KEYS.add("findsecbugs");
       FORBIDDEN_REPO_KEYS.add("fb-contrib");
