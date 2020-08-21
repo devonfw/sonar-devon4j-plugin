@@ -20,9 +20,10 @@ public class SonarDevon4jPlugin implements Plugin {
   @Override
   public void define(Context context) {
 
-    context.addExtensions(DevonSonarDefinition.class, DevonSonarRegistrar.class);
+    context.addExtensions(DevonSonarDefinition.class, DevonSonarRegistrar.class, DevonfwJavaProfile.class);
     context.addExtension(PropertyDefinition.builder(CONFIG_KEY).name("Config JSON")
-        .description("Configuration of business architecture").category("Devon").subCategory("").type(PropertyType.TEXT)
+        .description("Configuration of business architecture").category("devonfw").subCategory("")
+        .type(PropertyType.TEXT)
         .defaultValue("{\"architecture\":{\"components\":[\n{\"name\":\"component1\",\\\"dependencies\\\":[]}}\n]}}")
         .build());
   }
