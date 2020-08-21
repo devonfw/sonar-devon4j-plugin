@@ -34,6 +34,7 @@ public class DevonSonarDefinition implements RulesDefinition {
     for (Class<? extends JavaCheck> check : DevonSonarRegistrar.checkClasses()) {
       addRule(repository, check);
     }
+
     repository.done();
   }
 
