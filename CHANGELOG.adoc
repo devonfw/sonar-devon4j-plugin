@@ -6,7 +6,7 @@ This file documents all notable changes to https://github.com/devonfw/sonar-devo
 
 With this release, we added our own quality profile:
 
-* https://github.com/devonfw/sonar-devon4j-plugin/issues/16[#16]: Installed quality profile
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/16[#16]: Install devon4j quality profile
 
 Changes for this release can be found in https://github.com/devonfw/sonar-devon4j-plugin/milestone/6?closed=1[milestone 2020.08.001]
 
