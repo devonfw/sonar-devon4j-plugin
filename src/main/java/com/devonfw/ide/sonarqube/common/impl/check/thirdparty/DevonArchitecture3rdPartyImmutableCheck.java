@@ -5,6 +5,9 @@ import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitecture3rdPartyChec
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * {@link DevonArchitecture3rdPartyCheck} verifying that Immutable is used from the proper (org.hibernate.annotations) package.
  */
@@ -12,11 +15,15 @@ import org.sonar.check.Rule;
     priority = Priority.CRITICAL, tags = { "architecture-violation", "devonfw", "thirdparty" })
 public class DevonArchitecture3rdPartyImmutableCheck extends DevonArchitecture3rdPartyCheck {
 
+    private Set<String> allImports = new HashSet<>();
+
     @Override protected String checkDependency(JavaType source, JavaType target) {
 
+        allImports.add(target.toString());
         String sourceSimpleName = source.getSimpleName();
-        String targetFullName = target.toString();
-        if (sourceSimpleName.contains("Entity") && targetFullName.equals("javax.annotation.concurrent.Immutable")) {
+        if (sourceSimpleName.contains("Entity") && allImports.contains("javax.annotation.concurrent.Immutable")
+            && allImports.contains("javax.persistence.Entity")) {
+
             return "Use Immutable from org.hibernate.annotations.Immutable in Entity class.";
         }
         return null;
