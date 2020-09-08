@@ -1,0 +1,28 @@
+<p>
+    This rule checks that proper date types are used.
+    The use of the java.util.Date, java.util.Calendar, java.sql.Date and java.sql.Timestamp is discouraged.
+    Instead use the java.time.LocalDate[Time], java.time.ZonedDateTime, java.time.OffsetDateTime or java.time.Instant.
+</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+    package com.devonfw.ide.sonarqube.dataaccess.impl;
+
+    <del style='color: #979696'><span style='color: #FFB000'>import java.util.Date;</span></del>
+    <del style='color: #979696'><span style='color: #FFB000'>import java.util.Calendar;</span></del>
+    <del style='color: #979696'><span style='color: #FFB000'>import java.sql.Date;</span></del>
+    <del style='color: #979696'><span style='color: #FFB000'>java.sql.Timestamp;</span></del>
+
+    public class MyClass {}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+    package com.devonfw.ide.sonarqube.dataaccess.impl;
+
+    <u style='color: #979696'><span style='color: #648FFF'>import java.time.LocalDate;</span></u>
+    <u style='color: #979696'><span style='color: #648FFF'>import java.time.LocalDateTime;</span></u>
+    <u style='color: #979696'><span style='color: #648FFF'>import java.time.ZonedDateTime;</span></u>
+    <u style='color: #979696'><span style='color: #648FFF'>import java.time.OffsetDateTime;</span></u>
+    <u style='color: #979696'><span style='color: #648FFF'>import java.time.Instant;</span></u>
+
+    public class MyClass {}
+</pre>
