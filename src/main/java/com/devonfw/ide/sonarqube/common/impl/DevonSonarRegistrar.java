@@ -3,6 +3,7 @@ package com.devonfw.ide.sonarqube.common.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.*;
 import org.sonar.plugins.java.api.CheckRegistrar;
 import org.sonar.plugins.java.api.JavaCheck;
 import org.sonarsource.api.sonarlint.SonarLintSide;
@@ -45,12 +46,6 @@ import com.devonfw.ide.sonarqube.common.impl.check.scope.DevonArchitectureScopeB
 import com.devonfw.ide.sonarqube.common.impl.check.scope.DevonArchitectureScopeImpl2Base4ComponentPartCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.scope.DevonArchitectureScopeImpl2Impl4ComponentPartCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.security.DevonUcImplSecurityConstraintCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyDatatypeMappingsCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyHibernateCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyJpaCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyMysemaCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyObjectsCheck;
-import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyTransactionalCheck;
 
 /**
  * {@link CheckRegistrar} for this plugin.
@@ -106,6 +101,7 @@ public class DevonSonarRegistrar implements CheckRegistrar {
     checks.add(DevonArchitecture3rdPartyHibernateCheck.class); // E4
     checks.add(DevonArchitecture3rdPartyObjectsCheck.class); // E5
     checks.add(DevonArchitecture3rdPartyDatatypeMappingsCheck.class); // E6
+    checks.add(DevonArchitecture3rdPartyDateTypeCheck.class); // E7
 
     checks.add(DevonNamingConventionClassExtendsClassCtoCheck.class); // N1
     checks.add(DevonNamingConventionClassExtendsClassDaoCheck.class); // N2
