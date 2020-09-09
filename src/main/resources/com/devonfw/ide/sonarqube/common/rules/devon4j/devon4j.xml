@@ -9463,13 +9463,6 @@
     </rule>
     <rule>
         <repositoryKey>java</repositoryKey>
-        <key>S2391</key>
-        <type>CODE_SMELL</type>
-        <priority>BLOCKER</priority>
-        <parameters/>
-    </rule>
-    <rule>
-        <repositoryKey>java</repositoryKey>
         <key>S2437</key>
         <type>CODE_SMELL</type>
         <priority>BLOCKER</priority>
