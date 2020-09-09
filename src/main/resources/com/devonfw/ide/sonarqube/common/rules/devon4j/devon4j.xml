@@ -7713,13 +7713,6 @@
     </rule>
     <rule>
         <repositoryKey>java</repositoryKey>
-        <key>S1148</key>
-        <type>VULNERABILITY</type>
-        <priority>MINOR</priority>
-        <parameters/>
-    </rule>
-    <rule>
-        <repositoryKey>java</repositoryKey>
         <key>S1149</key>
         <type>CODE_SMELL</type>
         <priority>MAJOR</priority>
@@ -10348,6 +10341,13 @@
         <repositoryKey>java</repositoryKey>
         <key>S4349</key>
         <type>CODE_SMELL</type>
+        <priority>MINOR</priority>
+        <parameters/>
+    </rule>
+    <rule>
+        <repositoryKey>java</repositoryKey>
+        <key>S4507</key>
+        <type>SECURITY_HOTSPOT</type>
         <priority>MINOR</priority>
         <parameters/>
     </rule>
