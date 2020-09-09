@@ -8080,7 +8080,7 @@
         <repositoryKey>java</repositoryKey>
         <key>S121</key>
         <type>CODE_SMELL</type>
-        <priority>CRITICAL</priority>
+        <priority>MINOR</priority>
         <parameters/>
     </rule>
     <rule>
@@ -8766,13 +8766,6 @@
     <rule>
         <repositoryKey>java</repositoryKey>
         <key>S2062</key>
-        <type>CODE_SMELL</type>
-        <priority>CRITICAL</priority>
-        <parameters/>
-    </rule>
-    <rule>
-        <repositoryKey>java</repositoryKey>
-        <key>S2063</key>
         <type>CODE_SMELL</type>
         <priority>CRITICAL</priority>
         <parameters/>
@@ -9668,7 +9661,7 @@
         <repositoryKey>java</repositoryKey>
         <key>S2699</key>
         <type>CODE_SMELL</type>
-        <priority>BLOCKER</priority>
+        <priority>INFO</priority>
         <parameters/>
     </rule>
     <rule>
@@ -9963,7 +9956,7 @@
         <repositoryKey>java</repositoryKey>
         <key>S3369</key>
         <type>VULNERABILITY</type>
-        <priority>BLOCKER</priority>
+        <priority>INFO</priority>
         <parameters/>
     </rule>
     <rule>
