@@ -9837,13 +9837,6 @@
     </rule>
     <rule>
         <repositoryKey>java</repositoryKey>
-        <key>S3027</key>
-        <type>CODE_SMELL</type>
-        <priority>MAJOR</priority>
-        <parameters/>
-    </rule>
-    <rule>
-        <repositoryKey>java</repositoryKey>
         <key>S3030</key>
         <type>CODE_SMELL</type>
         <priority>MAJOR</priority>
