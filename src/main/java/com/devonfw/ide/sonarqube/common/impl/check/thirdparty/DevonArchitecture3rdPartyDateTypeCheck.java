@@ -9,12 +9,13 @@ import org.sonar.check.Rule;
  * {@link DevonArchitecture3rdPartyCheck} verifying that proper date types are used.
  */
 @Rule(key = "E7", name = "devonfw 3rd Party Date Type Check", //
-    priority = Priority.BLOCKER, tags = { "architecture-violation", "devonfw",
-    "thirdparty" }) public class DevonArchitecture3rdPartyDateTypeCheck extends DevonArchitecture3rdPartyCheck {
+    priority = Priority.MINOR, tags = { "architecture-violation", "devonfw", "thirdparty" })
+public class DevonArchitecture3rdPartyDateTypeCheck extends DevonArchitecture3rdPartyCheck {
 
     @Override protected String checkDependency(JavaType source, JavaType target) {
 
         String targetString = target.toString();
+
         if (targetString.equals("java.util.Date")) {
             return "Use the java.time.LocalDate[Time] instead";
         }
