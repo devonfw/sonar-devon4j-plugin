@@ -14,6 +14,19 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.http.HttpHost;
+import org.apache.http.HttpResponse;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.AuthCache;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.impl.auth.BasicScheme;
+import org.apache.http.impl.client.BasicAuthCache;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonar.plugins.java.Java;
 import org.sonarsource.api.sonarlint.SonarLintSide;
@@ -76,6 +89,7 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
     String repoKey = null;
     String ruleKey = null;
     String severity = "";
+    String tag = "";
 
     for (int i = 0; i < ruleList.getLength(); i++) {
 
@@ -92,6 +106,9 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
           case "priority":
             severity = childrenOfRule.item(j).getTextContent();
             break;
+          case "tag":
+            tag = childrenOfRule.item(j).getTextContent();
+            break;
           default:
             break;
         }
@@ -99,13 +116,42 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
 
       if (!(FORBIDDEN_REPO_KEYS.contains(repoKey) || repoKey == null || ruleKey == null)) {
         currentRule = devonfwJava.activateRule(repoKey, ruleKey);
-        if (severity.isEmpty()) {
+        if (!tag.isEmpty() && repoKey != null && ruleKey != null) {
+          try {
+            updateRulesTags(tag, repoKey, ruleKey);
+          } catch (IOException e) {
+            logger.log(Level.INFO, "There was problem sending a POST request to update rule's tag");
+          }
+          tag = "";
+        }
+        if (!severity.isEmpty()) {
           currentRule.overrideSeverity(severity);
         }
       }
     }
 
     devonfwJava.done();
+  }
+
+  private void updateRulesTags(String tag, String repoKey, String ruleKey) throws IOException {
+
+    String hostname = "localhost";
+    int port = 9000;
+    String updateTagUrl = String.format("http://%1$s:%2$s/api/rules/update?key=%3$s:%4$s&tags=%5$s", hostname, port,
+        repoKey, ruleKey, tag);
+
+    HttpHost targetHost = new HttpHost(hostname, port, "http");
+    CredentialsProvider credsProvider = new BasicCredentialsProvider();
+    credsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials("admin", "admin"));
+
+    AuthCache authCache = new BasicAuthCache();
+    authCache.put(targetHost, new BasicScheme());
+
+    HttpClientContext context = HttpClientContext.create();
+    context.setCredentialsProvider(credsProvider);
+    context.setAuthCache(authCache);
+    HttpClient client = HttpClientBuilder.create().build();
+    HttpResponse response = client.execute(new HttpPost(updateTagUrl), context);
   }
 
   private Document readQualityProfileXml() {

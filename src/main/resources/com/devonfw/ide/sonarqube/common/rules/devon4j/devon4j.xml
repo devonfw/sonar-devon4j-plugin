@@ -9956,7 +9956,8 @@
         <repositoryKey>java</repositoryKey>
         <key>S3369</key>
         <type>VULNERABILITY</type>
-        <priority>INFO</priority>
+        <priority>BLOCKER</priority>
+        <tag>security-constraint</tag>
         <parameters/>
     </rule>
     <rule>
