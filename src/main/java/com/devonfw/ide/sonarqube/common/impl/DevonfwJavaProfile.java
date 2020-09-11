@@ -151,7 +151,7 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
     context.setCredentialsProvider(credsProvider);
     context.setAuthCache(authCache);
     HttpClient client = HttpClientBuilder.create().build();
-    HttpResponse response = client.execute(new HttpPost(updateTagUrl), context);
+    client.execute(new HttpPost(updateTagUrl), context);
   }
 
   private Document readQualityProfileXml() {
