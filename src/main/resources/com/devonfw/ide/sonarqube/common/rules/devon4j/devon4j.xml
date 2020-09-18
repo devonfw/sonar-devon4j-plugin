@@ -1291,6 +1291,13 @@
     </rule>
     <rule>
         <repositoryKey>devon4j</repositoryKey>
+        <key>E8</key>
+        <type>CODE_SMELL</type>
+        <priority>CRITICAL</priority>
+        <parameters/>
+    </rule>
+    <rule>
+        <repositoryKey>devon4j</repositoryKey>
         <key>L1</key>
         <type>CODE_SMELL</type>
         <priority>BLOCKER</priority>
