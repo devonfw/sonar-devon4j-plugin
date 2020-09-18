@@ -7713,13 +7713,6 @@
     </rule>
     <rule>
         <repositoryKey>java</repositoryKey>
-        <key>S1148</key>
-        <type>VULNERABILITY</type>
-        <priority>MINOR</priority>
-        <parameters/>
-    </rule>
-    <rule>
-        <repositoryKey>java</repositoryKey>
         <key>S1149</key>
         <type>CODE_SMELL</type>
         <priority>MAJOR</priority>
@@ -9463,13 +9456,6 @@
     </rule>
     <rule>
         <repositoryKey>java</repositoryKey>
-        <key>S2391</key>
-        <type>CODE_SMELL</type>
-        <priority>BLOCKER</priority>
-        <parameters/>
-    </rule>
-    <rule>
-        <repositoryKey>java</repositoryKey>
         <key>S2437</key>
         <type>CODE_SMELL</type>
         <priority>BLOCKER</priority>
@@ -9833,13 +9819,6 @@
         <key>S3020</key>
         <type>BUG</type>
         <priority>MINOR</priority>
-        <parameters/>
-    </rule>
-    <rule>
-        <repositoryKey>java</repositoryKey>
-        <key>S3027</key>
-        <type>CODE_SMELL</type>
-        <priority>MAJOR</priority>
         <parameters/>
     </rule>
     <rule>
@@ -10362,6 +10341,13 @@
         <repositoryKey>java</repositoryKey>
         <key>S4349</key>
         <type>CODE_SMELL</type>
+        <priority>MINOR</priority>
+        <parameters/>
+    </rule>
+    <rule>
+        <repositoryKey>java</repositoryKey>
+        <key>S4507</key>
+        <type>SECURITY_HOTSPOT</type>
         <priority>MINOR</priority>
         <parameters/>
     </rule>
