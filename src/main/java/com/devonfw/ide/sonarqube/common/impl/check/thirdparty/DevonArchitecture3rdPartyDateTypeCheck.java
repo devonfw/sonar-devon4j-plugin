@@ -19,7 +19,7 @@ public class DevonArchitecture3rdPartyDateTypeCheck extends DevonArchitecture3rd
     String targetString = target.toString();
 
     if (targetString.equals("java.util.Date")) {
-      return "Use the java.time.LocalDate[Time] instead";
+      return "Use java.time.LocalDate[Time] instead";
     }
     if (targetString.equals("java.util.Calendar")) {
       return "Use java.time.LocalDate[Time], java.time.ZonedDateTime or java.time.OffsetDateTime instead";

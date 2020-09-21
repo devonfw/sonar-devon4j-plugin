@@ -52,6 +52,7 @@ import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3
 import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyObjectsCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyTransactionalCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyDateTypeCheck;
+import com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyImmutableCheck;
 
 /**
  * {@link CheckRegistrar} for this plugin.
@@ -108,6 +109,7 @@ public class DevonSonarRegistrar implements CheckRegistrar {
     checks.add(DevonArchitecture3rdPartyObjectsCheck.class); // E5
     checks.add(DevonArchitecture3rdPartyDatatypeMappingsCheck.class); // E6
     checks.add(DevonArchitecture3rdPartyDateTypeCheck.class); // E7
+    checks.add(DevonArchitecture3rdPartyImmutableCheck.class); // E8
 
     checks.add(DevonNamingConventionClassExtendsClassCtoCheck.class); // N1
     checks.add(DevonNamingConventionClassExtendsClassDaoCheck.class); // N2
