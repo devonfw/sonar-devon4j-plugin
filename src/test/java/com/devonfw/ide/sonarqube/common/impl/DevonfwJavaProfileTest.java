@@ -19,15 +19,11 @@ public class DevonfwJavaProfileTest extends ModuleTest {
    */
   @Test
   public void test() {
-
     // Create new test profile
-    File pluginDir = new File("src/test/files/qualityprofile/extensions/plugins");
-    DevonfwJavaProfile profileDef = new DevonfwJavaProfile(pluginDir);
-
+    DevonfwJavaProfile profileDef = new DevonfwJavaProfile();
     BuiltInQualityProfilesDefinition.Context context = new BuiltInQualityProfilesDefinition.Context();
     profileDef.define(context);
     BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = context.profile(Java.KEY, "devonfw Java");
-
     // Assertions
     assertThat(profile.rules()).isNotEmpty();
     assertThat(profile.language()).isEqualTo(Java.KEY);
