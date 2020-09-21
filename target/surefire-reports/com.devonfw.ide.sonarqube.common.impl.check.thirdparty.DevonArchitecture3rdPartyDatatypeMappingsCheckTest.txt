@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyDatatypeMappingsCheckTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.097 sec - in com.devonfw.ide.sonarqube.common.impl.check.thirdparty.DevonArchitecture3rdPartyDatatypeMappingsCheckTest

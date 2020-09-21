@@ -1,0 +1,33 @@
+<p>
+    This rule checks that all Use-Case implementation methods are annotated with a security constraint.
+    Valid security constraint annotations are the following from the javax.annotation.security package:
+    <ul type='disc'>
+        <li>@DenyAll</li>
+        <li>@PermitAll</li>
+        <li>@RolesAllowed</li>
+    </ul>
+</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+    public class TestInterfaceImpl implements TestInterface {
+
+        @Override                                 
+        public boolean testBoolMethod() {
+            return true;
+        }
+    }
+</pre>
+<h2>Compliant Solutions</h2>
+<pre>
+    public class TestClassImpl implements TestClass {
+    
+        @Override
+        @RolesAllowed(ApplicationAccessControlConfig.PERMISSION_SAVE_ENTITY)
+        public void ucImplMethod() {
+    
+        }
+    }
+</pre>
+<p>
+    Note that while @DenyAll and @RolesAllowed are technically allowed, they should only be used in exceptional cases.
+</p>

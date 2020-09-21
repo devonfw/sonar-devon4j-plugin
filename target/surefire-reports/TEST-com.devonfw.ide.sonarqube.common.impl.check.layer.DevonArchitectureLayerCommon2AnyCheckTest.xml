@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.devonfw.ide.sonarqube.common.impl.check.layer.DevonArchitectureLayerCommon2AnyCheckTest" time="0.033" tests="1" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="java.vm.version" value="11.0.5+10"/>
+    <property name="sun.boot.library.path" value="C:\projects\my-project\software\java\bin"/>
+    <property name="user.country.format" value="DE"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\projects\my-project\workspaces\main\babicz\sonar-devon4j-plugin"/>
+    <property name="java.vm.vendor" value="AdoptOpenJDK"/>
+    <property name="java.vendor.url" value="https://adoptopenjdk.net/"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="path.separator" value=";"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="sun.os.patch.level" value="Service Pack 1"/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="US"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="C:\projects\my-project\workspaces\main\babicz\sonar-devon4j-plugin"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="java.runtime.version" value="11.0.5+10"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\babicz\AppData\Local\Temp\"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 7"/>
+    <property name="classworlds.conf" value="C:\projects\my-project\software\maven\bin\..\bin\m2.conf"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\projects\my-project\software\java\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\projects\my-project\software\vscode-extensions;C:\projects\my-project\software\vscode\bin;C:\projects\my-project\software\node;C:\projects\my-project\software\maven\bin;C:\projects\my-project\software\java\bin;C:\projects\my-project\software\eclipse;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\apache-maven-3.6.3-bin\apache-maven-3.6.3\bin;;C:\Users\babicz\scripts;C:\Users\babicz\AppData\Local\Programs\Microsoft VS Code\bin;%IntelliJ IDEA%;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.2.1.1\bin;;."/>
+    <property name="maven.conf" value="C:\projects\my-project\software\maven\bin\../conf"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="java.class.version" value="55.0"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="6.1"/>
+    <property name="library.jansi.path" value="C:\projects\my-project\software\maven\bin\..\lib\jansi-native"/>
+    <property name="user.home" value="C:\projects\my-project/conf"/>
+    <property name="user.timezone" value="Europe/Berlin"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="java.specification.version" value="11"/>
+    <property name="user.name" value="BABICZ"/>
+    <property name="java.class.path" value="C:\projects\my-project\software\maven\bin\..\boot\plexus-classworlds-2.6.0.jar"/>
+    <property name="java.vm.specification.version" value="11"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher package"/>
+    <property name="java.home" value="C:\projects\my-project\software\java"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language.format" value="de"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="11.0.5"/>
+    <property name="java.vendor" value="AdoptOpenJDK"/>
+    <property name="sun.stderr.encoding" value="cp850"/>
+    <property name="maven.home" value="C:\projects\my-project\software\maven\bin\.."/>
+    <property name="file.separator" value="\"/>
+    <property name="java.version.date" value="2019-10-15"/>
+    <property name="java.vendor.url.bug" value="https://github.com/AdoptOpenJDK/openjdk-build/issues"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="java.vendor.version" value="AdoptOpenJDK"/>
+    <property name="sun.stdout.encoding" value="cp850"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase name="test" classname="com.devonfw.ide.sonarqube.common.impl.check.layer.DevonArchitectureLayerCommon2AnyCheckTest" time="0.033"/>
+</testsuite>

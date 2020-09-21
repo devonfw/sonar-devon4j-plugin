@@ -1,0 +1,12 @@
+<p>
+    This rule checks that api scope does not depend on base scope of another component part.
+    Api scope is only allowed to depend on the api scope of another component.
+</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+    package com.devonfw.ide.sonarqube.component1.logic.<span style='color: #785EF0'>api</span>;
+
+    import com.devonfw.ide.sonarqube.component2.logic.<del style='color: #979696'><span style='color: #FFB000'>base</span></del>.Bar;
+    
+    public class MyClass {}
+</pre>

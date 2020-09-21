@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.devonfw.ide.sonarqube.common.impl.check.component.DevonArchitectureLayerService2Service4ComponentCheckTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.15 sec - in com.devonfw.ide.sonarqube.common.impl.check.component.DevonArchitectureLayerService2Service4ComponentCheckTest
