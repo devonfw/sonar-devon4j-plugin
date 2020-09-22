@@ -1,5 +1,6 @@
 package com.devonfw.ide.sonarqube.common.impl;
 
+import java.io.File;
 import java.util.List;
 
 import org.junit.Test;
@@ -16,22 +17,20 @@ import com.devonfw.module.test.common.base.ModuleTest;
  * Test of {@link SonarDevon4jPlugin}
  */
 public class SonarDevon4jPluginTest extends ModuleTest {
-
   /**
    * Test of {@link SonarDevon4jPlugin}
    */
   @Test
   public void test() {
 
-    SonarDevon4jPlugin plugin = new SonarDevon4jPlugin();
+    File pluginDir = new File("src/test/files/qualityprofile/extensions/plugins");
+    SonarDevon4jPlugin plugin = new SonarDevon4jPlugin(pluginDir);
     PluginContextImpl.Builder builder = new PluginContextImpl.Builder();
     builder.setSonarRuntime(
         SonarRuntimeImpl.forSonarQube(Version.create(5, 7), SonarQubeSide.SERVER, SonarEdition.SONARCLOUD));
     Plugin.Context context = builder.build();
     plugin.define(context);
     List<Class<?>> extensions = context.getExtensions();
-
     assertThat(extensions).contains(DevonSonarDefinition.class, DevonSonarRegistrar.class);
   }
-
 }
