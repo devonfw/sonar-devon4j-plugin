@@ -1,0 +1,9 @@
+{
+  "architecture": {
+    "devonProject": false,
+    "packages": {
+      "groups": [ "root", "layer", "component", "scope", "detail" ],
+      "mappings": {  "persistence": "dataaccess", "core": "logic", "gui": "client"}
+    }
+  }
+}

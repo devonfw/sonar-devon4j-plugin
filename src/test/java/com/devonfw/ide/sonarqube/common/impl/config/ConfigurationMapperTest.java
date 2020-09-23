@@ -21,8 +21,8 @@ public class ConfigurationMapperTest extends ModuleTest {
       "{\"name\":\"component1\",\"dependencies\":[\"component2\"]}," + //
       "{\"name\":\"component2\",\"dependencies\":[\"component3\"],\"nonTransitiveDependencies\":[\"io.oasp.module.jpa\"]},"
       + //
-      "{\"name\":\"component3\",\"dependencies\":[]}" + //
-      "]}}";
+      "{\"name\":\"component3\",\"dependencies\":[]}]," + //
+      "\"devonProject\":true}}";
 
   /**
    * Test of {@link ConfigurationMapper#toJson(Configuration)}.

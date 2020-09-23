@@ -18,6 +18,14 @@ public class Architecture {
 
   private Map<String, Component> componentMap;
 
+  private boolean isDevonProject;
+
+  private String packageNamingPattern;
+
+  private Map<String, String> nameMappings;
+
+  private ArchitectureJsonReader architectureJsonReader = new ArchitectureJsonReader();
+
   /**
    * The constructor.
    */
@@ -62,6 +70,26 @@ public class Architecture {
     this.components = components;
   }
 
+  public Map<String, Component> getComponentMap() {
+
+    return componentMap;
+  }
+
+  public boolean isDevonProject() {
+
+    return architectureJsonReader.isDevon4jProject();
+  }
+
+  public String getPackageNamingPattern() {
+
+    return architectureJsonReader.getPackageNamingPattern();
+  }
+
+  public Map<String, String> getNameMappings() {
+
+    return architectureJsonReader.getPackageNameMappings();
+  }
+
   void initialize(Configuration configuration) {
 
     this.componentMap = new HashMap<>();
@@ -92,6 +120,11 @@ public class Architecture {
       if (nonTransitiveDependencies != null) {
         component.allDependencies.addAll(nonTransitiveDependencies);
       }
+    }
+    this.isDevonProject = architectureJsonReader.isDevon4jProject();
+    if (!this.isDevonProject()) {
+      this.packageNamingPattern = getPackageNamingPattern();
+      this.nameMappings = getNameMappings();
     }
   }
 
