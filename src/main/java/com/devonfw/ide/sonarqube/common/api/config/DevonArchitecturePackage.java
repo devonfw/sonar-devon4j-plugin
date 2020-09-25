@@ -6,9 +6,9 @@ public class DevonArchitecturePackage {
 
   private Devon4jPackage devon4jPackage;
 
-  public DevonArchitecturePackage(Devon4jPackage devon4jPackage) {
+  public DevonArchitecturePackage(String packageName) {
 
-    this.devon4jPackage = devon4jPackage;
+    this.devon4jPackage = Devon4jPackage.of(packageName);
   }
 
   public int getSegmentCount() {
