@@ -4,126 +4,126 @@ import com.devonfw.module.basic.common.api.reflect.Devon4jPackage;
 
 public class DevonArchitecturePackage {
 
-    private Devon4jPackage devon4jPackage;
+  private Devon4jPackage devon4jPackage;
 
-    public DevonArchitecturePackage(Devon4jPackage devon4jPackage) {
+  public DevonArchitecturePackage(String packageName) {
 
-        this.devon4jPackage = devon4jPackage;
-    }
+    this.devon4jPackage = Devon4jPackage.of(packageName);
+  }
 
-    public int getSegmentCount() {
+  public int getSegmentCount() {
 
-        return this.devon4jPackage.getSegmentCount();
-    }
+    return this.devon4jPackage.getSegmentCount();
+  }
 
-    public String getSegment(int index) {
+  public String getSegment(int index) {
 
-        return this.devon4jPackage.getSegment(index);
-    }
+    return this.devon4jPackage.getSegment(index);
+  }
 
-    public boolean isValid() {
+  public boolean isValid() {
 
-        return this.devon4jPackage.isValid();
-    }
+    return this.devon4jPackage.isValid();
+  }
 
-    public boolean isValidScope() {
+  public boolean isValidScope() {
 
-        return this.devon4jPackage.isValidScope();
-    }
+    return this.devon4jPackage.isValidScope();
+  }
 
-    public boolean isValidLayer() {
+  public boolean isValidLayer() {
 
-        return this.devon4jPackage.isValidLayer();
-    }
+    return this.devon4jPackage.isValidLayer();
+  }
 
-    public String getRoot() {
+  public String getRoot() {
 
-        return this.devon4jPackage.getRoot();
-    }
+    return this.devon4jPackage.getRoot();
+  }
 
-    public String getApplication() {
+  public String getApplication() {
 
-        return this.devon4jPackage.getApplication();
-    }
+    return this.devon4jPackage.getApplication();
+  }
 
-    public String getComponent() {
+  public String getComponent() {
 
-        return this.devon4jPackage.getComponent();
-    }
+    return this.devon4jPackage.getComponent();
+  }
 
-    public String getLayer() {
+  public String getLayer() {
 
-        return this.devon4jPackage.getLayer();
-    }
+    return this.devon4jPackage.getLayer();
+  }
 
-    public boolean isLayerCommon() {
+  public boolean isLayerCommon() {
 
-        return this.devon4jPackage.isLayerCommon();
-    }
+    return this.devon4jPackage.isLayerCommon();
+  }
 
-    public boolean isLayerDataAccess() {
+  public boolean isLayerDataAccess() {
 
-        return this.devon4jPackage.isLayerDataAccess();
-    }
+    return this.devon4jPackage.isLayerDataAccess();
+  }
 
-    public boolean isLayerLogic() {
+  public boolean isLayerLogic() {
 
-        return this.devon4jPackage.isLayerLogic();
-    }
+    return this.devon4jPackage.isLayerLogic();
+  }
 
-    public boolean isLayerService() {
+  public boolean isLayerService() {
 
-        return this.devon4jPackage.isLayerService();
-    }
+    return this.devon4jPackage.isLayerService();
+  }
 
-    public boolean isLayerBatch() {
+  public boolean isLayerBatch() {
 
-        return this.devon4jPackage.isLayerBatch();
-    }
+    return this.devon4jPackage.isLayerBatch();
+  }
 
-    public boolean isLayerClient() {
+  public boolean isLayerClient() {
 
-        return this.devon4jPackage.isLayerClient();
-    }
+    return this.devon4jPackage.isLayerClient();
+  }
 
-    public String getScope() {
+  public String getScope() {
 
-        return this.devon4jPackage.getScope();
-    }
+    return this.devon4jPackage.getScope();
+  }
 
-    public boolean isScopeApi() {
+  public boolean isScopeApi() {
 
-        return this.devon4jPackage.isScopeApi();
-    }
+    return this.devon4jPackage.isScopeApi();
+  }
 
-    public boolean isScopeBase() {
+  public boolean isScopeBase() {
 
-        return this.devon4jPackage.isScopeBase();
-    }
+    return this.devon4jPackage.isScopeBase();
+  }
 
-    public boolean isScopeImpl() {
+  public boolean isScopeImpl() {
 
-        return this.devon4jPackage.isScopeImpl();
-    }
+    return this.devon4jPackage.isScopeImpl();
+  }
 
-    public String getDetail() {
+  public String getDetail() {
 
-        return this.devon4jPackage.getDetail();
-    }
+    return this.devon4jPackage.getDetail();
+  }
 
-    public int hashCode() {
+  public int hashCode() {
 
-        return this.devon4jPackage.hashCode();
-    }
+    return this.devon4jPackage.hashCode();
+  }
 
-    public boolean equals(Object obj) {
+  public boolean equals(Object obj) {
 
-        return this.devon4jPackage.equals(obj);
-    }
+    return this.devon4jPackage.equals(obj);
+  }
 
-    public String toString() {
+  public String toString() {
 
-        return this.devon4jPackage.toString();
-    }
+    return this.devon4jPackage.toString();
+  }
 
 }

@@ -1,13 +1,13 @@
 package com.devonfw.ide.sonarqube.common.api;
 
-import com.devonfw.module.basic.common.api.reflect.Devon4jPackage;
+import com.devonfw.ide.sonarqube.common.api.config.DevonArchitecturePackage;
 
 /**
  * Simple representation of a Java type.
  */
 public class JavaType {
 
-  private final Devon4jPackage pkg;
+  private final DevonArchitecturePackage pkg;
 
   private final String simpleName;
 
@@ -17,7 +17,7 @@ public class JavaType {
    * @param pkg
    * @param simpleName
    */
-  public JavaType(Devon4jPackage pkg, String simpleName) {
+  public JavaType(DevonArchitecturePackage pkg, String simpleName) {
 
     super();
     this.pkg = pkg;
