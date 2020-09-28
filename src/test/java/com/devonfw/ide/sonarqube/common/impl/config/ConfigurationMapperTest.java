@@ -1,13 +1,18 @@
 package com.devonfw.ide.sonarqube.common.impl.config;
 
+import java.io.File;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 
 import com.devonfw.ide.sonarqube.common.api.config.Architecture;
 import com.devonfw.ide.sonarqube.common.api.config.Component;
 import com.devonfw.ide.sonarqube.common.api.config.Configuration;
+import com.devonfw.ide.sonarqube.common.api.config.Packages;
 import com.devonfw.ide.sonarqube.common.api.config.Status;
 import com.devonfw.module.test.common.base.ModuleTest;
 
@@ -21,8 +26,7 @@ public class ConfigurationMapperTest extends ModuleTest {
       "{\"name\":\"component1\",\"dependencies\":[\"component2\"]}," + //
       "{\"name\":\"component2\",\"dependencies\":[\"component3\"],\"nonTransitiveDependencies\":[\"io.oasp.module.jpa\"]},"
       + //
-      "{\"name\":\"component3\",\"dependencies\":[]}" +
-      "]}}";
+      "{\"name\":\"component3\",\"dependencies\":[]}" + "]}}";
 
   /**
    * Test of {@link ConfigurationMapper#toJson(Configuration)}.
@@ -207,6 +211,30 @@ public class ConfigurationMapperTest extends ModuleTest {
     assertThat(status).isNotNull();
     assertThat(status.getErrors())
         .containsExactly("Component 'component1' has dependency 'component2' but no such component is defined.");
+  }
+
+  @Test
+  public void testFromJsonFileWhenPackagesIsPresent() {
+
+    // given
+    ConfigurationMapper mapper = new ConfigurationMapper();
+    File file = new File("src/test/architecture.json");
+    String expectedPattern = "([a-zA-Z0-9_]+\\.)+(persistence|core|service|gui)\\.([a-zA-Z0-9_]+)\\.(api|base|impl)(\\.[a-zA-Z0-9_]+)*";
+    List<String> expectedDetails = Arrays.asList("root", "layer", "component", "scope", "detail");
+    Map<String, String> expectedMappings = new HashMap<>();
+    expectedMappings.put("persistence", "dataaccess");
+    expectedMappings.put("core", "logic");
+    expectedMappings.put("gui", "client");
+
+    // when
+    Configuration config = mapper.fromJson(file);
+
+    // then
+    Packages packages = config.getArchitecture().getPackages();
+    assertThat(packages).isNotNull();
+    assertThat(packages.getPattern()).isEqualTo(expectedPattern);
+    assertThat(packages.getGroups()).isEqualTo(expectedDetails);
+    assertThat(packages.getMappings()).isEqualTo(expectedMappings);
   }
 
 }
