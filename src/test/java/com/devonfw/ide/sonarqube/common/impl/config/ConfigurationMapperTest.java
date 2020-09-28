@@ -26,7 +26,8 @@ public class ConfigurationMapperTest extends ModuleTest {
       "{\"name\":\"component1\",\"dependencies\":[\"component2\"]}," + //
       "{\"name\":\"component2\",\"dependencies\":[\"component3\"],\"nonTransitiveDependencies\":[\"io.oasp.module.jpa\"]},"
       + //
-      "{\"name\":\"component3\",\"dependencies\":[]}" + "]}}";
+      "{\"name\":\"component3\",\"dependencies\":[]}" + //
+      "]}}";
 
   /**
    * Test of {@link ConfigurationMapper#toJson(Configuration)}.
@@ -234,7 +235,8 @@ public class ConfigurationMapperTest extends ModuleTest {
     assertThat(packages).isNotNull();
     assertThat(packages.getPattern()).isEqualTo(expectedPattern);
     assertThat(packages.getGroups()).isEqualTo(expectedDetails);
-    assertThat(packages.getMappings()).isEqualTo(expectedMappings);
+    assertThat(packages.getMappings()).hasSize(3).containsEntry("persistence", "dataaccess")
+        .containsEntry("core", "logic").containsEntry("gui", "client");
   }
 
 }
