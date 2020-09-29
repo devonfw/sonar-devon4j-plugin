@@ -23,14 +23,14 @@ import org.sonar.plugins.java.api.tree.VariableTree;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
 import com.devonfw.ide.sonarqube.common.api.config.Component;
-import com.devonfw.module.basic.common.api.reflect.Devon4jPackage;
+import com.devonfw.ide.sonarqube.common.api.config.DevonArchitecturePackage;
 
 /**
  * Abstract base class for all SonarQube architecture checks of this plugin.
  */
 public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements JavaFileScanner {
 
-  private Devon4jPackage sourcePackage;
+  private DevonArchitecturePackage sourcePackage;
 
   private JavaType sourceType;
 
@@ -161,7 +161,7 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
 
     String pkgName = className.substring(0, lastDot);
     String simpleName = className.substring(lastDot + 1);
-    Devon4jPackage targetPkg = Devon4jPackage.of(pkgName);
+    DevonArchitecturePackage targetPkg = new DevonArchitecturePackage(pkgName);
     JavaType targetType = new JavaType(targetPkg, simpleName);
     String warning = null;
 
@@ -190,7 +190,7 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
     return (!tree.is(Tree.Kind.INFERED_TYPE) && this.sourcePackage != null && this.sourcePackage.isValid());
   }
 
-  private boolean isTargetDependencyAllowed(Devon4jPackage targetPkg) {
+  private boolean isTargetDependencyAllowed(DevonArchitecturePackage targetPkg) {
 
     boolean targetDependencyAllowed;
     String targetComponent = targetPkg.getComponent();
@@ -219,7 +219,7 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
   public void visitPackage(PackageDeclarationTree tree) {
 
     String qualifiedName = getQualifiedName(tree.packageName());
-    this.sourcePackage = Devon4jPackage.of(qualifiedName);
+    this.sourcePackage = new DevonArchitecturePackage(qualifiedName);
     this.packageLine = tree.firstToken().line();
     this.sourceType = new JavaType(this.sourcePackage, null);
     super.visitPackage(tree);
