@@ -114,7 +114,7 @@ public class SonarDevon4jPlugin implements Plugin {
     if (missingPlugins.length() != 0) {
       missingPlugins.insert(0, "Please install plugins listed below: \n\n");
     } else {
-      missingPlugins.append("All plugins installed properly");
+      missingPlugins.append("All plugins installed properly.");
     }
     return missingPlugins.toString();
   }
