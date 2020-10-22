@@ -1,0 +1,14 @@
+=== Layer Rules
+
+* L1. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/layer/DevonArchitectureLayerCommon2AnyCheck.java[DevonArchitectureLayerCommon2AnyCheck]
+* L2. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/layer/DevonArchitectureLayerAny2ClientCheck.java[DevonArchitectureLayerAny2ClientCheck]
+* L3. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/layer/DevonArchitectureLayerClient2LogicCheck.java[DevonArchitectureLayerClient2LogicCheck]
+* L4. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/layer/DevonArchitectureLayerClient2DataaccessCheck.java[DevonArchitectureLayerClient2DataaccessCheck]
+* L5. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/layer/DevonArchitectureLayerClient2BatchCheck.java[DevonArchitectureLayerClient2BatchCheck]
+* L6. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/layer/DevonArchitectureLayerService2BatchCheck.java[DevonArchitectureLayerService2BatchCheck]
+* L7. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/layer/DevonArchitectureLayerBatch2ServiceCheck.java[DevonArchitectureLayerBatch2ServiceCheck]
+* L8. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/layer/DevonArchitectureLayerService2DataaccessCheck.java[DevonArchitectureLayerService2DataaccessCheck]
+* L9. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/layer/DevonArchitectureLayerLogic2ServiceCheck.java[DevonArchitectureLayerLogic2ServiceCheck]
+* L10. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/layer/DevonArchitectureLayerDataaccess2ServiceCheck.java[DevonArchitectureLayerDataaccess2ServiceCheck]
+* L11. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/layer/DevonArchitectureLayerBatch2DataaccessCheck.java[DevonArchitectureLayerBatch2DataaccessCheck]
+* L12. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/layer/DevonArchitectureLayerDataaccess2LogicCheck.java[DevonArchitectureLayerDataaccess2LogicCheck]

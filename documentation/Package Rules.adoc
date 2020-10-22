@@ -1,0 +1,5 @@
+=== Package Rules
+
+Additionally, there is a generic rule that checks the devonfw https://github.com/devonfw/devon4j/wiki/coding-conventions#packages[packaging conventions]:
+
+* P1. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/packaging/DevonArchitecturePackageCheck.java[DevonArchitecturePackageCheck]

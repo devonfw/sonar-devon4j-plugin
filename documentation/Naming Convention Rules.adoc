@@ -1,0 +1,13 @@
+=== Naming Convention Rules
+
+With our 3.2.0 release, we added rules checking for adherence to our naming convention rules:
+
+* N1. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/naming/DevonNamingConventionClassExtendsClassCtoCheck.java[DevonNamingConventionClassExtendsClassCtoCheck]
+* N2. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/naming/DevonNamingConventionClassExtendsClassDaoCheck.java[DevonNamingConventionClassExtendsClassDaoCheck]
+* N3. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/naming/DevonNamingConventionClassExtendsClassEntityCheck.java[DevonNamingConventionClassExtendsClassEntityCheck]
+* N4. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/naming/DevonNamingConventionClassExtendsClassEtoCheck.java[DevonNamingConventionClassExtendsClassEtoCheck]
+* N5. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/naming/DevonNamingConventionClassExtendsClassImplCheck.java[DevonNamingConventionClassExtendsClassImplCheck]
+* N6. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/naming/DevonNamingConventionClassExtendsClassSearchCriteriaToCheck.java[DevonNamingConventionClassExtendsClassSearchCriteriaToCheck]
+* N7. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/naming/DevonNamingConventionClassExtendsClassToCheck.java[DevonNamingConventionClassExtendsClassToCheck]
+* N8. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/naming/DevonNamingConventionInterfaceExtendsInterfaceDaoCheck.java[DevonNamingConventionInterfaceExtendsInterfaceDaoCheck]
+* N9. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/naming/DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck.java[DevonNamingConventionInterfaceExtendsInterfaceRepositoryCheck]

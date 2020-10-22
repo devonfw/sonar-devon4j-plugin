@@ -1,0 +1,13 @@
+=== Scope Rules
+
+Further there are additional rules to check the scope:
+image:DevonScopeRules.png["Devon Architecture Rules",link=DevonScopeRules.png]
+
+* S1. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/scope/DevonArchitectureScopeApi2ImplCheck.java[DevonArchitectureScopeApi2ImplCheck]
+* S2. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/scope/DevonArchitectureScopeApi2BaseCheck.java[DevonArchitectureScopeApi2BaseCheck]
+* S3. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/scope/DevonArchitectureScopeBase2ImplCheck.java[DevonArchitectureScopeBase2ImplCheck]
+* S4. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/scope/DevonArchitectureScopeApi2Base4ComponentPartCheck.java[DevonArchitectureScopeApi2Base4ComponentPartCheck]
+* S5. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/scope/DevonArchitectureScopeBase2Impl4ComponentPartCheck.java[DevonArchitectureScopeBase2Impl4ComponentPartCheck]
+* S6. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/scope/DevonArchitectureScopeImpl2Base4ComponentPartCheck.java[DevonArchitectureScopeImpl2Base4ComponentPartCheck]
+* S7. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/scope/DevonArchitectureScopeBase2Base4ComponentPartCheck.java[DevonArchitectureScopeBase2Base4ComponentPartCheck]
+* S8. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/scope/DevonArchitectureScopeImpl2Impl4ComponentPartCheck.java[DevonArchitectureScopeImpl2Impl4ComponentPartCheck]
