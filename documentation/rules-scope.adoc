@@ -1,7 +1,7 @@
 === Scope Rules
 
 Further there are additional rules to check the scope:
-image:DevonScopeRules.png["Devon Architecture Rules",link=DevonScopeRules.png]
+image:DevonScopeRules.png["Devon Architecture Rules",link=images/DevonScopeRules.png]
 
 * S1. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/scope/DevonArchitectureScopeApi2ImplCheck.java[DevonArchitectureScopeApi2ImplCheck]
 * S2. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/scope/DevonArchitectureScopeApi2BaseCheck.java[DevonArchitectureScopeApi2BaseCheck]
