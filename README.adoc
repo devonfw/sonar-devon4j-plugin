@@ -9,7 +9,7 @@ Plugin for https://sonarqube.org[SonarQube] to validate https://github.com/devon
 == Documentation
 
 * link:documentation/motivation.adoc[Motivation]
-* link:documentation/installation.adoc[Installation
+* link:documentation/installation.adoc[Installation]
 * link:documentation/configuration.adoc[Configuration]
 * link:documentation/motivation.adoc[Motivation]
 * link:documentation/qualityprofile.adoc[devonfw Java Quality Profile]
