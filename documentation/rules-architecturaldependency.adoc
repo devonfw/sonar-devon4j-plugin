@@ -1,4 +1,4 @@
-== Architecture Rules
+== Architectural Dependency Rules
 
 The following image illustrates the devonfw architecture rules. The arrows show the allowed dependencies in green, discouraged dependencies in orange and forbidden dependencies in red.
 image:DevonArchitectureRules.png["Devon Architecture Rules",link=images/DevonArchitectureRules.png]
