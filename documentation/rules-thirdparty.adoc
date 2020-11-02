@@ -1,4 +1,4 @@
-=== 3rd Party Rules
+== 3rd Party Rules
 
 Finally, there are rules checking the proper usage of third-party library code:
 

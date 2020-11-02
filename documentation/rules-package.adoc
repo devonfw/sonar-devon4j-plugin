@@ -1,4 +1,4 @@
-=== Package Rules
+== Package Rules
 
 Additionally, there is a generic rule that checks the devonfw https://github.com/devonfw/devon4j/wiki/coding-conventions#packages[packaging conventions]:
 

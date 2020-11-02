@@ -1,4 +1,4 @@
-=== Naming Convention Rules
+== Naming Convention Rules
 
 With our 3.2.0 release, we added rules checking for adherence to our naming convention rules:
 
