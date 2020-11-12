@@ -8080,7 +8080,7 @@
         <repositoryKey>java</repositoryKey>
         <key>S121</key>
         <type>CODE_SMELL</type>
-        <priority>MINOR</priority>
+        <priority>CRITICAL</priority>
         <parameters/>
     </rule>
     <rule>
