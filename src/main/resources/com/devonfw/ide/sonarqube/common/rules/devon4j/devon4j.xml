@@ -8779,13 +8779,6 @@
     </rule>
     <rule>
         <repositoryKey>java</repositoryKey>
-        <key>S2063</key>
-        <type>CODE_SMELL</type>
-        <priority>CRITICAL</priority>
-        <parameters/>
-    </rule>
-    <rule>
-        <repositoryKey>java</repositoryKey>
         <key>S2065</key>
         <type>CODE_SMELL</type>
         <priority>MINOR</priority>
@@ -9668,7 +9661,7 @@
         <repositoryKey>java</repositoryKey>
         <key>S2699</key>
         <type>CODE_SMELL</type>
-        <priority>BLOCKER</priority>
+        <priority>INFO</priority>
         <parameters/>
     </rule>
     <rule>
