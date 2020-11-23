@@ -13,13 +13,6 @@ Plugin for https://sonarqube.org[SonarQube] to validate https://github.com/devon
 * link:documentation/configuration.adoc[Configuration]
 * link:documentation/qualityprofile.adoc[devonfw Java Quality Profile]
 
-== Architecture Rules
+== Rules
 
-* link:documentation/rules-architecturaldependency.adoc[Architectural Dependency Rules]
-** link:documentation/rules-layer.adoc[Layer Rules]
-** link:documentation/rules-component.adoc[Component Rules]
-** link:documentation/rules-scope.adoc[Scope Rules]
-* link:documentation/rules-package.adoc[Package Rules]
-* link:documentation/rules-thirdparty.adoc[3rd Party Rules]
-* link:documentation/rules-namingconvention.adoc[Naming Convention Rules]
-* link:documentation/rules-security.adoc[Security Rules]
+* link:documentation/rules.adoc[Architecture Rules]

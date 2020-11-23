@@ -1,4 +1,0 @@
-== Security Rules
-As of version 3.2.1, we have started adding security-related rules to our plugin:
-
-* Y1. https://github.com/devonfw/sonar-devon4j-plugin/blob/master/src/main/java/com/devonfw/ide/sonarqube/common/impl/check/security/DevonUcImplSecurityConstraintCheck.java[DevonUcImplSecurityConstraintCheck]

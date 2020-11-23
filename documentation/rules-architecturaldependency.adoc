@@ -1,6 +1,0 @@
-== Architectural Dependency Rules
-
-The following image illustrates the devonfw architecture rules. The arrows show the allowed dependencies in green, discouraged dependencies in orange and forbidden dependencies in red.
-image:DevonArchitectureRules.png["Devon Architecture Rules",link=images/DevonArchitectureRules.png]
-
-Within the same component you are always allowed to call code from the same layer and scope as well as the API from the next layer below. Discouraged and forbidden dependencies are always implemented by its own SonarQube rule. This gives you absolute flexibility to customize the severity of such architecture violation. These dependencies have a white circle with a unique label. For each label we link the according rule to give you transparency and help you customizing.
