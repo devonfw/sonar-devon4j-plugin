@@ -1,5 +1,6 @@
 package com.devonfw.ide.sonarqube.common.impl.check;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,8 +23,11 @@ import org.sonar.plugins.java.api.tree.TypeTree;
 import org.sonar.plugins.java.api.tree.VariableTree;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
+import com.devonfw.ide.sonarqube.common.api.config.Architecture;
 import com.devonfw.ide.sonarqube.common.api.config.Component;
 import com.devonfw.ide.sonarqube.common.api.config.DevonArchitecturePackage;
+import com.devonfw.ide.sonarqube.common.api.config.Packages;
+import com.devonfw.ide.sonarqube.common.impl.config.ConfigurationFactory;
 
 /**
  * Abstract base class for all SonarQube architecture checks of this plugin.
@@ -40,6 +44,8 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
 
   private List<ImportTree> imports;
 
+  private Packages packages;
+
   private static final Logger logger = Logger.getGlobal();
 
   /**
@@ -48,6 +54,7 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
   public DevonArchitectureCheck() {
 
     super();
+    this.packages = Architecture.getPackages(ConfigurationFactory.get(getFileToScan()).getArchitecture());
     this.imports = new ArrayList<>();
   }
 
@@ -161,7 +168,7 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
 
     String pkgName = className.substring(0, lastDot);
     String simpleName = className.substring(lastDot + 1);
-    DevonArchitecturePackage targetPkg = new DevonArchitecturePackage(pkgName);
+    DevonArchitecturePackage targetPkg = new DevonArchitecturePackage(pkgName, this.packages);
     JavaType targetType = new JavaType(targetPkg, simpleName);
     String warning = null;
 
@@ -219,7 +226,7 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
   public void visitPackage(PackageDeclarationTree tree) {
 
     String qualifiedName = getQualifiedName(tree.packageName());
-    this.sourcePackage = new DevonArchitecturePackage(qualifiedName);
+    this.sourcePackage = new DevonArchitecturePackage(qualifiedName, this.packages);
     this.packageLine = tree.firstToken().line();
     this.sourceType = new JavaType(this.sourcePackage, null);
     super.visitPackage(tree);
@@ -255,6 +262,16 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
     }
 
     return null;
+  }
+
+  /**
+   * Creates a new {@link File} out of the currently analyzed file.
+   *
+   * @return {@link File} of the file to scan
+   */
+  protected File getFileToScan() {
+
+    return new File(this.context.getInputFile().toString());
   }
 
   /**

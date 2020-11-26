@@ -1,129 +1,127 @@
 package com.devonfw.ide.sonarqube.common.api.config;
 
-import com.devonfw.module.basic.common.api.reflect.Devon4jPackage;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DevonArchitecturePackage {
 
-  private Devon4jPackage devon4jPackage;
+  // private Devon4jPackage devon4jPackage;
 
-  public DevonArchitecturePackage(String packageName) {
+  private String packageName;
 
-    this.devon4jPackage = Devon4jPackage.of(packageName);
+  private Packages packages;
+
+  private Pattern pattern;
+
+  private Matcher matcher;
+
+  private Map<String, String> groupValues;
+
+  private Logger logger = Logger.getLogger("logger");
+
+  public DevonArchitecturePackage(String packageName, Packages packages) {
+
+    this.packages = packages;
+    this.packageName = packageName;
+    this.groupValues = new HashMap<>();
+    this.pattern = Pattern.compile(this.packages.getPattern());
+    this.logger.log(Level.INFO, this.pattern.toString());
+    this.matcher = this.pattern.matcher(this.packageName);
+    this.logger.log(Level.INFO, "Group of this packageName: " + this.matcher.group(2));
+    // this.devon4jPackage = Devon4jPackage.of(packageName);
   }
 
-  public int getSegmentCount() {
+  private void setGroupValues() {
 
-    return this.devon4jPackage.getSegmentCount();
-  }
-
-  public String getSegment(int index) {
-
-    return this.devon4jPackage.getSegment(index);
   }
 
   public boolean isValid() {
 
-    return this.devon4jPackage.isValid();
-  }
-
-  public boolean isValidScope() {
-
-    return this.devon4jPackage.isValidScope();
+    return false;
   }
 
   public boolean isValidLayer() {
 
-    return this.devon4jPackage.isValidLayer();
+    return false;
   }
 
-  public String getRoot() {
+  public boolean isValidScope() {
 
-    return this.devon4jPackage.getRoot();
-  }
-
-  public String getApplication() {
-
-    return this.devon4jPackage.getApplication();
-  }
-
-  public String getComponent() {
-
-    return this.devon4jPackage.getComponent();
-  }
-
-  public String getLayer() {
-
-    return this.devon4jPackage.getLayer();
-  }
-
-  public boolean isLayerCommon() {
-
-    return this.devon4jPackage.isLayerCommon();
-  }
-
-  public boolean isLayerDataAccess() {
-
-    return this.devon4jPackage.isLayerDataAccess();
-  }
-
-  public boolean isLayerLogic() {
-
-    return this.devon4jPackage.isLayerLogic();
-  }
-
-  public boolean isLayerService() {
-
-    return this.devon4jPackage.isLayerService();
+    return false;
   }
 
   public boolean isLayerBatch() {
 
-    return this.devon4jPackage.isLayerBatch();
+    return false;
   }
 
   public boolean isLayerClient() {
 
-    return this.devon4jPackage.isLayerClient();
+    return false;
   }
 
-  public String getScope() {
+  public boolean isLayerCommon() {
 
-    return this.devon4jPackage.getScope();
+    return false;
+  }
+
+  public boolean isLayerDataAccess() {
+
+    return false;
+  }
+
+  public boolean isLayerLogic() {
+
+    return false;
+  }
+
+  public boolean isLayerService() {
+
+    return false;
   }
 
   public boolean isScopeApi() {
 
-    return this.devon4jPackage.isScopeApi();
+    return false;
   }
 
   public boolean isScopeBase() {
 
-    return this.devon4jPackage.isScopeBase();
+    return false;
   }
 
   public boolean isScopeImpl() {
 
-    return this.devon4jPackage.isScopeImpl();
+    return false;
   }
 
-  public String getDetail() {
+  public String getApplication() {
 
-    return this.devon4jPackage.getDetail();
+    return null;
   }
 
-  public int hashCode() {
+  public String getComponent() {
 
-    return this.devon4jPackage.hashCode();
+    return null;
   }
 
-  public boolean equals(Object obj) {
+  public String getLayer() {
 
-    return this.devon4jPackage.equals(obj);
+    return null;
   }
 
-  public String toString() {
+  public String getRoot() {
 
-    return this.devon4jPackage.toString();
+    return null;
+  }
+
+  public String getScope() {
+
+    return null;
   }
 
 }

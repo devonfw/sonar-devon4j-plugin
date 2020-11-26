@@ -1,7 +1,5 @@
 package com.devonfw.ide.sonarqube.common.impl.check;
 
-import java.io.File;
-
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.ClassTree;
 
@@ -21,8 +19,7 @@ public abstract class DevonArchitectureComponentCheck extends DevonArchitectureC
   @Override
   public void doScanFile(ClassTree tree, JavaFileScannerContext context) {
 
-    File fileToScan = new File(context.getInputFile().toString());
-    this.configuration = ConfigurationFactory.get(fileToScan);
+    this.configuration = ConfigurationFactory.get(getFileToScan());
     if (this.configuration == null) {
       this.configuration = new Configuration();
     }
