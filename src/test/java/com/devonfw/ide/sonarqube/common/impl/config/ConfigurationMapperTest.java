@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.junit.Test;
@@ -232,8 +231,6 @@ public class ConfigurationMapperTest extends ModuleTest {
 
     // then
     Packages packages = config.getArchitecture().getPackages();
-    logger.log(Level.INFO, "Pattern: " + packages.getPattern());
-    logger.log(Level.INFO, "Groups: " + packages.getGroups());
     assertThat(packages).isNotNull();
     assertThat(packages.getPattern()).isEqualTo(expectedPattern);
     assertThat(packages.getGroups()).isEqualTo(expectedDetails);

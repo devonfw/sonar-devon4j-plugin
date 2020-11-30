@@ -1,7 +1,6 @@
 package com.devonfw.ide.sonarqube.common.impl.check;
 
 import java.io.File;
-import java.util.logging.Logger;
 
 import org.junit.Test;
 
@@ -17,17 +16,22 @@ import com.devonfw.module.test.common.base.ModuleTest;
  */
 public class DevonArchitecturePackageTest extends ModuleTest {
 
+  /**
+   * Tests construction of {@link DevonArchitecturePackage} and the use of its methods
+   */
   @Test
   public void test() {
 
-    Logger logger = Logger.getLogger("logger");
-
-    // given
     ConfigurationMapper mapper = new ConfigurationMapper();
     File file = new File("src/test/architecture.json");
     Configuration config = mapper.fromJson(file);
-    DevonArchitecturePackage pkg = new DevonArchitecturePackage("root",
+    DevonArchitecturePackage pkg = new DevonArchitecturePackage(
+        "com.devonfw.firstGroup.test.persistence.testComponent.impl.TestClass",
         Architecture.getPackages(config.getArchitecture()));
+
+    assertThat(pkg.getLayer()).isEqualTo("dataaccess");
+    assertThat(pkg.getScope()).isEqualTo("impl");
+    assertThat(pkg.getApplication()).isEqualTo(".TestClass");
   }
 
 }
