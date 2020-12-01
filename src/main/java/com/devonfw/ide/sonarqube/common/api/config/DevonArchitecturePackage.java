@@ -2,7 +2,7 @@ package com.devonfw.ide.sonarqube.common.api.config;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -32,10 +32,9 @@ public class DevonArchitecturePackage {
   public DevonArchitecturePackage(String packageName, Packages packages) {
 
     this.packages = packages;
-    this.packages.setPattern(replaceMappings(packages.getPattern()));
     this.pattern = Pattern.compile(this.packages.getPattern());
     setPatternGroups();
-    this.matcher = this.pattern.matcher(replaceMappings(packageName));
+    this.matcher = this.pattern.matcher(packageName);
 
     if (!isValid()) {
       logger.log(Level.WARNING,
@@ -61,52 +60,52 @@ public class DevonArchitecturePackage {
 
   public boolean isLayerBatch() {
 
-    return this.matcher.group(2).matches("batch");
+    return replaceLayerOrScope(this.matcher.group(2)).matches("batch");
   }
 
   public boolean isLayerClient() {
 
-    return this.matcher.group(2).matches("client");
+    return replaceLayerOrScope(this.matcher.group(2)).matches("client");
   }
 
   public boolean isLayerCommon() {
 
-    return this.matcher.group(2).matches("common");
+    return replaceLayerOrScope(this.matcher.group(2)).matches("common");
   }
 
   public boolean isLayerDataAccess() {
 
-    return this.matcher.group(2).matches("dataaccess");
+    return replaceLayerOrScope(this.matcher.group(2)).matches("dataaccess");
   }
 
   public boolean isLayerLogic() {
 
-    return this.matcher.group(2).matches("logic");
+    return replaceLayerOrScope(this.matcher.group(2)).matches("logic");
   }
 
   public boolean isLayerService() {
 
-    return this.matcher.group(2).matches("service");
+    return replaceLayerOrScope(this.matcher.group(2)).matches("service");
   }
 
   public boolean isScopeApi() {
 
-    return this.matcher.group(4).matches("api");
+    return replaceLayerOrScope(this.matcher.group(4)).matches("api");
   }
 
   public boolean isScopeBase() {
 
-    return this.matcher.group(4).matches("base");
+    return replaceLayerOrScope(this.matcher.group(4)).matches("base");
   }
 
   public boolean isScopeImpl() {
 
-    return this.matcher.group(4).matches("impl");
+    return replaceLayerOrScope(this.matcher.group(4)).matches("impl");
   }
 
   public String getApplication() {
 
-    return this.matcher.group(5);
+    return this.matcher.group(0).substring(this.matcher.start(5) + 1, this.matcher.end(5));
   }
 
   public String getComponent() {
@@ -121,12 +120,19 @@ public class DevonArchitecturePackage {
 
   public String getRoot() {
 
-    return this.matcher.group(1);
+    return this.matcher.group(0).substring(0, this.matcher.end(1) - 1);
   }
 
   public String getScope() {
 
     return this.matcher.group(4);
+  }
+
+  private void setPatternGroups() {
+
+    List<String> patternGroups = getPatternGroups(this.packages.getPattern());
+    this.layerPattern = Pattern.compile(patternGroups.get(1));
+    this.scopePattern = Pattern.compile(patternGroups.get(3));
   }
 
   private List<String> getPatternGroups(String stringPattern) {
@@ -139,20 +145,9 @@ public class DevonArchitecturePackage {
     return patternGroups;
   }
 
-  private void setPatternGroups() {
+  private String replaceLayerOrScope(String layerOrScope) {
 
-    List<String> patternGroups = getPatternGroups(this.packages.getPattern());
-    this.layerPattern = Pattern.compile(patternGroups.get(1));
-    this.scopePattern = Pattern.compile(patternGroups.get(3));
-  }
-
-  private String replaceMappings(String packageName) {
-
-    Map<String, String> mappings = this.packages.getMappings();
-    for (String key : mappings.keySet()) {
-      packageName = packageName.replace(key, mappings.get(key));
-    }
-    return packageName;
+    return Optional.ofNullable(this.packages.getMappings().get(layerOrScope)).orElse(layerOrScope);
   }
 
 }

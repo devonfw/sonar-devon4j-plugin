@@ -29,9 +29,25 @@ public class DevonArchitecturePackageTest extends ModuleTest {
         "com.devonfw.firstGroup.test.persistence.testComponent.impl.TestClass",
         Architecture.getPackages(config.getArchitecture()));
 
-    assertThat(pkg.getLayer()).isEqualTo("dataaccess");
+    assertThat(pkg.isValidLayer()).isTrue();
+    assertThat(pkg.isValidScope()).isTrue();
+
+    assertThat(pkg.isLayerBatch()).isFalse();
+    assertThat(pkg.isLayerClient()).isFalse();
+    assertThat(pkg.isLayerCommon()).isFalse();
+    assertThat(pkg.isLayerDataAccess()).isTrue();
+    assertThat(pkg.isLayerLogic()).isFalse();
+    assertThat(pkg.isLayerService()).isFalse();
+
+    assertThat(pkg.isScopeApi()).isFalse();
+    assertThat(pkg.isScopeBase()).isFalse();
+    assertThat(pkg.isScopeImpl()).isTrue();
+
+    assertThat(pkg.getApplication()).isEqualTo("TestClass");
+    assertThat(pkg.getComponent()).isEqualTo("testComponent");
+    assertThat(pkg.getLayer()).isEqualTo("persistence");
+    assertThat(pkg.getRoot()).isEqualTo("com.devonfw.firstGroup.test");
     assertThat(pkg.getScope()).isEqualTo("impl");
-    assertThat(pkg.getApplication()).isEqualTo(".TestClass");
   }
 
 }
