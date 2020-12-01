@@ -54,7 +54,6 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
   public DevonArchitectureCheck() {
 
     super();
-    this.packages = Architecture.getPackages(ConfigurationFactory.get(getFileToScan()).getArchitecture());
     this.imports = new ArrayList<>();
   }
 
@@ -72,6 +71,7 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
 
     this.imports.clear();
     this.context = fileContext;
+    this.packages = Architecture.getPackages(ConfigurationFactory.get(getFileToScan()).getArchitecture());
 
     ClassTree tree = getClassTree(this.context);
 

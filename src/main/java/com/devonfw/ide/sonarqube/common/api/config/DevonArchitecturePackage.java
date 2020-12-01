@@ -1,6 +1,6 @@
 package com.devonfw.ide.sonarqube.common.api.config;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -14,13 +14,24 @@ public class DevonArchitecturePackage {
 
   private Pattern pattern;
 
-  private Pattern layerPattern;
-
-  private Pattern scopePattern;
-
   private Matcher matcher;
 
+  private String root;
+
+  private String layer;
+
+  private String component;
+
+  private String scope;
+
+  private String detail;
+
   private static final Logger logger = Logger.getLogger("logger");
+
+  private static final List<String> LAYERS = Arrays.asList("batch", "client", "common", "dataaccess", "logic",
+      "service");
+
+  private static final List<String> SCOPES = Arrays.asList("api", "base", "impl");
 
   /**
    *
@@ -33,14 +44,8 @@ public class DevonArchitecturePackage {
 
     this.packages = packages;
     this.pattern = Pattern.compile(this.packages.getPattern());
-    setPatternGroups();
     this.matcher = this.pattern.matcher(packageName);
-
-    if (!isValid()) {
-      logger.log(Level.WARNING,
-          "The package '" + packageName + "' does not follow the pattern you entered in your architecture.json.");
-      return;
-    }
+    setGroups(packageName);
   }
 
   public boolean isValid() {
@@ -50,99 +55,124 @@ public class DevonArchitecturePackage {
 
   public boolean isValidLayer() {
 
-    return this.layerPattern.matcher(this.matcher.group(2)).matches();
+    return LAYERS.contains(replaceLayerOrScope(this.layer));
   }
 
   public boolean isValidScope() {
 
-    return this.scopePattern.matcher(this.matcher.group(4)).matches();
+    return SCOPES.contains(replaceLayerOrScope(this.scope));
   }
 
   public boolean isLayerBatch() {
 
-    return replaceLayerOrScope(this.matcher.group(2)).matches("batch");
+    return replaceLayerOrScope(this.layer).matches("batch");
   }
 
   public boolean isLayerClient() {
 
-    return replaceLayerOrScope(this.matcher.group(2)).matches("client");
+    return replaceLayerOrScope(this.layer).matches("client");
   }
 
   public boolean isLayerCommon() {
 
-    return replaceLayerOrScope(this.matcher.group(2)).matches("common");
+    return replaceLayerOrScope(this.layer).matches("common");
   }
 
   public boolean isLayerDataAccess() {
 
-    return replaceLayerOrScope(this.matcher.group(2)).matches("dataaccess");
+    return replaceLayerOrScope(this.layer).matches("dataaccess");
   }
 
   public boolean isLayerLogic() {
 
-    return replaceLayerOrScope(this.matcher.group(2)).matches("logic");
+    return replaceLayerOrScope(this.layer).matches("logic");
   }
 
   public boolean isLayerService() {
 
-    return replaceLayerOrScope(this.matcher.group(2)).matches("service");
+    return replaceLayerOrScope(this.layer).matches("service");
   }
 
   public boolean isScopeApi() {
 
-    return replaceLayerOrScope(this.matcher.group(4)).matches("api");
+    return replaceLayerOrScope(this.scope).matches("api");
   }
 
   public boolean isScopeBase() {
 
-    return replaceLayerOrScope(this.matcher.group(4)).matches("base");
+    return replaceLayerOrScope(this.scope).matches("base");
   }
 
   public boolean isScopeImpl() {
 
-    return replaceLayerOrScope(this.matcher.group(4)).matches("impl");
+    return replaceLayerOrScope(this.scope).matches("impl");
   }
 
   public String getApplication() {
 
-    return this.matcher.group(0).substring(this.matcher.start(5) + 1, this.matcher.end(5));
+    return this.detail;
   }
 
   public String getComponent() {
 
-    return this.matcher.group(3);
+    return this.component;
   }
 
   public String getLayer() {
 
-    return this.matcher.group(2);
+    return this.layer;
   }
 
   public String getRoot() {
 
-    return this.matcher.group(0).substring(0, this.matcher.end(1) - 1);
+    return this.root;
   }
 
   public String getScope() {
 
-    return this.matcher.group(4);
+    return this.scope;
   }
 
-  private void setPatternGroups() {
+  private void setGroups(String packageName) {
 
-    List<String> patternGroups = getPatternGroups(this.packages.getPattern());
-    this.layerPattern = Pattern.compile(patternGroups.get(1));
-    this.scopePattern = Pattern.compile(patternGroups.get(3));
-  }
+    int i = 1;
+    if (isValid()) {
 
-  private List<String> getPatternGroups(String stringPattern) {
-
-    List<String> patternGroups = new ArrayList<>();
-    Matcher m = Pattern.compile("\\((.*?)\\)").matcher(stringPattern);
-    while (m.find()) {
-      patternGroups.add(m.group(1));
+      int groupCount = this.matcher.groupCount();
+      for (String group : this.packages.getGroups()) {
+        if (i > groupCount) {
+          logger.log(Level.WARNING,
+              "The package '" + packageName + "' contains more groups than declared in your architecture.json.");
+          break;
+        }
+        String value = this.matcher.group(i);
+        switch (group) {
+          case "root":
+            this.root = value;
+            break;
+          case "layer":
+            this.layer = value;
+            break;
+          case "component":
+            this.component = value;
+            break;
+          case "scope":
+            this.scope = value;
+            break;
+          case "detail":
+            this.detail = value;
+            break;
+          case "-":
+            break;
+          default:
+            logger.log(Level.WARNING, "The group '" + group + "' is unknown.");
+        }
+        i++;
+      }
+    } else {
+      logger.log(Level.WARNING,
+          "The package '" + packageName + "' does not follow the pattern you entered in your architecture.json.");
     }
-    return patternGroups;
   }
 
   private String replaceLayerOrScope(String layerOrScope) {

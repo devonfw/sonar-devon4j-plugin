@@ -43,10 +43,10 @@ public class DevonArchitecturePackageTest extends ModuleTest {
     assertThat(pkg.isScopeBase()).isFalse();
     assertThat(pkg.isScopeImpl()).isTrue();
 
-    assertThat(pkg.getApplication()).isEqualTo("TestClass");
+    assertThat(pkg.getApplication()).isEqualTo(".TestClass");
     assertThat(pkg.getComponent()).isEqualTo("testComponent");
     assertThat(pkg.getLayer()).isEqualTo("persistence");
-    assertThat(pkg.getRoot()).isEqualTo("com.devonfw.firstGroup.test");
+    assertThat(pkg.getRoot()).isEqualTo("test.");
     assertThat(pkg.getScope()).isEqualTo("impl");
   }
 
