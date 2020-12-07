@@ -77,7 +77,7 @@ public class Architecture {
    */
   public Packages getPackages() {
 
-    return packages;
+    return this.packages;
   }
 
   /**

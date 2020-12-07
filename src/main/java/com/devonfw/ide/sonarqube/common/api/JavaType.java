@@ -34,7 +34,7 @@ public class JavaType {
 
   public String getPackage() {
 
-    return this.pkg.toString();
+    return this.pkg.getPackage();
   }
 
   public String getRoot() {
@@ -125,13 +125,13 @@ public class JavaType {
   @Override
   public String toString() {
 
-    String pkgName = this.pkg.toString();
+    String pkgName = this.pkg.getPackage();
     if (this.simpleName == null) {
       return pkgName;
     } else if (pkgName.isEmpty()) {
       return this.simpleName;
     } else {
-      return pkgName + "." + this.simpleName;
+      return DevonArchitecturePackage.joinSegments(pkgName, this.simpleName);
     }
   }
 

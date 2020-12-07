@@ -25,6 +25,7 @@ import org.sonar.plugins.java.api.tree.VariableTree;
 import com.devonfw.ide.sonarqube.common.api.JavaType;
 import com.devonfw.ide.sonarqube.common.api.config.Architecture;
 import com.devonfw.ide.sonarqube.common.api.config.Component;
+import com.devonfw.ide.sonarqube.common.api.config.Configuration;
 import com.devonfw.ide.sonarqube.common.api.config.DevonArchitecturePackage;
 import com.devonfw.ide.sonarqube.common.api.config.Packages;
 import com.devonfw.ide.sonarqube.common.impl.config.ConfigurationFactory;
@@ -46,6 +47,8 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
 
   private Packages packages;
 
+  private Configuration configuration;
+
   private static final Logger logger = Logger.getGlobal();
 
   /**
@@ -66,13 +69,26 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
    */
   protected abstract String checkDependency(JavaType source, JavaType target);
 
+  /**
+   * Called from {@link #scanFile(JavaFileScannerContext)} after the {@link Configuration} has been set.
+   *
+   * @param context the {@link JavaFileScannerContext}.
+   */
+  protected void onConfigurationSet(JavaFileScannerContext context) {
+
+  }
+
   @Override
   public final void scanFile(JavaFileScannerContext fileContext) {
 
     this.imports.clear();
     this.context = fileContext;
-    this.packages = Architecture.getPackages(ConfigurationFactory.get(getFileToScan()).getArchitecture());
-
+    this.configuration = ConfigurationFactory.get(getFileToScan());
+    if (this.configuration == null) {
+      this.configuration = new Configuration();
+    }
+    this.packages = Architecture.getPackages(this.configuration.getArchitecture());
+    onConfigurationSet(this.context);
     ClassTree tree = getClassTree(this.context);
 
     if (tree == null) {
@@ -309,6 +325,14 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
     }
 
     return false;
+  }
+
+  /**
+   * @return the {@link Configuration} for the current project.
+   */
+  protected Configuration getConfiguration() {
+
+    return this.configuration;
   }
 
   /**

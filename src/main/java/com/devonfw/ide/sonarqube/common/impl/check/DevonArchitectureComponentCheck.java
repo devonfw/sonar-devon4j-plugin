@@ -5,8 +5,7 @@ import org.sonar.plugins.java.api.tree.ClassTree;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
 import com.devonfw.ide.sonarqube.common.api.config.Component;
-import com.devonfw.ide.sonarqube.common.api.config.Configuration;
-import com.devonfw.ide.sonarqube.common.impl.config.ConfigurationFactory;
+import com.devonfw.ide.sonarqube.common.api.config.DevonArchitecturePackage;
 
 /**
  * Abstract base class for a {@link DevonArchitectureCheck} that checks the business architecture (validates the
@@ -14,33 +13,9 @@ import com.devonfw.ide.sonarqube.common.impl.config.ConfigurationFactory;
  */
 public abstract class DevonArchitectureComponentCheck extends DevonArchitectureCheck {
 
-  private Configuration configuration;
-
   @Override
   public void doScanFile(ClassTree tree, JavaFileScannerContext context) {
 
-    this.configuration = ConfigurationFactory.get(getFileToScan());
-    if (this.configuration == null) {
-      this.configuration = new Configuration();
-    }
-    onConfigurationSet(context);
-  }
-
-  /**
-   * Called from {@link #scanFile(JavaFileScannerContext)} after the {@link Configuration} has been set.
-   *
-   * @param context the {@link JavaFileScannerContext}.
-   */
-  protected void onConfigurationSet(JavaFileScannerContext context) {
-
-  }
-
-  /**
-   * @return the {@link Configuration} for the current project.
-   */
-  protected Configuration getConfiguration() {
-
-    return this.configuration;
   }
 
   /**
@@ -72,8 +47,8 @@ public abstract class DevonArchitectureComponentCheck extends DevonArchitectureC
       targetDependencyAllowed = sourceComponent.hasDependency(targetName);
     } else {
       String targetRoot = target.getRoot();
-      String targetRootApp = targetRoot + "." + target.getApplication();
-      targetName = targetRootApp + "." + targetComponentName;
+      String targetRootApp = DevonArchitecturePackage.joinSegments(targetRoot, target.getApplication());
+      targetName = DevonArchitecturePackage.joinSegments(targetRootApp, targetComponentName);
       targetDependencyAllowed = sourceComponent.hasDependency(targetRoot); // allow full access to (external) root?
       if (!targetDependencyAllowed) {
         targetDependencyAllowed = sourceComponent.hasDependency(targetRootApp); // allow full access to external app?

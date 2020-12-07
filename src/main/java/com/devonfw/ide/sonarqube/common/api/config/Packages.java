@@ -16,10 +16,9 @@ public class Packages {
 
   private List<String> groups;
 
-  private static final String DEFAULT_PATTERN =
-      "([a-zA-Z0-9_]+\\.)+(dataaccess|service|batch|gui|client)\\.([a-zA-Z0-9_]+)\\.(api|base|impl)(\\.[a-zA-Z0-9_]+)*";
+  private static final String DEFAULT_PATTERN = "([a-zA-Z0-9_]+)\\.([a-zA-Z0-9_]+)\\.(dataaccess|service|batch|logic|client|gui|common)\\.(api|base|impl)(\\.[a-zA-Z0-9_]+)*";
 
-  private static final List<String> defaultGroups = Arrays.asList("root", "application", "component", "layer", "scope",
+  private static final List<String> defaultGroups = Arrays.asList("application", "component", "layer", "scope",
       "detail");
 
   /**
@@ -48,7 +47,10 @@ public class Packages {
    */
   public static Packages getDefault() {
 
-    return new Packages(DEFAULT_PATTERN, new HashMap<>(), defaultGroups);
+    Map<String, String> defaultMappings = new HashMap<>();
+    defaultMappings.put("gui", "client");
+
+    return new Packages(DEFAULT_PATTERN, defaultMappings, defaultGroups);
   }
 
   /**

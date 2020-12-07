@@ -16,15 +16,21 @@ public class DevonArchitecturePackage {
 
   private Matcher matcher;
 
-  private String root;
+  private String root = "";
 
-  private String layer;
+  private String application;
 
-  private String component;
+  private String component = "";
 
-  private String scope;
+  private String layer = "";
 
-  private String detail;
+  private String scope = "";
+
+  private String detail = "";
+
+  private String packageName;
+
+  private boolean valid;
 
   private static final Logger logger = Logger.getLogger("logger");
 
@@ -45,72 +51,68 @@ public class DevonArchitecturePackage {
     this.packages = packages;
     this.pattern = Pattern.compile(this.packages.getPattern());
     this.matcher = this.pattern.matcher(packageName);
+    this.packageName = packageName;
     setGroups(packageName);
   }
 
   public boolean isValid() {
 
-    return this.matcher.matches();
+    return this.valid;
   }
 
   public boolean isValidLayer() {
 
-    return LAYERS.contains(replaceLayerOrScope(this.layer));
+    return LAYERS.contains((this.layer));
   }
 
   public boolean isValidScope() {
 
-    return SCOPES.contains(replaceLayerOrScope(this.scope));
+    return SCOPES.contains(this.scope);
   }
 
   public boolean isLayerBatch() {
 
-    return replaceLayerOrScope(this.layer).matches("batch");
+    return "batch".equals(this.layer);
   }
 
   public boolean isLayerClient() {
 
-    return replaceLayerOrScope(this.layer).matches("client");
+    return "client".equals(this.layer);
   }
 
   public boolean isLayerCommon() {
 
-    return replaceLayerOrScope(this.layer).matches("common");
+    return "common".equals(this.layer);
   }
 
   public boolean isLayerDataAccess() {
 
-    return replaceLayerOrScope(this.layer).matches("dataaccess");
+    return "dataaccess".equals(this.layer);
   }
 
   public boolean isLayerLogic() {
 
-    return replaceLayerOrScope(this.layer).matches("logic");
+    return "logic".equals(this.layer);
   }
 
   public boolean isLayerService() {
 
-    return replaceLayerOrScope(this.layer).matches("service");
+    return "service".equals(this.layer);
   }
 
   public boolean isScopeApi() {
 
-    return replaceLayerOrScope(this.scope).matches("api");
+    return "api".equals(this.scope);
   }
 
   public boolean isScopeBase() {
 
-    return replaceLayerOrScope(this.scope).matches("base");
+    return "base".equals(this.scope);
   }
 
   public boolean isScopeImpl() {
 
-    return replaceLayerOrScope(this.scope).matches("impl");
-  }
-
-  public String getApplication() {
-
-    return this.detail;
+    return "impl".equals(this.scope);
   }
 
   public String getComponent() {
@@ -133,46 +135,92 @@ public class DevonArchitecturePackage {
     return this.scope;
   }
 
+  public String getPackage() {
+
+    return this.packageName;
+  }
+
+  public String getApplication() {
+
+    if (this.application == null) {
+      int lastIndexOfRoot = this.root.lastIndexOf(".");
+      if (lastIndexOfRoot > 0) {
+        this.application = this.root.substring(lastIndexOfRoot + 1);
+      } else {
+        this.application = this.root;
+      }
+    }
+    return this.application;
+  }
+
+  @Override
+  public String toString() {
+
+    return this.packageName;
+  }
+
   private void setGroups(String packageName) {
 
     int i = 1;
-    if (isValid()) {
-
-      int groupCount = this.matcher.groupCount();
-      for (String group : this.packages.getGroups()) {
-        if (i > groupCount) {
-          logger.log(Level.WARNING,
-              "The package '" + packageName + "' contains more groups than declared in your architecture.json.");
-          break;
-        }
-        String value = this.matcher.group(i);
-        switch (group) {
-          case "root":
-            this.root = value;
-            break;
-          case "layer":
-            this.layer = value;
-            break;
-          case "component":
-            this.component = value;
-            break;
-          case "scope":
-            this.scope = value;
-            break;
-          case "detail":
-            this.detail = value;
-            break;
-          case "-":
-            break;
-          default:
-            logger.log(Level.WARNING, "The group '" + group + "' is unknown.");
-        }
-        i++;
+    if (this.matcher.find()) {
+      int start = this.matcher.start();
+      int end = this.matcher.end();
+      if (start >= 1) {
+        this.root = packageName.substring(0, start - 1);
+      } else {
+        return;
       }
-    } else {
-      logger.log(Level.WARNING,
-          "The package '" + packageName + "' does not follow the pattern you entered in your architecture.json.");
+      if (end == packageName.length()) {
+        this.valid = true;
+        int groupCount = this.matcher.groupCount();
+        for (String group : this.packages.getGroups()) {
+          if (i > groupCount) {
+            logger.log(Level.WARNING,
+                "The package '" + packageName + "' contains more groups than declared in your architecture.json.");
+            break;
+          }
+          String value = replaceLayerOrScope(this.matcher.group(i));
+          switch (group) {
+            case "layer":
+              this.layer = value;
+              break;
+            case "component":
+              this.component = value;
+              break;
+            case "scope":
+              this.scope = value;
+              break;
+            case "detail":
+              this.detail = value;
+              break;
+            case "-":
+              break;
+            case "application":
+              this.application = value;
+              break;
+            default:
+              logger.log(Level.WARNING, "The group '" + group + "' is unknown.");
+          }
+          i++;
+        }
+      } else {
+        logger.log(Level.WARNING,
+            "The package '" + packageName + "' does not follow the pattern you entered in your architecture.json.");
+      }
     }
+  }
+
+  public static String joinSegments(String firstSegment, String secondSegment) {
+
+    if (firstSegment == null || firstSegment.isEmpty()) {
+      return secondSegment;
+    }
+
+    if (secondSegment == null || secondSegment.isEmpty()) {
+      return firstSegment;
+    }
+
+    return firstSegment + "." + secondSegment;
   }
 
   private String replaceLayerOrScope(String layerOrScope) {

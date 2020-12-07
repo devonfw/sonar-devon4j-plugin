@@ -222,9 +222,9 @@ public class ConfigurationMapperTest extends ModuleTest {
 
     // given
     ConfigurationMapper mapper = new ConfigurationMapper();
-    File file = new File("src/test/architecture.json");
-    String expectedPattern = "([a-zA-Z0-9_]+\\.)+(persistence|core|service|gui)\\.([a-zA-Z0-9_]+)\\.(api|base|impl)(\\.[a-zA-Z0-9_]+)*";
-    List<String> expectedDetails = Arrays.asList("root", "layer", "component", "scope", "detail");
+    File file = new File("src/test/files/DevonArchitecturePackage/architecture.json");
+    String expectedPattern = "([a-zA-Z0-9_]+)\\.(persistence|service|batch|gui|client)\\.([a-zA-Z0-9_]+)\\.(api|base|impl)\\.([a-zA-Z0-9_]+)*";
+    List<String> expectedDetails = Arrays.asList("application", "layer", "component", "scope", "detail");
     Map<String, String> expectedMappings = new HashMap<>();
     expectedMappings.put("persistence", "dataaccess");
     expectedMappings.put("core", "logic");
