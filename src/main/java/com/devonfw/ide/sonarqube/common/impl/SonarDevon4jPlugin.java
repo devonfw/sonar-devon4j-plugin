@@ -1,18 +1,20 @@
 package com.devonfw.ide.sonarqube.common.impl;
 
-import org.sonar.api.Plugin;
-import org.sonar.api.PropertyType;
-import org.sonar.api.config.PropertyDefinition;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.sonar.api.Plugin;
+import org.sonar.api.PropertyType;
+import org.sonar.api.config.PropertyDefinition;
+
 /**
  * The {@link Plugin} to integrate devonfw architecture rules into SonarQube.
  */
 public class SonarDevon4jPlugin implements Plugin {
+
   static final String CONFIG_KEY = "sonar.devon.config";
 
   static final String FORBIDDEN_CONF_KEY = "sonar.devon.forbiddenConf";
@@ -29,7 +31,7 @@ public class SonarDevon4jPlugin implements Plugin {
 
   private static final String FINDBUGS = "sonar-findbugs-plugin";
 
-  static List<String> FORBIDDEN_REPO_KEYS = new ArrayList<>();
+  private static List<String> forbiddenRepoKeys = new ArrayList<>();
 
   private File pluginDirectory;
 
@@ -52,15 +54,19 @@ public class SonarDevon4jPlugin implements Plugin {
   @Override
   public void define(Context context) {
 
+    String warningMessage = getMissingPlugins();
+
     context.addExtensions(DevonSonarDefinition.class, DevonSonarRegistrar.class, DevonfwJavaProfile.class);
     context.addExtension(PropertyDefinition.builder(CONFIG_KEY).name("Config JSON")
         .description("Configuration of business architecture").category("devonfw").subCategory("")
         .type(PropertyType.TEXT)
         .defaultValue("{\"architecture\":{\"components\":[\n{\"name\":\"component1\",\\\"dependencies\\\":[]}}\n]}}")
         .build());
-    context.addExtension(PropertyDefinition.builder(DISABLED).name("Warning")
-        .description("Missing plugins for full initialization of devonfw quality profile").category("devonfw")
-        .subCategory("").type(PropertyType.TEXT).defaultValue(getMissingPlugins()).build());
+    if (warningMessage != null) {
+      context.addExtension(PropertyDefinition.builder(DISABLED).name("Warning")
+          .description("Missing plugins for full initialization of devonfw quality profile").category("devonfw")
+          .subCategory("").type(PropertyType.TEXT).defaultValue(warningMessage).build());
+    }
     disableRepoKeys();
   }
 
@@ -86,19 +92,19 @@ public class SonarDevon4jPlugin implements Plugin {
   private void disableRepoKeys() {
 
     if (!hasPlugin(QUALINSIGHT)) {
-      FORBIDDEN_REPO_KEYS.add("qualinsight-smells");
+      forbiddenRepoKeys.add("qualinsight-smells");
     }
     if (!hasPlugin(PMD)) {
-      FORBIDDEN_REPO_KEYS.add("pmd");
-      FORBIDDEN_REPO_KEYS.add("pmd-unit-tests");
+      forbiddenRepoKeys.add("pmd");
+      forbiddenRepoKeys.add("pmd-unit-tests");
     }
     if (!hasPlugin(CHECKSTYLE)) {
-      FORBIDDEN_REPO_KEYS.add("checkstyle");
+      forbiddenRepoKeys.add("checkstyle");
     }
     if (!hasPlugin(FINDBUGS)) {
-      FORBIDDEN_REPO_KEYS.add("findbugs");
-      FORBIDDEN_REPO_KEYS.add("findsecbugs");
-      FORBIDDEN_REPO_KEYS.add("fb-contrib");
+      forbiddenRepoKeys.add("findbugs");
+      forbiddenRepoKeys.add("findsecbugs");
+      forbiddenRepoKeys.add("fb-contrib");
     }
   }
 
@@ -112,10 +118,13 @@ public class SonarDevon4jPlugin implements Plugin {
       }
     });
     if (missingPlugins.length() != 0) {
-      missingPlugins.insert(0, "Please install plugins listed below: \n\n");
-    } else {
-      missingPlugins.append("All plugins installed properly.");
+      return missingPlugins.insert(0, "Please install plugins listed below: \n\n").toString();
     }
-    return missingPlugins.toString();
+    return null;
+  }
+
+  static List<String> getForbiddenRepoKeys() {
+
+    return forbiddenRepoKeys;
   }
 }
