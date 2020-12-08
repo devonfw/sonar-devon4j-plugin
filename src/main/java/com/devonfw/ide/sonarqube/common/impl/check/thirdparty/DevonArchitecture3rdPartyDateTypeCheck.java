@@ -16,18 +16,15 @@ public class DevonArchitecture3rdPartyDateTypeCheck extends DevonArchitecture3rd
   @Override
   protected String checkDependency(JavaType source, JavaType target) {
 
-    String targetString = target.toString();
+    String targetFqn = target.getQualifiedName();
 
-    if (targetString.equals("java.util.Date")) {
+    if (targetFqn.equals("java.util.Date")) {
       return "Use java.time.LocalDate[Time] instead";
-    }
-    if (targetString.equals("java.util.Calendar")) {
+    } else if (targetFqn.equals("java.util.Calendar")) {
       return "Use java.time.LocalDate[Time], java.time.ZonedDateTime or java.time.OffsetDateTime instead";
-    }
-    if (targetString.equals("java.sql.Date")) {
+    } else if (targetFqn.equals("java.sql.Date")) {
       return "Use java.time.LocalDate instead";
-    }
-    if (targetString.equals("java.sql.Timestamp")) {
+    } else if (targetFqn.equals("java.sql.Timestamp")) {
       return "Use java.time.Instant instead";
     }
     return null;

@@ -1,13 +1,8 @@
 {
   "architecture": {
-    "packages": {
-      "pattern":  "([a-zA-Z0-9_]+\\.)+(persistence|core|service|gui)\\.([a-zA-Z0-9_]+)\\.(api|base|impl)(\\.[a-zA-Z0-9_]+)*",
-      "groups": [ "root", "layer", "component", "scope", "detail" ],
-      "mappings": {  "persistence": "dataaccess", "core": "logic", "gui": "client"}
-    },
     "components": [
-      {"name":"compA","dependencies":["compB"]},
-      {"name":"compB","dependencies":[]}
-    ]
+        {"name":"compA","dependencies":["compB"]},
+        {"name":"compB","dependencies":[]}
+      ]
   }
 }

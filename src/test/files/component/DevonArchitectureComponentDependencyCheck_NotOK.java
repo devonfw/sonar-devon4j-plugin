@@ -9,5 +9,4 @@ import com.google.common.base.Strings; // compliant
 class MyClass {
 
   private Bar bar;
-
 }

@@ -1,4 +1,4 @@
-package com.devonfw.ide.sonarqube.service.api;
+package com.devonfw.ide.sonarqube.compA.service.api;
 
 import javax.persistence.EntityManager; // Noncompliant
 

@@ -22,8 +22,8 @@ public class DevonArchitectureComponentDeclarationCheck extends DevonArchitectur
   @Override
   protected String createIssueForInvalidSourcePackage(JavaType source, ClassTree classTree) {
 
-    if (source.isValid()) {
-      String sourceComponentName = source.getComponent();
+    if (source.getDevonPackage().isValid()) {
+      String sourceComponentName = source.getDevonPackage().getComponent();
       Component sourceComponent = getComponent(sourceComponentName);
       if (sourceComponent == null) {
         return "Undefined component '" + sourceComponentName

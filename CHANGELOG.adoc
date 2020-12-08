@@ -2,6 +2,16 @@
 
 This file documents all notable changes to https://github.com/devonfw/sonar-devon4j-plugin[sonar-devon4j-plugin].
 
+== 2020.12.001
+
+With this release, we made the package structure configurable and did some other improvements and fixes:
+
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/97[#97]: Custom configuration for architecture
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/95[#95]: Add 3rd Party rule to avoid Immutable annotation from wrong package
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/93[#93]: Improve devonfw Java quality profile
+
+Changes for this release can be found in https://github.com/devonfw/sonar-devon4j-plugin/milestone/8?closed=1[milestone 2020.12.001]
+
 == 2020.08.001
 
 With this release, we added our own quality profile:

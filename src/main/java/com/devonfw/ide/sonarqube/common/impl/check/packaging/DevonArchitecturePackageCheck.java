@@ -7,6 +7,7 @@ import org.sonar.plugins.java.api.tree.ClassTree;
 import org.sonar.plugins.java.api.tree.Tree.Kind;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
+import com.devonfw.ide.sonarqube.common.api.config.DevonArchitecturePackage;
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureImportCheck;
 
@@ -26,11 +27,12 @@ public class DevonArchitecturePackageCheck extends DevonArchitectureImportCheck 
   @Override
   protected String createIssueForInvalidSourcePackage(JavaType source, ClassTree classTree) {
 
-    if (source.isValid()) {
+    DevonArchitecturePackage sourcePkg = source.getDevonPackage();
+    if (sourcePkg.isValid()) {
       return null;
     }
 
-    if (!source.isValidLayer() && !source.isValidScope() && classTree.kind() == Kind.CLASS
+    if (!sourcePkg.isValidLayer() && !sourcePkg.isValidScope() && (classTree.kind() == Kind.CLASS)
         && isSpringBootApplicationClass(classTree)) {
       return null;
     }
@@ -53,19 +55,20 @@ public class DevonArchitecturePackageCheck extends DevonArchitectureImportCheck 
 
   private String buildIssueString(JavaType source) {
 
+    DevonArchitecturePackage sourcePkg = source.getDevonPackage();
     StringBuilder sb = new StringBuilder(64);
-    sb.append("The package '");
-    sb.append(source.toString());
+    sb.append("The package of type '");
+    sb.append(source.getQualifiedName());
     sb.append("' is not compliant with your architecture. ");
-    if (!source.isValidLayer()) {
+    if (!sourcePkg.isValidLayer()) {
       sb.append(" Layer '");
-      sb.append(source.getLayer());
-      sb.append("' is invalid. Valid layers are: dataaccess, logic, service, batch, client, or common. ");
+      sb.append(sourcePkg.getUnresolved().getLayer());
+      sb.append("' is undefined. ");
     }
-    if (!source.isValidScope()) {
+    if (!sourcePkg.isValidScope()) {
       sb.append(" Scope '");
-      sb.append(source.getScope());
-      sb.append("' is invalid. Valid scopes are: api, base, or impl. ");
+      sb.append(sourcePkg.getUnresolved().getScope());
+      sb.append("' is undefined. ");
     }
     sb.append("Please follow the devonfw naming conventions for packages: ");
     sb.append("https://github.com/devonfw/devon4j/wiki/coding-conventions#packages");

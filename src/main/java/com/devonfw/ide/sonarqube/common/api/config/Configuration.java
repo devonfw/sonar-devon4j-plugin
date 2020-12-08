@@ -1,7 +1,7 @@
 package com.devonfw.ide.sonarqube.common.api.config;
 
 /**
- * The {@link Configuration} for this plugin.
+ * The {@link Configuration} for this plugin. It defines the architecture of the current project.
  */
 public class Configuration {
 
@@ -50,7 +50,7 @@ public class Configuration {
 
   /**
    * Properly initializes this configuration.
-   * 
+   *
    * @param source the source where the configuration was loaded from.
    */
   public void initialize(String source) {
