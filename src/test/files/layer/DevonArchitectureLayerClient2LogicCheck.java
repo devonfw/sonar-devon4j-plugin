@@ -17,6 +17,6 @@ class MyClass {
 
   public void init() {
 
-    this.foo = new com.devonfw.ide.logic.api.Foo();// Noncompliant
+    this.foo = new com.devonfw.ide.sonarqube.logic.api.Foo();// Noncompliant
   }
 }

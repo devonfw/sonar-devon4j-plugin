@@ -1,129 +1,52 @@
 package com.devonfw.ide.sonarqube.common.api.config;
 
-import com.devonfw.module.basic.common.api.reflect.Devon4jPackage;
+/**
+ * Wrapper for a {@link Class#getPackage() package} as structural representation according to the {@link Packages}
+ * definition of the architecture {@link com.devonfw.ide.sonarqube.common.api.config.Configuration}.
+ */
+public class DevonArchitecturePackage extends DevonPackageImpl {
 
-public class DevonArchitecturePackage {
+  private final DevonPackage unresolved;
 
-  private Devon4jPackage devon4jPackage;
+  /**
+   * The constructor.
+   *
+   * @param ori the {@link #getUnresolved() original package}.
+   * @param packages the {@link Packages}.
+   */
+  public DevonArchitecturePackage(DevonPackage ori, Packages packages) {
 
-  public DevonArchitecturePackage(String packageName) {
-
-    this.devon4jPackage = Devon4jPackage.of(packageName);
+    super(ori.getPackage(), ori.isValid(), ori.getRoot(), resolve(ori.getComponent(), packages),
+        resolve(ori.getLayer(), packages), resolve(ori.getScope(), packages), ori.getDetail());
+    this.unresolved = ori;
   }
 
-  public int getSegmentCount() {
+  /**
+   * @return original {@link DevonPackage} with unresolved segments.
+   */
+  public DevonPackage getUnresolved() {
 
-    return this.devon4jPackage.getSegmentCount();
+    return this.unresolved;
   }
 
-  public String getSegment(int index) {
+  /**
+   * @param packageName the {@link #getPackage() package name}.
+   * @param packages the {@link Packages}.
+   * @return the parsed {@link DevonArchitecturePackage}.
+   */
+  public static DevonArchitecturePackage of(String packageName, Packages packages) {
 
-    return this.devon4jPackage.getSegment(index);
+    DevonPackage originalPackage = ofOriginal(packageName, packages);
+    return new DevonArchitecturePackage(originalPackage, packages);
   }
 
-  public boolean isValid() {
+  private static String resolve(String segment, Packages packages) {
 
-    return this.devon4jPackage.isValid();
-  }
-
-  public boolean isValidScope() {
-
-    return this.devon4jPackage.isValidScope();
-  }
-
-  public boolean isValidLayer() {
-
-    return this.devon4jPackage.isValidLayer();
-  }
-
-  public String getRoot() {
-
-    return this.devon4jPackage.getRoot();
-  }
-
-  public String getApplication() {
-
-    return this.devon4jPackage.getApplication();
-  }
-
-  public String getComponent() {
-
-    return this.devon4jPackage.getComponent();
-  }
-
-  public String getLayer() {
-
-    return this.devon4jPackage.getLayer();
-  }
-
-  public boolean isLayerCommon() {
-
-    return this.devon4jPackage.isLayerCommon();
-  }
-
-  public boolean isLayerDataAccess() {
-
-    return this.devon4jPackage.isLayerDataAccess();
-  }
-
-  public boolean isLayerLogic() {
-
-    return this.devon4jPackage.isLayerLogic();
-  }
-
-  public boolean isLayerService() {
-
-    return this.devon4jPackage.isLayerService();
-  }
-
-  public boolean isLayerBatch() {
-
-    return this.devon4jPackage.isLayerBatch();
-  }
-
-  public boolean isLayerClient() {
-
-    return this.devon4jPackage.isLayerClient();
-  }
-
-  public String getScope() {
-
-    return this.devon4jPackage.getScope();
-  }
-
-  public boolean isScopeApi() {
-
-    return this.devon4jPackage.isScopeApi();
-  }
-
-  public boolean isScopeBase() {
-
-    return this.devon4jPackage.isScopeBase();
-  }
-
-  public boolean isScopeImpl() {
-
-    return this.devon4jPackage.isScopeImpl();
-  }
-
-  public String getDetail() {
-
-    return this.devon4jPackage.getDetail();
-  }
-
-  public int hashCode() {
-
-    return this.devon4jPackage.hashCode();
-  }
-
-  public boolean equals(Object obj) {
-
-    return this.devon4jPackage.equals(obj);
-  }
-
-  public String toString() {
-
-    return this.devon4jPackage.toString();
+    String replacement = packages.getMappings().get(segment);
+    if (replacement != null) {
+      return replacement;
+    }
+    return segment;
   }
 
 }

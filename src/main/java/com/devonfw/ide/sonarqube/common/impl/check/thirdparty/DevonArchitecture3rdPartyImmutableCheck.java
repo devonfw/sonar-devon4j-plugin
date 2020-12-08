@@ -18,7 +18,7 @@ public class DevonArchitecture3rdPartyImmutableCheck extends DevonArchitecture3r
   protected String checkDependency(JavaType source, JavaType target) {
 
     if (source.getSimpleName().contains("Entity")
-        && target.toString().equals("javax.annotation.concurrent.Immutable")) {
+        && target.getQualifiedName().equals("javax.annotation.concurrent.Immutable")) {
 
       return "Use Immutable from org.hibernate.annotations.Immutable in Entity class.";
     }

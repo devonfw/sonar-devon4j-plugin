@@ -10,7 +10,7 @@
   </parent>
   <groupId>com.devonfw.tools</groupId>
   <artifactId>sonar-devon4j-plugin</artifactId>
-  <version>2020.08.002-SNAPSHOT</version>
+  <version>2020.12.001-SNAPSHOT</version>
   <packaging>sonar-plugin</packaging>
   <name>${project.artifactId}</name>
   <description>SonarQube Plugin with rules for static code analysis to validate architecture.</description>
@@ -103,12 +103,6 @@
       <scope>provided</scope>
     </dependency>
 
-    <dependency>
-      <groupId>com.devonfw.java.modules</groupId>
-      <artifactId>devon4j-basic</artifactId>
-      <version>${devon4j.version}</version>
-    </dependency>
-    
     <dependency>
       <groupId>com.devonfw.java.modules</groupId>
       <artifactId>devon4j-test</artifactId>

@@ -5,6 +5,7 @@ import org.sonar.check.Rule;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
 import com.devonfw.ide.sonarqube.common.api.config.Component;
+import com.devonfw.ide.sonarqube.common.api.config.DevonArchitecturePackage;
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureComponentCheck;
 
 /**
@@ -18,13 +19,14 @@ public class DevonArchitectureLayerLogic2Dataaccess4ComponentCheck extends Devon
   @Override
   protected String checkDependency(JavaType source, Component sourceComponent, JavaType target) {
 
-    if (source.isLayerLogic() && target.isLayerDataAccess()) {
-      if (target.toString().equals("com.devonfw.module.jpa.dataaccess.api.RevisionMetadata")) {
+    DevonArchitecturePackage sourcePkg = source.getDevonPackage();
+    DevonArchitecturePackage targetPkg = target.getDevonPackage();
+    if (sourcePkg.isLayerLogic() && targetPkg.isLayerDataAccess()) {
+      if (target.getQualifiedName().equals("com.devonfw.module.jpa.dataaccess.api.RevisionMetadata")) {
         return null; // specific exclusion for unclean packaging
       }
       return "Code from logic layer shall not depend on dataaccess layer of a different component. ('"
-          + source.getComponent() + "." + source.getLayer() + "' is dependent on '" + target.getComponent() + "."
-          + target.getLayer() + "')";
+          + sourcePkg.getComponentAndLayer() + "' is dependent on '" + targetPkg.getComponentAndLayer() + "')";
     }
     return null;
   }
