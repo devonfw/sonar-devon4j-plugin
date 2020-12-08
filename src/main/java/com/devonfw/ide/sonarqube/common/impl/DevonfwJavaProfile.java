@@ -57,7 +57,7 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
             break;
         }
       }
-      if (!(SonarDevon4jPlugin.FORBIDDEN_REPO_KEYS.contains(repoKey) || repoKey == null || ruleKey == null)) {
+      if (!(SonarDevon4jPlugin.getForbiddenRepoKeys().contains(repoKey) || repoKey == null || ruleKey == null)) {
         currentRule = devonfwJava.activateRule(repoKey, ruleKey);
         if (severity.isEmpty()) {
           currentRule.overrideSeverity(severity);
