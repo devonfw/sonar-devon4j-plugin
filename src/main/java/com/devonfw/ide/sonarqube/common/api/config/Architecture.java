@@ -18,6 +18,8 @@ public class Architecture {
 
   private Map<String, Component> componentMap;
 
+  private Packages packages;
+
   /**
    * The constructor.
    */
@@ -60,6 +62,39 @@ public class Architecture {
   public void setComponents(List<Component> components) {
 
     this.components = components;
+  }
+
+  /**
+   * @param packages new value of {@link #getPackages()}.
+   */
+  public void setPackages(Packages packages) {
+
+    this.packages = packages;
+  }
+
+  /**
+   * @return packages
+   */
+  public Packages getPackages() {
+
+    return this.packages;
+  }
+
+  /**
+   * @param architecture the {@link Architecture} config.
+   * @return the requested {@link Packages} of given architecture or default packages if architecture or its packages is
+   *         {@code null}.
+   */
+  public static Packages getPackages(Architecture architecture) {
+
+    Packages packages = null;
+    if (architecture != null) {
+      packages = architecture.getPackages();
+    }
+    if (packages == null) {
+      packages = Packages.getDefault();
+    }
+    return packages;
   }
 
   void initialize(Configuration configuration) {

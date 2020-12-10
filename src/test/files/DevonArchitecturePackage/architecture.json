@@ -1,0 +1,14 @@
+{
+  "architecture": {
+    "packages": {
+      "pattern":  "(persistence|service|batch|gui|client)\\.([a-zA-Z0-9_]+)\\.(api|base|impl)(\\.[a-zA-Z0-9_]+)*",
+      "groups": ["layer", "component", "scope", "detail"],
+      "mappings": {  "persistence": "dataaccess", "core": "logic", "gui": "client"},
+      "minimumRootSegments": 2
+    },
+    "components": [
+      {"name":"compA","dependencies":["compB"]},
+      {"name":"compB","dependencies":[]}
+    ]
+  }
+}

@@ -30,11 +30,11 @@ public class DevonArchitecture3rdPartyHibernateCheck extends DevonArchitecture3r
   protected String checkDependency(JavaType source, JavaType target) {
 
     String targetSimpleName = target.getSimpleName();
-    String targetPackageName = target.getPackage();
+    String targetPackageName = target.getDevonPackage().getPackage();
 
     if (targetPackageName.startsWith("org.hibernate") && !targetPackageName.startsWith(ORG_HIBERNATE_VALIDATOR)) {
 
-      if (!source.isLayerDataAccess()) {
+      if (!source.getDevonPackage().isLayerDataAccess()) {
         return "Hibernate (" + target + ") should only be used in dataaccess layer.";
       }
 
@@ -52,7 +52,7 @@ public class DevonArchitecture3rdPartyHibernateCheck extends DevonArchitecture3r
         return "Hibernate envers internals (" + target + ") should never be used directly.";
       }
 
-      if (!source.isScopeImpl()) {
+      if (!source.getDevonPackage().isScopeImpl()) {
         return "Hibernate internals (" + target + ") should only be used in impl scope of dataaccess layer.";
       }
 
@@ -71,7 +71,7 @@ public class DevonArchitecture3rdPartyHibernateCheck extends DevonArchitecture3r
   private boolean isNotImplementingHibernateEnversInImplScope(JavaType source, String targetSimpleName,
       String targetPackageName) {
 
-    return (targetPackageName.startsWith(ORG_HIBERNATE_ENVERS)) && !source.isScopeImpl()
+    return (targetPackageName.startsWith(ORG_HIBERNATE_ENVERS)) && !source.getDevonPackage().isScopeImpl()
         && (!targetPackageName.equals(ORG_HIBERNATE_ENVERS) || targetSimpleName.startsWith("Default")
             || targetSimpleName.contains("Listener") || targetSimpleName.contains("Reader"));
   }

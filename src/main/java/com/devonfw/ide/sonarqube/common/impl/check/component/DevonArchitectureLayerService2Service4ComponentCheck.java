@@ -5,6 +5,7 @@ import org.sonar.check.Rule;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
 import com.devonfw.ide.sonarqube.common.api.config.Component;
+import com.devonfw.ide.sonarqube.common.api.config.DevonArchitecturePackage;
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureComponentCheck;
 
 /**
@@ -18,10 +19,11 @@ public class DevonArchitectureLayerService2Service4ComponentCheck extends DevonA
   @Override
   protected String checkDependency(JavaType source, Component sourceComponent, JavaType target) {
 
-    if (source.isLayerService() && target.isLayerService()) {
+    DevonArchitecturePackage sourcePkg = source.getDevonPackage();
+    DevonArchitecturePackage targetPkg = target.getDevonPackage();
+    if (sourcePkg.isLayerService() && targetPkg.isLayerService()) {
       return "Code from service layer shall not depend on service layer of a different component. ('"
-          + source.getComponent() + "." + source.getLayer() + "' is dependent on '" + target.getComponent() + "."
-          + target.getLayer() + "')";
+          + sourcePkg.getComponentAndLayer() + "' is dependent on '" + targetPkg.getComponentAndLayer() + "')";
     }
     return null;
   }

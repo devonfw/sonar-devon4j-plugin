@@ -1,5 +1,6 @@
 package com.devonfw.ide.sonarqube.common.impl.check;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,15 +23,18 @@ import org.sonar.plugins.java.api.tree.TypeTree;
 import org.sonar.plugins.java.api.tree.VariableTree;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
-import com.devonfw.ide.sonarqube.common.api.config.Component;
-import com.devonfw.module.basic.common.api.reflect.Devon4jPackage;
+import com.devonfw.ide.sonarqube.common.api.config.Architecture;
+import com.devonfw.ide.sonarqube.common.api.config.Configuration;
+import com.devonfw.ide.sonarqube.common.api.config.DevonArchitecturePackage;
+import com.devonfw.ide.sonarqube.common.api.config.Packages;
+import com.devonfw.ide.sonarqube.common.impl.config.ConfigurationFactory;
 
 /**
  * Abstract base class for all SonarQube architecture checks of this plugin.
  */
 public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements JavaFileScanner {
 
-  private Devon4jPackage sourcePackage;
+  private DevonArchitecturePackage sourcePackage;
 
   private JavaType sourceType;
 
@@ -39,6 +43,10 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
   private int packageLine;
 
   private List<ImportTree> imports;
+
+  private Packages packages;
+
+  private Configuration configuration;
 
   private static final Logger logger = Logger.getGlobal();
 
@@ -60,12 +68,26 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
    */
   protected abstract String checkDependency(JavaType source, JavaType target);
 
+  /**
+   * Called from {@link #scanFile(JavaFileScannerContext)} after the {@link Configuration} has been set.
+   *
+   * @param ctx the {@link JavaFileScannerContext}.
+   */
+  protected void onConfigurationSet(JavaFileScannerContext ctx) {
+
+  }
+
   @Override
   public final void scanFile(JavaFileScannerContext fileContext) {
 
     this.imports.clear();
     this.context = fileContext;
-
+    this.configuration = ConfigurationFactory.get(getFileToScan());
+    if (this.configuration == null) {
+      this.configuration = new Configuration();
+    }
+    this.packages = Architecture.getPackages(this.configuration.getArchitecture());
+    onConfigurationSet(this.context);
     ClassTree tree = getClassTree(this.context);
 
     if (tree == null) {
@@ -90,7 +112,7 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
   @Override
   public void visitVariable(VariableTree variableTree) {
 
-    String qualifiedName = getQualifiedName(variableTree);
+    String qualifiedName = getQualifiedName(variableTree.type());
     checkIfDisallowed(qualifiedName, variableTree.type());
     super.visitVariable(variableTree);
   }
@@ -161,7 +183,7 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
 
     String pkgName = className.substring(0, lastDot);
     String simpleName = className.substring(lastDot + 1);
-    Devon4jPackage targetPkg = Devon4jPackage.of(pkgName);
+    DevonArchitecturePackage targetPkg = DevonArchitecturePackage.of(pkgName, this.packages);
     JavaType targetType = new JavaType(targetPkg, simpleName);
     String warning = null;
 
@@ -170,8 +192,7 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
         warning = checkDependency(this.sourceType, targetType);
       }
     } else {
-      String targetRoot = targetPkg.getRoot();
-      if ("com.devonfw".equals(targetRoot) && !isSameRootApplication(this.sourceType, targetType)
+      if (targetPkg.getRoot().startsWith("com.devonfw") && !this.sourcePackage.hasSameRoot(targetPkg)
           && isTargetDependencyAllowed(targetPkg)) {
         return;
       }
@@ -190,7 +211,7 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
     return (!tree.is(Tree.Kind.INFERED_TYPE) && this.sourcePackage != null && this.sourcePackage.isValid());
   }
 
-  private boolean isTargetDependencyAllowed(Devon4jPackage targetPkg) {
+  private boolean isTargetDependencyAllowed(DevonArchitecturePackage targetPkg) {
 
     boolean targetDependencyAllowed;
     String targetComponent = targetPkg.getComponent();
@@ -219,7 +240,7 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
   public void visitPackage(PackageDeclarationTree tree) {
 
     String qualifiedName = getQualifiedName(tree.packageName());
-    this.sourcePackage = Devon4jPackage.of(qualifiedName);
+    this.sourcePackage = DevonArchitecturePackage.of(qualifiedName, this.packages);
     this.packageLine = tree.firstToken().line();
     this.sourceType = new JavaType(this.sourcePackage, null);
     super.visitPackage(tree);
@@ -255,6 +276,16 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
     }
 
     return null;
+  }
+
+  /**
+   * Creates a new {@link File} out of the currently analyzed file.
+   *
+   * @return {@link File} of the file to scan
+   */
+  protected File getFileToScan() {
+
+    return new File(this.context.getInputFile().toString());
   }
 
   /**
@@ -295,6 +326,22 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
   }
 
   /**
+   * @return the {@link Configuration} for the current project.
+   */
+  protected Configuration getConfiguration() {
+
+    return this.configuration;
+  }
+
+  /**
+   * @return the {@link Packages} for the current project.
+   */
+  public Packages getPackages() {
+
+    return this.packages;
+  }
+
+  /**
    * @param source the {@link JavaType} of the source type to analyze.
    * @param classTree the {@link ClassTree} of the top-level type.
    * @return the message of an issue to create in case the source package itself is invalid.
@@ -313,83 +360,17 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
   /**
    * @param source the {@link JavaType} of the source type.
    * @param target the {@link JavaType} of the target type referenced from the source type.
-   * @return {@code true} if both {@link JavaType}s have the same {@link JavaType#getRoot() root package}, {@code false}
-   *         otherwise.
+   * @return {@code true} if both {@link JavaType}s have the same {@link DevonArchitecturePackage#getComponent()
+   *         component} and {@link DevonArchitecturePackage#getLayer() layer}, {@code false} otherwise.
    */
-  protected boolean isSameRoot(JavaType source, JavaType target) {
+  protected boolean isSameOrGeneralComponentWithSameOrCommonLayer(DevonArchitecturePackage source,
+      DevonArchitecturePackage target) {
 
-    return source.getRoot().equals(target.getRoot());
-  }
-
-  /**
-   * @param source the {@link JavaType} of the source type.
-   * @param target the {@link JavaType} of the target type referenced from the source type.
-   * @return {@code true} if both {@link JavaType}s have the same {@link JavaType#getApplication() application},
-   *         {@code false} otherwise.
-   */
-  protected boolean isSameApplication(JavaType source, JavaType target) {
-
-    return source.getApplication().equals(target.getApplication());
-  }
-
-  /**
-   * @param source the {@link JavaType} of the source type.
-   * @param target the {@link JavaType} of the target type referenced from the source type.
-   * @return {@code true} if both {@link JavaType}s have the same {@link JavaType#getApplication() application},
-   *         {@code false} otherwise.
-   */
-  protected boolean isSameRootApplication(JavaType source, JavaType target) {
-
-    return isSameRoot(source, target) && isSameApplication(source, target);
-  }
-
-  /**
-   * @param source the {@link JavaType} of the source type.
-   * @param target the {@link JavaType} of the target type referenced from the source type.
-   * @return {@code true} if both {@link JavaType}s have the same {@link JavaType#getComponent() component},
-   *         {@code false} otherwise.
-   */
-  protected boolean isSameComponent(JavaType source, JavaType target) {
-
-    return source.getComponent().equals(target.getComponent());
-  }
-
-  /**
-   * @param source the {@link JavaType} of the source type.
-   * @param target the {@link JavaType} of the target type referenced from the source type.
-   * @return {@code true} if both {@link JavaType}s have the same {@link JavaType#getLayer() layer}, {@code false}
-   *         otherwise.
-   */
-  protected boolean isSameLayer(JavaType source, JavaType target) {
-
-    return source.getLayer().equals(target.getLayer());
-  }
-
-  /**
-   * @param source the {@link JavaType} of the source type.
-   * @param target the {@link JavaType} of the target type referenced from the source type.
-   * @return {@code true} if both {@link JavaType}s have the same {@link JavaType#getComponent() component} and
-   *         {@link JavaType#getLayer() layer}, {@code false} otherwise.
-   */
-  protected boolean isSameComponentPart(JavaType source, JavaType target) {
-
-    return isSameRootApplication(source, target) && isSameComponent(source, target) && isSameLayer(source, target);
-  }
-
-  /**
-   * @param source the {@link JavaType} of the source type.
-   * @param target the {@link JavaType} of the target type referenced from the source type.
-   * @return {@code true} if both {@link JavaType}s have the same {@link JavaType#getComponent() component} and
-   *         {@link JavaType#getLayer() layer}, {@code false} otherwise.
-   */
-  protected boolean isSameOrGeneralComponentWithSameOrCommonLayer(JavaType source, JavaType target) {
-
-    if (target.isLayerCommon() || (target.getLayer().equals(source.getLayer()))) {
-      String targetComponent = target.getComponent();
-      if (targetComponent.equals(Component.NAME_GENERAL)) {
+    if (target.isLayerCommon() || target.hasSameLayer(source)) {
+      if (target.isComponentGeneral()) {
         return true;
       }
-      if (targetComponent.equals(source.getComponent()) && isSameRootApplication(source, target)) {
+      if (target.hasSameComponent(source) && target.hasSameRoot(source)) {
         return true;
       }
     }

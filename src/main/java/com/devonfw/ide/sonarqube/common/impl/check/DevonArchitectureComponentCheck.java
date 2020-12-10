@@ -1,14 +1,12 @@
 package com.devonfw.ide.sonarqube.common.impl.check;
 
-import java.io.File;
-
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.ClassTree;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
 import com.devonfw.ide.sonarqube.common.api.config.Component;
-import com.devonfw.ide.sonarqube.common.api.config.Configuration;
-import com.devonfw.ide.sonarqube.common.impl.config.ConfigurationFactory;
+import com.devonfw.ide.sonarqube.common.api.config.DevonArchitecturePackage;
+import com.devonfw.ide.sonarqube.common.api.config.DevonPackage;
 
 /**
  * Abstract base class for a {@link DevonArchitectureCheck} that checks the business architecture (validates the
@@ -16,34 +14,9 @@ import com.devonfw.ide.sonarqube.common.impl.config.ConfigurationFactory;
  */
 public abstract class DevonArchitectureComponentCheck extends DevonArchitectureCheck {
 
-  private Configuration configuration;
-
   @Override
   public void doScanFile(ClassTree tree, JavaFileScannerContext context) {
 
-    File fileToScan = new File(context.getInputFile().toString());
-    this.configuration = ConfigurationFactory.get(fileToScan);
-    if (this.configuration == null) {
-      this.configuration = new Configuration();
-    }
-    onConfigurationSet(context);
-  }
-
-  /**
-   * Called from {@link #scanFile(JavaFileScannerContext)} after the {@link Configuration} has been set.
-   *
-   * @param context the {@link JavaFileScannerContext}.
-   */
-  protected void onConfigurationSet(JavaFileScannerContext context) {
-
-  }
-
-  /**
-   * @return the {@link Configuration} for the current project.
-   */
-  protected Configuration getConfiguration() {
-
-    return this.configuration;
   }
 
   /**
@@ -58,10 +31,12 @@ public abstract class DevonArchitectureComponentCheck extends DevonArchitectureC
   @Override
   protected String checkDependency(JavaType source, JavaType target) {
 
-    String sourceComponentName = source.getComponent();
-    String targetComponentName = target.getComponent();
-    boolean sameRootApp = isSameRootApplication(source, target);
-    if (sourceComponentName.equals(targetComponentName) && sameRootApp) {
+    DevonArchitecturePackage sourcePkg = source.getDevonPackage();
+    DevonArchitecturePackage targetPkg = target.getDevonPackage();
+    String sourceComponentName = sourcePkg.getComponent();
+    String targetComponentName = targetPkg.getComponent();
+    boolean sameRoot = sourcePkg.hasSameRoot(targetPkg);
+    if (sourceComponentName.equals(targetComponentName) && sameRoot) {
       return null;
     }
     Component sourceComponent = getComponent(sourceComponentName);
@@ -70,13 +45,13 @@ public abstract class DevonArchitectureComponentCheck extends DevonArchitectureC
     }
     boolean targetDependencyAllowed;
     String targetName;
-    if (sameRootApp) {
+    if (sameRoot) {
       targetName = targetComponentName;
       targetDependencyAllowed = sourceComponent.hasDependency(targetName);
     } else {
-      String targetRoot = target.getRoot();
-      String targetRootApp = targetRoot + "." + target.getApplication();
-      targetName = targetRootApp + "." + targetComponentName;
+      String targetRoot = targetPkg.getRoot();
+      String targetRootApp = DevonPackage.composePackage(targetRoot, targetPkg.getApplication());
+      targetName = DevonPackage.composePackage(targetRootApp, targetComponentName);
       targetDependencyAllowed = sourceComponent.hasDependency(targetRoot); // allow full access to (external) root?
       if (!targetDependencyAllowed) {
         targetDependencyAllowed = sourceComponent.hasDependency(targetRootApp); // allow full access to external app?

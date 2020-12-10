@@ -17,7 +17,7 @@ public class DevonArchitecture3rdPartyObjectsCheck extends DevonArchitecture3rdP
   @Override
   protected String checkDependency(JavaType source, JavaType target) {
 
-    if (target.toString().equals("com.google.common.base.Objects")) {
+    if (target.getQualifiedName().equals("com.google.common.base.Objects")) {
       return "Use Java standards instead (java.util.Objects).";
     }
     return null;
