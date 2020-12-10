@@ -1,14 +1,9 @@
 package com.devonfw.ide.sonarqube.common.impl;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -26,38 +21,9 @@ import org.xml.sax.SAXException;
  */
 @SonarLintSide
 public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
-
   private static final String DEVON4J_XML = "/com/devonfw/ide/sonarqube/common/rules/devon4j/devon4j.xml";
 
   private static final Logger logger = Logger.getGlobal();
-
-  private static final String QUALINSIGHT = "qualinsight-plugins-sonarqube-smell-plugin";
-
-  private static final String PMD = "sonar-pmd-plugin";
-
-  private static final String CHECKSTYLE = "checkstyle-sonar-plugin";
-
-  private static final String FINDBUGS = "sonar-findbugs-plugin";
-
-  private static List<String> FORBIDDEN_REPO_KEYS = new ArrayList<>();
-
-  private File pluginDirectory;
-
-  private List<String> pluginList;
-
-  // Use this constructor only for testing purposes
-  DevonfwJavaProfile(File pluginDirectory) {
-
-    this.pluginDirectory = pluginDirectory;
-  }
-
-  /**
-   * The constructor
-   */
-  public DevonfwJavaProfile() {
-
-    this(new File("extensions/plugins"));
-  }
 
   @Override
   public void define(Context context) {
@@ -70,17 +36,12 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
     }
     NodeList ruleList = parsedXml.getElementsByTagName("rule");
     NodeList childrenOfRule;
-    disableRepoKeys();
-
     NewBuiltInActiveRule currentRule;
     String repoKey = null;
     String ruleKey = null;
     String severity = "";
-
     for (int i = 0; i < ruleList.getLength(); i++) {
-
       childrenOfRule = ruleList.item(i).getChildNodes();
-
       for (int j = 0; j < childrenOfRule.getLength(); j++) {
         switch (childrenOfRule.item(j).getNodeName()) {
           case "repositoryKey":
@@ -96,15 +57,13 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
             break;
         }
       }
-
-      if (!(FORBIDDEN_REPO_KEYS.contains(repoKey) || repoKey == null || ruleKey == null)) {
+      if (!(SonarDevon4jPlugin.getForbiddenRepoKeys().contains(repoKey) || repoKey == null || ruleKey == null)) {
         currentRule = devonfwJava.activateRule(repoKey, ruleKey);
         if (!severity.isEmpty()) {
           currentRule.overrideSeverity(severity);
         }
       }
     }
-
     devonfwJava.done();
   }
 
@@ -123,49 +82,6 @@ public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
     } catch (SAXException sax) {
       logger.log(Level.WARNING, "There was a problem parsing the file.");
       return null;
-    }
-  }
-
-  private List<String> getPlugins() {
-
-    if (this.pluginList == null) {
-      File[] fileList = this.pluginDirectory.listFiles(f -> f.getName().endsWith(".jar") && f.isFile());
-      this.pluginList = Arrays.asList(fileList).stream().map(f -> f.getName()).collect(Collectors.toList());
-    }
-
-    return this.pluginList;
-  }
-
-  private boolean hasPlugin(String name) {
-
-    for (String plugin : getPlugins()) {
-      if (plugin.contains(name)) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  private void disableRepoKeys() {
-
-    if (!hasPlugin(QUALINSIGHT)) {
-      FORBIDDEN_REPO_KEYS.add("qualinsight-smells");
-    }
-
-    if (!hasPlugin(PMD)) {
-      FORBIDDEN_REPO_KEYS.add("pmd");
-      FORBIDDEN_REPO_KEYS.add("pmd-unit-tests");
-    }
-
-    if (!hasPlugin(CHECKSTYLE)) {
-      FORBIDDEN_REPO_KEYS.add("checkstyle");
-    }
-
-    if (!hasPlugin(FINDBUGS)) {
-      FORBIDDEN_REPO_KEYS.add("findbugs");
-      FORBIDDEN_REPO_KEYS.add("findsecbugs");
-      FORBIDDEN_REPO_KEYS.add("fb-contrib");
     }
   }
 }
