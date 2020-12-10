@@ -1,23 +1,24 @@
 package com.devonfw.ide.sonarqube.common.api;
 
-import com.devonfw.module.basic.common.api.reflect.Devon4jPackage;
+import com.devonfw.ide.sonarqube.common.api.config.DevonArchitecturePackage;
+import com.devonfw.ide.sonarqube.common.api.config.DevonPackage;
 
 /**
  * Simple representation of a Java type.
  */
 public class JavaType {
 
-  private final Devon4jPackage pkg;
+  private final DevonArchitecturePackage pkg;
 
   private final String simpleName;
 
   /**
    * The constructor.
    *
-   * @param pkg
-   * @param simpleName
+   * @param pkg the {@link DevonArchitecturePackage} representing the {@link Class#getPackage() package} of the type.
+   * @param simpleName the {@link Class#getSimpleName() simple name} of the type.
    */
-  public JavaType(Devon4jPackage pkg, String simpleName) {
+  public JavaType(DevonArchitecturePackage pkg, String simpleName) {
 
     super();
     this.pkg = pkg;
@@ -25,114 +26,42 @@ public class JavaType {
   }
 
   /**
-   * @return simpleName
+   * @return the {@link Class#getSimpleName() simple name} of the type.
    */
   public String getSimpleName() {
 
     return this.simpleName;
   }
 
+  /**
+   * @return the {@link Class#getPackage() package} of the type as plain {@link String}.
+   */
   public String getPackage() {
 
-    return this.pkg.toString();
+    return this.pkg.getPackage();
   }
 
-  public String getRoot() {
+  /**
+   * @return the {@link Class#getPackage() package} of the type as {@link DevonArchitecturePackage}.
+   */
+  public DevonArchitecturePackage getDevonPackage() {
 
-    return this.pkg.getRoot();
+    return this.pkg;
   }
 
-  public String getApplication() {
+  /**
+   * @return the {@link Class#getName() qualified name} of this {@link JavaType} composed of {@link #getPackage()
+   *         package} and {@link #getSimpleName() simple name}.
+   */
+  public String getQualifiedName() {
 
-    return this.pkg.getApplication();
-  }
-
-  public String getComponent() {
-
-    return this.pkg.getComponent();
-  }
-
-  public String getLayer() {
-
-    return this.pkg.getLayer();
-  }
-
-  public String getScope() {
-
-    return this.pkg.getScope();
-  }
-
-  public boolean isScopeApi() {
-
-    return this.pkg.isScopeApi();
-  }
-
-  public boolean isScopeBase() {
-
-    return this.pkg.isScopeBase();
-  }
-
-  public boolean isScopeImpl() {
-
-    return this.pkg.isScopeImpl();
-  }
-
-  public boolean isLayerBatch() {
-
-    return this.pkg.isLayerBatch();
-  }
-
-  public boolean isLayerClient() {
-
-    return this.pkg.isLayerClient();
-  }
-
-  public boolean isLayerCommon() {
-
-    return this.pkg.isLayerCommon();
-  }
-
-  public boolean isLayerDataAccess() {
-
-    return this.pkg.isLayerDataAccess();
-  }
-
-  public boolean isLayerLogic() {
-
-    return this.pkg.isLayerLogic();
-  }
-
-  public boolean isLayerService() {
-
-    return this.pkg.isLayerService();
-  }
-
-  public boolean isValid() {
-
-    return this.pkg.isValid();
-  }
-
-  public boolean isValidLayer() {
-
-    return this.pkg.isValidLayer();
-  }
-
-  public boolean isValidScope() {
-
-    return this.pkg.isValidScope();
+    return DevonPackage.composePackage(this.pkg.getPackage(), this.simpleName);
   }
 
   @Override
   public String toString() {
 
-    String pkgName = this.pkg.toString();
-    if (this.simpleName == null) {
-      return pkgName;
-    } else if (pkgName.isEmpty()) {
-      return this.simpleName;
-    } else {
-      return pkgName + "." + this.simpleName;
-    }
+    return getQualifiedName();
   }
 
 }

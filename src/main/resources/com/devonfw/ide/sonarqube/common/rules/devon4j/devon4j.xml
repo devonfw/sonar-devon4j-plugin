@@ -1291,6 +1291,20 @@
     </rule>
     <rule>
         <repositoryKey>devon4j</repositoryKey>
+        <key>E7</key>
+        <type>CODE_SMELL</type>
+        <priority>MINOR</priority>
+        <parameters/>
+    </rule>
+    <rule>
+       <repositoryKey>devon4j</repositoryKey>
+        <key>E8</key>
+        <type>CODE_SMELL</type>
+        <priority>CRITICAL</priority>
+        <parameters/>
+    </rule>
+    <rule>
+        <repositoryKey>devon4j</repositoryKey>
         <key>L1</key>
         <type>CODE_SMELL</type>
         <priority>BLOCKER</priority>
@@ -7713,13 +7727,6 @@
     </rule>
     <rule>
         <repositoryKey>java</repositoryKey>
-        <key>S1148</key>
-        <type>VULNERABILITY</type>
-        <priority>MINOR</priority>
-        <parameters/>
-    </rule>
-    <rule>
-        <repositoryKey>java</repositoryKey>
         <key>S1149</key>
         <type>CODE_SMELL</type>
         <priority>MAJOR</priority>
@@ -8772,13 +8779,6 @@
     </rule>
     <rule>
         <repositoryKey>java</repositoryKey>
-        <key>S2063</key>
-        <type>CODE_SMELL</type>
-        <priority>CRITICAL</priority>
-        <parameters/>
-    </rule>
-    <rule>
-        <repositoryKey>java</repositoryKey>
         <key>S2065</key>
         <type>CODE_SMELL</type>
         <priority>MINOR</priority>
@@ -9463,13 +9463,6 @@
     </rule>
     <rule>
         <repositoryKey>java</repositoryKey>
-        <key>S2391</key>
-        <type>CODE_SMELL</type>
-        <priority>BLOCKER</priority>
-        <parameters/>
-    </rule>
-    <rule>
-        <repositoryKey>java</repositoryKey>
         <key>S2437</key>
         <type>CODE_SMELL</type>
         <priority>BLOCKER</priority>
@@ -9668,7 +9661,7 @@
         <repositoryKey>java</repositoryKey>
         <key>S2699</key>
         <type>CODE_SMELL</type>
-        <priority>BLOCKER</priority>
+        <priority>INFO</priority>
         <parameters/>
     </rule>
     <rule>
@@ -9833,13 +9826,6 @@
         <key>S3020</key>
         <type>BUG</type>
         <priority>MINOR</priority>
-        <parameters/>
-    </rule>
-    <rule>
-        <repositoryKey>java</repositoryKey>
-        <key>S3027</key>
-        <type>CODE_SMELL</type>
-        <priority>MAJOR</priority>
         <parameters/>
     </rule>
     <rule>
@@ -10362,6 +10348,13 @@
         <repositoryKey>java</repositoryKey>
         <key>S4349</key>
         <type>CODE_SMELL</type>
+        <priority>MINOR</priority>
+        <parameters/>
+    </rule>
+    <rule>
+        <repositoryKey>java</repositoryKey>
+        <key>S4507</key>
+        <type>SECURITY_HOTSPOT</type>
         <priority>MINOR</priority>
         <parameters/>
     </rule>
