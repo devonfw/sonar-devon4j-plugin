@@ -15,6 +15,8 @@ import org.sonar.api.config.PropertyDefinition;
  */
 public class SonarDevon4jPlugin implements Plugin {
 
+  private static final String DISABLED = "Disabled";
+
   private static final String QUALINSIGHT = "qualinsight-plugins-sonarqube-smell-plugin";
 
   private static final String PMD = "sonar-pmd-plugin";
