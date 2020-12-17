@@ -17,7 +17,7 @@ public class SonarDevon4jPlugin implements Plugin {
 
   private static final String DISABLED = "Disabled";
 
-  private static final String QUALINSIGHT = "qualinsight-plugins-sonarqube-smell-plugin";
+  private static final String QUALINSIGHT = "qualinsight-sonarqube-smell-plugin";
 
   private static final String PMD = "sonar-pmd-plugin";
 
@@ -63,7 +63,11 @@ public class SonarDevon4jPlugin implements Plugin {
 
     if (this.pluginList == null) {
       File[] fileList = this.pluginDirectory.listFiles(f -> f.getName().endsWith(".jar") && f.isFile());
-      this.pluginList = Arrays.asList(fileList).stream().map(f -> f.getName()).collect(Collectors.toList());
+      if (fileList != null) {
+        this.pluginList = Arrays.asList(fileList).stream().map(f -> f.getName()).collect(Collectors.toList());
+      } else {
+        this.pluginList = new ArrayList<>();
+      }
     }
     return this.pluginList;
   }
