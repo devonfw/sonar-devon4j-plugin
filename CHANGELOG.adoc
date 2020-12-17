@@ -2,6 +2,13 @@
 
 This file documents all notable changes to https://github.com/devonfw/sonar-devon4j-plugin[sonar-devon4j-plugin].
 
+== 2020.12.002
+
+In this build of our 2020.12 release, two bugs were fixed:
+
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/117[#117]: Rule from checkstyle plugin could not be instantiated in our quality profile
+* https://github.com/devonfw/sonar-devon4j-plugin/issues/118[#118]: NPE during project analysis
+
 == 2020.12.001
 
 With this release, we made the package structure configurable and did some other improvements and fixes:
