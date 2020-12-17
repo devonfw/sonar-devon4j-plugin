@@ -21,6 +21,7 @@ import org.xml.sax.SAXException;
  */
 @SonarLintSide
 public class DevonfwJavaProfile implements BuiltInQualityProfilesDefinition {
+
   private static final String DEVON4J_XML = "/com/devonfw/ide/sonarqube/common/rules/devon4j/devon4j.xml";
 
   private static final Logger logger = Logger.getGlobal();
