@@ -77,11 +77,11 @@ public class Architecture {
    */
   public Packages getPackages() {
 
-    return packages;
+    return this.packages;
   }
 
   /**
-   * @param architecture
+   * @param architecture the {@link Architecture} config.
    * @return the requested {@link Packages} of given architecture or default packages if architecture or its packages is
    *         {@code null}.
    */

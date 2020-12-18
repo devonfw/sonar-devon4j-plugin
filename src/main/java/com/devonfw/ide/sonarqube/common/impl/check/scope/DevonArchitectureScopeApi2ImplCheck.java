@@ -4,6 +4,7 @@ import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
+import com.devonfw.ide.sonarqube.common.api.config.DevonArchitecturePackage;
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureImportCheck;
 
@@ -17,10 +18,11 @@ public class DevonArchitectureScopeApi2ImplCheck extends DevonArchitectureImport
   @Override
   protected String checkDependency(JavaType source, JavaType target) {
 
-    if (source.isScopeApi() && target.isScopeImpl()) {
-      return "Code from api scope shall not depend on impl scope. ('" + source.getComponent() + "." + source.getLayer()
-          + "." + source.getScope() + "' is dependent on '" + target.getComponent() + "." + target.getLayer() + "."
-          + target.getScope() + "')";
+    DevonArchitecturePackage sourcePkg = source.getDevonPackage();
+    DevonArchitecturePackage targetPkg = target.getDevonPackage();
+    if (sourcePkg.isScopeApi() && targetPkg.isScopeImpl()) {
+      return "Code from api scope shall not depend on impl scope. ('" + sourcePkg.getComponentAndLayerAndScope()
+          + "' is dependent on '" + targetPkg.getComponentAndLayerAndScope() + "')";
     }
     return null;
   }

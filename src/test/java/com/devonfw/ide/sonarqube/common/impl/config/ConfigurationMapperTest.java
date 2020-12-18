@@ -214,14 +214,18 @@ public class ConfigurationMapperTest extends ModuleTest {
         .containsExactly("Component 'component1' has dependency 'component2' but no such component is defined.");
   }
 
+  /**
+   * Test of {@link ConfigurationMapper#fromJson(File)} for extended {@code architecture.json} with custom
+   * {@link Packages}.
+   */
   @Test
   public void testFromJsonFileWhenPackagesIsPresent() {
 
     // given
     ConfigurationMapper mapper = new ConfigurationMapper();
-    File file = new File("src/test/architecture.json");
-    String expectedPattern = "([a-zA-Z0-9_]+\\.)+(persistence|core|service|gui)\\.([a-zA-Z0-9_]+)\\.(api|base|impl)(\\.[a-zA-Z0-9_]+)*";
-    List<String> expectedDetails = Arrays.asList("root", "layer", "component", "scope", "detail");
+    File file = new File("src/test/files/DevonArchitecturePackage/architecture.json");
+    String expectedPattern = "(persistence|service|batch|gui|client)\\.([a-zA-Z0-9_]+)\\.(api|base|impl)(\\.[a-zA-Z0-9_]+)*";
+    List<String> expectedGroups = Arrays.asList("layer", "component", "scope", "detail");
     Map<String, String> expectedMappings = new HashMap<>();
     expectedMappings.put("persistence", "dataaccess");
     expectedMappings.put("core", "logic");
@@ -234,7 +238,7 @@ public class ConfigurationMapperTest extends ModuleTest {
     Packages packages = config.getArchitecture().getPackages();
     assertThat(packages).isNotNull();
     assertThat(packages.getPattern()).isEqualTo(expectedPattern);
-    assertThat(packages.getGroups()).isEqualTo(expectedDetails);
+    assertThat(packages.getGroups()).isEqualTo(expectedGroups);
     assertThat(packages.getMappings()).hasSize(3).containsEntry("persistence", "dataaccess")
         .containsEntry("core", "logic").containsEntry("gui", "client");
   }

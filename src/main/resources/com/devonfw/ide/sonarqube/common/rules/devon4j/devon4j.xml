@@ -128,30 +128,6 @@
     </rule>
     <rule>
         <repositoryKey>checkstyle</repositoryKey>
-        <key>com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationLocationCheck</key>
-        <type>CODE_SMELL</type>
-        <priority>MAJOR</priority>
-        <parameters>
-            <parameter>
-                <key>allowSamelineSingleParameterlessAnnotation</key>
-                <value>true</value>
-            </parameter>
-            <parameter>
-                <key>allowSamelineParameterizedAnnotation</key>
-                <value>false</value>
-            </parameter>
-            <parameter>
-                <key>allowSamelineMultipleAnnotations</key>
-                <value>false</value>
-            </parameter>
-            <parameter>
-                <key>tokens</key>
-                <value>CLASS_DEF,INTERFACE_DEF,PACKAGE_DEF,ENUM_CONSTANT_DEF,ENUM_DEF,METHOD_DEF,CTOR_DEF,VARIABLE_DEF</value>
-            </parameter>
-        </parameters>
-    </rule>
-    <rule>
-        <repositoryKey>checkstyle</repositoryKey>
         <key>com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationUseStyleCheck</key>
         <type>CODE_SMELL</type>
         <priority>MAJOR</priority>
@@ -8779,13 +8755,6 @@
     </rule>
     <rule>
         <repositoryKey>java</repositoryKey>
-        <key>S2063</key>
-        <type>CODE_SMELL</type>
-        <priority>CRITICAL</priority>
-        <parameters/>
-    </rule>
-    <rule>
-        <repositoryKey>java</repositoryKey>
         <key>S2065</key>
         <type>CODE_SMELL</type>
         <priority>MINOR</priority>
@@ -9668,7 +9637,7 @@
         <repositoryKey>java</repositoryKey>
         <key>S2699</key>
         <type>CODE_SMELL</type>
-        <priority>BLOCKER</priority>
+        <priority>INFO</priority>
         <parameters/>
     </rule>
     <rule>

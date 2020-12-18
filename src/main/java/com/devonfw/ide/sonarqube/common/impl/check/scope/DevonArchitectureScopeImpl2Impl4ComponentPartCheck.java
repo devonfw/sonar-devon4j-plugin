@@ -4,6 +4,7 @@ import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
+import com.devonfw.ide.sonarqube.common.api.config.DevonArchitecturePackage;
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureImportCheck;
 
@@ -18,10 +19,12 @@ public class DevonArchitectureScopeImpl2Impl4ComponentPartCheck extends DevonArc
   @Override
   protected String checkDependency(JavaType source, JavaType target) {
 
-    if (source.isScopeImpl() && target.isScopeImpl() && !isSameComponentPart(source, target)) {
-      return "Code from impl scope shall not depend on impl scope of other component part. ('" + source.getComponent()
-          + "." + source.getLayer() + "." + source.getScope() + "' is dependent on '" + target.getComponent() + "."
-          + target.getLayer() + "." + target.getScope() + "')";
+    DevonArchitecturePackage sourcePkg = source.getDevonPackage();
+    DevonArchitecturePackage targetPkg = target.getDevonPackage();
+    if (sourcePkg.isScopeImpl() && targetPkg.isScopeImpl() && !sourcePkg.hasSameComponentPart(targetPkg)) {
+      return "Code from impl scope shall not depend on impl scope of other component part. ('"
+          + sourcePkg.getComponentAndLayerAndScope() + "' is dependent on '" + targetPkg.getComponentAndLayerAndScope()
+          + "')";
     }
     return null;
   }

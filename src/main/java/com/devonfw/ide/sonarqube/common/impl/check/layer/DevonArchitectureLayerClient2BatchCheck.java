@@ -4,6 +4,7 @@ import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
 import com.devonfw.ide.sonarqube.common.api.JavaType;
+import com.devonfw.ide.sonarqube.common.api.config.DevonArchitecturePackage;
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureCheck;
 import com.devonfw.ide.sonarqube.common.impl.check.DevonArchitectureImportCheck;
 
@@ -17,9 +18,11 @@ public class DevonArchitectureLayerClient2BatchCheck extends DevonArchitectureIm
   @Override
   protected String checkDependency(JavaType source, JavaType target) {
 
-    if (source.isLayerClient() && target.isLayerBatch()) {
-      return "Code from client layer shall not depend on batch layer. ('" + source.getComponent() + "."
-          + source.getLayer() + "' is dependent on '" + target.getComponent() + "." + target.getLayer() + "')";
+    DevonArchitecturePackage sourcePkg = source.getDevonPackage();
+    DevonArchitecturePackage targetPkg = target.getDevonPackage();
+    if (sourcePkg.isLayerClient() && targetPkg.isLayerBatch()) {
+      return "Code from client layer shall not depend on batch layer. ('" + sourcePkg.getComponentAndLayer()
+          + "' is dependent on '" + targetPkg.getComponentAndLayer() + "')";
     }
     return null;
   }
