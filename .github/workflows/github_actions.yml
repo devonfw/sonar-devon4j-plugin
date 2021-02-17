@@ -21,10 +21,13 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+        env:
+             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |   
-           mvn clean -Pjacoco-report install sonar:sonar -Dsonar.projectKey=devonfw_sonar-devon4j-plugin -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=comdevonfw;
+            mvn clean -Pjacoco-report install sonar:sonar -Dsonar.projectKey=devonfw_sonar-devon4j-plugin -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=comdevonfw;
 
     
