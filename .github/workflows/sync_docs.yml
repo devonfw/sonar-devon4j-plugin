@@ -8,7 +8,7 @@ on:
 jobs:
        build:
         runs-on: ubuntu-latest
-        if: ${{github.event.repository =='devonfw/sonar-devon4j-plugin'}}
+        if: ${{github.repository == 'devonfw/sonar-devon4j-plugin'}}
         steps:
              - name: Checkout code
                uses: actions/checkout@v2   
