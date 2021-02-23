@@ -21,7 +21,7 @@ jobs:
                with:
                java-version: 11.0.10
              - name: build the project with Maven     
-                run:
+                run: |
                 mvn clean -Pjacoco-report install sonar:sonar -Dsonar.projectKey=devonfw_sonar-devon4j-plugin -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=comdevonfw;
              - name: build the project with Maven
                run : mvn clean install
