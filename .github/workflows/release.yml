@@ -6,7 +6,6 @@ name: Build
 jobs:
   build:
     name: Install asset
-    if: ${{github.repository == 'devonfw/sonar-devon4j-plugin'}}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
