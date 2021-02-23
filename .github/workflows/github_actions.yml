@@ -11,7 +11,7 @@ on:
 jobs:
   build:
         name: checking codition
-        if: ${{github.repository == 'devonfw/sonar-devon4j-plugin'}}
+        if: ${{github.repository =='devonfw/sonar-devon4j-plugin'}}
         runs-on: ubuntu-latest
         steps:
              - name: Checkout code
