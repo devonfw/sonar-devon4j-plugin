@@ -30,14 +30,14 @@ jobs:
                 path: ~/.m2
                 key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
                 restore-keys: ${{ runner.os }}-m2-
-           - name: Send mail
+           - name: Notification mail
              if: always()
              uses: dawidd6/action-send-mail@v2
              with:
                server_address: smtp.gmail.com
                server_port: 465               
-               username: ${{ secrets.EMAIL_USERNAME }}
-               password: ${{ secrets.EMAIL_PASSWORD }}            
+               username: ${{ secrets.BUILD_USER_EMAIL }}
+               password: ${{ secrets.BUILD_USER_PASSWD }}            
                subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}            
                body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
                to: joerg.hohwiller@gmail.com
