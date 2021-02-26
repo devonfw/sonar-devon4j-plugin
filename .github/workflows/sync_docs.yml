@@ -36,7 +36,7 @@ jobs:
              with:
                server_address: smtp.gmail.com
                server_port: 465               
-               username: ${{ secrets.BUILD_USER_EMAIL }}
+               username: ${{ secrets.BUILD_USER }}
                password: ${{ secrets.BUILD_USER_PASSWD }}            
                subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}            
                body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
