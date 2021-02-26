@@ -2,21 +2,45 @@ name: sonarcloud
 env:
   ORG: "comdevonfw"
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  BUILD_USER: ${{ secrets.BUILD_USER }}
+  BUILD_USER_PASSWD: ${{ secrets.BUILD_USER_PASSWD }}
+  BUILD_USER_EMAIL: ${{ secrets.BUILD_USER_EMAIL }}
 on:
   push:
-    branches:  master 
+    branches:  master
+    
 jobs:
-       build:
+    build:
         if: ${{github.repository == 'devonfw/sonar-devon4j-plugin'}}
         runs-on: ubuntu-latest
         steps:
-             - name: Set up JDK
-               uses: actions/setup-java@v1
-               with:
-                java-version: '8'
-             - name: build the project with Maven     
-               run:
-                   mvn clean -Pjacoco-report install sonar:sonar -Dsonar.projectKey=devonfw_sonar-devon4j-plugin -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=comdevonfw;
+           - name: Set up JDK
+             uses: actions/setup-java@v1
+             with:
+              java-version: '8'
+           - name: email
+             run: |
+               git config --global user.email ${BUILD_USER_EMAIL}
+               git config --global user.name ${BUILD_USER}
+           - name: build the project with Maven     
+             run:
+               mvn clean -Pjacoco-report install sonar:sonar -Dsonar.projectKey=devonfw_sonar-devon4j-plugin -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=comdevonfw;
+           - name: Setup tmate session
+             uses: mxschmitt/action-tmate@v3
+             with:
+              sudo: false
+           - name: Cache Maven packages
+             uses: actions/cache@v2
+             with:
+                path: ~/.m2
+                key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+                restore-keys: ${{ runner.os }}-m2-
+        
+     
+
+         
+           
+               
              
   
 
