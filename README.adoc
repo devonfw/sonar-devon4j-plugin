@@ -2,7 +2,7 @@
 
 image:https://img.shields.io/github/license/devonfw/sonar-devon4j-plugin.svg?label=License["Apache License, Version 2.0",link=https://github.com/devonfw/sonar-devon4j-plugin/blob/master/LICENSE]
 image:https://img.shields.io/maven-central/v/com.devonfw.tools/sonar-devon4j-plugin.svg?label=Maven%20Central["Maven Central",link=https://search.maven.org/search?q=g:com.devonfw.tools&a=sonar-devon4j-plugin]
-image:https://travis-ci.com/devonfw/sonar-devon4j-plugin.svg?branch=master["Build Status",link="https://travis-ci.com/devonfw/sonar-devon4j-plugin"]
+image:https://github.com/devonfw/sonar-devon4j-plugin/actions/workflows/build.yml/badge.svg["Build Status",link="https://github.com/devonfw/sonar-devon4j-plugin/actions/workflows/build.yml"]
 
 Plugin for https://sonarqube.org[SonarQube] to validate https://github.com/devonfw/devon4j/blob/develop/documentation/coding-conventions.asciidoc#packages[devon4j architecture].
 
