@@ -1,4 +1,4 @@
-== Installation
+= Installation
 
 If you have https://sonarqube.org[SonarQube] installed, you only need to go to its marketplace and install the latest version of this `sonar-devon4j-plugin`.
 Further you need to import the devonfw quality profiles (or activate all the rules of this plugin in your quality profile).
