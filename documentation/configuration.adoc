@@ -1,4 +1,4 @@
-== Configuration
+= Configuration
 
 In your project add a file called `architecture.json` to the toplevel directory of your project and configure your components and their dependencies. You should commit this file to your version control system (e.g. git). The following example shows an architecture definition for the `my-thai-star` sample application:
 ```
