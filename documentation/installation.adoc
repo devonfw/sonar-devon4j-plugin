@@ -1,7 +1,7 @@
 = Installation
 
 If you have https://sonarqube.org[SonarQube] installed, you only need to go to its marketplace and install the according plugins.
-Please note that the following other plugins are required as pre-requisite:
+Please note that the following other plugins are required as prerequisite:
 
 * `SonarJava`
 * https://github.com/checkstyle/sonar-checkstyle[Checkstyle]
