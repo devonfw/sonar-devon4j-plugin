@@ -15,15 +15,15 @@
 Plugin for SonarQube to validate devon4j architecture.
 ${project.version}, ${buildtime}
 
-include::motivation.adoc[leveloffset=1]
+include::motivation.asciidoc[leveloffset=1]
 
 <<<<
 
-include::installation.adoc[leveloffset=1]
+include::installation.asciidoc[leveloffset=1]
 
 <<<<
 
-include::configuration.adoc[leveloffset=1]
+include::configuration.asciidoc[leveloffset=1]
 
 <<<<
 
