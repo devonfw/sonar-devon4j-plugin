@@ -1,0 +1,18 @@
+= Configuration
+
+In your project add a file called `architecture.json` to the toplevel directory of your project and configure your components and their dependencies. You should commit this file to your version control system (e.g. git). The following example shows an architecture definition for the `my-thai-star` sample application:
+```
+{
+  "architecture": {
+    "components": [
+        {"name":"bookingmanagement","dependencies":["ordermanagement","usermanagement","mailservice"]},
+        {"name":"dishmanagement","dependencies":["imagemanagement"]},
+        {"name":"imagemanagement","dependencies":[]},
+        {"name":"ordermanagement","dependencies":["dishmanagement"]},
+        {"name":"usermanagement","dependencies":[]},
+        {"name":"mailservice","dependencies":[]}
+      ]
+  }
+}
+```
+As you can see all you need to do is declare the components of your application with their allowed dependencies. In case you need dependencies to other devonfw apps (microservices) you can also add them as dependencies with qualified packages (e.g. `com.devonfw.sampleapp.samplecomponent`). As the technical architecture is standardized by a blueprint in devonfw, you do not need any further configuration and everything can already be validated out of the box.

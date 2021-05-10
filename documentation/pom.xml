@@ -1,0 +1,21 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.devonfw.tools</groupId>
+        <artifactId>devonfw-docgen-pdf</artifactId>
+        <version>2021.04.001</version>
+    </parent>
+
+    <artifactId>devonfw-sonar-devon4j-plugin-doc</artifactId>
+    <properties>
+        <packaging>pom</packaging>
+        <name>${project.artifactId}</name>
+        <description>Documentation for devonfw-sonar-devon4j-plugin</description>
+        <docgen.asciidoc.page>devonfw-sonar-devon4j-plugin-doc</docgen.asciidoc.page>
+        <revision>dev</revision>
+        <changelist>-SNAPSHOT</changelist>
+    </properties>
+
+</project>

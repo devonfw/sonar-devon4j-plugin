@@ -1,0 +1,6 @@
+= Motivation
+
+With https://github.com/devonfw/devon4j/[devon4j] you can build business applications very efficiently following elaborated https://github.com/devonfw/devon4j/wiki[guidelines and best practices].
+This includes a profound https://github.com/devonfw/devon4j/blob/develop/documentation/architecture.asciidoc#architecture[architecture blueprint] that is mapped to the code via clear https://github.com/devonfw/devon4j/blob/develop/documentation/coding-conventions.asciidoc#packages[packaging conventions].
+
+This `sonar-devon4j-plugin` provides a plugin extending https://sonarqube.org[SonarQube] with the ability to validate your Java code according to the devon4j architecture.

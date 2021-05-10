@@ -1,0 +1,33 @@
+= sonar-devon4j-plugin
+:description: documentation for sonar-devon4j-plugin.
+:doctype: book
+:toc:
+:toc-title: Table of Contents
+:idprefix:
+:idseparator: -
+:sectnums:
+:reproducible:
+:source-highlighter: rouge
+:listing-caption: Listing
+:chapter-label:
+:partnums:
+:imagesdir: ./
+Plugin for SonarQube to validate devon4j architecture.
+${project.version}, ${buildtime}
+
+include::motivation.adoc[leveloffset=1]
+
+<<<<
+
+include::installation.adoc[leveloffset=1]
+
+<<<<
+
+include::configuration.adoc[leveloffset=1]
+
+<<<<
+
+include::rules.asciidoc[leveloffset=1]
+
+<<<<
+
