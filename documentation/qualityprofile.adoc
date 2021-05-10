@@ -1,4 +1,4 @@
-== devonfw Java Quality Profile
+= devonfw Java Quality Profile
 
 This plugin comes with a quality profile containing not only the previously described rules, but also rules from other plugins that are vital to ensure optimal code quality. You can download these plugins directly onto your SonarQube instance via its marketplace or install them manually. For more information on the installation of plugins, see https://docs.sonarqube.org/latest/setup/install-plugin/[here].
 If you have this devon4j plugin installed, you should make sure to install the following plugins, so that the quality profile can be properly initialized at startup:
