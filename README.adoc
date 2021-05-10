@@ -11,8 +11,8 @@ Plugin for https://sonarqube.org[SonarQube] to validate https://github.com/devon
 * link:documentation/motivation.adoc[Motivation]
 * link:documentation/installation.adoc[Installation]
 * link:documentation/configuration.adoc[Configuration]
-* link:documentation/qualityprofile.adoc[devonfw Java Quality Profile]
+* link:documentation/qualityprofile.adoc[Quality Profile]
 
 == Rules
 
-* link:documentation/rules.adoc[Architecture Rules]
+* link:documentation/rules.adoc[Rules]
