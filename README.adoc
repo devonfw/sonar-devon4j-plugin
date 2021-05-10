@@ -8,11 +8,11 @@ Plugin for https://sonarqube.org[SonarQube] to validate https://github.com/devon
 
 == Documentation
 
-* link:documentation/motivation.adoc[Motivation]
-* link:documentation/installation.adoc[Installation]
-* link:documentation/configuration.adoc[Configuration]
-* link:documentation/qualityprofile.adoc[devonfw Java Quality Profile]
+* link:documentation/motivation.asciidoc[Motivation]
+* link:documentation/installation.asciidoc[Installation]
+* link:documentation/configuration.asciidoc[Configuration]
+* link:documentation/qualityprofile.asciidoc[devonfw Java Quality Profile]
 
 == Rules
 
-* link:documentation/rules.adoc[Architecture Rules]
+* link:documentation/rules.asciidoc[Architecture Rules]
