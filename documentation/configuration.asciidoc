@@ -1,0 +1,41 @@
+= Configuration
+
+Add a file called `architecture.json` to the toplevel directory of your project and configure your components and their dependencies. You should commit this file to your version control system (e.g. git). The following example shows an architecture definition for the `my-thai-star` sample application:
+```
+{
+  "architecture": {
+    "components": [
+        {"name":"bookingmanagement","dependencies":["ordermanagement","usermanagement","mailservice"]},
+        {"name":"dishmanagement","dependencies":["imagemanagement"]},
+        {"name":"imagemanagement","dependencies":[]},
+        {"name":"ordermanagement","dependencies":["dishmanagement"]},
+        {"name":"usermanagement","dependencies":[]},
+        {"name":"mailservice","dependencies":[]}
+      ]
+  }
+}
+```
+As you can see all you need to do is declare the components of your application with their allowed dependencies. In case you need dependencies to other devonfw apps (microservices) you can also add them as dependencies with qualified packages (e.g. `com.devonfw.sampleapp.samplecomponent`). As the technical architecture is standardized by a blueprint in devonfw, you do not need any further configuration and everything can already be validated out of the box.
+
+== Custom packages
+
+If for some reason you can not or do not want to follow the `devon4j` packaging conventions and architecture mapping but still map your architecture to the code and want to use this plugin, you can do so.
+All you need to do is to configure a custom mapping by adding a `packages` configuration to your `architecture.json`:
+
+```
+{
+  "architecture": {
+    "components": [ ... ]
+    "packages": {
+        "pattern": "([a-zA-Z0-9_]+\.)+(persistence|core|service|gui)\.([a-zA-Z0-9_]+)\.(api|base|impl)(\.[a-zA-Z0-9_]+)*",
+        "groups": [ "root", "layer", "component", "scope", "detail" ],
+        "mappings": {  "persistence": "dataaccess", "core": "logic", "gui": "client"}
+    }
+  }
+```
+
+The `packages` object has the following properties:
+
+* The `pattern` property defines a regular expression your packages will match.
+* The `groups` property maps the groups of the regular expression from `pattern` in the order of occurence to the according architecture segments. In case your regular expression needs some extra bracket and therefore "artificial" groups, you can assign `none` to such groups.
+* The `mappings` maps segments from your custom architecture definition to the `devon4j` architecture terms.

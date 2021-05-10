@@ -1,0 +1,10 @@
+= devonfw Java Quality Profile
+
+This plugin comes with the quality profile `devonfw Java` that is automatically added and maintained with every update.
+The `devonfw Java` quality profile contains not only the previously described rules, but also Java based rules from other plugins that are vital to ensure optimal code quality (see prerequisites in link:installation.asciidoc[installation]).
+For `devon4j` projects we recommend to use this qualtiy profile for your projects and ideally make it the default.
+However, if you want to use this quality profile but need to make (small) changes to it, you should create a copy of it as SonarQube admin, make the desired changes and then make it default and/or assign your projects to it.
+Please be aware that new versions of this plugin may automatically update and improve the `devonfw Java` quality profile.
+So, if you copied it, you have to maintain your own "fork" manually.
+
+For further information on quality profiles and their setup, please follow the https://docs.sonarqube.org/latest/instance-administration/quality-profiles/[SonarQube documentation on Quality Profiles].

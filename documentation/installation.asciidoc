@@ -1,0 +1,12 @@
+= Installation
+
+If you have https://sonarqube.org[SonarQube] installed, you only need to go to its marketplace and install the according plugins.
+Please note that the following other plugins are required as prerequisite:
+
+* `SonarJava`
+* https://github.com/checkstyle/sonar-checkstyle[Checkstyle]
+* https://github.com/QualInsight/qualinsight-plugins-sonarqube-smell[Code Smells]
+* https://github.com/spotbugs/sonar-findbugs[FindBugs]
+* https://github.com/jensgerdes/sonar-pmd[PMD]
+
+If the above plugins are installed, you can additionally install the latest version of this `sonar-devon4j-plugin` from the marketplace as well.

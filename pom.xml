@@ -29,6 +29,10 @@
     <gson.version>2.6.2</gson.version>
   </properties>
 
+  <modules>
+    <module>documentation</module>
+  </modules>
+
   <dependencies>
 
     <dependency>
@@ -126,10 +130,6 @@
     
   </dependencies>
 
-  <modules>
-    <module>documentation</module>
-  </modules>
-
   <build>
     <plugins>
       <plugin>
@@ -145,160 +145,7 @@
           <sonarQubeMinVersion>5.6</sonarQubeMinVersion> <!-- allow to depend on API 6.x but run on LTS -->
         </configuration>
       </plugin>
-      
-      <!-- configure java compiler -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <encoding>${project.build.sourceEncoding}</encoding>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
-        </configuration>
-      </plugin>
     </plugins>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>2.7</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.6.0</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-install-plugin</artifactId>
-          <version>2.5.2</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>2.8.2</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>2.6</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>2.5</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-source-plugin</artifactId>
-          <version>2.4</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.4</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>2.9.1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-antrun-plugin</artifactId>
-          <version>1.8</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-project-info-reports-plugin</artifactId>
-          <version>2.7</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-jxr-plugin</artifactId>
-          <version>2.4</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-javadoc-plugin</artifactId>
-          <version>2.9.1</version>
-          <configuration>
-            <additionalDependencies>
-              <additionalDependency>
-                <groupId>javax.interceptor</groupId>
-                <artifactId>javax.interceptor-api</artifactId>
-                <version>1.2</version>
-              </additionalDependency>
-            </additionalDependencies>
-            <notree>true</notree>
-            <show>private</show>
-            <encoding>${project.reporting.outputEncoding}</encoding>
-            <charset>${project.build.sourceEncoding}</charset>
-            <docfilessubdirs>true</docfilessubdirs>
-            <additionalparam>${javadoc.params}</additionalparam>
-            <source>${java.version}</source>
-            <doctitle>JavaDocs for ${project.name}</doctitle>
-            <windowtitle>JavaDocs for ${project.name}</windowtitle>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.17</version>
-          <configuration>
-            <!-- Surefire changed the default to the project.build.directory causing
-              trouble with file paths to test resources -->
-            <workingDirectory>${basedir}</workingDirectory>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-report-plugin</artifactId>
-          <version>2.9</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-gpg-plugin</artifactId>
-          <version>1.6</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-help-plugin</artifactId>
-          <version>2.2</version>
-        </plugin>
-        <plugin>
-          <groupId>org.sonarsource.scanner.maven</groupId>
-          <artifactId>sonar-maven-plugin</artifactId>
-          <version>3.7.0.1746</version>
-        </plugin>
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>findbugs-maven-plugin</artifactId>
-          <version>3.0.0</version>
-        </plugin>
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>taglist-maven-plugin</artifactId>
-          <version>2.4</version>
-        </plugin>
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>flatten-maven-plugin</artifactId>
-          <version>1.0.1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>servicedocgen-maven-plugin</artifactId>
-          <version>${servicedocgen.version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.owasp</groupId>
-          <artifactId>dependency-check-maven</artifactId>
-          <version>5.1.0</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
   </build>
 
   <profiles>
@@ -336,89 +183,7 @@
         <javadoc.params>-Xdoclint:none</javadoc.params>
       </properties>
     </profile>
-    <profile>
-      <id>deploy</id>
-      <build>
-        <plugins>
-          <!-- also generate javadoc JARs -->
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <configuration>
-              <additionalDependencies>
-                <additionalDependency>
-                  <groupId>javax.interceptor</groupId>
-                  <artifactId>javax.interceptor-api</artifactId>
-                  <version>1.2</version>
-                </additionalDependency>
-              </additionalDependencies>
-            </configuration>
-            <executions>
-              <execution>
-                <id>attach-javadocs</id>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <!-- Sign artifacts with PGP -->
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <configuration>
-              <keyname>${oasp.gpg.keyname}</keyname>
-            </configuration>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-      <distributionManagement>
-        <snapshotRepository>
-          <id>ossrh</id>
-          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-          <id>ossrh</id>
-          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-      </distributionManagement>
-    </profile>
-    <profile>
-      <!-- separate eclipse build from command-line... -->
-      <id>eclipse</id>
-      <activation>
-        <property>
-          <name>eclipse.application</name>
-        </property>
-      </activation>
-      <build>
-        <directory>eclipse-target</directory>
-      </build>
-    </profile>
   </profiles>
-
-  <issueManagement>
-    <system>GitHub</system>
-    <url>https://github.com/devonfw/sonar-devon4j-plugin/issues</url>
-  </issueManagement>
-
-  <scm>
-    <url>https://github.com/devonfw/sonar-devon4j-plugin/tree/develop</url>
-  </scm>
-
-  <organization>
-    <name>devonfw</name>
-    <url>https://devonfw.com</url>
-  </organization>
 
   <developers>
     <developer>
@@ -450,21 +215,5 @@
       <properties/>
     </developer>
   </developers>
-
-  <licenses>
-    <license>
-      <name>Apache Software License, Version 2.0</name>
-      <url>https://github.com/devonfw/sonar-devon4j-plugin/blob/master/LICENSE</url>
-      <distribution>repo</distribution>
-      <comments/>
-    </license>
-  </licenses>
-
-  <distributionManagement>
-    <site>
-      <id>site</id>
-      <url>file://${user.dir}/target/devon4j/maven</url>
-    </site>
-  </distributionManagement>
 
 </project>
