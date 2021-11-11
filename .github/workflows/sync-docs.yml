@@ -8,6 +8,7 @@ on:
     paths:
       - '**.asciidoc'
       - '**.md'
+      - '**.adoc'      
     branches:
       - master
 name: Sync Docs
