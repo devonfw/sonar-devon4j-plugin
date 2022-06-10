@@ -21,7 +21,7 @@
     <github.repository>sonar-devon4j-plugin</github.repository>
     <java.version>1.8</java.version>
     <sonar.version>7.9.1</sonar.version>
-    <devon4j.version>2020.08.001</devon4j.version>
+    <devon4j.version>2022.04.001</devon4j.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.plugin.version>5.14.0.18788</java.plugin.version>
