@@ -706,15 +706,15 @@
         <parameters>
             <parameter>
                 <key>throwsIndent</key>
-                <value>4</value>
+                <value>2</value>
             </parameter>
             <parameter>
                 <key>tabWidth</key>
-                <value>8</value>
+                <value>4</value>
             </parameter>
             <parameter>
                 <key>arrayInitIndent</key>
-                <value>4</value>
+                <value>2</value>
             </parameter>
             <parameter>
                 <key>forceStrictCondition</key>
@@ -722,11 +722,11 @@
             </parameter>
             <parameter>
                 <key>caseIndent</key>
-                <value>4</value>
+                <value>2</value>
             </parameter>
             <parameter>
                 <key>basicOffset</key>
-                <value>4</value>
+                <value>2</value>
             </parameter>
             <parameter>
                 <key>braceAdjustment</key>
@@ -734,7 +734,7 @@
             </parameter>
             <parameter>
                 <key>lineWrappingIndentation</key>
-                <value>4</value>
+                <value>2</value>
             </parameter>
         </parameters>
     </rule>
