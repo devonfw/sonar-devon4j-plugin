@@ -1,9 +1,9 @@
-<p>This rule checks that classes extending classes with the suffix To end with the same suffix.</p>
+<p>This rule checks that types extending To (Transfer-Object) end with the same suffix.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-    public class <del style='color: #979696'><span style='color: #FFB000'>TestClass</span></del> extends AbstractTo {}
+    public class <span style='color: #FFB000'><del>TestClass</del></span> extends AbstractTo {}
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-    public class <u style='color: #979696'><span style='color: #648FFF'>UserTo</span></u> extends AbstractTo {}
+    public class <span style='color: #648FFF'><u>UserTo</u></span> extends AbstractTo {}
 </pre>

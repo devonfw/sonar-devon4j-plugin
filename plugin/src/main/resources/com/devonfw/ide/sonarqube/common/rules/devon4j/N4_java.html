@@ -1,9 +1,9 @@
-<p>This rule checks that classes inheriting from classes with the suffix Eto end with the same suffix.</p>
+<p>This rule checks that types inheriting from Eto (Entity-Transfer-Object) end with the suffix Eto.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-    public class <del style='color: #979696'><span style='color: #FFB000'>TestClass</span></del> extends AbstractEto {}
+    public class <span style='color: #FFB000'><del>ExampleClass</del></span> extends AbstractEto {}
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-    public class <u style='color: #979696'><span style='color: #648FFF'>TestEto</span></u> extends AbstractEto {}
+    public class <span style='color: #648FFF'><u>ExampleEto</u></span> extends AbstractEto {}
 </pre>

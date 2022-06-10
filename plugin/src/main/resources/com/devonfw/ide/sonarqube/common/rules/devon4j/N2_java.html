@@ -1,18 +1,17 @@
-<p>
-    This rule checks that non-abstract classes extending AbstractDao end with DaoImpl.
-    In addition, classes that inherit from a class with the suffix Dao must also have the suffix Dao.
+<p>This rule checks types extending from Dao (Data-Access-Object) also start or end with Dao.
+Further if they are non-abstract they should carry the suffix and DaoImpl and implement an interface with their name excluding the Impl suffix.
 </p>
 <h2>Noncompliant Code Examples</h2>
 <pre>
-    public abstract class <del style='color: #979696'><span style='color: #FFB000'>ClassDaoImpl</span></del> extends AbstractDao {}
+    public abstract class <span style='color: #FFB000'><del>ExampleClass</del></span> extends AbstractDao {}
 </pre>
 <pre>
-    public class <del style='color: #979696'><span style='color: #FFB000'>TestClass</span></del> extends TestDao {}
+    public class <span style='color: #FFB000'><del>ExampleDaoImpl</del></span> extends AbstractDao {}
 </pre>
 <h2>Compliant Solutions</h2>
 <pre>
-    public class <u style='color: #979696'><span style='color: #648FFF'>ClassDaoImpl</span></u> extends AbstractDao {}
+    public abstract class <span style='color: #648FFF'><u>AbstractExampleDaoImpl</u></span> extends AbstractDao {}
 </pre>
 <pre>
-    public class <u style='color: #979696'><span style='color: #648FFF'>ClassDao</span></u> extends TestDao {}
+    public class <span style='color: #648FFF'><u>CustomerDaoImpl</u></span> extends AbstractDao implements CustomerDao {}
 </pre>

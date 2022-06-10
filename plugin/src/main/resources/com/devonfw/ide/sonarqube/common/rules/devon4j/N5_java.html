@@ -1,15 +1,14 @@
-<p>
-    This rule checks that non-abstract classes inheriting from AbstractUc begin with Uc, 
-    end with Impl and implement an interface with the same name except the suffix Impl.
+<p>This rule checks that non-abstract types inheriting from Uc (Use-Case) start or end with Uc.
+Further if they are non-abstract they should start with Uc, carry the suffix Impl and implement an interface with their name excluding the Impl suffix.
 </p>
 <h2>Noncompliant Code Examples</h2>
 <pre>
-    public class <del style='color:#979696'><span style='color: #FFB000'>UcTestImpl</span></del> extends AbstractUc {}
+    public class <span style='color: #FFB000'><del>UcExampleImpl</del></span> extends AbstractUc {}
 </pre>
 <pre>
-    public abstract class <del style='color: #979696'><span style='color: #FFB000'>UcClass</span></del> extends AbstractUc {}
+    public abstract class <span style='color: #FFB000'><del>ExampleClass</del></span> extends AbstractUc {}
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-    public class <u style = 'color: #979696'><span style='color: #648FFF'>UcTestImpl</span></u> extends AbstractUc implements UcTest {}
+    public class <span style='color: #648FFF'><u>UcExampleImpl</u></span> extends AbstractUc implements UcExample {}
 </pre>

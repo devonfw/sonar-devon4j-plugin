@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.sonar.java.model.ModifiersUtils;
 import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.BaseTreeVisitor;
@@ -48,7 +49,7 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
 
   private Configuration configuration;
 
-  private static final Logger logger = Logger.getGlobal();
+  private static final Logger LOG = Logger.getGlobal();
 
   /**
    * The constructor.
@@ -91,7 +92,7 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
     ClassTree tree = getClassTree(this.context);
 
     if (tree == null) {
-      logger.log(Level.INFO, "Tree currently being investigated is not of type ClassTree.");
+      LOG.log(Level.INFO, "Tree currently being investigated is not of type ClassTree.");
       return;
     } else {
       doScanFile(tree, this.context);
@@ -375,6 +376,51 @@ public abstract class DevonArchitectureCheck extends BaseTreeVisitor implements 
       }
     }
     return false;
+  }
+
+  /**
+   * @param tree the {@link ClassTree} of the class to check.
+   * @return the {@link Class#getSimpleName() simple name} of the super class of the class given as {@link ClassTree}.
+   */
+  protected static String getSimpleNameOfSuperClass(ClassTree tree) {
+
+    TypeTree superClass = tree.superClass();
+    if (superClass == null) {
+      return null;
+    } else {
+      return superClass.toString();
+    }
+  }
+
+  /**
+   * @param tree the {@link ClassTree} of the class to check.
+   * @param interfaceName the {@link Class#getSimpleName() simple name} of the interface to check.
+   * @return {@code true} if the given {@link ClassTree} implements an interface with the given
+   *         {@link Class#getSimpleName() simple name}.
+   */
+  protected static boolean hasSuperInterfacesWithSimpleName(ClassTree tree, String interfaceName) {
+
+    List<TypeTree> superInterfaces = tree.superInterfaces();
+    for (TypeTree superInterface : superInterfaces) {
+      if (interfaceName.equals(superInterface.toString())) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Checks if the currently checked class is abstract or not.
+   *
+   * @param tree Tree currently being investigated.
+   * @return True or false.
+   */
+  protected static boolean isAbstract(ClassTree tree) {
+
+    if (tree.is(Tree.Kind.INTERFACE)) {
+      return true;
+    }
+    return ModifiersUtils.hasModifier(tree.modifiers(), Modifier.ABSTRACT);
   }
 
 }

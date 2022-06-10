@@ -1,18 +1,18 @@
 <p>This rule checks that the JPA is only used in the dataaccess layer and optionally in common for embeddables.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-    package com.devonfw.ide.sonarqube.<del style='color: #979696'><span style='color: #FFB000'>service</span></del>.api;
+    package com.devonfw.ide.sonarqube.<span style='color: #FFB000'><del>service</del></span>.api;
 
-    <del style='color: #979696'><span style='color: #FFB000'>import javax.persistence.EntityManager;</span></del>
+    <span style='color: #FFB000'><del>import javax.persistence.EntityManager;</del></span>
 
     public class MyClass {}
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-    package com.devonfw.ide.sonarqube.<u style='color: #979696'></u><span style='color: #648FFF'>dataaccess</span></u>.api;
+    package com.devonfw.ide.sonarqube.<u style='color: #979696'></u><span style='color: #648FFF'>dataaccess</u></span>.api;
 
-    <u style='color: #979696'><span style='color: #648FFF'>import javax.persistence.Entity;</span></u>
-    <u style='color: #979696'><span style='color: #648FFF'>import javax.persistence.Table;</span></u>
+    <span style='color: #648FFF'><u>import javax.persistence.Entity;</u></span>
+    <span style='color: #648FFF'><u>import javax.persistence.Table;</u></span>
 
     @Entity
     @Table(name="Foo")

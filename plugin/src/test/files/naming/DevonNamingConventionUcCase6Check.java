@@ -3,6 +3,6 @@
  */
 package com.devonfw.ide.sonarqube.batch.api;
 
-class ClassOne extends UcClassTwoImpl {
+class ClassOne extends UcClassTwoImpl { // Noncompliant
 
 }

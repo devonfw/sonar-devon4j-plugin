@@ -1,9 +1,9 @@
-<p>This rule checks that classes inheriting from Cto classes end with the suffix Cto.</p>
+<p>This rule checks that types inheriting from Cto (Composite-Transfer-Object) also have the suffix Cto.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-    public class <del style='color: #979696'><span style='color: #FFB000'>MyClass</span></del> extends AbstractCto {}
+    public class <span style='color: #FFB000'><del>MyClass</del></span> extends AbstractCto {}
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-    public class <u style='color: #979696'><span style='color: #648FFF'>ClassCto</span></u> extends AbstractCto {}
+    public class <span style='color: #648FFF'><u>MyCto</u></span> extends AbstractCto {}
 </pre>

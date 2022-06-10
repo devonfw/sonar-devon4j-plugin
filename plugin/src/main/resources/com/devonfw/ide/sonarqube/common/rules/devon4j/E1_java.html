@@ -7,23 +7,23 @@
 <pre>
     package com.devonfw.ide.sonarqube.logic.impl;
 
-    <del style='color: #979696'><span style='color: #FFB000'>import org.springframework.transaction.annotation.Transactional;</span></del>
+    <span style='color: #FFB000'><del>import org.springframework.transaction.annotation.Transactional;</del></span>
 
     public class MyClass {}
 </pre>
 <br>
 <pre>
-    package com.devonfw.ide.sonarqube.common.<del style='color: #979696'><span style='color: #FFB000'>api</span></del>;
+    package com.devonfw.ide.sonarqube.common.<span style='color: #FFB000'><del>api</del></span>;
 
-    <del style='color: #979696'><span style='color: #FFB000'>import javax.transaction.Transactional;</span></del>
+    <span style='color: #FFB000'><del>import javax.transaction.Transactional;</del></span>
 
     public class MyClass {}
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-    package com.devonfw.ide.sonarqube.logic.<u style='color: #979696'><span style='color: #648FFF'>impl</span></u>;
+    package com.devonfw.ide.sonarqube.logic.<span style='color: #648FFF'><u>impl</u></span>;
 
-    <u style='color: #979696'><span style='color: #648FFF'>import javax.transaction.Transactional;</span></u>
+    <span style='color: #648FFF'><u>import javax.transaction.Transactional;</u></span>
 
     public class MyClass {}
 </pre>
