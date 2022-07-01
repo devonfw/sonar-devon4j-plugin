@@ -130,6 +130,8 @@
           <pluginClass>com.devonfw.ide.sonarqube.common.impl.SonarDevon4jPlugin</pluginClass>
           <sonarLintSupported>true</sonarLintSupported>
           <sonarQubeMinVersion>5.6</sonarQubeMinVersion> <!-- allow to depend on API 6.x but run on LTS -->
+          <!-- #110: sonar-devon4j-plugin enables a quality profile with rules that require these plugins -->
+          <requirePlugins>pmd:3.3.1,findbugs:4.0.3,checkstype:8.40</requirePlugins>
         </configuration>
       </plugin>
     </plugins>
