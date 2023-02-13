@@ -6,6 +6,8 @@ image:https://github.com/devonfw/sonar-devon4j-plugin/actions/workflows/build.ym
 
 Plugin for https://sonarqube.org[SonarQube] to validate https://github.com/devonfw/devon4j/blob/develop/documentation/coding-conventions.asciidoc#packages[devon4j architecture].
 
+ATTENTION: The SonarQube ecosystem is rather fragile and we are facing issues like https://github.com/devonfw/sonar-devon4j-plugin/issues/141[#141]. As we have to focus our maintenance effort we offer an alternative approach with our https://github.com/devonfw-sample/archunit[ArchUnit Sample].
+
 == Documentation
 
 * link:documentation/motivation.asciidoc[Motivation]
